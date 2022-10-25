@@ -10,7 +10,11 @@ type Image = {
 };
 
 const GalleryPage = () => {
-    const { width, height, ref } = useResizeDetector();
+    const { width, height, ref } = useResizeDetector({
+        handleHeight: false,
+        refreshMode: 'debounce',
+        refreshRate: 200
+    });
     const border = 1;
     const margin = 5;
     const images = jsonData as Image[];
