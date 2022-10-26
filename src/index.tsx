@@ -5,4 +5,16 @@ import GalleryPage from './components/gallery/galleryPage';
 
 const container = document.getElementById('app-root')!;
 const root = createRoot(container);
-root.render(<GalleryPage />);
+root.render(
+    <>
+        <header>
+            Some Header
+        </header>
+        <div className='main'>
+            <GalleryPage />
+        </div>
+        <footer>
+            Some Footer
+        </footer>
+    </>
+);

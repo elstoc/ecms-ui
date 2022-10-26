@@ -1,6 +1,6 @@
 import './galleryPage.css';
 import { useResizeDetector } from 'react-resize-detector';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import jsonData from './initialData.json';
 
 type Image = {
@@ -56,7 +56,7 @@ const GalleryPage = () => {
     }, [width, images]);
 
     useEffect(() => {
-        redraw();
+        width && redraw();
     },[redraw]);
 
     const elements: JSX.Element[] = [];
