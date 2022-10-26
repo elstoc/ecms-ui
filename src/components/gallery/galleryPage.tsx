@@ -72,8 +72,10 @@ const GalleryPage = () => {
     });
 
     return (
-        <div ref={ref} className="outerDiv">
-            {sizedImages ? elements : 'This item has not been rendered yet'}
+        <div className='main'>
+            <div ref={ref} className="outerDiv">
+                {sizedImages ? elements : 'This item has not been rendered yet'}
+            </div>
         </div>
     );
 };

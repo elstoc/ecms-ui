@@ -10,9 +10,7 @@ root.render(
         <header>
             Some Header
         </header>
-        <div className='main'>
-            <GalleryPage />
-        </div>
+        <GalleryPage />
         <footer>
             Some Footer
         </footer>
