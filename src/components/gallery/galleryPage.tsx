@@ -1,4 +1,4 @@
-import './galleryPage.css';
+import './galleryPage.scss';
 import { useResizeDetector } from 'react-resize-detector';
 import React, { useCallback, useEffect, useState } from 'react';
 import jsonData from './initialData.json';
@@ -12,8 +12,6 @@ type Image = {
 const GalleryPage = () => {
     const { width, height, ref } = useResizeDetector({
         handleHeight: false,
-        refreshMode: 'debounce',
-        refreshRate: 200
     });
     const border = 1;
     const margin = 5;
@@ -72,8 +70,8 @@ const GalleryPage = () => {
     });
 
     return (
-        <div ref={ref} className='content'>
-            <div className="justifiedGallery">
+        <div className='content'>
+            <div ref={ref} className="justifiedGallery">
                 {sizedImages ? elements : 'This item has not been rendered yet'}
             </div>
         </div>

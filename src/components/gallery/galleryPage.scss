@@ -1,4 +1,6 @@
 .content{
+    display: flex;
+    justify-content: center;
     background-color: darkgray;
     flex: 1;
     width: 100%;
@@ -13,6 +15,15 @@
     margin: 0;
     border: 0;
     padding: 0;
+    width: 100%;
+}
+
+@for $i from 10 through 25 {
+    @media screen and (min-width: #{$i * 100}px) {
+        .justifiedGallery {
+            width: #{$i * 100 - 50}px;
+        }
+    }
 }
 
 .justifiedGallery div {

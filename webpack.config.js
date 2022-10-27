@@ -20,8 +20,13 @@ module.exports = {
         use: 'ts-loader',
       },
       {
-        test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.(sa|sc|c)ss$/,
+        use: [
+          prod ? MiniCssExtractPlugin.loader : "style-loader",
+          "css-loader",
+          "postcss-loader",
+          "sass-loader",
+        ],
       },
     ]
   },
@@ -29,7 +34,5 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
-    }),
-    new MiniCssExtractPlugin(),
-  ],
+    })].concat(prod ? [new MiniCssExtractPlugin()] : []),
 };
