@@ -17,8 +17,6 @@ const Gallery = () => {
     const { width, height, ref } = useResizeDetector({ handleHeight: false });
     const [sizedImages, setSizedImages] = useState<Image[]>();
 
-    console.log(`width: ${width} height: ${height}`);
-
     useEffect(() => {
         if (!width) return;
 
