@@ -25,7 +25,7 @@ const Gallery = () => {
         images.forEach((image) => {
             row.push(image);
             rowWidth += image.width;
-            const desiredWidth = width! - 2 * (margin + border) * row.length;
+            const desiredWidth = width - 2 * (margin + border) * row.length;
 
             if (rowWidth > desiredWidth) {
                 const ratio = desiredWidth / rowWidth;
