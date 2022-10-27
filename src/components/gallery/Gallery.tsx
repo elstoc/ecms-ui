@@ -1,6 +1,6 @@
 import './Gallery.scss';
 import { useResizeDetector } from 'react-resize-detector';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import jsonData from './initialData.json';
 
 type Image = {
@@ -13,25 +13,23 @@ const Gallery = () => {
     const border = 1;
     const margin = 5;
     const images = jsonData as Image[];
-
-    const { width, height, ref } = useResizeDetector({ handleHeight: false });
     const [sizedImages, setSizedImages] = useState<Image[]>();
 
-    useEffect(() => {
+    const onResize = useCallback((width?: number, height?: number) => {
         if (!width) return;
 
         let rowWidth = 0;
-        let rowImages: Image[] = [];
+        let row: Image[] = [];
         const newSizedImages: Image[] = [];
 
         images.forEach((image) => {
-            rowImages.push(image);
+            row.push(image);
             rowWidth += image.width;
-            const desiredWidth = width! - 2 * (margin + border) * rowImages.length;
+            const desiredWidth = width! - 2 * (margin + border) * row.length;
 
             if (rowWidth > desiredWidth) {
                 const ratio = desiredWidth / rowWidth;
-                rowImages = rowImages.map((image) => {
+                row = row.map((image) => {
                     return {
                         path: image.path,
                         width: Math.trunc(image.width * ratio),
@@ -41,16 +39,22 @@ const Gallery = () => {
             }
 
             if(rowWidth >= desiredWidth) {
-                newSizedImages.push(...rowImages);
-                rowImages = [];
+                newSizedImages.push(...row);
+                row = [];
                 rowWidth = 0;
             }
 
         });
 
-        newSizedImages.push(...rowImages);
+        newSizedImages.push(...row);
         setSizedImages(newSizedImages);
-    },[width, images]);
+
+    }, [images]);
+
+    const { ref: widthRef } = useResizeDetector({
+        handleHeight: false,
+        onResize
+    });
 
     const elements: JSX.Element[] = [];
 
@@ -66,7 +70,7 @@ const Gallery = () => {
 
     return (
         <div className='content'>
-            <div ref={ref} className="justifiedGallery">
+            <div ref={widthRef} className="justifiedGallery">
                 {sizedImages ? elements : 'Loading images...'}
             </div>
         </div>
