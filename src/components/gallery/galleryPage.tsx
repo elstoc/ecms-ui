@@ -10,17 +10,18 @@ type Image = {
 };
 
 const GalleryPage = () => {
-    const { width, height, ref } = useResizeDetector({
-        handleHeight: false,
-    });
     const border = 1;
     const margin = 5;
     const images = jsonData as Image[];
+
+    const { width, height, ref } = useResizeDetector({ handleHeight: false });
     const [sizedImages, setSizedImages] = useState<Image[]>();
 
     console.log(`width: ${width} height: ${height}`);
 
-    const redraw = useCallback((): void => {
+    useEffect(() => {
+        if (!width) return;
+
         let rowWidth = 0;
         let rowImages: Image[] = [];
         const newSizedImages: Image[] = [];
@@ -29,12 +30,8 @@ const GalleryPage = () => {
             rowImages.push(image);
             rowWidth += image.width;
             const desiredWidth = width! - 2 * (margin + border) * rowImages.length;
-            if(rowWidth === desiredWidth) {
-                newSizedImages.push(...rowImages);
-                rowImages = [];
-                rowWidth = 0;
-                console.log('desired');
-            } else if (rowWidth > desiredWidth) {
+
+            if (rowWidth > desiredWidth) {
                 const ratio = desiredWidth / rowWidth;
                 rowImages = rowImages.map((image) => {
                     return {
@@ -43,19 +40,19 @@ const GalleryPage = () => {
                         height: Math.trunc(image.height * ratio)
                     };
                 });
+            }
+
+            if(rowWidth >= desiredWidth) {
                 newSizedImages.push(...rowImages);
                 rowImages = [];
                 rowWidth = 0;
             }
+
         });
 
         newSizedImages.push(...rowImages);
         setSizedImages(newSizedImages);
-    }, [width, images]);
-
-    useEffect(() => {
-        width && redraw();
-    },[redraw]);
+    },[width, images]);
 
     const elements: JSX.Element[] = [];
 
@@ -66,13 +63,13 @@ const GalleryPage = () => {
             border: `${border}px solid black`,
             margin: `${margin}px`
         };
-        elements.push(<div key={item.path} style={style}>Helloo World</div>);
+        elements.push(<div key={item.path} style={style}>Image</div>);
     });
 
     return (
         <div className='content'>
             <div ref={ref} className="justifiedGallery">
-                {sizedImages ? elements : 'This item has not been rendered yet'}
+                {sizedImages ? elements : 'Loading images...'}
             </div>
         </div>
     );
