@@ -2,7 +2,7 @@
   "name": "home-api",
   "version": "1.0.0",
   "description": "UI for home website",
-  "main": "dist/index.ts",
+  "main": "dist/app.ts",
   "scripts": {
     "start": "webpack serve --port 3000",
     "build": "NODE_ENV=production webpack",
