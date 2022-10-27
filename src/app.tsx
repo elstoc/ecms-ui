@@ -1,7 +1,7 @@
 import './app.css';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import GalleryPage from './components/gallery/galleryPage';
+import GalleryPage from './components/gallery/Gallery';
 
 const container = document.getElementById('app-root')!;
 const root = createRoot(container);

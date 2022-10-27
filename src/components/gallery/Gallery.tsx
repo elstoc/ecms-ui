@@ -1,6 +1,6 @@
-import './galleryPage.scss';
+import './Gallery.scss';
 import { useResizeDetector } from 'react-resize-detector';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import jsonData from './initialData.json';
 
 type Image = {
@@ -9,7 +9,7 @@ type Image = {
     height: number;
 };
 
-const GalleryPage = () => {
+const Gallery = () => {
     const border = 1;
     const margin = 5;
     const images = jsonData as Image[];
@@ -75,4 +75,4 @@ const GalleryPage = () => {
     );
 };
 
-export default GalleryPage;
+export default Gallery;
