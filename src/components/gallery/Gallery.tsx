@@ -22,11 +22,14 @@ const Gallery = () => {
         images.forEach((image) => {
             row.push(image);
             if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
+                // get width of all images
+                // and width of div, less borders / margins (width available)
                 rowWidth += image.thumbDimensions.width;
-                const desiredWidth = width - 2 * (margin + border) * row.length;
+                const availableWidth = width - ( 2 * (margin + border) * row.length );
 
-                if (rowWidth > desiredWidth) {
-                    const ratio = desiredWidth / rowWidth;
+                if (rowWidth > availableWidth) {
+                    // images exceed available width: decrease their size
+                    const ratio = availableWidth / rowWidth;
                     row.forEach((image) => {
                         newSizedImages[image.fileName] = {
                             width: Math.trunc(image.thumbDimensions.width * ratio),
@@ -37,7 +40,8 @@ const Gallery = () => {
                     rowWidth = 0;
                 }
 
-                if (rowWidth === desiredWidth) {
+                if (rowWidth === availableWidth) {
+                    // all images fit without adjusting size (corner case)
                     row.forEach((image) => {
                         newSizedImages[image.fileName] = image.thumbDimensions;
                     });
@@ -48,9 +52,11 @@ const Gallery = () => {
 
         });
 
+        // add any unhandled images
         row.forEach((image) => {
             newSizedImages[image.fileName] = image.thumbDimensions;
         });
+
         setSizedImages(newSizedImages);
 
     }, [images]);
