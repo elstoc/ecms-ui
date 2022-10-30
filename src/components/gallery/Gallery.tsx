@@ -9,7 +9,7 @@ import jsonData from './initialData.json';
 const Gallery = () => {
     const border = 1;
     const margin = 5;
-    const images = jsonData as ImageData[];
+    const imageList = jsonData as ImageData[];
     const [sizedImages, setSizedImages] = useState<SizeData>();
 
     const onResize = useCallback((width?: number, height?: number) => {
@@ -19,7 +19,7 @@ const Gallery = () => {
         let row: ImageData[] = [];
         const newSizedImages: SizeData = {};
 
-        images.forEach((image) => {
+        imageList.forEach((image) => {
             row.push(image);
             if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
                 // get width of all images
@@ -59,7 +59,7 @@ const Gallery = () => {
 
         setSizedImages(newSizedImages);
 
-    }, [images]);
+    }, [imageList]);
 
     const { ref: widthRef } = useResizeDetector({
         handleHeight: false,
@@ -68,7 +68,7 @@ const Gallery = () => {
 
     const elements: JSX.Element[] = [];
 
-    sizedImages && images.forEach((item) => {
+    sizedImages && imageList.forEach((item) => {
         const style = {
             width: `${sizedImages[item.fileName].width}px`,
             height: `${sizedImages[item.fileName].height}px`,
