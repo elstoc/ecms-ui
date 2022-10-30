@@ -1,507 +1,1363 @@
 [
   {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-06-17-12.42.18a.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-06-20-12.46.26a.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-06-20-12.56.00a.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-06-20-14.00.01a.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-06-22-13.38.59a.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-11-30-18.54.11_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2007-12-14-00.06.33_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-01-05-02.31.16_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-01-05-02.33.00_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-04-14-21.13.29_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-05-10-14.33.10_A.jpg",
-    "width": 555,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-10-04-08.39.20_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-11-15-10.57.19_A.jpg",
-    "width": 293,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-12-21-11.37.01_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-12-21-13.43.52_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2008-12-30-11.21.04_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-04-05-16.55.53_A.jpg",
-    "width": 326,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-04-13-09.40.35_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-08-02-17.43.35_A.jpg",
-    "width": 300,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-08-02-18.10.56_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-08-16-08.49.23_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-09-06-09.34.39_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-10-10-10.44.56_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2009-11-28-19.13.35_A.jpg",
-    "width": 400,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2010-05-15-11.39.02_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2010-05-28-13.30.22_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2010-05-28-14.43.32_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-04-16-13.55.48_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-12-11.41.57_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-30-09.29.07.jpg",
-    "width": 597,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-30-11.08.08.jpg",
-    "width": 614,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-30-11.08.21.jpg",
-    "width": 375,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-30-13.33.38.jpg",
-    "width": 654,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-08-30-13.34.57.jpg",
-    "width": 556,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2011-12-18-12.37.34_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2012-03-10-15.18.28_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2012-03-15-12.49.34.jpg",
-    "width": 308,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2012-06-09-12.41.06_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2013-03-09-17.03.22_A.jpg",
-    "width": 300,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2013-04-24-17.41.03_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2013-05-03-10.46.49.jpg",
-    "width": 660,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2013-05-27-12.00.38_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2013-11-29-14.32.16_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2014-05-03-12.40.27_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2014-06-27-17.43.06_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2014-08-07-14.58.32_A.jpg",
-    "width": 713,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2014-08-31-11.47.10_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2015-02-14-11.04.04_A.jpg",
-    "width": 533,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2015-07-21-14.34.24_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2015-07-25-12.11.58_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-03-05-12.48.54_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-06-07.34.39_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-06-18.55.35_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-09-10.38.08_A.jpg",
-    "width": 528,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-15-11.09.26_A.jpg",
-    "width": 332,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-19-19.28.55_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-19-19.29.49_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-25-15.48.40_A.jpg",
-    "width": 711,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-26-11.10.25_A.jpg",
-    "width": 711,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-27-18.59.55_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-27-19.08.13_A.jpg",
-    "width": 711,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-27-19.21.30_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-27-19.24.56_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-27-19.25.06_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-11.40.54_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-11.49.53_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-12.21.34_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-12.26.18_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-12.26.49_A.jpg",
-    "width": 648,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-12.28.04_A.jpg",
-    "width": 320,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-17.47.59_A.jpg",
-    "width": 599,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-07-29-17.55.49_A.jpg",
-    "width": 683,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-10-15-13.16.24_A.jpg",
-    "width": 267,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-10-15-13.27.00_A.jpg",
-    "width": 640,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-10-15-13.38.05_A.jpg",
-    "width": 400,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-10-15-13.52.30_A.jpg",
-    "width": 290,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2016-12-16-18.56.38_A.jpg",
-    "width": 267,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-01-07-14.28.03_A.jpg",
-    "width": 298,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-01-07-15.05.02_A.jpg",
-    "width": 632,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-01-07-15.15.45_A.jpg",
-    "width": 621,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-01-07-15.31.26_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-09.41.52_A.jpg",
-    "width": 724,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-10.08.26_A.jpg",
-    "width": 400,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-10.38.12_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-11.07.33_A.jpg",
-    "width": 600,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-11.50.52_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-10-11.54.39_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-16-14.01.06_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-16-16.26.33_A.jpg",
-    "width": 262,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-09.34.11_A.jpg",
-    "width": 286,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-12.10.11_A.jpg",
-    "width": 318,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-12.24.25_A.jpg",
-    "width": 343,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-13.13.39_A.jpg",
-    "width": 280,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-13.34.15_A.jpg",
-    "width": 711,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-14.41.44_A.jpg",
-    "width": 599,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-15.21.37_A.jpg",
-    "width": 282,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-16.30.38_A.jpg",
-    "width": 606,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-21.03.44_A.jpg",
-    "width": 560,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-17-21.03.51_A.jpg",
-    "width": 711,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-18-12.49.21_A.jpg",
-    "width": 634,
-    "height": 400
-  },
-  {
-    "path": "/home/chris/coding/javascript/home-api/cache/gallery//2017-02-18-12.55.59_A.jpg",
-    "width": 582,
-    "height": 400
+    "fileName": "2007-06-17-12.42.18a.jpg",
+    "exif": {
+      "title": "Waiting for the train. Bristol Temple Meads",
+      "dateTaken": "2007-06-17T11:42:18.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/250",
+      "iso": "80",
+      "aperture": "f/4.9",
+      "focalLength": "17.4 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2007-06-20-12.46.26a.jpg",
+    "exif": {
+      "title": "Looking towards St Michael's Mount. Penzance.",
+      "dateTaken": "2007-06-20T11:46:26.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/400",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2007-06-20-12.56.00a.jpg",
+    "exif": {
+      "title": "Penzance Beach",
+      "dateTaken": "2007-06-20T11:56:00.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/320",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2007-06-20-14.00.01a.jpg",
+    "exif": {
+      "title": "The harbour at Mousehole",
+      "dateTaken": "2007-06-20T13:00:01.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/250",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2007-06-22-13.38.59a.jpg",
+    "exif": {
+      "title": "St Ives to Zennor Coastal Walk",
+      "dateTaken": "2007-06-22T12:38:59.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/250",
+      "iso": "80",
+      "aperture": "f/9",
+      "focalLength": "7.109 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2007-11-30-18.54.11_A.jpg",
+    "exif": {
+      "title": "Leonie and Amy. Southmead Hospital.",
+      "dateTaken": "2007-11-30T18:54:11.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/40",
+      "iso": "200",
+      "aperture": "f/3.5",
+      "focalLength": "10.093 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2007-12-14-00.06.33_A.jpg",
+    "exif": {
+      "title": "Amy fits on a pillow",
+      "dateTaken": "2007-12-14T00:06:33.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2008-01-05-02.31.16_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2008-01-05T02:31:16.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/4",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2008-01-05-02.33.00_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2008-01-05T02:33:00.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/3",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2008-04-14-21.13.29_A.jpg",
+    "exif": {
+      "title": "Cosy Amy",
+      "dateTaken": "2008-04-14T20:13:29.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "200",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2008-05-10-14.33.10_A.jpg",
+    "exif": {
+      "title": "Leonie and Amy. Eastville Park",
+      "dateTaken": "2008-05-10T13:33:10.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/80",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 485, "height": 350 }
+  },
+  {
+    "fileName": "2008-10-04-08.39.20_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2008-10-04T07:39:20.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/100",
+      "iso": "800",
+      "aperture": "f/3.5",
+      "focalLength": "10.093 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2008-11-15-10.57.19_A.jpg",
+    "exif": {
+      "title": "Would you like a ball?",
+      "dateTaken": "2008-11-15T10:57:19.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/100",
+      "iso": "400",
+      "aperture": "f/3.2",
+      "focalLength": "7.109 mm"
+    },
+    "thumbDimensions": { "width": 256, "height": 350 }
+  },
+  {
+    "fileName": "2008-12-21-11.37.01_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2008-12-21T11:37:01.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "250",
+      "aperture": "f/3.2",
+      "focalLength": "7.109 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2008-12-21-13.43.52_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2008-12-21T13:43:52.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "800",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2008-12-30-11.21.04_A.jpg",
+    "exif": {
+      "title": "Amy and Peter",
+      "dateTaken": "2008-12-30T11:21:04.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "250",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2009-04-05-16.55.53_A.jpg",
+    "exif": {
+      "title": "Kiss Kiss",
+      "dateTaken": "2009-04-05T15:55:53.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "500",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 285, "height": 350 }
+  },
+  {
+    "fileName": "2009-04-13-09.40.35_A.jpg",
+    "exif": {
+      "title": "Enjoying the chair",
+      "dateTaken": "2009-04-13T08:40:35.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/50",
+      "iso": "800",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2009-08-02-17.43.35_A.jpg",
+    "exif": {
+      "title": "To the playground...",
+      "dateTaken": "2009-08-02T16:43:35.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/320",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 263, "height": 350 }
+  },
+  {
+    "fileName": "2009-08-02-18.10.56_A.jpg",
+    "exif": {
+      "title": "Southey Fields, Kingswood",
+      "dateTaken": "2009-08-02T17:10:56.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/160",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2009-08-16-08.49.23_A.jpg",
+    "exif": {
+      "title": "And... we're here",
+      "dateTaken": "2009-08-16T07:49:23.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/400",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2009-09-06-09.34.39_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2009-09-06T08:34:39.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/80",
+      "iso": "800",
+      "aperture": "f/4.9",
+      "focalLength": "17.4 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2009-10-10-10.44.56_A.jpg",
+    "exif": {
+      "title": "Umbrella",
+      "dateTaken": "2009-10-10T09:44:56.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2009-11-28-19.13.35_A.jpg",
+    "exif": {
+      "title": "Amy and Pete",
+      "dateTaken": "2009-11-28T19:13:35.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 350, "height": 350 }
+  },
+  {
+    "fileName": "2010-05-15-11.39.02_A.jpg",
+    "exif": {
+      "title": "Amy and Peter",
+      "dateTaken": "2010-05-15T10:39:02.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "160",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2010-05-28-13.30.22_A.jpg",
+    "exif": {
+      "title": "Tired at Laura's Wedding",
+      "dateTaken": "2010-05-28T12:30:22.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/200",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2010-05-28-14.43.32_A.jpg",
+    "exif": {
+      "title": "Laura's Wedding. Bristol Registry Office",
+      "dateTaken": "2010-05-28T13:43:32.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/400",
+      "iso": "400",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2011-04-16-13.55.48_A.jpg",
+    "exif": {
+      "title": "Wow look what I made!",
+      "dateTaken": "2011-04-16T12:55:48.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-12-11.41.57_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2011-08-12T10:41:57.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/1000",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-30-09.29.07.jpg",
+    "exif": {
+      "title": "Keynsham Weir, River Avon",
+      "dateTaken": "2011-08-30T08:29:07.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/160",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 522, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-30-11.08.08.jpg",
+    "exif": {
+      "title": "Saltford Weir, River Avon",
+      "dateTaken": "2011-08-30T10:08:08.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/160",
+      "iso": "80",
+      "aperture": "f/9",
+      "focalLength": "7.109 mm"
+    },
+    "thumbDimensions": { "width": 537, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-30-11.08.21.jpg",
+    "exif": {
+      "title": "Saltford Weir, River Avon",
+      "dateTaken": "2011-08-30T10:08:21.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/160",
+      "iso": "80",
+      "aperture": "f/9",
+      "focalLength": "7.109 mm"
+    },
+    "thumbDimensions": { "width": 328, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-30-13.33.38.jpg",
+    "exif": {
+      "title": "River Avon, Bath",
+      "dateTaken": "2011-08-30T12:33:38.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/400",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 573, "height": 350 }
+  },
+  {
+    "fileName": "2011-08-30-13.34.57.jpg",
+    "exif": {
+      "title": "River Avon, Bath",
+      "dateTaken": "2011-08-30T12:34:57.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/400",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 487, "height": 350 }
+  },
+  {
+    "fileName": "2011-12-18-12.37.34_A.jpg",
+    "exif": {
+      "title": "Nice hat",
+      "dateTaken": "2011-12-18T12:37:34.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/50",
+      "iso": "250",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2012-03-10-15.18.28_A.jpg",
+    "exif": {
+      "title": "Amy",
+      "dateTaken": "2012-03-10T15:18:28.000Z",
+      "camera": "K810i",
+      "exposure": "1/25",
+      "iso": "200",
+      "aperture": "f/2.8"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2012-03-15-12.49.34.jpg",
+    "exif": {
+      "title": "St Ives to Zennor Coastal Path",
+      "dateTaken": "2012-03-15T12:49:34.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/125",
+      "iso": "80",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 269, "height": 350 }
+  },
+  {
+    "fileName": "2012-06-09-12.41.06_A.jpg",
+    "exif": {
+      "title": "Amy follows instructions",
+      "dateTaken": "2012-06-09T11:41:06.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/30",
+      "iso": "200",
+      "aperture": "f/4.6",
+      "focalLength": "11.7 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2013-03-09-17.03.22_A.jpg",
+    "exif": {
+      "title": "Give my hat back",
+      "dateTaken": "2013-03-09T17:03:22.000Z",
+      "camera": "GT-I8160",
+      "exposure": "1/14",
+      "iso": "100",
+      "aperture": "f/2.7",
+      "focalLength": "3.54 mm"
+    },
+    "thumbDimensions": { "width": 263, "height": 350 }
+  },
+  {
+    "fileName": "2013-04-24-17.41.03_A.jpg",
+    "exif": {
+      "title": "Caught the sun",
+      "dateTaken": "2013-04-24T16:41:03.000Z",
+      "camera": "GT-I8160",
+      "exposure": "1/14",
+      "iso": "100",
+      "aperture": "f/2.7",
+      "focalLength": "3.54 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2013-05-03-10.46.49.jpg",
+    "exif": {
+      "title": "Ashton Avenue Bridge",
+      "dateTaken": "2013-05-03T09:46:49.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/200",
+      "iso": "100",
+      "aperture": "f/4",
+      "focalLength": "4.3 mm"
+    },
+    "thumbDimensions": { "width": 578, "height": 350 }
+  },
+  {
+    "fileName": "2013-05-27-12.00.38_A.jpg",
+    "exif": {
+      "title": "Dyrham Park",
+      "dateTaken": "2013-05-27T11:00:38.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/1000",
+      "iso": "100",
+      "aperture": "f/5.6",
+      "focalLength": "5 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2013-11-29-14.32.16_A.jpg",
+    "exif": {
+      "title": "That way",
+      "dateTaken": "2013-11-29T14:32:16.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/60",
+      "iso": "640",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2014-05-03-12.40.27_A.jpg",
+    "exif": {
+      "title": "Bristol Zoo",
+      "dateTaken": "2014-05-03T11:40:27.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/100",
+      "iso": "80",
+      "aperture": "f/8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2014-06-27-17.43.06_A.jpg",
+    "exif": {
+      "title": "Amy Face Paint",
+      "dateTaken": "2014-06-27T16:43:06.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/60",
+      "iso": "320",
+      "aperture": "f/4.3",
+      "focalLength": "9.4 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2014-08-07-14.58.32_A.jpg",
+    "exif": {
+      "title": "Weston-Super-Mare",
+      "dateTaken": "2014-08-07T13:58:32.000Z",
+      "camera": "FinePix AX245w",
+      "exposure": "1/220",
+      "iso": "100",
+      "aperture": "f/8",
+      "focalLength": "5 mm"
+    },
+    "thumbDimensions": { "width": 624, "height": 350 }
+  },
+  {
+    "fileName": "2014-08-31-11.47.10_A.jpg",
+    "exif": {
+      "title": "Favourite Ride. Butlins, Minehead.",
+      "dateTaken": "2014-08-31T10:47:10.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/500",
+      "iso": "100",
+      "aperture": "f/4",
+      "focalLength": "4.3 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2015-02-14-11.04.04_A.jpg",
+    "exif": {
+      "title": "Daddy I pulled his head off",
+      "dateTaken": "2015-02-14T11:04:04.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/60",
+      "iso": "125",
+      "aperture": "f/4.1",
+      "focalLength": "8.7 mm"
+    },
+    "thumbDimensions": { "width": 467, "height": 350 }
+  },
+  {
+    "fileName": "2015-07-21-14.34.24_A.jpg",
+    "exif": {
+      "title": "Swimming with Grandma. Sandaway Caravan Park, Coombe Martin.",
+      "dateTaken": "2015-07-21T13:34:24.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/400",
+      "iso": "100",
+      "aperture": "f/5.4",
+      "focalLength": "30.1 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2015-07-25-12.11.58_A.jpg",
+    "exif": {
+      "title": "Spat on by a Dinosaur. Coombe Martin Wildlife & Dinosaur Park.",
+      "dateTaken": "2015-07-25T11:11:58.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/200",
+      "iso": "100",
+      "aperture": "f/4",
+      "focalLength": "5.4 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-03-05-12.48.54_A.jpg",
+    "exif": {
+      "title": "Selfie",
+      "dateTaken": "2016-03-05T12:48:54.000Z",
+      "camera": "Canon DIGITAL IXUS 70",
+      "exposure": "1/30",
+      "iso": "200",
+      "aperture": "f/2.8",
+      "focalLength": "5.8 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-06-07.34.39_A.jpg",
+    "exif": {
+      "title": "Thinking",
+      "dateTaken": "2016-07-06T06:34:39.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/80",
+      "iso": "1600",
+      "aperture": "f/6.3",
+      "focalLength": "35 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-06-18.55.35_A.jpg",
+    "exif": {
+      "title": "Rose",
+      "dateTaken": "2016-07-06T17:55:35.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/160",
+      "iso": "200",
+      "aperture": "f/8",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-09-10.38.08_A.jpg",
+    "exif": {
+      "title": "Hazel",
+      "dateTaken": "2016-07-09T09:38:08.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/50",
+      "iso": "1600",
+      "aperture": "f/11",
+      "focalLength": "40 mm"
+    },
+    "thumbDimensions": { "width": 462, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-15-11.09.26_A.jpg",
+    "exif": {
+      "title": "Amy. Sports Day.",
+      "dateTaken": "2016-07-15T10:09:26.000Z",
+      "camera": "DMC-TZ19",
+      "exposure": "1/200",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "4.7 mm"
+    },
+    "thumbDimensions": { "width": 291, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-19-19.28.55_A.jpg",
+    "exif": {
+      "title": "Poser",
+      "dateTaken": "2016-07-19T18:28:55.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/25",
+      "iso": "400",
+      "aperture": "f/8",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-19-19.29.49_A.jpg",
+    "exif": {
+      "title": "Poser",
+      "dateTaken": "2016-07-19T18:29:49.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/60",
+      "iso": "400",
+      "aperture": "f/8",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-25-15.48.40_A.jpg",
+    "exif": {
+      "title": "Hayle Beach",
+      "dateTaken": "2016-07-25T14:48:40.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/1000",
+      "iso": "200",
+      "aperture": "f/8",
+      "focalLength": "33 mm"
+    },
+    "thumbDimensions": { "width": 622, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-26-11.10.25_A.jpg",
+    "exif": {
+      "title": "Porthmeor Beach. St Ives",
+      "dateTaken": "2016-07-26T10:10:25.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/800",
+      "iso": "200",
+      "aperture": "f/9",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 622, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-27-18.59.55_A.jpg",
+    "exif": {
+      "title": "Seagulls. St Ives",
+      "dateTaken": "2016-07-27T17:59:55.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/1600",
+      "iso": "400",
+      "aperture": "f/10",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-27-19.08.13_A.jpg",
+    "exif": {
+      "title": "Seal. St Ives",
+      "dateTaken": "2016-07-27T18:08:13.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/800",
+      "iso": "400",
+      "aperture": "f/10",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 622, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-27-19.21.30_A.jpg",
+    "exif": {
+      "title": "Paddling. St Ives",
+      "dateTaken": "2016-07-27T18:21:30.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/800",
+      "iso": "400",
+      "aperture": "f/10",
+      "focalLength": "100 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-27-19.24.56_A.jpg",
+    "exif": {
+      "title": "Paddling. St Ives",
+      "dateTaken": "2016-07-27T18:24:56.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/1600",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "200 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-27-19.25.06_A.jpg",
+    "exif": {
+      "title": "Paddling. St Ives",
+      "dateTaken": "2016-07-27T18:25:06.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/2000",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "200 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-11.40.54_A.jpg",
+    "exif": {
+      "title": "Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T10:40:54.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/640",
+      "iso": "800",
+      "aperture": "f/8",
+      "focalLength": "166 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-11.49.53_A.jpg",
+    "exif": {
+      "title": "Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T10:49:53.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/640",
+      "iso": "800",
+      "aperture": "f/4",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-12.21.34_A.jpg",
+    "exif": {
+      "title": "Falconry at Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T11:21:34.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/3200",
+      "iso": "800",
+      "aperture": "f/9",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-12.26.18_A.jpg",
+    "exif": {
+      "title": "Falconry at Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T11:26:18.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/2000",
+      "iso": "800",
+      "aperture": "f/8",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-12.26.49_A.jpg",
+    "exif": {
+      "title": "Falconry at Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T11:26:49.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/2000",
+      "iso": "800",
+      "aperture": "f/10",
+      "focalLength": "178 mm"
+    },
+    "thumbDimensions": { "width": 567, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-12.28.04_A.jpg",
+    "exif": {
+      "title": "Falconry at Paradise Park. Hayle",
+      "dateTaken": "2016-07-29T11:28:04.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/2000",
+      "iso": "800",
+      "aperture": "f/11",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 280, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-17.47.59_A.jpg",
+    "exif": {
+      "title": "Seal Watching. St Ives",
+      "dateTaken": "2016-07-29T16:47:59.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/320",
+      "iso": "200",
+      "aperture": "f/9",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 524, "height": 350 }
+  },
+  {
+    "fileName": "2016-07-29-17.55.49_A.jpg",
+    "exif": {
+      "title": "Seal Island. St Ives",
+      "dateTaken": "2016-07-29T16:55:49.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/1600",
+      "iso": "200",
+      "aperture": "f/9",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 598, "height": 350 }
+  },
+  {
+    "fileName": "2016-10-15-13.16.24_A.jpg",
+    "exif": {
+      "title": "Crane. Bristol Docks",
+      "dateTaken": "2016-10-15T12:16:24.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/400",
+      "iso": "100",
+      "aperture": "f/3.5",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 233, "height": 350 }
+  },
+  {
+    "fileName": "2016-10-15-13.27.00_A.jpg",
+    "exif": {
+      "title": "Bristol Harbour Railway",
+      "dateTaken": "2016-10-15T12:27:00.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/125",
+      "iso": "100",
+      "aperture": "f/5",
+      "focalLength": "143 mm"
+    },
+    "thumbDimensions": { "width": 560, "height": 350 }
+  },
+  {
+    "fileName": "2016-10-15-13.38.05_A.jpg",
+    "exif": {
+      "title": "Chimney and Tower. Bristol Docks.",
+      "dateTaken": "2016-10-15T12:38:05.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/250",
+      "iso": "100",
+      "aperture": "f/8",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 350, "height": 350 }
+  },
+  {
+    "fileName": "2016-10-15-13.52.30_A.jpg",
+    "exif": {
+      "title": "Bristol Docks",
+      "dateTaken": "2016-10-15T12:52:30.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/100",
+      "iso": "100",
+      "aperture": "f/8",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 254, "height": 350 }
+  },
+  {
+    "fileName": "2016-12-16-18.56.38_A.jpg",
+    "exif": {
+      "title": "Ready for a night out",
+      "dateTaken": "2016-12-16T18:56:38.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/10",
+      "iso": "800",
+      "aperture": "f/4",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 233, "height": 350 }
+  },
+  {
+    "fileName": "2017-01-07-14.28.03_A.jpg",
+    "exif": {
+      "title": "Roman Baths, Bath",
+      "dateTaken": "2017-01-07T14:28:03.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/125",
+      "iso": "800",
+      "aperture": "f/8",
+      "focalLength": "27 mm"
+    },
+    "thumbDimensions": { "width": 261, "height": 350 }
+  },
+  {
+    "fileName": "2017-01-07-15.05.02_A.jpg",
+    "exif": {
+      "title": "Roman Baths, Bath",
+      "dateTaken": "2017-01-07T15:05:02.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/25",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 553, "height": 350 }
+  },
+  {
+    "fileName": "2017-01-07-15.15.45_A.jpg",
+    "exif": {
+      "title": "Amy At the Roman Baths",
+      "dateTaken": "2017-01-07T15:15:45.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/80",
+      "iso": "400",
+      "aperture": "f/5",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 543, "height": 350 }
+  },
+  {
+    "fileName": "2017-01-07-15.31.26_A.jpg",
+    "exif": {
+      "title": "Roman Baths, Bath",
+      "dateTaken": "2017-01-07T15:31:26.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/60",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-09.41.52_A.jpg",
+    "exif": {
+      "title": "Frome Valley, Oldbury Court",
+      "dateTaken": "2017-02-10T09:41:52.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/13",
+      "iso": "400",
+      "aperture": "f/8",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 634, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-10.08.26_A.jpg",
+    "exif": {
+      "title": "Oldbury Court",
+      "dateTaken": "2017-02-10T10:08:26.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "2",
+      "iso": "100",
+      "aperture": "f/22",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 350, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-10.38.12_A.jpg",
+    "exif": {
+      "title": "Frome Valley Walk",
+      "dateTaken": "2017-02-10T10:38:12.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/3",
+      "iso": "100",
+      "aperture": "f/8",
+      "focalLength": "25 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-11.07.33_A.jpg",
+    "exif": {
+      "title": "Snuff Mills Weir. Frome Valley Walk",
+      "dateTaken": "2017-02-10T11:07:33.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/6",
+      "iso": "100",
+      "aperture": "f/22",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-11.50.52_A.jpg",
+    "exif": {
+      "title": "Heron. Eastville Park",
+      "dateTaken": "2017-02-10T11:50:52.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/500",
+      "iso": "800",
+      "aperture": "f/5.6",
+      "focalLength": "250 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-10-11.54.39_A.jpg",
+    "exif": {
+      "title": "Heron. Eastville Park",
+      "dateTaken": "2017-02-10T11:54:39.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/320",
+      "iso": "400",
+      "aperture": "f/5.6",
+      "focalLength": "163 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-16-14.01.06_A.jpg",
+    "exif": {
+      "title": "Apollo 10 Command Module. Science Museum, London",
+      "dateTaken": "2017-02-16T14:01:06.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/5",
+      "iso": "400",
+      "aperture": "f/4",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-16-16.26.33_A.jpg",
+    "exif": {
+      "title": "Earth Hall, Natural History Museum, London",
+      "dateTaken": "2017-02-16T16:26:33.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/1",
+      "iso": "1600",
+      "aperture": "f/6.3",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 229, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-09.34.11_A.jpg",
+    "exif": {
+      "title": "Amy at the London Eye",
+      "dateTaken": "2017-02-17T09:34:11.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/800",
+      "iso": "100",
+      "aperture": "f/4.5",
+      "focalLength": "20 mm"
+    },
+    "thumbDimensions": { "width": 250, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-12.10.11_A.jpg",
+    "exif": {
+      "title": "Cranes, London",
+      "dateTaken": "2017-02-17T12:10:11.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/400",
+      "iso": "100",
+      "aperture": "f/11",
+      "focalLength": "89 mm"
+    },
+    "thumbDimensions": { "width": 278, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-12.24.25_A.jpg",
+    "exif": {
+      "title": "A, B, C & D Warehouses, King Henry's Wharves, Tower Hamlets, London",
+      "dateTaken": "2017-02-17T12:24:25.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/320",
+      "iso": "200",
+      "aperture": "f/11",
+      "focalLength": "70 mm"
+    },
+    "thumbDimensions": { "width": 300, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-13.13.39_A.jpg",
+    "exif": {
+      "title": "Tower of London",
+      "dateTaken": "2017-02-17T13:13:39.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/100",
+      "iso": "100",
+      "aperture": "f/11",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 245, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-13.34.15_A.jpg",
+    "exif": {
+      "title": "Baboon Sculptures. Tower of London",
+      "dateTaken": "2017-02-17T13:34:15.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/15",
+      "iso": "100",
+      "aperture": "f/11",
+      "focalLength": "29 mm"
+    },
+    "thumbDimensions": { "width": 622, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-14.41.44_A.jpg",
+    "exif": {
+      "title": "Tower of London",
+      "dateTaken": "2017-02-17T14:41:44.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/640",
+      "iso": "1600",
+      "aperture": "f/8",
+      "focalLength": "30 mm"
+    },
+    "thumbDimensions": { "width": 525, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-15.21.37_A.jpg",
+    "exif": {
+      "title": "Tower Bridge, London",
+      "dateTaken": "2017-02-17T15:21:37.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/25",
+      "iso": "100",
+      "aperture": "f/11",
+      "focalLength": "37 mm"
+    },
+    "thumbDimensions": { "width": 247, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-16.30.38_A.jpg",
+    "exif": {
+      "title": "The London Eye and Waterloo Bridge",
+      "dateTaken": "2017-02-17T16:30:38.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S55-250mm f/4-5.6 IS STM",
+      "exposure": "1/400",
+      "iso": "200",
+      "aperture": "f/11",
+      "focalLength": "55 mm"
+    },
+    "thumbDimensions": { "width": 531, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-21.03.44_A.jpg",
+    "exif": {
+      "title": "Robots Exhibition. Science Museum, London",
+      "dateTaken": "2017-02-17T21:03:44.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/50",
+      "iso": "800",
+      "aperture": "f/6.3",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 490, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-17-21.03.51_A.jpg",
+    "exif": {
+      "title": "Robots Exhibition, Science Museum, London",
+      "dateTaken": "2017-02-17T21:03:51.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/125",
+      "iso": "800",
+      "aperture": "f/6.3",
+      "focalLength": "46 mm"
+    },
+    "thumbDimensions": { "width": 622, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-18-12.49.21_A.jpg",
+    "exif": {
+      "title": "London Underground",
+      "dateTaken": "2017-02-18T12:49:21.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/15",
+      "iso": "800",
+      "aperture": "f/7.1",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 555, "height": 350 }
+  },
+  {
+    "fileName": "2017-02-18-12.55.59_A.jpg",
+    "exif": {
+      "title": "Gold. Covent Garden, London",
+      "dateTaken": "2017-02-18T12:55:59.000Z",
+      "camera": "Canon EOS 100D",
+      "lens": "EF-S18-55mm f/3.5-5.6 IS STM",
+      "exposure": "1/400",
+      "iso": "800",
+      "aperture": "f/7.1",
+      "focalLength": "18 mm"
+    },
+    "thumbDimensions": { "width": 510, "height": 350 }
   }
 ]

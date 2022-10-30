@@ -1,52 +1,56 @@
-import './Gallery.scss';
 import { useResizeDetector } from 'react-resize-detector';
 import React, { useCallback, useState } from 'react';
-import jsonData from './initialData.json';
 
-type Image = {
-    path: string;
-    width: number;
-    height: number;
-};
+import './Gallery.scss';
+import { ImageData, SizeData } from './IGallery';
+
+import jsonData from './initialData.json';
 
 const Gallery = () => {
     const border = 1;
     const margin = 5;
-    const images = jsonData as Image[];
-    const [sizedImages, setSizedImages] = useState<Image[]>();
+    const images = jsonData as ImageData[];
+    const [sizedImages, setSizedImages] = useState<SizeData>();
 
     const onResize = useCallback((width?: number, height?: number) => {
         if (!width) return;
 
         let rowWidth = 0;
-        let row: Image[] = [];
-        const newSizedImages: Image[] = [];
+        let row: ImageData[] = [];
+        const newSizedImages: SizeData = {};
 
         images.forEach((image) => {
             row.push(image);
-            rowWidth += image.width;
-            const desiredWidth = width - 2 * (margin + border) * row.length;
+            if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
+                rowWidth += image.thumbDimensions.width;
+                const desiredWidth = width - 2 * (margin + border) * row.length;
 
-            if (rowWidth > desiredWidth) {
-                const ratio = desiredWidth / rowWidth;
-                row = row.map((image) => {
-                    return {
-                        path: image.path,
-                        width: Math.trunc(image.width * ratio),
-                        height: Math.trunc(image.height * ratio)
-                    };
-                });
-            }
+                if (rowWidth > desiredWidth) {
+                    const ratio = desiredWidth / rowWidth;
+                    row.forEach((image) => {
+                        newSizedImages[image.fileName] = {
+                            width: Math.trunc(image.thumbDimensions.width * ratio),
+                            height: Math.trunc(image.thumbDimensions.height * ratio)
+                        };
+                    });
+                    row = [];
+                    rowWidth = 0;
+                }
 
-            if(rowWidth >= desiredWidth) {
-                newSizedImages.push(...row);
-                row = [];
-                rowWidth = 0;
+                if (rowWidth === desiredWidth) {
+                    row.forEach((image) => {
+                        newSizedImages[image.fileName] = image.thumbDimensions;
+                    });
+                    row = [];
+                    rowWidth = 0;
+                }
             }
 
         });
 
-        newSizedImages.push(...row);
+        row.forEach((image) => {
+            newSizedImages[image.fileName] = image.thumbDimensions;
+        });
         setSizedImages(newSizedImages);
 
     }, [images]);
@@ -58,14 +62,14 @@ const Gallery = () => {
 
     const elements: JSX.Element[] = [];
 
-    sizedImages && sizedImages.forEach((item) => {
+    sizedImages && images.forEach((item) => {
         const style = {
-            width: `${item.width}px`,
-            height: `${item.height}px`,
+            width: `${sizedImages[item.fileName].width}px`,
+            height: `${sizedImages[item.fileName].height}px`,
             border: `${border}px solid black`,
             margin: `${margin}px`
         };
-        elements.push(<div key={item.path} style={style}>Image</div>);
+        elements.push(<div key={item.fileName} style={style}>Image</div>);
     });
 
     return (
