@@ -2,7 +2,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import React, { useCallback, useState } from 'react';
 
 import './Gallery.scss';
-import { ImageData, SizeData } from './IGallery';
+import { ImageData } from './IGallery';
 
 import { useQuery } from '@tanstack/react-query';
 
@@ -41,21 +41,21 @@ const Gallery = () => {
 
     let rowImgWidth = 0;
     let row: ImageData[] = [];
-
-    const sizedImages: SizeData = {};
+    const galleryData: ImageData[] = [];
 
     (imageList as ImageData[]).forEach((image) => {
         row.push(image);
         rowImgWidth += image.thumbDimensions.width;
-        const availableWidth = galleryWidth - ( 2 * (margin + border) * row.length );
+        const availableWidth = galleryWidth - (2 * (margin + border) * row.length);
 
         if (rowImgWidth >= availableWidth) {
             const ratio = availableWidth / rowImgWidth;
             row.forEach((image) => {
-                sizedImages[image.fileName] = {
+                image.galleryDimensions = {
                     width: Math.trunc(image.thumbDimensions.width * ratio),
                     height: Math.trunc(image.thumbDimensions.height * ratio)
                 };
+                galleryData.push(image);
             });
             row = [];
             rowImgWidth = 0;
@@ -64,15 +64,16 @@ const Gallery = () => {
 
     // add any unhandled images
     row.forEach((image) => {
-        sizedImages[image.fileName] = image.thumbDimensions;
+        image.galleryDimensions = image.thumbDimensions;
+        galleryData.push(image);
     });
 
     const elements: JSX.Element[] = [];
 
-    sizedImages && (imageList as ImageData[]).forEach((item) => {
+    (galleryData as ImageData[]).forEach((item) => {
         const style = {
-            width: `${sizedImages[item.fileName].width}px`,
-            height: `${sizedImages[item.fileName].height}px`,
+            width: `${item.galleryDimensions!.width}px`,
+            height: `${item.galleryDimensions!.height}px`,
             border: `${border}px solid black`,
             margin: `${margin}px`
         };

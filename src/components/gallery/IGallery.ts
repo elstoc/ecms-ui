@@ -18,8 +18,5 @@ export type ImageData = {
     fileName: string;
     exif: Exif;
     thumbDimensions: Dimensions;
-}
-
-export type SizeData = {
-    [key: string]: Dimensions;
+    galleryDimensions?: Dimensions;
 }
