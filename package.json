@@ -37,6 +37,7 @@
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.13.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-resize-detector": "^7.1.2"

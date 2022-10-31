@@ -4,12 +4,18 @@ import React, { useCallback, useState } from 'react';
 import './Gallery.scss';
 import { ImageData, SizeData } from './IGallery';
 
-import jsonData from './initialData.json';
+import { useQuery } from '@tanstack/react-query';
 
 const Gallery = () => {
+
+    const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], () =>
+        fetch('http://localhost:3123/gallery/imagelist/portfolio').then(res =>
+            res.json()
+        )
+    );
+
     const border = 1;
     const margin = 5;
-    const imageList = jsonData as ImageData[];
     const [sizedImages, setSizedImages] = useState<SizeData>();
 
     const onResize = useCallback((width?: number, height?: number) => {
@@ -19,7 +25,7 @@ const Gallery = () => {
         let row: ImageData[] = [];
         const newSizedImages: SizeData = {};
 
-        imageList.forEach((image) => {
+        (imageList as ImageData[]).forEach((image) => {
             row.push(image);
             if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
                 // get width of all images
@@ -66,16 +72,19 @@ const Gallery = () => {
         onResize
     });
 
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error...</div>;
+
     const elements: JSX.Element[] = [];
 
-    sizedImages && imageList.forEach((item) => {
+    sizedImages && (imageList as ImageData[]).forEach((item) => {
         const style = {
             width: `${sizedImages[item.fileName].width}px`,
             height: `${sizedImages[item.fileName].height}px`,
             border: `${border}px solid black`,
             margin: `${margin}px`
         };
-        elements.push(<div key={item.fileName} style={style}>Image</div>);
+        elements.push(<div key={item.fileName} style={style}><img src={`http://localhost:3123/gallery/image/portfolio/${item.fileName}`} alt={item.fileName}/></div>);
     });
 
     return (
