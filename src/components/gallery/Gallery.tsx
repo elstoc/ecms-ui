@@ -39,42 +39,27 @@ const Gallery = () => {
 
     if (error) return <div>Error...</div>;
 
-    let rowWidth = 0;
+    let rowImgWidth = 0;
     let row: ImageData[] = [];
 
     const sizedImages: SizeData = {};
 
     (imageList as ImageData[]).forEach((image) => {
         row.push(image);
-        if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
-            // get width of all images
-            // and width of div, less borders / margins (width available)
-            rowWidth += image.thumbDimensions.width;
-            const availableWidth = galleryWidth - ( 2 * (margin + border) * row.length );
+        rowImgWidth += image.thumbDimensions.width;
+        const availableWidth = galleryWidth - ( 2 * (margin + border) * row.length );
 
-            if (rowWidth > availableWidth) {
-                // images exceed available width: decrease their size
-                const ratio = availableWidth / rowWidth;
-                row.forEach((image) => {
-                    sizedImages[image.fileName] = {
-                        width: Math.trunc(image.thumbDimensions.width * ratio),
-                        height: Math.trunc(image.thumbDimensions.height * ratio)
-                    };
-                });
-                row = [];
-                rowWidth = 0;
-            }
-
-            if (rowWidth === availableWidth) {
-                // all images fit without adjusting size (corner case)
-                row.forEach((image) => {
-                    sizedImages[image.fileName] = image.thumbDimensions;
-                });
-                row = [];
-                rowWidth = 0;
-            }
+        if (rowImgWidth >= availableWidth) {
+            const ratio = availableWidth / rowImgWidth;
+            row.forEach((image) => {
+                sizedImages[image.fileName] = {
+                    width: Math.trunc(image.thumbDimensions.width * ratio),
+                    height: Math.trunc(image.thumbDimensions.height * ratio)
+                };
+            });
+            row = [];
+            rowImgWidth = 0;
         }
-
     });
 
     // add any unhandled images
