@@ -7,6 +7,8 @@ import { ImageData, SizeData } from './IGallery';
 import { useQuery } from '@tanstack/react-query';
 
 const Gallery = () => {
+    const border = 0;
+    const margin = 2;
 
     const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], () =>
         fetch('http://localhost:3123/gallery/imagelist/portfolio').then(res =>
@@ -14,66 +16,71 @@ const Gallery = () => {
         )
     );
 
-    const border = 0;
-    const margin = 2;
-    const [sizedImages, setSizedImages] = useState<SizeData>();
+    const [galleryWidth, setGalleryWidth] = useState<number>(0);
 
     const onResize = useCallback((width?: number, height?: number) => {
-        if (!width) return;
-
-        let rowWidth = 0;
-        let row: ImageData[] = [];
-        const newSizedImages: SizeData = {};
-
-        (imageList as ImageData[]).forEach((image) => {
-            row.push(image);
-            if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
-                // get width of all images
-                // and width of div, less borders / margins (width available)
-                rowWidth += image.thumbDimensions.width;
-                const availableWidth = width - ( 2 * (margin + border) * row.length );
-
-                if (rowWidth > availableWidth) {
-                    // images exceed available width: decrease their size
-                    const ratio = availableWidth / rowWidth;
-                    row.forEach((image) => {
-                        newSizedImages[image.fileName] = {
-                            width: Math.trunc(image.thumbDimensions.width * ratio),
-                            height: Math.trunc(image.thumbDimensions.height * ratio)
-                        };
-                    });
-                    row = [];
-                    rowWidth = 0;
-                }
-
-                if (rowWidth === availableWidth) {
-                    // all images fit without adjusting size (corner case)
-                    row.forEach((image) => {
-                        newSizedImages[image.fileName] = image.thumbDimensions;
-                    });
-                    row = [];
-                    rowWidth = 0;
-                }
-            }
-
-        });
-
-        // add any unhandled images
-        row.forEach((image) => {
-            newSizedImages[image.fileName] = image.thumbDimensions;
-        });
-
-        setSizedImages(newSizedImages);
-
-    }, [imageList]);
+        if (width) setGalleryWidth(width);
+    },[setGalleryWidth]);
 
     const { ref: widthRef } = useResizeDetector({
         handleHeight: false,
         onResize
     });
 
-    if (isLoading) return <div>Loading...</div>;
+    if (isLoading || !galleryWidth) {
+        return (
+            <div className='content'>
+                <div ref={widthRef} className="justifiedGallery">
+                    {'Loading images...'}
+                </div>
+            </div>
+        );
+    }
+
     if (error) return <div>Error...</div>;
+
+    let rowWidth = 0;
+    let row: ImageData[] = [];
+
+    const sizedImages: SizeData = {};
+
+    (imageList as ImageData[]).forEach((image) => {
+        row.push(image);
+        if (image?.thumbDimensions?.width && image?.thumbDimensions?.height && image?.fileName) {
+            // get width of all images
+            // and width of div, less borders / margins (width available)
+            rowWidth += image.thumbDimensions.width;
+            const availableWidth = galleryWidth - ( 2 * (margin + border) * row.length );
+
+            if (rowWidth > availableWidth) {
+                // images exceed available width: decrease their size
+                const ratio = availableWidth / rowWidth;
+                row.forEach((image) => {
+                    sizedImages[image.fileName] = {
+                        width: Math.trunc(image.thumbDimensions.width * ratio),
+                        height: Math.trunc(image.thumbDimensions.height * ratio)
+                    };
+                });
+                row = [];
+                rowWidth = 0;
+            }
+
+            if (rowWidth === availableWidth) {
+                // all images fit without adjusting size (corner case)
+                row.forEach((image) => {
+                    sizedImages[image.fileName] = image.thumbDimensions;
+                });
+                row = [];
+                rowWidth = 0;
+            }
+        }
+
+    });
+
+    // add any unhandled images
+    row.forEach((image) => {
+        sizedImages[image.fileName] = image.thumbDimensions;
+    });
 
     const elements: JSX.Element[] = [];
 
@@ -90,7 +97,7 @@ const Gallery = () => {
     return (
         <div className='content'>
             <div ref={widthRef} className="justifiedGallery">
-                {sizedImages ? elements : 'Loading images...'}
+                {elements}
             </div>
         </div>
     );
