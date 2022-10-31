@@ -14,12 +14,20 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin }): ReactElement =>
         margin: `${margin}px`,
     };
 
+    let imageDesc = image.exif.title || '';
+
+    if (image.exif.dateTaken) {
+        const exifDate = new Date(image.exif.dateTaken);
+        imageDesc += ` (${exifDate.toLocaleDateString('default', { month: 'short' })} ${exifDate.getFullYear()})`;
+    }
+
     return (
-        <div style={style}>
+        <div className='thumbContainer' style={style}>
             <img
                 src={`http://localhost:3123/gallery/image/portfolio/${image.fileName}`}
                 alt={image.fileName}
             />
+            <div className='overlay'>{imageDesc}</div>
         </div>
     );
 };
