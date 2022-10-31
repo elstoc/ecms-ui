@@ -14,8 +14,8 @@ const Gallery = () => {
         )
     );
 
-    const border = 1;
-    const margin = 5;
+    const border = 0;
+    const margin = 2;
     const [sizedImages, setSizedImages] = useState<SizeData>();
 
     const onResize = useCallback((width?: number, height?: number) => {
