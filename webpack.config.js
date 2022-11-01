@@ -34,5 +34,6 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: 'index.html',
+      favicon: 'favicon.png'
     })].concat(prod ? [new MiniCssExtractPlugin()] : []),
 };
