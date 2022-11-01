@@ -18,8 +18,8 @@
     color: #f1f1f1;
     transition: .5s ease;
     opacity:0;
-    color: white;
-    font-size: 15px;
+    color: rgb(200,200,200);
+    font-size: 14px;
     text-align: center;
     margin: 0;
     padding: 0;

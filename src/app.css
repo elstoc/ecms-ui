@@ -1,10 +1,14 @@
 header,
 footer{
-    background-color: #ccc;
-    flex-basis: 30px;
+    background-color: #aaa;
+    flex-basis: 1.5em;
     
     /*center align of links*/
     display: flex;
     align-items: center; /*vertical*/
     justify-content: space-around; /*or space-between*/
+}
+
+body {
+  font-family: Sans-Serif;
 }

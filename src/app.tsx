@@ -11,11 +11,11 @@ const queryClient = new QueryClient();
 root.render(
     <QueryClientProvider client={queryClient}>
         <header>
-            Some Header
+            Chris Elston's Home Page
         </header>
         <GalleryPage />
         <footer>
-            Some Footer
+            2022
         </footer>
     </QueryClientProvider>
 );
