@@ -1,11 +1,12 @@
 import { useResizeDetector } from 'react-resize-detector';
 import React, { ReactElement, useCallback, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 import GalleryThumb from './GalleryThumb';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
 
-import { useQuery } from '@tanstack/react-query';
+const apiUrl: string = process.env.API_URL || '';
 
 const Gallery = (): ReactElement => {
     const margin = 2;
@@ -15,7 +16,7 @@ const Gallery = (): ReactElement => {
     const [galleryWidth, setGalleryWidth] = useState<number>(0);
 
     const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], () =>
-        fetch('http://localhost:3123/gallery/imagelist/portfolio').then(res =>
+        fetch(`${apiUrl}/gallery/imagelist/portfolio`).then(res =>
             res.json()
         )
     );

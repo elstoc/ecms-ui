@@ -2,6 +2,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
@@ -32,6 +33,7 @@ module.exports = {
   },
   devtool: prod ? undefined : 'source-map',
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: 'index.html',
       favicon: 'favicon.png'

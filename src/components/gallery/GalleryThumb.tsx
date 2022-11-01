@@ -1,6 +1,9 @@
 import React, { FC, ReactElement } from 'react';
+
 import { ImageData } from './IGallery';
 import './GalleryThumb.css';
+
+const apiUrl: string = process.env.API_URL || '';
 
 type GalleryThumbProps = {
     image: ImageData;
@@ -24,7 +27,7 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin }): ReactElement =>
     return (
         <div className='thumbContainer' style={style}>
             <img
-                src={`http://localhost:3123/gallery/image/portfolio/${image.fileName}`}
+                src={`${apiUrl}/gallery/image/portfolio/${image.fileName}`}
                 alt={image.fileName}
             />
             <div className='overlay'>{imageDesc}</div>
