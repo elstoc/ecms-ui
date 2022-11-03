@@ -2,11 +2,10 @@ import { useResizeDetector } from 'react-resize-detector';
 import React, { ReactElement, useCallback, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
+import { galleryPortfolio } from '../../queries/galleryPortfolio';
 import GalleryThumb from './GalleryThumb';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
-
-const apiUrl: string = process.env.API_URL || '';
 
 const Gallery = (): ReactElement => {
     const margin = 2;
@@ -15,11 +14,7 @@ const Gallery = (): ReactElement => {
 
     const [galleryWidth, setGalleryWidth] = useState<number>(0);
 
-    const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], () =>
-        fetch(`${apiUrl}/gallery/imagelist/portfolio`).then(res =>
-            res.json()
-        )
-    );
+    const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], galleryPortfolio);
 
     const onResize = useCallback((width?: number, height?: number) => {
         if (width) setGalleryWidth(width);
@@ -39,7 +34,7 @@ const Gallery = (): ReactElement => {
         let nextRowImgWidth = 0;
         let nextRow: ImageData[] = [];
 
-        (imageList as ImageData[]).forEach((image) => {
+        imageList!.forEach((image) => {
             nextRow.push(image);
             nextRowImgWidth += image.thumbDimensions.width;
             const availableWidth = galleryWidth - (2 * margin * nextRow.length);
