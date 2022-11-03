@@ -1,8 +1,7 @@
 import { useResizeDetector } from 'react-resize-detector';
 import React, { ReactElement, useCallback, useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
 
-import { galleryPortfolio } from '../../queries/galleryPortfolio';
+import { useGalleryPortfolio } from '../../hooks/galleryPortfolio';
 import GalleryThumb from './GalleryThumb';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
@@ -14,7 +13,7 @@ const Gallery = (): ReactElement => {
 
     const [galleryWidth, setGalleryWidth] = useState<number>(0);
 
-    const { isLoading, error, data: imageList } = useQuery(['imageListPortfolio'], galleryPortfolio);
+    const { isLoading, error, data: imageList } = useGalleryPortfolio();
 
     const onResize = useCallback((width?: number, height?: number) => {
         if (width) setGalleryWidth(width);
