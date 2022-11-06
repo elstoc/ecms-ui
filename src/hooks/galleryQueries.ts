@@ -3,7 +3,7 @@ import { ImageData } from '../components/gallery/IGallery';
 
 const apiUrl = process.env.API_URL || '';
 
-const galleryData = async (path: string): Promise<ImageData[]> => {
+const galleryListQuery = async (path: string): Promise<ImageData[]> => {
     const response = await fetch(`${apiUrl}/gallery/imagelist/${path}`);
 
     if (!response.ok) throw new Error('Network Response was not Ok');
@@ -13,4 +13,8 @@ const galleryData = async (path: string): Promise<ImageData[]> => {
     return returnData || [];
 };
 
-export const useGalleryPortfolioList = () => useQuery(['galleryPortfolioList'], () => galleryData('portfolio'));
+export const useGalleryList = (path: string) => {
+    const queryName = `gallery/imagelist/${path}`;
+
+    return useQuery([queryName], () => galleryListQuery(path));
+};

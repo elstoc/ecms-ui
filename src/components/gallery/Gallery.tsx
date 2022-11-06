@@ -1,19 +1,20 @@
 import { useResizeDetector } from 'react-resize-detector';
 import React, { ReactElement, useCallback, useState } from 'react';
 
-import { useGalleryPortfolioList } from '../../hooks/galleryPortfolio';
+import { useGalleryList } from '../../hooks/galleryQueries';
 import GalleryThumb from './GalleryThumb';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
 
 const Gallery = (): ReactElement => {
+    const galleryPath = 'portfolio';
     const margin = 3;
     const galleryImages: ImageData[] = [];
     let message = '';
 
     const [galleryDivWidth, setGalleryWidth] = useState<number>(0);
 
-    const { isLoading, error, data: imageList } = useGalleryPortfolioList();
+    const { isLoading, error, data: imageList } = useGalleryList(galleryPath);
 
     const onResize = useCallback((width?: number, height?: number) => {
         if (width) setGalleryWidth(width);
@@ -64,7 +65,12 @@ const Gallery = (): ReactElement => {
             <div ref={widthRef} className="justifiedGallery">
                 {message}
                 {galleryImages.map((image) => 
-                    <GalleryThumb key={image.fileName} image={image} margin={margin} />
+                    <GalleryThumb
+                        key={image.fileName}
+                        image={image}
+                        margin={margin}
+                        path={galleryPath}
+                    />
                 )}
             </div>
         </div>

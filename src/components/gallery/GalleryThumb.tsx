@@ -6,11 +6,12 @@ import './GalleryThumb.css';
 const apiUrl: string = process.env.API_URL || '';
 
 type GalleryThumbProps = {
+    path: string;
     image: ImageData;
     margin: number;
 }
 
-const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin }): ReactElement => {
+const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElement => {
     const style = {
         width: `${image.galleryDimensions!.width}px`,
         height: `${image.galleryDimensions!.height}px`,
@@ -27,7 +28,7 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin }): ReactElement =>
     return (
         <div className='thumbContainer' style={style}>
             <img
-                src={`${apiUrl}/gallery/image/portfolio/${image.fileName}`}
+                src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
                 alt={image.fileName}
             />
             <div className='overlay'>{imageDesc}</div>
