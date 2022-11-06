@@ -1,19 +1,19 @@
 import { useResizeDetector } from 'react-resize-detector';
 import React, { ReactElement, useCallback, useState } from 'react';
 
-import { useGalleryPortfolio } from '../../hooks/galleryPortfolio';
+import { useGalleryPortfolioList } from '../../hooks/galleryPortfolio';
 import GalleryThumb from './GalleryThumb';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
 
 const Gallery = (): ReactElement => {
     const margin = 3;
-    const galleryData: ImageData[] = [];
+    const galleryImages: ImageData[] = [];
     let message = '';
 
-    const [galleryWidth, setGalleryWidth] = useState<number>(0);
+    const [galleryDivWidth, setGalleryWidth] = useState<number>(0);
 
-    const { isLoading, error, data: imageList } = useGalleryPortfolio();
+    const { isLoading, error, data: imageList } = useGalleryPortfolioList();
 
     const onResize = useCallback((width?: number, height?: number) => {
         if (width) setGalleryWidth(width);
@@ -26,36 +26,36 @@ const Gallery = (): ReactElement => {
 
     if (error) {
         message = 'There has been an ERROR';
-    } else if (isLoading || !galleryWidth) {
+    } else if (isLoading || !galleryDivWidth) {
         message = 'Loading Images';
     } else {
         //resize images to fit in rows
-        let nextRowImgWidth = 0;
-        let nextRow: ImageData[] = [];
+        let nextRowImgsWidth = 0;
+        let nextRowImgs: ImageData[] = [];
 
         imageList!.forEach((image) => {
-            nextRow.push(image);
-            nextRowImgWidth += image.thumbDimensions.width;
-            const availableWidth = galleryWidth - (2 * margin * nextRow.length);
+            nextRowImgs.push(image);
+            nextRowImgsWidth += image.thumbDimensions.width;
+            const availableImgsWidth = galleryDivWidth - (2 * margin * nextRowImgs.length);
 
-            if (nextRowImgWidth >= availableWidth) {
-                const ratio = availableWidth / nextRowImgWidth;
-                nextRow.forEach((image) => {
+            if (nextRowImgsWidth >= availableImgsWidth) {
+                const ratio = availableImgsWidth / nextRowImgsWidth;
+                nextRowImgs.forEach((image) => {
                     image.galleryDimensions = {
                         width: Math.trunc(image.thumbDimensions.width * ratio),
                         height: Math.trunc(image.thumbDimensions.height * ratio)
                     };
-                    galleryData.push(image);
+                    galleryImages.push(image);
                 });
-                nextRow = [];
-                nextRowImgWidth = 0;
+                nextRowImgs = [];
+                nextRowImgsWidth = 0;
             }
         });
 
         // add any unhandled images
-        nextRow.forEach((image) => {
+        nextRowImgs.forEach((image) => {
             image.galleryDimensions = image.thumbDimensions;
-            galleryData.push(image);
+            galleryImages.push(image);
         });
     }
 
@@ -63,7 +63,7 @@ const Gallery = (): ReactElement => {
         <div className='content'>
             <div ref={widthRef} className="justifiedGallery">
                 {message}
-                {galleryData.map((image) => 
+                {galleryImages.map((image) => 
                     <GalleryThumb key={image.fileName} image={image} margin={margin} />
                 )}
             </div>

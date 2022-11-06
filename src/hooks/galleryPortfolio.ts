@@ -13,4 +13,4 @@ const galleryData = async (path: string): Promise<ImageData[]> => {
     return returnData || [];
 };
 
-export const useGalleryPortfolio = () => useQuery(['galleryPortfolio'], () => galleryData('portfolio'));
+export const useGalleryPortfolioList = () => useQuery(['galleryPortfolioList'], () => galleryData('portfolio'));
