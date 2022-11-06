@@ -1,8 +1,8 @@
 import './app.css';
-import React from 'react';
+import React, { ReactElement } from 'react';
 import GalleryPage from './components/gallery/Gallery';
 
-const App = () => {
+const App = (): ReactElement => {
     return (
         <>
             <header>
