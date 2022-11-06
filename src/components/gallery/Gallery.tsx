@@ -7,7 +7,7 @@ import './Gallery.scss';
 import { ImageData } from './IGallery';
 
 const Gallery = (): ReactElement => {
-    const margin = 2;
+    const margin = 3;
     const galleryData: ImageData[] = [];
     let message = '';
 
