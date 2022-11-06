@@ -6,7 +6,7 @@ const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
-  entry: './src/app.tsx',
+  entry: './src/index.tsx',
   output: {
     path: __dirname + '/dist/',
   },
