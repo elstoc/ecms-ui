@@ -7,7 +7,13 @@ const Dotenv = require('dotenv-webpack');
 module.exports = {
   mode: prod ? 'production' : 'development',
   entry: './src/index.tsx',
+  devServer: {
+    historyApiFallback: {
+        disableDotRule: true,
+    },
+  },
   output: {
+    publicPath: '/',
     path: __dirname + '/dist/',
   },
   module: {

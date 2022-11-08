@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+import { Link } from 'react-router-dom';
 
 import { ImageData } from './IGallery';
 import './GalleryThumb.css';
@@ -27,10 +28,12 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElem
 
     return (
         <div className='thumbContainer' style={style}>
-            <img
-                src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
-                alt={image.fileName}
-            />
+            <Link to={`./${image.fileName}`}>
+                <img
+                    src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
+                    alt={image.fileName}
+                />
+            </Link>
             <div className='overlay'>{imageDesc}</div>
         </div>
     );

@@ -1,22 +1,27 @@
 import { useResizeDetector } from 'react-resize-detector';
-import React, { ReactElement, useCallback, useState } from 'react';
+import React, { FC, ReactElement, useCallback, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import { useGalleryList } from '../../hooks/galleryQueries';
 import GalleryThumb from './GalleryThumb';
+import LightBox from './LightBox';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
 
-const Gallery = (): ReactElement => {
-    const galleryPath = 'portfolio';
-    const margin = 3;
+type GalleryProps = {
+    path: string;
+    margin: number;
+}
+
+const Gallery: FC<GalleryProps> = ({ path, margin }): ReactElement => {
     const galleryImages: ImageData[] = [];
     let message = '';
 
-    const [galleryDivWidth, setGalleryWidth] = useState<number>(0);
+    const [galleryDivWidth, setGalleryWidth] = useState(0);
 
-    const { isLoading, error, data: imageList } = useGalleryList(galleryPath);
+    const { isLoading, error, data: imageList } = useGalleryList(path);
 
-    const onResize = useCallback((width?: number, height?: number) => {
+    const onResize = useCallback((width?: number) => {
         if (width) setGalleryWidth(width);
     },[setGalleryWidth]);
 
@@ -64,12 +69,15 @@ const Gallery = (): ReactElement => {
         <div className='content'>
             <div ref={widthRef} className="justifiedGallery">
                 {message}
+                <Routes>
+                    <Route path=":imageName" element={<LightBox path={path} />} />
+                </Routes>
                 {galleryImages.map((image) => 
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
                         margin={margin}
-                        path={galleryPath}
+                        path={path}
                     />
                 )}
             </div>

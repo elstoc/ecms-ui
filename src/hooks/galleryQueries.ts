@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+
 import { ImageData } from '../components/gallery/IGallery';
 
 const apiUrl = process.env.API_URL || '';
