@@ -70,7 +70,7 @@ const Gallery: FC<GalleryProps> = ({ path, margin }): ReactElement => {
             <div ref={widthRef} className="justifiedGallery">
                 {message}
                 <Routes>
-                    <Route path=":imageName" element={<LightBox path={path} />} />
+                    <Route path=":imageName" element={<LightBox path={path} galleryImages={galleryImages} />} />
                 </Routes>
                 {galleryImages.map((image) => 
                     <GalleryThumb
