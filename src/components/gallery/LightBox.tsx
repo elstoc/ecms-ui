@@ -19,8 +19,8 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
     const nextImage = galleryImages[currImageIndex + 1];
     return (
         <div className='LightBox'>
-            {prevImage && <Link to={`../${prevImage.fileName}`} className="prev">&#10094;</Link>}
-            {nextImage && <Link to={`../${nextImage.fileName}`} className="next">&#10095;</Link>}
+            {prevImage && <Link to={`../${prevImage.fileName}`} replace={true} className="prev">&#10094;</Link>}
+            {nextImage && <Link to={`../${nextImage.fileName}`} replace={true} className="next">&#10095;</Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
         </div>
     );
