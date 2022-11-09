@@ -1,6 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ImageData } from './IGallery';
 
 import './LightBox.css';
