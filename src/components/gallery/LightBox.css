@@ -1,6 +1,7 @@
 .LightBox {
     display: flex;
     justify-content: center;
+    align-items: center;
     /* Height & width depends on how you want to reveal the overlay (see JS below) */   
     height: 100%;
     width: 100%;
@@ -15,8 +16,6 @@
 }
 
 .LightBox img {
-    height: 100%;
-    width: 100%;
     object-fit: scale-down;
 }
 

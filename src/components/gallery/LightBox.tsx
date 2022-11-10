@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { MouseEvent, FC, ReactElement } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import useKeyPress from '../../hooks/useKeyPress';
 
@@ -32,13 +32,19 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
         nextImage && navigate(`../${nextImage.fileName}`, { replace: true });
     };
 
+    const handleOuterClick = (event: MouseEvent) => {
+        if (event.target === event.currentTarget) {
+            goBack();
+        }
+    };
+
     useKeyPress(['Escape'], goBack);
     useKeyPress(['ArrowLeft'], goPrevImage);
     useKeyPress(['ArrowRight'], goNextImage);
     useKeyPress(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'], null);
     
     return (
-        <div className='LightBox'>
+        <div className='LightBox' onClick={handleOuterClick}>
             {prevImage && <Link to={`../${prevImage.fileName}`} replace={true} className="prev">&#10094;</Link>}
             {nextImage && <Link to={`../${nextImage.fileName}`} replace={true} className="next">&#10095;</Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
