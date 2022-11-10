@@ -25,11 +25,11 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
     };
 
     const goPrevImage = () => {
-        navigate(`../${prevImage.fileName}`, { replace: true });
+        prevImage && navigate(`../${prevImage.fileName}`, { replace: true });
     };
 
     const goNextImage = () => {
-        navigate(`../${nextImage.fileName}`, { replace: true });
+        nextImage && navigate(`../${nextImage.fileName}`, { replace: true });
     };
 
     useKeyPress(['Escape'], goBack);
