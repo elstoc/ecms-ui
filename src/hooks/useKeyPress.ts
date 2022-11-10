@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react';
 
-const useKeyPress: (keys: string[], handler: (event: KeyboardEvent) => void) => void = (keys, handler) => {
+const useKeyPress: (keys: string[], handler: null | ((event: KeyboardEvent) => void)) => void = (keys, handler) => {
     const eventListenerFn = useCallback((ev: KeyboardEvent) => {
         if (keys.includes(ev.key)) {
+            ev.preventDefault();
             handler?.(ev);
         }
     },[keys, handler]);

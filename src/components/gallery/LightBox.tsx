@@ -35,6 +35,7 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
     useKeyPress(['Escape'], goBack);
     useKeyPress(['ArrowLeft'], goPrevImage);
     useKeyPress(['ArrowRight'], goNextImage);
+    useKeyPress(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'], null);
     
     return (
         <div className='LightBox'>
