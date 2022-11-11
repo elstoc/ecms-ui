@@ -28,7 +28,7 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElem
 
     return (
         <div className='thumbContainer' style={style}>
-            <Link to={`./${image.fileName}`}>
+            <Link to={`./${image.fileName}`} replace={true}>
                 <img
                     src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
                     alt={image.fileName}
