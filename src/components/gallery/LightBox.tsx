@@ -45,8 +45,9 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
     
     return (
         <div className='LightBox' onClick={handleOuterClick}>
-            {prevImage && <Link to={`../${prevImage.fileName}`} replace={true} className="prev">&#10094;</Link>}
-            {nextImage && <Link to={`../${nextImage.fileName}`} replace={true} className="next">&#10095;</Link>}
+            <Link to=".." className="close">&times;</Link>
+            {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
+            {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
         </div>
     );

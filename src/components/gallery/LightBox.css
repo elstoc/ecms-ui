@@ -2,54 +2,68 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* Height & width depends on how you want to reveal the overlay (see JS below) */   
     height: 100%;
     width: 100%;
-    position: fixed; /* Stay in place */
+    position: fixed;
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    background-color: rgb(0,0,0); /* Black fallback color */
-    background-color: rgba(0,0,0, 0.9); /* Black w/opacity */
+    background-color: rgba(0,0,0, 0.8);
     overflow-x: hidden; /* Disable horizontal scroll */
-    transition: 0.5s; /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */
 }
 
 .LightBox img {
     object-fit: scale-down;
 }
 
-/* Next & previous buttons */
 .prev,
 .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  text-decoration: none;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: absolute;
+    top: 10%;
+    height: 80%;
+    width: 5%;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: none;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
 }
 
-/* Position the "next button" to the right */
 .next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+    right: 0;
+    border-radius: 3px 0 0 3px;
 }
 
 .prev {
-  left: 0;
-  border-radius: 3px 0 0 3px;
+    left: 0;
+    border-radius: 3px 0 0 3px;
 }
 
-/* On hover, add a black background color with a little bit see-through */
 .prev:hover,
 .next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(40, 40, 40, 0.5);
+}
+
+.close {
+    color: white;
+    position: absolute;
+    top: 10px;
+    padding: 25px;
+    right: 25px;
+    font-size: 35px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
 }
