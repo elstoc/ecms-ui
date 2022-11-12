@@ -67,3 +67,15 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.image-info {
+    position: absolute;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 30px;
+    bottom: 0%;
+    width: 100%;
+    height: 5%;
+    color: white;
+    background-color: rgba(40, 40, 40, 0.5);
+}

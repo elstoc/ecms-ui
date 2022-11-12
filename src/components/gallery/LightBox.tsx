@@ -43,12 +43,21 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
     useKeyPress(['ArrowRight'], goNextImage);
     useKeyPress(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'], null);
     
+    const currImage = galleryImages[currImageIndex];
+    let imageDesc = currImage.exif.title || '';
+
+    if (currImage.exif.dateTaken) {
+        const exifDate = new Date(currImage.exif.dateTaken);
+        imageDesc += ` (${exifDate.toLocaleDateString('default', { month: 'short' })} ${exifDate.getFullYear()})`;
+    }
+
     return (
         <div className='LightBox' onClick={handleOuterClick}>
             <Link to=".." replace={true} className="close">&times;</Link>
             {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
             {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
+            <div className="image-info">{imageDesc}</div>
         </div>
     );
 };
