@@ -79,3 +79,17 @@
     color: white;
     background-color: rgba(40, 40, 40, 0.5);
 }
+
+.fade-out {
+    animation: fadeOut 4s;
+    opacity: 0;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

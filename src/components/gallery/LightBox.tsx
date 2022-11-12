@@ -53,11 +53,11 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
 
     return (
         <div className='LightBox' onClick={handleOuterClick}>
-            <Link to=".." replace={true} className="close">&times;</Link>
-            {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
-            {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
+            <Link to=".." replace={true} className="close fade-out">&times;</Link>
+            {prevImage && <Link className="prev fade-out" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
+            {nextImage && <Link className="next fade-out" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
-            <div className="image-info">{imageDesc}</div>
+            <div className="image-info fade-out">{imageDesc}</div>
         </div>
     );
 };
