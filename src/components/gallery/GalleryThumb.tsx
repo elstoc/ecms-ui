@@ -27,15 +27,13 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElem
     }
 
     return (
-        <div className='thumbContainer' style={style}>
-            <Link to={`./${image.fileName}`} replace={true}>
-                <img
-                    src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
-                    alt={image.fileName}
-                />
-                <div className='overlay'>{imageDesc}</div>
-            </Link>
-        </div>
+        <Link to={`./${image.fileName}`} replace={true} className='thumbContainer' style={style}>
+            <img
+                src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
+                alt={image.fileName}
+            />
+            <div className='overlay'>{imageDesc}</div>
+        </Link>
     );
 };
 
