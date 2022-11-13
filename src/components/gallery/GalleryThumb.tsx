@@ -33,8 +33,8 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElem
                     src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
                     alt={image.fileName}
                 />
+                <div className='overlay'>{imageDesc}</div>
             </Link>
-            <div className='overlay'>{imageDesc}</div>
         </div>
     );
 };
