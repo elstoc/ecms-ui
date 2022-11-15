@@ -3,6 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 import './app.css';
 import Gallery from './components/gallery/Gallery';
+import MarkdownPage from './components/markdown/MarkdownPage';
 
 const App = (): ReactElement => {
     return (
@@ -14,6 +15,10 @@ const App = (): ReactElement => {
                 <Route
                     path="portfolio/*"
                     element={<Gallery path="portfolio" margin={3} />}
+                />
+                <Route
+                    path="markdown/*"
+                    element={<MarkdownPage />}
                 />
                 <Route
                     path="*"

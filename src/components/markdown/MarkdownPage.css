@@ -1,0 +1,8 @@
+.markdown-content {
+    font-size: 1.5rem;
+    margin: 1em 10em 1em 20em;
+}
+
+table, th, td {
+  border: 1px solid;
+}
