@@ -17,8 +17,8 @@ const App = (): ReactElement => {
                     element={<Gallery path="portfolio" margin={3} />}
                 />
                 <Route
-                    path="markdown/*"
-                    element={<MarkdownPage />}
+                    path="markdown/:mdFileName"
+                    element={<MarkdownPage path='mdTest' />}
                 />
                 <Route
                     path="*"

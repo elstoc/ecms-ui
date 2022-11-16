@@ -1,16 +1,20 @@
 import React, { FC, ReactElement } from 'react';
+
+import { useParams } from 'react-router';
+import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
 import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
 import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
+
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownPage.css';
 import './MarkdownPageCode.css';
-import ReactMarkdown from 'react-markdown';
 
-const MarkdownPage: FC = (): ReactElement => {
-    const {isLoading, error, data: mdFile} = useMarkdownFile();
+const MarkdownPage: FC<{ path: string }> = ({ path }): ReactElement => {
+    const { mdFileName } = useParams();
+    const {isLoading, error, data: mdFile} = useMarkdownFile(`${path}/${mdFileName}`);
 
     if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
 
