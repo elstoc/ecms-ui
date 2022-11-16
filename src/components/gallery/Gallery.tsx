@@ -8,7 +8,7 @@ import LightBox from './LightBox';
 import './Gallery.scss';
 import { ImageData } from './IGallery';
 
-type GalleryProps = {
+export type GalleryProps = {
     path: string;
     margin: number;
 }

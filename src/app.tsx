@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 import './app.css';
 import Gallery from './components/gallery/Gallery';
-import MarkdownPage from './components/markdown/MarkdownPage';
+import Markdown from './components/markdown/Markdown';
 
 const App = (): ReactElement => {
     return (
@@ -17,8 +17,8 @@ const App = (): ReactElement => {
                     element={<Gallery path="portfolio" margin={3} />}
                 />
                 <Route
-                    path="markdown/:mdFileName"
-                    element={<MarkdownPage path='mdTest' />}
+                    path="markdown-testing/*"
+                    element={<Markdown path='markdown-testing' />}
                 />
                 <Route
                     path="*"
