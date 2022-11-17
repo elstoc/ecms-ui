@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import './app.css';
 import Gallery, { GalleryProps } from './components/gallery/Gallery';
@@ -10,7 +10,7 @@ type SiteProps = (GalleryProps & {type: 'gallery'} | MarkdownProps & {type: 'mar
 const siteProps: SiteProps = [
     {
         path: 'portfolio',
-        margin: 3,
+        marginPx: 3,
         type: 'gallery',
     },
     {
@@ -23,7 +23,7 @@ const App = (): ReactElement => {
     const siteRoutes = siteProps.map((props) => {
         let element: ReactElement;
         if (props.type === 'gallery') {
-            element = <Gallery path={props.path} margin={props.margin} />;
+            element = <Gallery path={props.path} marginPx={props.marginPx} />;
         } else {
             element = <Markdown path={props.path} />;
         }

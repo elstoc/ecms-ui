@@ -10,10 +10,10 @@ import { ImageData } from './IGallery';
 
 export type GalleryProps = {
     path: string;
-    margin: number;
+    marginPx: number;
 }
 
-const Gallery: FC<GalleryProps> = ({ path, margin }): ReactElement => {
+const Gallery: FC<GalleryProps> = ({ path, marginPx }): ReactElement => {
     const galleryImages: ImageData[] = [];
     let message = '';
 
@@ -42,7 +42,7 @@ const Gallery: FC<GalleryProps> = ({ path, margin }): ReactElement => {
         imageList!.forEach((image) => {
             nextRowImgs.push(image);
             nextRowImgsWidth += image.thumbDimensions.width;
-            const availableImgsWidth = galleryDivWidth - (2 * margin * nextRowImgs.length);
+            const availableImgsWidth = galleryDivWidth - (2 * marginPx * nextRowImgs.length);
 
             if (nextRowImgsWidth >= availableImgsWidth) {
                 const ratio = availableImgsWidth / nextRowImgsWidth;
@@ -76,7 +76,7 @@ const Gallery: FC<GalleryProps> = ({ path, margin }): ReactElement => {
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
-                        margin={margin}
+                        marginPx={marginPx}
                         path={path}
                     />
                 )}

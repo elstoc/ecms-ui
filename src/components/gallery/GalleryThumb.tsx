@@ -9,14 +9,14 @@ const apiUrl: string = process.env.API_URL || '';
 type GalleryThumbProps = {
     path: string;
     image: ImageData;
-    margin: number;
+    marginPx: number;
 }
 
-const GalleryThumb: FC<GalleryThumbProps> = ({ image, margin, path }): ReactElement => {
+const GalleryThumb: FC<GalleryThumbProps> = ({ image, marginPx, path }): ReactElement => {
     const style = {
         width: `${image.galleryDimensions!.width}px`,
         height: `${image.galleryDimensions!.height}px`,
-        margin: `${margin}px`,
+        margin: `${marginPx}px`,
     };
 
     let imageDesc = image.exif.title || '';
