@@ -1,11 +1,13 @@
 import React, { ReactElement } from 'react';
-import { Route, Routes } from 'react-router-dom';
 
 import './app.css';
-import Gallery, { GalleryProps } from './components/gallery/Gallery';
-import Markdown, { MarkdownProps } from './components/markdown/Markdown';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import SiteRoutes from './components/SiteRoutes';
+import { GalleryProps } from './components/gallery/Gallery';
+import { MarkdownProps } from './components/markdown/Markdown';
 
-type SiteProps = (GalleryProps & {type: 'gallery'} | MarkdownProps & {type: 'markdown'})[];
+export type SiteProps = (GalleryProps & {type: 'gallery'} | MarkdownProps & {type: 'markdown'})[];
 
 const siteProps: SiteProps = [
     {
@@ -20,32 +22,11 @@ const siteProps: SiteProps = [
 ];
 
 const App = (): ReactElement => {
-    const siteRoutes = siteProps.map((props) => {
-        let element: ReactElement;
-        if (props.type === 'gallery') {
-            element = <Gallery path={props.path} marginPx={props.marginPx} />;
-        } else {
-            element = <Markdown path={props.path} />;
-        }
-        return (
-            <Route
-                key={props.path}
-                path={`${props.path}/*`}
-                element={element}
-            />
-        );
-    });
     return (
         <>
-            <header>
-                Chris Elston's Home Page
-            </header>
-            <Routes>
-                {siteRoutes}
-            </Routes>
-            <footer>
-                2022
-            </footer>
+            <Header />
+            <SiteRoutes siteProps={siteProps} />
+            <Footer />
         </>
     );
 };
