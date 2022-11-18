@@ -21,7 +21,7 @@ const siteProps: SiteProps = [
 const App = (): ReactElement => {
     return (
         <>
-            <Header />
+            <Header siteProps={siteProps}/>
             <SiteRoutes siteProps={siteProps} />
             <Footer />
         </>
