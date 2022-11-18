@@ -15,6 +15,10 @@ const siteProps: SiteProps = [
     {
         path: 'markdown-testing',
         type: 'markdown'
+    },
+    {
+        path: '',
+        type: 'markdown'
     }
 ];
 
