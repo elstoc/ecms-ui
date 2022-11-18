@@ -6,7 +6,11 @@ import { SiteProps } from '../app';
 import Gallery from './gallery/Gallery';
 import Markdown from './markdown/Markdown';
 
-const SiteRoutes: FC<{ siteProps: SiteProps }> = ({ siteProps }): ReactElement => {
+type SiteRouteProps = {
+    siteProps: SiteProps
+};
+
+const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
     const siteRoutes = siteProps.map((props) => {
         let element: ReactElement;
         if (props.type === 'gallery') {
