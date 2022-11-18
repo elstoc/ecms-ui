@@ -12,6 +12,7 @@ const Markdown: FC<MarkdownProps> = ({ path }): ReactElement => {
     return (
         <Routes>
             <Route path=":mdFilePath" element={<MarkdownPage path={path} />} />
+            <Route path="*" element={<MarkdownPage path={path} />} />
         </Routes>
     );
 };

@@ -18,7 +18,7 @@ type MarkdownPageProps = {
 
 const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
     const { mdFilePath } = useParams();
-    const {isLoading, error, data: mdFile} = useMarkdownFile(`${path}/${mdFilePath}`);
+    const {isLoading, error, data: mdFile} = useMarkdownFile(`${path}/${mdFilePath || ''}`);
 
     if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
 
