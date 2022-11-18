@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ImageData } from './IGallery';
+import { ImageData } from '../../types/Gallery';
 import './GalleryThumb.css';
 
 const apiUrl: string = process.env.API_URL || '';

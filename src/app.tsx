@@ -4,10 +4,7 @@ import './app.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SiteRoutes from './components/SiteRoutes';
-import { GalleryProps } from './components/gallery/Gallery';
-import { MarkdownProps } from './components/markdown/Markdown';
-
-export type SiteProps = (GalleryProps & {type: 'gallery'} | MarkdownProps & {type: 'markdown'})[];
+import { SiteProps } from './types/Site';
 
 const siteProps: SiteProps = [
     {

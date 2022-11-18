@@ -2,7 +2,7 @@ import React, { MouseEvent, FC, ReactElement } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import useKeyPress from '../../hooks/useKeyPress';
 
-import { ImageData } from './IGallery';
+import { ImageData } from '../../types/Gallery';
 
 import './LightBox.css';
 

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
-import { SiteProps } from '../app';
+import { SiteProps } from '../types/Site';
 
 import Gallery from './gallery/Gallery';
 import Markdown from './markdown/Markdown';

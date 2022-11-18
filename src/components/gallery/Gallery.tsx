@@ -6,7 +6,7 @@ import { useGalleryList } from '../../hooks/galleryQueries';
 import GalleryThumb from './GalleryThumb';
 import LightBox from './LightBox';
 import './Gallery.scss';
-import { ImageData } from './IGallery';
+import { ImageData } from '../../types/Gallery';
 
 export type GalleryProps = {
     path: string;
