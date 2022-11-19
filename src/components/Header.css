@@ -8,3 +8,7 @@ header div
     align-items: center; /*vertical*/
     justify-content: space-around; /*or space-between*/
 }
+
+a.active {
+    font-weight: bolder;
+}

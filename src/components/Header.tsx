@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { SiteProps } from '../types/Site';
 
 import './Header.css';
@@ -10,7 +10,7 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
     const headerLinks = siteProps.map((props) =>
-        <Link to={props.path} key={props.path}>{props.title}</Link>
+        <NavLink to={props.path} key={props.path}>{props.title}</NavLink>
     );
     return (
         <header>
