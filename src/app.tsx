@@ -23,6 +23,11 @@ const siteProps: SiteProps = [
         title: 'Markdown Testing',
         type: 'markdown'
     },
+    {
+        path: 'about',
+        title: 'About',
+        type: 'markdownPage'
+    },
 ];
 
 const App = (): ReactElement => {
