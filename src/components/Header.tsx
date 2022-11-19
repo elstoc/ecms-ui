@@ -10,7 +10,7 @@ type HeaderProps = {
 
 const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
     const headerLinks = siteProps.map((props) =>
-        <Link to={props.path} key={props.path}>{props.path}</Link>
+        <Link to={props.path} key={props.path}>{props.title}</Link>
     );
     return (
         <header>

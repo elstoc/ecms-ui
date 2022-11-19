@@ -14,6 +14,7 @@ import './MarkdownPageCode.css';
 
 type MarkdownPageProps = {
     path: string;
+    title: string;
 };
 
 const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {

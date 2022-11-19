@@ -14,9 +14,9 @@ const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
     const siteRoutes = siteProps.map((props) => {
         let element: ReactElement;
         if (props.type === 'gallery') {
-            element = <Gallery path={props.path} marginPx={props.marginPx} />;
+            element = <Gallery path={props.path} title={props.title} marginPx={props.marginPx} />;
         } else {
-            element = <Markdown path={props.path} />;
+            element = <Markdown path={props.path} title={props.title} />;
         }
         return (
             <Route

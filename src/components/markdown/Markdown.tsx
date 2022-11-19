@@ -6,13 +6,14 @@ import './Markdown.css';
 
 export type MarkdownProps = {
     path: string;
+    title: string;
 }
 
-const Markdown: FC<MarkdownProps> = ({ path }): ReactElement => {
+const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
     return (
         <Routes>
-            <Route path=":mdFilePath" element={<MarkdownPage path={path} />} />
-            <Route path="*" element={<MarkdownPage path={path} />} />
+            <Route path=":mdFilePath" element={<MarkdownPage path={path} title={title} />} />
+            <Route path="*" element={<MarkdownPage path={path} title={title} />} />
         </Routes>
     );
 };

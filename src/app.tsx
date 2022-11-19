@@ -9,15 +9,18 @@ import { SiteProps } from './types/Site';
 const siteProps: SiteProps = [
     {
         path: 'portfolio',
+        title: 'Portfolio Photos',
         marginPx: 3,
         type: 'gallery',
     },
     {
         path: 'markdown-testing',
+        title: 'Markdown Testing',
         type: 'markdown'
     },
     {
         path: '',
+        title: 'Home',
         type: 'markdown'
     }
 ];

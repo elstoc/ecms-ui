@@ -10,10 +10,11 @@ import { ImageData } from '../../types/Gallery';
 
 export type GalleryProps = {
     path: string;
+    title: string;
     marginPx: number;
 }
 
-const Gallery: FC<GalleryProps> = ({ path, marginPx }): ReactElement => {
+const Gallery: FC<GalleryProps> = ({ path, marginPx, title }): ReactElement => {
     const galleryImages: ImageData[] = [];
     let message = '';
 
@@ -76,6 +77,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx }): ReactElement => {
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
+                        title={`${title} - ${image.fileName}`}
                         marginPx={marginPx}
                         path={path}
                     />
