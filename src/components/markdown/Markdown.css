@@ -1,0 +1,13 @@
+.markdown-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.markdown-nav {
+    width: 15%;
+}
+
+.markdown-page-content {
+    width: 75%;
+}

@@ -24,7 +24,7 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
     if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
 
     return (
-        <div className='markdown-content'>
+        <div>
             <ReactMarkdown
                 remarkPlugins={[
                     [remarkGfm, { singleTilde: false }],
