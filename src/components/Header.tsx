@@ -14,8 +14,7 @@ const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
     );
     return (
         <header>
-            <div>Chris Elston's Home Page</div>
-            <div>
+            <div className='header-links'>
                 {headerLinks}
             </div>
         </header>
