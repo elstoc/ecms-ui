@@ -1,10 +1,11 @@
 import React, { FC, ReactElement } from 'react';
 
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { SiteProps } from '../types/Site';
 
 import Gallery from './gallery/Gallery';
 import Markdown from './markdown/Markdown';
+import MarkdownPage from './markdown/MarkdownPage';
 
 type SiteRouteProps = {
     siteProps: SiteProps
@@ -12,23 +13,36 @@ type SiteRouteProps = {
 
 const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
     const siteRoutes = siteProps.map((props) => {
-        let element: ReactElement;
         if (props.type === 'gallery') {
-            element = <Gallery path={props.path} title={props.title} marginPx={props.marginPx} />;
+            return (
+                <Route
+                    key={props.path}
+                    path={`${props.path}/*`}
+                    element={<Gallery path={props.path} title={props.title} marginPx={props.marginPx} />}
+                />
+            );
+        } else if (props.type === 'markdown') {
+            return (
+                <Route
+                    key={props.path}
+                    path={`${props.path}/*`}
+                    element={<Markdown path={props.path} title={props.title} />}
+                />
+            );
         } else {
-            element = <Markdown path={props.path} title={props.title} />;
+            return (
+                <Route
+                    key={props.path}
+                    path={`${props.path}`}
+                    element={<MarkdownPage path={props.path} title={props.title} />}
+                />
+            );
         }
-        return (
-            <Route
-                key={props.path}
-                path={`${props.path}/*`}
-                element={element}
-            />
-        );
     });
     return (
         <Routes>
             {siteRoutes}
+            <Route path='*' element={<Navigate to='/' />} />
         </Routes>
     );
 };

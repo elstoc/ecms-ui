@@ -12,7 +12,7 @@ import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownPage.css';
 import './MarkdownPageCode.css';
 
-type MarkdownPageProps = {
+export type MarkdownPageProps = {
     path: string;
     title: string;
 };

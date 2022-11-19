@@ -8,6 +8,11 @@ import { SiteProps } from './types/Site';
 
 const siteProps: SiteProps = [
     {
+        path: '',
+        title: 'Home',
+        type: 'markdownPage'
+    },
+    {
         path: 'portfolio',
         title: 'Portfolio Photos',
         marginPx: 3,
@@ -18,11 +23,6 @@ const siteProps: SiteProps = [
         title: 'Markdown Testing',
         type: 'markdown'
     },
-    {
-        path: '',
-        title: 'Home',
-        type: 'markdown'
-    }
 ];
 
 const App = (): ReactElement => {
