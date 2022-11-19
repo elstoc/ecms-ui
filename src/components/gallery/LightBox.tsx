@@ -57,6 +57,10 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
             {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
             {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
             <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=full`} alt={imageName} />
+            <div className='preload'>
+                <img src={`${apiUrl}/gallery/image/${path}/${prevImage.fileName}?size=full`} alt={imageName} />
+                <img src={`${apiUrl}/gallery/image/${path}/${nextImage.fileName}?size=full`} alt={imageName} />
+            </div>
             <div className="image-info">{imageDesc}</div>
         </div>
     );
