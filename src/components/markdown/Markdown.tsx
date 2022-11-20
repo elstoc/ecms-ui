@@ -18,7 +18,7 @@ const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
             </nav>
             <div className='markdown-content'>
                 <Routes>
-                    <Route path=":mdFilePath" element={<MarkdownPage path={path} title={title} />} />
+                    <Route path=":mdFilePath/*" element={<MarkdownPage path={path} title={title} />} />
                     <Route path="*" element={<MarkdownPage path={path} title={title} />} />
                 </Routes>
             </div>
