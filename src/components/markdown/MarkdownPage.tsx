@@ -18,9 +18,7 @@ export type MarkdownPageProps = {
 };
 
 const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
-    const { mdPath0, '*': splat } = useParams();
-
-    const mdFilePath = (mdPath0 || '') + (splat ? '/' + splat : '');
+    const { '*': mdFilePath } = useParams();
 
     const {isLoading, error, data: mdFile} = useMarkdownFile(`${path}/${mdFilePath || ''}`);
 
