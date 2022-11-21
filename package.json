@@ -51,6 +51,7 @@
     "remark-definition-list": "^1.2.0",
     "remark-emoji": "^3.0.2",
     "remark-gfm": "^3.0.1",
-    "remark-smartypants": "^2.0.0"
+    "remark-smartypants": "^2.0.0",
+    "yaml": "^2.1.3"
   }
 }

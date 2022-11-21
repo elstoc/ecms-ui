@@ -7,8 +7,11 @@ import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
 import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
+import YAML from 'yaml';
 
 import { useMarkdownFile } from '../../hooks/markdownQueries';
+import { splitFrontMatter } from '../../utils/splitFrontMatter';
+
 import './MarkdownPage.css';
 import './MarkdownPageCode.css';
 
@@ -24,6 +27,9 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
 
     if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
 
+    const [yaml, content] = splitFrontMatter(mdFile);
+    const pageTitle = YAML.parse(yaml)?.title;
+
     return (
         <div>
             <ReactMarkdown
@@ -38,7 +44,7 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
                     handlers: {...defListHastHandlers},
                 }}
             >
-                {mdFile}
+                {pageTitle ? `# ${pageTitle} \n---\n${content}` : content}
             </ReactMarkdown>
         </div>
     );
