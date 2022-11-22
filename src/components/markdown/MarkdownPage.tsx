@@ -44,7 +44,7 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
                     handlers: {...defListHastHandlers},
                 }}
             >
-                {pageTitle ? `# ${pageTitle} \n---\n${content}` : content}
+                {pageTitle ? `# ${pageTitle}\n---\n${content}` : content}
             </ReactMarkdown>
         </div>
     );
