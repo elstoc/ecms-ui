@@ -20,3 +20,8 @@ export type ImageData = {
     thumbDimensions: Dimensions;
     galleryDimensions?: Dimensions;
 }
+
+export type GalleryData = {
+    imageCount: number;
+    imageList: ImageData[];
+}

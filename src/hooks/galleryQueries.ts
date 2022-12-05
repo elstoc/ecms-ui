@@ -1,21 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { ImageData } from '../types/Gallery';
+import { GalleryData } from '../types/Gallery';
 
 const apiUrl = process.env.API_URL || '';
 
-const galleryListQuery = async (path: string): Promise<ImageData[]> => {
-    const response = await fetch(`${apiUrl}/gallery/imagelist/${path}`);
+const galleryListQuery = async (path: string, limit = 0): Promise<GalleryData> => {
+    const response = await fetch(`${apiUrl}/gallery/imagelist/${path}?limit=${limit}`);
 
     if (!response.ok) throw new Error('Network Response was not Ok');
 
-    const returnData: ImageData[] = await response.json();
+    const returnData: GalleryData = await response.json();
 
-    return returnData || [];
+    return returnData || {};
 };
 
-export const useGalleryList = (path: string) => {
+export const useGalleryList = (path: string, limit = 0) => {
     const queryName = `gallery/imagelist/${path}`;
 
-    return useQuery([queryName], () => galleryListQuery(path));
+    return useQuery([queryName], () => galleryListQuery(path, limit));
 };

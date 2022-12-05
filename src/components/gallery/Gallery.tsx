@@ -18,9 +18,10 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title }): ReactElement => {
     const galleryImages: ImageData[] = [];
     let message = '';
 
+    const [imageLimit, setImageLimit] = useState(0);
     const [galleryDivWidth, setGalleryWidth] = useState(0);
 
-    const { isLoading, error, data: imageList } = useGalleryList(path);
+    const { isLoading, error, data: galleryData } = useGalleryList(path, imageLimit);
 
     const onResize = useCallback((width?: number) => {
         if (width) setGalleryWidth(width);
@@ -40,7 +41,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title }): ReactElement => {
         let nextRowImgsWidth = 0;
         let nextRowImgs: ImageData[] = [];
 
-        imageList!.forEach((image) => {
+        galleryData?.imageList?.forEach((image) => {
             nextRowImgs.push(image);
             nextRowImgsWidth += image.thumbDimensions.width;
             const availableImgsWidth = galleryDivWidth - (2 * marginPx * nextRowImgs.length);
