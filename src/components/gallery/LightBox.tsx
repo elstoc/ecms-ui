@@ -1,8 +1,8 @@
-import React, { MouseEvent, FC, ReactElement } from 'react';
+import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import useKeyPress from '../../hooks/useKeyPress';
 
-import { ImageData } from '../../types/Gallery';
+import { GalleryData } from '../../types/Gallery';
 
 import './LightBox.css';
 
@@ -10,15 +10,24 @@ const apiUrl: string = process.env.API_URL || '';
 
 type LightBoxProps = {
     path: string;
-    galleryImages: ImageData[];
+    galleryData: GalleryData;
+    loadMoreImages: () => void;
 }
 
-const LightBox: FC<LightBoxProps> = ({ path, galleryImages }): ReactElement => {
+const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): ReactElement => {
     const { imageName } = useParams();
     const navigate = useNavigate();
+    const galleryImages = galleryData.imageList;
     const currImageIndex = galleryImages.findIndex((image) => image.fileName === imageName);
     const prevImage = galleryImages[currImageIndex - 1];
     const nextImage = galleryImages[currImageIndex + 1];
+
+    useEffect(() => {
+        if (!nextImage && galleryData.imageCount > currImageIndex + 1) {
+            loadMoreImages();
+            console.log('boo');
+        }
+    },[nextImage, galleryData, currImageIndex, loadMoreImages]);
 
     const goBack = () => {
         navigate('..', { replace: true });

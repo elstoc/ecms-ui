@@ -18,7 +18,7 @@ const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
                 <Route
                     key={props.path}
                     path={`${props.path}/*`}
-                    element={<Gallery path={props.path} title={props.title} marginPx={props.marginPx} />}
+                    element={<Gallery path={props.path} title={props.title} marginPx={props.marginPx} batchSize={props.batchSize} threshold={props.threshold} />}
                 />
             );
         } else if (props.type === 'markdown') {

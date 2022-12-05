@@ -17,5 +17,9 @@ const galleryListQuery = async (path: string, limit = 0): Promise<GalleryData> =
 export const useGalleryList = (path: string, limit = 0) => {
     const queryName = `gallery/imagelist/${path}`;
 
-    return useQuery([queryName], () => galleryListQuery(path, limit));
+    return useQuery({
+        queryKey: [queryName, limit],
+        keepPreviousData: true,
+        queryFn: () => galleryListQuery(path, limit)
+    });
 };

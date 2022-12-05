@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ImageData } from '../../types/Gallery';
@@ -13,7 +13,7 @@ type GalleryThumbProps = {
     marginPx: number;
 }
 
-const GalleryThumb: FC<GalleryThumbProps> = ({ image, marginPx, path }): ReactElement => {
+const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, marginPx, path }, ref) => {
     const style = {
         width: `${image.galleryDimensions!.width}px`,
         height: `${image.galleryDimensions!.height}px`,
@@ -32,10 +32,11 @@ const GalleryThumb: FC<GalleryThumbProps> = ({ image, marginPx, path }): ReactEl
             <img
                 src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
                 alt={image.fileName}
+                ref={ref}
             />
             <div className='overlay'>{imageDesc}</div>
         </Link>
     );
-};
+});
 
 export default GalleryThumb;
