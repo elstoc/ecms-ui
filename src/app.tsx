@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react';
 
 import './app.css';
+import '../node_modules/modern-normalize/modern-normalize.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SiteRoutes from './components/SiteRoutes';

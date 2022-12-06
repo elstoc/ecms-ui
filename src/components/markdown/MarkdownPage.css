@@ -1,3 +1,45 @@
+* {
+    line-height: normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 1.2em 0px 0.5em 0px;
+    padding: 0;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.5em; }
+h4, h5, h6 { font-size: 1em; }
+h5 { font-style: italic; }
+h6 { color: red; text-decoration: line-through; }
+table {
+  border-collapse: collapse;
+}
+
 table, th, td {
   border: 1px solid;
+  margin: 0;
+  padding: 0.2em;
+}
+
+ol, ul {
+    padding-left: 2em;
+}
+
+blockquote {
+    margin-left: 2em;
+}
+
+pre {
+    padding-right: 2em;
+}
+
+p, li, td {
+    margin: 0.5em 0;
+}
+
+dt {
+    font-weight: bold;
+    margin: 0.4em 0;
 }
