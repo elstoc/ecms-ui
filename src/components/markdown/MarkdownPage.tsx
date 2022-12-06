@@ -32,6 +32,7 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
 
     return (
         <div>
+            {pageTitle && <h1 className='title'>{pageTitle}</h1>}
             <ReactMarkdown
                 remarkPlugins={[
                     [remarkGfm, { singleTilde: false }],
@@ -44,7 +45,7 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path }): ReactElement => {
                     handlers: {...defListHastHandlers},
                 }}
             >
-                {pageTitle ? `# ${pageTitle}\n---\n${content}` : content}
+                {content}
             </ReactMarkdown>
         </div>
     );
