@@ -10,8 +10,8 @@ import YAML from 'yaml';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
 
-import './MarkdownPageRender.css';
-import './MarkdownPageRenderCode.css';
+import './MarkdownPageRender.scss';
+import './MarkdownPageRenderCode.scss';
 
 export type MarkdownPageRenderProps = {
     path: string;

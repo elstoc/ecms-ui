@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom';
 import { useMarkdownNav } from '../../hooks/markdownQueries';
 import { MdNavContents } from '../../types/Markdown';
 
-import './MarkdownNav.css';
-
 export type MarkdownNavProps = {
     path: string;
     title: string;

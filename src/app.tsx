@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
 
-import './app.css';
+import './app.scss';
 import 'modern-normalize';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -35,11 +35,17 @@ const siteProps: SiteProps = [
 
 const App = (): ReactElement => {
     return (
-        <>
-            <Header siteProps={siteProps}/>
-            <SiteRoutes siteProps={siteProps} />
-            <Footer />
-        </>
+        <div className='app'>
+            <header>
+                <Header siteProps={siteProps}/>
+            </header>
+            <div className='content'>
+                <SiteRoutes siteProps={siteProps} />
+            </div>
+            <footer>
+                <Footer />
+            </footer>
+        </div>
     );
 };
 

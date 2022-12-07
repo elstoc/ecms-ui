@@ -13,11 +13,9 @@ const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
         <NavLink to={props.path} key={props.path}>{props.title}</NavLink>
     );
     return (
-        <header>
-            <div className='header-links'>
-                {headerLinks}
-            </div>
-        </header>
+        <div className='header-links'>
+            {headerLinks}
+        </div>
     );
 };
 

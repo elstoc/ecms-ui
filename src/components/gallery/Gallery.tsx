@@ -6,7 +6,7 @@ import { useIsVisible } from '../../hooks/useIsVisible';
 import { useGalleryList } from '../../hooks/galleryQueries';
 import GalleryThumb from './GalleryThumb';
 import LightBox from './LightBox';
-import './Gallery.scss';
+import './Gallery.css';
 import { ImageData } from '../../types/Gallery';
 
 export type GalleryProps = {
@@ -74,7 +74,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
     }
 
     return (
-        <div className='content'>
+        <div className='galleryContainer'>
             <div ref={widthRef} className="justifiedGallery">
                 {message}
                 <Routes>

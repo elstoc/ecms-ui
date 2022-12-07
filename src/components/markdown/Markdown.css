@@ -2,12 +2,13 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
+    min-height: 100%;
 }
 
 .markdown-nav {
-    width: 15%;
+    width: 20%;
 }
 
-.markdown-page-content {
-    width: 75%;
+.markdown-content .markdown-page {
+    width: 80%;
 }

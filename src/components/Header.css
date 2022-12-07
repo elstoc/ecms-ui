@@ -1,5 +1,4 @@
-header div
-{
+.header-links {
     background-color: #aaa;
     flex-basis: 1.5em;
 
