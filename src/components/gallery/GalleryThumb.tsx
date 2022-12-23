@@ -8,6 +8,7 @@ const apiUrl: string = process.env.API_URL || '';
 
 type GalleryThumbProps = {
     path: string;
+    modificationTime: number;
     title: string;
     image: ImageData;
     marginPx: number;
@@ -30,7 +31,7 @@ const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, m
     return (
         <Link to={`./${image.fileName}`} replace={true} className='thumbContainer' style={style}>
             <img
-                src={`${apiUrl}/gallery/image/${path}/${image.fileName}`}
+                src={`${apiUrl}/gallery/image/${path}/${image.fileName}?id=${image.sourceModificationTime}`}
                 alt={image.fileName}
                 ref={ref}
             />

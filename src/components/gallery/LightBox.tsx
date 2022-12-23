@@ -65,10 +65,10 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): Rea
             <Link to=".." replace={true} className="close">&times;</Link>
             {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
             {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
-            <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=fhd`} alt={imageName} />
+            <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=fhd&id=${currImage.sourceModificationTime}`} alt={imageName} />
             <div className='preload'>
-                {prevImage && <img src={`${apiUrl}/gallery/image/${path}/${prevImage.fileName}?size=fhd`} alt={imageName} />}
-                {nextImage && <img src={`${apiUrl}/gallery/image/${path}/${nextImage.fileName}?size=fhd`} alt={imageName} />}
+                {prevImage && <img src={`${apiUrl}/gallery/image/${path}/${prevImage.fileName}?size=fhd&id=${prevImage.sourceModificationTime}`} alt={imageName} />}
+                {nextImage && <img src={`${apiUrl}/gallery/image/${path}/${nextImage.fileName}?size=fhd&id=${nextImage.sourceModificationTime}`} alt={imageName} />}
             </div>
             <div className="image-info">{imageDesc}</div>
         </div>
