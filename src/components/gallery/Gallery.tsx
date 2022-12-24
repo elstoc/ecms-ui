@@ -40,7 +40,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
 
     if (error) {
         message = 'There has been an ERROR';
-    } else if (isLoading || !galleryDivWidth) {
+    } else if (isLoading) {
         message = 'Loading Images';
     } else {
         //resize images to fit in rows
