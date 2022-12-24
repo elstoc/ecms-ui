@@ -4,6 +4,7 @@
     background-color:#808080;
     flex: 1;
     width: 100%;
+    min-height: 100%;
     padding: 1em 2em;
     font-family: sans-serif;
 }
