@@ -19,9 +19,13 @@ export type MarkdownPageRenderProps = {
     markdown: string;
 };
 
+const basename = (path: string): string => {
+    return path.split('/').reverse()[0];
+};
+
 const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ path, markdown }): ReactElement => {
     const [yaml, content] = splitFrontMatter(markdown);
-    const pageTitle = YAML.parse(yaml)?.title;
+    const pageTitle = YAML.parse(yaml)?.title || basename(path);
 
     return (
         <div className='markdown-page'>

@@ -12,13 +12,14 @@ export type MarkdownPageProps = {
 
 const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactElement => {
     const { '*': mdFilePath } = useParams();
+    const fullPath = `${path}/${mdFilePath || ''}`;
 
-    const {isLoading, error, data: mdFile} = useMarkdownFile(`${path}/${mdFilePath || ''}`);
+    const {isLoading, error, data: mdFile} = useMarkdownFile(fullPath);
 
     if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
 
     return (
-        <MarkdownPageRender path={path} title={title} markdown={mdFile} />
+        <MarkdownPageRender path={fullPath} title={title} markdown={mdFile} />
     );
 };
 
