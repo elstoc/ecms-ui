@@ -20,7 +20,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
     const resizeRatios: number[] = [];
     let message = '';
 
-    const refImageToTriggerLoadWhenVisible = createRef<HTMLImageElement>();
+    const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
     const [galleryDivWidth, setGalleryDivWidth] = useState(0);
 
@@ -30,7 +30,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
         setMaxImagesToLoad((prevMaxImages) => (prevMaxImages < galleryData!.imageCount) ? (prevMaxImages + batchSize) : prevMaxImages);
     }, [galleryData, batchSize]);
 
-    useIsVisible(refImageToTriggerLoadWhenVisible, loadMoreImages);
+    useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     const onResize = useCallback((width?: number) => (
         width && setGalleryDivWidth(width)
@@ -46,35 +46,42 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
     } else if (isLoading) {
         message = 'Loading Images';
     } else {
-        //populate array of resize ratios to fit images in rows
         let nextRowWidthOfThumbs = 0;
         let nextRowImageCount = 0;
-
         galleryData?.imageList?.forEach((image) => {
             nextRowImageCount++;
             nextRowWidthOfThumbs += image.thumbDimensions.width;
-            const widthAvailableForImages = galleryDivWidth - (2 * marginPx * nextRowImageCount);
+            const widthAvailableForThumbs = galleryDivWidth - (2 * marginPx * nextRowImageCount);
 
-            if (nextRowWidthOfThumbs >= widthAvailableForImages) {
-                const ratio = widthAvailableForImages / nextRowWidthOfThumbs;
-                resizeRatios.push(...Array(nextRowImageCount).fill(ratio));
+            if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
+                const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
+                resizeRatios.push(...Array(nextRowImageCount).fill(resizeRatio));
                 nextRowWidthOfThumbs = 0;
                 nextRowImageCount = 0;
             }
         });
-
-        // add any unhandled images
         resizeRatios.push(...Array(nextRowImageCount).fill(1));
     }
 
     return (
-        <div className='galleryContainer'>
+        <div className="galleryContainer">
             <div ref={widthRef} className="justifiedGallery">
                 {message}
-                <Routes>
-                    {galleryData && <Route path=":imageName" element={<LightBox path={path} galleryData={galleryData} loadMoreImages={loadMoreImages} />} />}
-                </Routes>
-                {galleryData?.imageList?.map((image, index) => 
+                {galleryData && (
+                    <Routes>
+                        <Route
+                            path=":imageName"
+                            element={
+                                <LightBox
+                                    path={path}
+                                    galleryData={galleryData}
+                                    loadMoreImages={loadMoreImages}
+                                />
+                            }
+                        />
+                    </Routes>
+                )}
+                {galleryData?.imageList?.map((image, index) => (
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
@@ -82,9 +89,13 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
                         marginPx={marginPx}
                         resizeRatio={resizeRatios[index]}
                         path={path}
-                        ref={index === (galleryData.imageList.length - threshold) ? refImageToTriggerLoadWhenVisible : null}
+                        ref={
+                            index === galleryData.imageList.length - threshold
+                                ? refTriggerLoadWhenVisible
+                                : null
+                        }
                     />
-                )}
+                ))}
             </div>
         </div>
     );
