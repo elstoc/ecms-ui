@@ -7,7 +7,6 @@ import { useGalleryList } from '../../hooks/galleryQueries';
 import GalleryThumb from './GalleryThumb';
 import LightBox from './LightBox';
 import './Gallery.css';
-import { ImageData } from '../../types/Gallery';
 
 export type GalleryProps = {
     path: string;
@@ -18,7 +17,7 @@ export type GalleryProps = {
 }
 
 const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
-    const galleryImages: ImageData[] = [];
+    const resizeRatios: number[] = [];
     let message = '';
 
     const visibleRef = createRef<HTMLImageElement>();
@@ -43,34 +42,25 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
     } else if (isLoading) {
         message = 'Loading Images';
     } else {
-        //resize images to fit in rows
-        let nextRowImgsWidth = 0;
-        let nextRowImgs: ImageData[] = [];
+        //populate array of resize ratios to fit images in rows
+        let nextRowWidthOfThumbs = 0;
+        let nextRowImageCount = 0;
 
         galleryData?.imageList?.forEach((image) => {
-            nextRowImgs.push(image);
-            nextRowImgsWidth += image.thumbDimensions.width;
-            const availableImgsWidth = galleryDivWidth - (2 * marginPx * nextRowImgs.length);
+            nextRowImageCount++;
+            nextRowWidthOfThumbs += image.thumbDimensions.width;
+            const widthAvailableForImages = galleryDivWidth - (2 * marginPx * nextRowImageCount);
 
-            if (nextRowImgsWidth >= availableImgsWidth) {
-                const ratio = availableImgsWidth / nextRowImgsWidth;
-                nextRowImgs.forEach((image) => {
-                    image.galleryDimensions = {
-                        width: Math.trunc(image.thumbDimensions.width * ratio),
-                        height: Math.trunc(image.thumbDimensions.height * ratio)
-                    };
-                    galleryImages.push(image);
-                });
-                nextRowImgs = [];
-                nextRowImgsWidth = 0;
+            if (nextRowWidthOfThumbs >= widthAvailableForImages) {
+                const ratio = widthAvailableForImages / nextRowWidthOfThumbs;
+                resizeRatios.push(...Array(nextRowImageCount).fill(ratio));
+                nextRowWidthOfThumbs = 0;
+                nextRowImageCount = 0;
             }
         });
 
         // add any unhandled images
-        nextRowImgs.forEach((image) => {
-            image.galleryDimensions = image.thumbDimensions;
-            galleryImages.push(image);
-        });
+        resizeRatios.push(...Array(nextRowImageCount).fill(1));
     }
 
     return (
@@ -80,14 +70,15 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
                 <Routes>
                     {galleryData && <Route path=":imageName" element={<LightBox path={path} galleryData={galleryData} loadMoreImages={loadMoreImages} />} />}
                 </Routes>
-                {galleryImages.map((image, index) => 
+                {galleryData?.imageList?.map((image, index) => 
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
                         title={`${title} - ${image.fileName}`}
                         marginPx={marginPx}
+                        resizeRatio={resizeRatios[index]}
                         path={path}
-                        ref={index === galleryImages.length - threshold ? visibleRef : null}
+                        ref={index === galleryData.imageList.length - threshold ? visibleRef : null}
                     />
                 )}
             </div>

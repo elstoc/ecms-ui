@@ -19,7 +19,6 @@ export type ImageData = {
     sourceModificationTime: number;
     exif: Exif;
     thumbDimensions: Dimensions;
-    galleryDimensions?: Dimensions;
 }
 
 export type GalleryData = {
