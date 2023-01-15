@@ -84,7 +84,6 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
                     <GalleryThumb
                         key={image.fileName}
                         image={image}
-                        modificationTime={image.sourceModificationTime}
                         title={`${title} - ${image.fileName}`}
                         marginPx={marginPx}
                         path={path}

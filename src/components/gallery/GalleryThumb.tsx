@@ -8,7 +8,6 @@ const apiUrl: string = process.env.API_URL || '';
 
 type GalleryThumbProps = {
     path: string;
-    modificationTime: number;
     title: string;
     image: ImageData;
     marginPx: number;
