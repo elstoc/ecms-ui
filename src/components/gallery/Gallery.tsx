@@ -20,21 +20,21 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
     const resizeRatios: number[] = [];
     let message = '';
 
-    const visibleRef = createRef<HTMLImageElement>();
-    const [imageLimit, setImageLimit] = useState(batchSize);
-    const [galleryDivWidth, setGalleryWidth] = useState(0);
+    const refImageToTriggerLoadWhenVisible = createRef<HTMLImageElement>();
+    const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
+    const [galleryDivWidth, setGalleryDivWidth] = useState(0);
 
-    const { isLoading, error, data: galleryData } = useGalleryList(path, imageLimit);
+    const { isLoading, error, data: galleryData } = useGalleryList(path, maxImagesToLoad);
 
     const loadMoreImages = useCallback(() => {
-        setImageLimit((prev) => prev < galleryData!.imageCount ? prev + batchSize : prev);
+        setMaxImagesToLoad((prevMaxImages) => (prevMaxImages < galleryData!.imageCount) ? (prevMaxImages + batchSize) : prevMaxImages);
     }, [galleryData, batchSize]);
 
-    useIsVisible(visibleRef, loadMoreImages);
+    useIsVisible(refImageToTriggerLoadWhenVisible, loadMoreImages);
 
     const { ref: widthRef } = useResizeDetector({
         handleHeight: false,
-        onResize: (width) => width && setGalleryWidth(width)
+        onResize: (width) => width && setGalleryDivWidth(width)
     });
 
     if (error) {
@@ -78,7 +78,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
                         marginPx={marginPx}
                         resizeRatio={resizeRatios[index]}
                         path={path}
-                        ref={index === galleryData.imageList.length - threshold ? visibleRef : null}
+                        ref={index === (galleryData.imageList.length - threshold) ? refImageToTriggerLoadWhenVisible : null}
                     />
                 )}
             </div>
