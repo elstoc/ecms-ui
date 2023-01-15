@@ -32,7 +32,7 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
 
     useIsVisible(refImageToTriggerLoadWhenVisible, loadMoreImages);
 
-    const onResize = useCallback((width: number | undefined) => (
+    const onResize = useCallback((width?: number) => (
         width && setGalleryDivWidth(width)
     ), []);
 
