@@ -16,8 +16,8 @@ type GalleryThumbProps = {
 
 const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, marginPx, path, resizeRatio }, ref) => {
     const style = {
-        width: `${image.thumbDimensions.width * resizeRatio}px`,
-        height: `${image.thumbDimensions.height * resizeRatio }px`,
+        width: `${Math.trunc(image.thumbDimensions.width * resizeRatio)}px`,
+        height: `${Math.trunc(image.thumbDimensions.height * resizeRatio)}px`,
         margin: `${marginPx}px`,
     };
 
