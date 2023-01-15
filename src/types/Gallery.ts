@@ -1,12 +1,5 @@
 export type Exif = {
-    title: string | undefined;
-    dateTaken: string | undefined;
-    camera: string | undefined;
-    lens: string | undefined;
-    exposure: string | undefined;
-    iso: string | undefined;
-    aperture: string | undefined;
-    focalLength: string | undefined;
+    [key: string]: string | undefined;
 };
 
 export type Dimensions = {
