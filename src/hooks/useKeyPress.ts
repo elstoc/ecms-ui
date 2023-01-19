@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-const useKeyPress: (keys: string[], handler: null | ((event: KeyboardEvent) => void)) => void = (keys, handler) => {
+export const useKeyPress: (keys: string[], handler: null | ((event: KeyboardEvent) => void)) => void = (keys, handler) => {
     const eventListenerFn = useCallback((ev: KeyboardEvent) => {
         if (keys.includes(ev.key)) {
             ev.preventDefault();
@@ -21,5 +21,3 @@ const useKeyPress: (keys: string[], handler: null | ((event: KeyboardEvent) => v
 
     }, [eventListenerFn]);
 };
-
-export default useKeyPress;

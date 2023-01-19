@@ -3,15 +3,15 @@ import React, { FC, ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { SiteProps } from '../types/Site';
 
-import Gallery from './gallery/Gallery';
-import Markdown from './markdown/Markdown';
-import MarkdownPage from './markdown/MarkdownPage';
+import { Gallery } from './gallery/Gallery';
+import { Markdown } from './markdown/Markdown';
+import { MarkdownPage } from './markdown/MarkdownPage';
 
 type SiteRouteProps = {
     siteProps: SiteProps
 };
 
-const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
+export const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
     const siteRoutes = siteProps.map((props) => {
         if (props.type === 'gallery') {
             return (
@@ -46,5 +46,3 @@ const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
         </Routes>
     );
 };
-
-export default SiteRoutes;

@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import MarkdownPage from './MarkdownPage';
-import MarkdownNav from './MarkdownNav';
+import { MarkdownPage } from './MarkdownPage';
+import { MarkdownNav } from './MarkdownNav';
 import './Markdown.css';
 
 export type MarkdownProps = {
@@ -10,7 +10,7 @@ export type MarkdownProps = {
     title: string;
 }
 
-const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
+export const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
     return (
         <div className='markdown-content'>
             <nav className='markdown-nav'>
@@ -22,5 +22,3 @@ const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
         </div>
     );
 };
-
-export default Markdown;

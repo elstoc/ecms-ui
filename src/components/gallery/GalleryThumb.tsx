@@ -14,7 +14,7 @@ type GalleryThumbProps = {
     marginPx: number;
 }
 
-const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, marginPx, path, resizeRatio }, ref) => {
+export const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, marginPx, path, resizeRatio }, ref) => {
     const style = {
         width: `${Math.trunc(image.thumbDimensions.width * resizeRatio)}px`,
         height: `${Math.trunc(image.thumbDimensions.height * resizeRatio)}px`,
@@ -39,5 +39,3 @@ const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ image, m
         </Link>
     );
 });
-
-export default GalleryThumb;

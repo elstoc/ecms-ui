@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { useGalleryList } from '../../hooks/galleryQueries';
-import GalleryThumb from './GalleryThumb';
-import LightBox from './LightBox';
+import { GalleryThumb } from './GalleryThumb';
+import { LightBox } from './LightBox';
 import './Gallery.css';
 
 export type GalleryProps = {
@@ -16,7 +16,7 @@ export type GalleryProps = {
     threshold: number;
 }
 
-const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
+export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
     const resizeRatios: number[] = [];
     let message = '';
 
@@ -100,5 +100,3 @@ const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold
         </div>
     );
 };
-
-export default Gallery;

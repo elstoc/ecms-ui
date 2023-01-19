@@ -8,7 +8,7 @@ type HeaderProps = {
     siteProps: SiteProps
 };
 
-const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
+export const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
     const headerLinks = siteProps.map((props) =>
         <NavLink to={props.path} key={props.path}>{props.title}</NavLink>
     );
@@ -18,5 +18,3 @@ const Header: FC<HeaderProps> = ({ siteProps }): ReactElement => {
         </div>
     );
 };
-
-export default Header;

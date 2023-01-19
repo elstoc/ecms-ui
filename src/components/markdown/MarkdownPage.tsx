@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 
 import { useParams } from 'react-router';
 
-import MarkdownPageRender from './MarkdownPageRender';
+import { MarkdownPageRender } from './MarkdownPageRender';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 
 export type MarkdownPageProps = {
@@ -10,7 +10,7 @@ export type MarkdownPageProps = {
     title: string;
 };
 
-const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactElement => {
+export const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactElement => {
     const { '*': mdFilePath } = useParams();
     const fullPath = `${path}/${mdFilePath || ''}`;
 
@@ -22,5 +22,3 @@ const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactElement => {
         <MarkdownPageRender path={fullPath} title={title} markdown={mdFile} />
     );
 };
-
-export default MarkdownPage;

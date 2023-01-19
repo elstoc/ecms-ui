@@ -23,7 +23,7 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): Re
     );
 };
 
-const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
+export const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
     const { isLoading, error, data: navContents } = useMarkdownNav(path);
 
     if (error) {
@@ -38,5 +38,3 @@ const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
         </ol>
     );
 };
-
-export default MarkdownNav;

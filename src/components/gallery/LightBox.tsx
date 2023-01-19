@@ -1,6 +1,6 @@
 import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import useKeyPress from '../../hooks/useKeyPress';
+import { useKeyPress } from '../../hooks/useKeyPress';
 
 import { GalleryData } from '../../types/Gallery';
 
@@ -14,7 +14,7 @@ type LightBoxProps = {
     loadMoreImages: () => void;
 }
 
-const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): ReactElement => {
+export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): ReactElement => {
     const { imageName } = useParams();
     const navigate = useNavigate();
     const galleryImages = galleryData.imageList;
@@ -74,5 +74,3 @@ const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): Rea
         </div>
     );
 };
-
-export default LightBox;

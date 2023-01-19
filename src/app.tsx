@@ -2,9 +2,9 @@ import React, { ReactElement } from 'react';
 
 import './app.scss';
 import 'modern-normalize';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import SiteRoutes from './components/SiteRoutes';
+import { Header } from './components/Header';
+import { Footer } from './components/Footer';
+import { SiteRoutes } from './components/SiteRoutes';
 import { SiteProps } from './types/Site';
 
 const siteProps: SiteProps = [

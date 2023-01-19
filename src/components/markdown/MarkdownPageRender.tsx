@@ -23,7 +23,7 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0];
 };
 
-const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ path, markdown }): ReactElement => {
+export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ path, markdown }): ReactElement => {
     const [yaml, content] = splitFrontMatter(markdown);
     const pageTitle = YAML.parse(yaml)?.title || basename(path) || 'Home';
 
@@ -47,5 +47,3 @@ const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ path, markdown }): Re
         </div>
     );
 };
-
-export default MarkdownPageRender;
