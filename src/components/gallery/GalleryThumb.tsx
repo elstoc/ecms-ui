@@ -21,13 +21,6 @@ export const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ i
         margin: `${marginPx}px`,
     };
 
-    let imageDesc = image.exif.title || '';
-
-    if (image.exif.dateTaken) {
-        const exifDate = new Date(image.exif.dateTaken);
-        imageDesc += ` (${exifDate.toLocaleDateString('default', { month: 'short' })} ${exifDate.getFullYear()})`;
-    }
-
     return (
         <Link to={`./${image.fileName}`} replace={true} className='thumbContainer' style={style}>
             <img
@@ -35,7 +28,7 @@ export const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ i
                 alt={image.fileName}
                 ref={ref}
             />
-            <div className='overlay'>{imageDesc}</div>
+            <div className='overlay'>{image.description}</div>
         </Link>
     );
 });

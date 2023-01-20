@@ -53,12 +53,6 @@ export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages 
     useKeyPress(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'], null);
     
     const currImage = galleryImages[currImageIndex];
-    let imageDesc = currImage.exif.title || '';
-
-    if (currImage.exif.dateTaken) {
-        const exifDate = new Date(currImage.exif.dateTaken);
-        imageDesc += ` (${exifDate.toLocaleDateString('default', { month: 'short' })} ${exifDate.getFullYear()})`;
-    }
 
     return (
         <div className='LightBox' onClick={handleOuterClick}>
@@ -70,7 +64,7 @@ export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages 
                 {prevImage && <img src={`${apiUrl}/gallery/image/${path}/${prevImage.fileName}?size=fhd&id=${prevImage.sourceModificationTime}`} alt={imageName} />}
                 {nextImage && <img src={`${apiUrl}/gallery/image/${path}/${nextImage.fileName}?size=fhd&id=${nextImage.sourceModificationTime}`} alt={imageName} />}
             </div>
-            <div className="image-info">{imageDesc}</div>
+            <div className="image-info">{currImage.description}</div>
         </div>
     );
 };
