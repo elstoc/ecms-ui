@@ -17,27 +17,6 @@ export type GalleryProps = {
     threshold: number;
 }
 
-const getResizeRatios = (galleryData: GalleryData, divWidth: number, marginPx: number): number[] => {
-    let nextRowWidthOfThumbs = 0;
-    let nextRowImageCount = 0;
-    const ratios: number[] = [];
-
-    galleryData?.imageList?.forEach((image) => {
-        nextRowImageCount++;
-        nextRowWidthOfThumbs += image.thumbDimensions.width;
-        const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
-
-        if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
-            const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
-            ratios.push(...Array(nextRowImageCount).fill(resizeRatio));
-            nextRowWidthOfThumbs = 0;
-            nextRowImageCount = 0;
-        }
-    });
-
-    return ratios;
-};
-
 export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
     let resizeRatios: number[] = [];
     let message = '';
@@ -107,4 +86,25 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
             </div>
         </div>
     );
+};
+
+const getResizeRatios = (galleryData: GalleryData, divWidth: number, marginPx: number): number[] => {
+    let nextRowWidthOfThumbs = 0;
+    let nextRowImageCount = 0;
+    const ratios: number[] = [];
+
+    galleryData?.imageList?.forEach((image) => {
+        nextRowImageCount++;
+        nextRowWidthOfThumbs += image.thumbDimensions.width;
+        const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
+
+        if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
+            const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
+            ratios.push(...Array(nextRowImageCount).fill(resizeRatio));
+            nextRowWidthOfThumbs = 0;
+            nextRowImageCount = 0;
+        }
+    });
+
+    return ratios;
 };
