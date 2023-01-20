@@ -60,7 +60,6 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
                 nextRowImageCount = 0;
             }
         });
-        resizeRatios.push(...Array(nextRowImageCount).fill(1));
     }
 
     return (
@@ -87,7 +86,7 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
                         image={image}
                         title={`${title} - ${image.fileName}`}
                         marginPx={marginPx}
-                        resizeRatio={resizeRatios[index]}
+                        resizeRatio={resizeRatios[index] || 1}
                         path={path}
                         ref={
                             index === galleryData.imageList.length - threshold
