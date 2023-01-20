@@ -2,8 +2,7 @@ import React, { ReactElement } from 'react';
 
 import './app.scss';
 import 'modern-normalize';
-import { Header } from './components/Header';
-import { Footer } from './components/Footer';
+import { SiteNav } from './components/SiteNav';
 import { SiteRoutes } from './components/SiteRoutes';
 import { SiteProps } from './types/Site';
 
@@ -37,13 +36,13 @@ const App = (): ReactElement => {
     return (
         <div className='app'>
             <header>
-                <Header siteProps={siteProps}/>
+                <SiteNav siteProps={siteProps}/>
             </header>
             <div className='content'>
                 <SiteRoutes siteProps={siteProps} />
             </div>
             <footer>
-                <Footer />
+                C Elston 2022
             </footer>
         </div>
     );
