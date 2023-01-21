@@ -6,8 +6,6 @@ import { GalleryData } from '../../types/Gallery';
 
 import './LightBox.css';
 
-const apiUrl: string = process.env.API_URL || '';
-
 type LightBoxProps = {
     path: string;
     galleryData: GalleryData;
@@ -59,10 +57,10 @@ export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages 
             <Link to=".." replace={true} className="close">&times;</Link>
             {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
             {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
-            <img src={`${apiUrl}/gallery/image/${path}/${imageName}?size=fhd&id=${currImage.sourceModificationTime}`} alt={imageName} />
+            <img src={currImage.fhdSrcUrl} alt={imageName} />
             <div className='preload'>
-                {prevImage && <img src={`${apiUrl}/gallery/image/${path}/${prevImage.fileName}?size=fhd&id=${prevImage.sourceModificationTime}`} alt={imageName} />}
-                {nextImage && <img src={`${apiUrl}/gallery/image/${path}/${nextImage.fileName}?size=fhd&id=${nextImage.sourceModificationTime}`} alt={imageName} />}
+                {prevImage && <img src={prevImage.fhdSrcUrl} alt={imageName} />}
+                {nextImage && <img src={nextImage.fhdSrcUrl} alt={imageName} />}
             </div>
             <div className="image-info">{currImage.description}</div>
         </div>

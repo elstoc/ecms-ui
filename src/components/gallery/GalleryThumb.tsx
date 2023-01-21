@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { ImageData } from '../../types/Gallery';
 import './GalleryThumb.css';
 
-const apiUrl: string = process.env.API_URL || '';
-
 type GalleryThumbProps = {
     path: string;
     title: string;
@@ -24,7 +22,7 @@ export const GalleryThumb = forwardRef<HTMLImageElement, GalleryThumbProps>(({ i
     return (
         <Link to={`./${image.fileName}`} replace={true} className='thumbContainer' style={style}>
             <img
-                src={`${apiUrl}/gallery/image/${path}/${image.fileName}?id=${image.sourceModificationTime}`}
+                src={image.thumbSrcUrl}
                 alt={image.fileName}
                 ref={ref}
             />
