@@ -41,11 +41,12 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
             {galleryData.imageList.map((image, index) =>
                 <GalleryThumb
                     key={image.fileName}
-                    image={image}
-                    title={`${title} - ${image.fileName}`}
+                    fileName={image.fileName}
+                    description={image.description}
+                    srcUrl={image.thumbSrcUrl}
+                    widthPx={Math.trunc(image.thumbDimensions.width * (resizeRatios[index] || 1))}
+                    heightPx={Math.trunc(image.thumbDimensions.height * (resizeRatios[index] || 1))}
                     marginPx={marginPx}
-                    resizeRatio={resizeRatios[index] || 1}
-                    path={path}
                     ref={
                         index === galleryData.imageList.length - threshold
                             ? refTriggerLoadWhenVisible
