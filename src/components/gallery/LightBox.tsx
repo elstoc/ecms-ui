@@ -1,5 +1,5 @@
 import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
 
 import { GalleryData } from '../../types/Gallery';
@@ -53,15 +53,16 @@ export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages 
 
     return (
         <div className='LightBox' onClick={handleOuterClick}>
-            <Link to=".." replace={true} className="close">&times;</Link>
-            {prevImage && <Link className="prev" to={`../${prevImage.fileName}`} replace={true}><div>&#10094;</div></Link>}
-            {nextImage && <Link className="next" to={`../${nextImage.fileName}`} replace={true}><div>&#10095;</div></Link>}
+            <div className='close' onClick={goBack}>&times;</div>
+            {prevImage && <div className='prev' onClick={goPrevImage}>&#10094;</div>}
+            {nextImage && <div className='next' onClick={goNextImage}>&#10095;</div>}
             <img src={currImage.fhdSrcUrl} alt={imageName} />
+            <div className='image-info'>{currImage.description}</div>
+
             <div className='preload'>
-                {prevImage && <img src={prevImage.fhdSrcUrl} alt={imageName} />}
-                {nextImage && <img src={nextImage.fhdSrcUrl} alt={imageName} />}
+                {prevImage && <img src={prevImage.fhdSrcUrl} alt='preload' />}
+                {nextImage && <img src={nextImage.fhdSrcUrl} alt='preload' />}
             </div>
-            <div className="image-info">{currImage.description}</div>
         </div>
     );
 };
