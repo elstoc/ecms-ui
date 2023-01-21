@@ -7,12 +7,11 @@ import { GalleryData } from '../../types/Gallery';
 import './LightBox.css';
 
 type LightBoxProps = {
-    path: string;
     galleryData: GalleryData;
     loadMoreImages: () => void;
 }
 
-export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages }): ReactElement => {
+export const LightBox: FC<LightBoxProps> = ({ galleryData, loadMoreImages }): ReactElement => {
     const { imageName } = useParams();
     const navigate = useNavigate();
     const galleryImages = galleryData.imageList;

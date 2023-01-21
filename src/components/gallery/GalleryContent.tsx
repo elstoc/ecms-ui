@@ -31,7 +31,6 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
                     path=":imageName"
                     element={
                         <LightBox
-                            path={path}
                             galleryData={galleryData}
                             loadMoreImages={loadMoreImages}
                         />
