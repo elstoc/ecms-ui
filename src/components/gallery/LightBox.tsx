@@ -23,7 +23,6 @@ export const LightBox: FC<LightBoxProps> = ({ path, galleryData, loadMoreImages 
     useEffect(() => {
         if (!nextImage && galleryData.imageCount > currImageIndex + 1) {
             loadMoreImages();
-            console.log('boo');
         }
     },[nextImage, galleryData, currImageIndex, loadMoreImages]);
 
