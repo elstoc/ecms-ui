@@ -11,13 +11,11 @@ export type GalleryContentProps = {
     galleryData: GalleryData;
     galleryDivWidth: number;
     loadMoreImages: () => void;
-    path: string;
-    title: string;
     marginPx: number;
     threshold: number;
 }
 
-export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, path, marginPx, title, threshold }): ReactElement => {
+export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
 
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);

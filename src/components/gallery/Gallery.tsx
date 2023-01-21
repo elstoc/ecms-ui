@@ -50,8 +50,6 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
                 {message}
                 {showGallery && (
                     <GalleryContent
-                        path={path}
-                        title={title}
                         galleryData={galleryData as GalleryData}
                         galleryDivWidth={galleryDivWidth}
                         loadMoreImages={loadMoreImages}
