@@ -4,7 +4,6 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useGalleryList } from '../../hooks/galleryQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
-import { GalleryData } from '../../types/Gallery';
 
 export type GalleryProps = {
     path: string;
@@ -17,7 +16,6 @@ export type GalleryProps = {
 export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
     const [galleryDivWidth, setGalleryDivWidth] = useState(0);
-
     const { isLoading, error, data: galleryData } = useGalleryList(path, maxImagesToLoad);
 
     const loadMoreImages = useCallback(() => {
