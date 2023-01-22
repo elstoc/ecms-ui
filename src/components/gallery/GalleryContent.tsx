@@ -5,7 +5,7 @@ import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
 import './Gallery.css';
-import { GalleryData } from '../../types/Gallery';
+import { GalleryData, ImageData } from '../../types/Gallery';
 
 export type GalleryContentProps = {
     galleryData: GalleryData;
@@ -20,7 +20,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
 
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
-    const resizeRatios = getResizeRatios(galleryData, galleryDivWidth, marginPx);
+    const resizeRatios = getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx);
 
     return (
         <>
@@ -55,12 +55,12 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
     );
 };
 
-const getResizeRatios = (galleryData: GalleryData, divWidth: number, marginPx: number): number[] => {
+const getResizeRatios = (imageList: ImageData[], divWidth: number, marginPx: number): number[] => {
     let nextRowWidthOfThumbs = 0;
     let nextRowImageCount = 0;
     const ratios: number[] = [];
 
-    galleryData?.imageList?.forEach((image) => {
+    imageList.forEach((image) => {
         nextRowImageCount++;
         nextRowWidthOfThumbs += image.thumbDimensions.width;
         const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
