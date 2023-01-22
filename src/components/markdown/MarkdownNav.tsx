@@ -8,21 +8,6 @@ export type MarkdownNavProps = {
     title: string;
 }
 
-const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): ReactElement => {
-    return (
-        <ol>
-            {children.map((child) => {
-                return (
-                    <React.Fragment key = {child.meta.uiPath } >
-                        <li><NavLink to={'/' + child.meta.uiPath} end>{child.meta.title}</NavLink></li>
-                        {child.children && <MarkdownNavRecurse children={child.children} />}
-                    </React.Fragment>
-                );
-            })}
-        </ol>
-    );
-};
-
 export const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
     const { isLoading, isError, data: navContents } = useMarkdownNav(path);
 
@@ -36,6 +21,21 @@ export const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement
         <ol>
             <li><NavLink to={'/' + navContents.meta.uiPath} end >{navContents.meta.title}</NavLink></li>
             {navContents.children && <MarkdownNavRecurse children={navContents.children} />}
+        </ol>
+    );
+};
+
+const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): ReactElement => {
+    return (
+        <ol>
+            {children.map((child) => {
+                return (
+                    <React.Fragment key = {child.meta.uiPath } >
+                        <li><NavLink to={'/' + child.meta.uiPath} end>{child.meta.title}</NavLink></li>
+                        {child.children && <MarkdownNavRecurse children={child.children} />}
+                    </React.Fragment>
+                );
+            })}
         </ol>
     );
 };
