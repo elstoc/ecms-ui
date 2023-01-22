@@ -6,6 +6,7 @@
     justify-content: center;
     background-color: #ddd;
     height: 100vh;
+    overflow-y: auto;
 }
 
 .app {
@@ -24,7 +25,6 @@
 
 .content {
     flex: 1 1 auto;
-    overflow-y: auto;
 }
 
 footer {
