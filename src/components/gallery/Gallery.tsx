@@ -15,20 +15,14 @@ export type GalleryProps = {
 
 export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
-    const [galleryDivWidth, setGalleryDivWidth] = useState(0);
     const { isLoading, error, data: galleryData } = useGalleryList(path, maxImagesToLoad);
 
     const loadMoreImages = useCallback(() => {
         setMaxImagesToLoad((prevMaxImages) => (prevMaxImages < galleryData!.imageCount) ? (prevMaxImages + batchSize) : prevMaxImages);
     }, [galleryData, batchSize]);
 
-    const onResize = useCallback((width?: number) => (
-        width && setGalleryDivWidth(width)
-    ), []);
-
-    const { ref: widthRef } = useResizeDetector({
-        handleHeight: false,
-        onResize
+    const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({
+        handleHeight: false
     });
 
     const showGallery = (galleryData && galleryDivWidth);
@@ -36,8 +30,8 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
     const loadingMessage = isLoading ? 'Loading images' : '';
 
     return (
-        <div className="galleryContainer">
-            <div ref={widthRef} className="justifiedGallery">
+        <div ref={widthRef} className="galleryContainer">
+            <div className="justifiedGallery">
                 {errorMessage || loadingMessage}
                 {showGallery && (
                     <GalleryContent
