@@ -16,14 +16,15 @@ export type GalleryProps = {
 export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
     const { isLoading, error, data: galleryData } = useGalleryList(path, maxImagesToLoad);
+    const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => {
-        setMaxImagesToLoad((prevMaxImages) => (prevMaxImages < galleryData!.imageCount) ? (prevMaxImages + batchSize) : prevMaxImages);
+        setMaxImagesToLoad((prevMaxImages) =>
+            prevMaxImages < galleryData!.imageCount
+                ? prevMaxImages + batchSize
+                : prevMaxImages
+        );
     }, [galleryData, batchSize]);
-
-    const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({
-        handleHeight: false
-    });
 
     const showGallery = (galleryData && galleryDivWidth);
     const errorMessage = error ? 'There has been an ERROR' : '';
