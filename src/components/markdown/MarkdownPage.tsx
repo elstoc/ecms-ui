@@ -14,9 +14,13 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactEleme
     const { '*': mdFilePath } = useParams();
     const fullPath = `${path}/${mdFilePath || ''}`;
 
-    const {isLoading, error, data: mdFile} = useMarkdownFile(fullPath);
+    const {isLoading, isError, data: mdFile} = useMarkdownFile(fullPath);
 
-    if (isLoading || error || !mdFile) return <div>Nothing to see here</div>;
+    if (isError) {
+        return <div>There has been an ERROR</div>;
+    } else if (isLoading || !mdFile) {
+        return <div>Loading Page</div>;
+    }
 
     return (
         <MarkdownPageRender path={fullPath} title={title} markdown={mdFile} />

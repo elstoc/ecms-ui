@@ -24,13 +24,14 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): Re
 };
 
 export const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
-    const { isLoading, error, data: navContents } = useMarkdownNav(path);
+    const { isLoading, isError, data: navContents } = useMarkdownNav(path);
 
-    if (error) {
+    if (isError) {
         return <div>There has been an ERROR</div>;
     } else if (isLoading || !navContents) {
-        return <div>Loading Nav</div>;
+        return <div>Loading Navigation</div>;
     }
+
     return (
         <ol>
             <li><NavLink to={'/' + navContents.meta.uiPath} end >{navContents.meta.title}</NavLink></li>
