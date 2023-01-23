@@ -15,7 +15,7 @@ const siteProps: SiteProps = [
     {
         path: 'portfolio',
         title: 'Portfolio Photos',
-        marginPx: 3,
+        marginPx: 2,
         batchSize: 50,
         threshold: 20,
         type: 'gallery',
