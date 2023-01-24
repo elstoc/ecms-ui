@@ -21,8 +21,9 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
 
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
-    const resizeRatios = useMemo(() => getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
-        , [galleryData, galleryDivWidth, marginPx]);
+    const resizeRatios = useMemo(() => (
+        getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
+    ), [galleryData, galleryDivWidth, marginPx]);
 
     return (
         <>
