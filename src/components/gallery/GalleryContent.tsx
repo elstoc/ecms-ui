@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, createRef, useMemo } from 'react';
+import React, { FC, ReactElement, createRef, useMemo, useEffect } from 'react';
 import { Navigate, useParams } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
@@ -22,6 +22,12 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
+    useEffect(() => {
+        if (lightBoxImageIndex >= (galleryData.imageList.length - 2) && galleryData.imageList.length < galleryData.imageCount) {
+            loadMoreImages();
+        }
+    }, [galleryData, lightBoxImageIndex, loadMoreImages]);
+
     const resizeRatios = useMemo(() => (
         getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
     ), [galleryData, galleryDivWidth, marginPx]);
@@ -36,7 +42,6 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
                 <LightBox
                     imageName={lightBoxImageName}
                     galleryData={galleryData}
-                    loadMoreImages={loadMoreImages}
                 />
             }
             {galleryData.imageList.map((image, index) =>

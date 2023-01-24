@@ -1,4 +1,4 @@
-import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
+import React, { MouseEvent, FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
 
@@ -9,21 +9,14 @@ import './LightBox.css';
 type LightBoxProps = {
     imageName: string;
     galleryData: GalleryData;
-    loadMoreImages: () => void;
 }
 
-export const LightBox: FC<LightBoxProps> = ({ imageName, galleryData, loadMoreImages }): ReactElement => {
+export const LightBox: FC<LightBoxProps> = ({ imageName, galleryData }): ReactElement => {
     const navigate = useNavigate();
     const galleryImages = galleryData.imageList;
     const currImageIndex = galleryImages.findIndex((image) => image.fileName === imageName);
     const prevImage = galleryImages[currImageIndex - 1];
     const nextImage = galleryImages[currImageIndex + 1];
-
-    useEffect(() => {
-        if (!nextImage && galleryData.imageCount > currImageIndex + 1) {
-            loadMoreImages();
-        }
-    },[nextImage, galleryData, currImageIndex, loadMoreImages]);
 
     const goBack = () => {
         navigate('..', { replace: true });
