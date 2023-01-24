@@ -1,5 +1,5 @@
 import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
 
 import { GalleryData } from '../../types/Gallery';
@@ -7,12 +7,12 @@ import { GalleryData } from '../../types/Gallery';
 import './LightBox.css';
 
 type LightBoxProps = {
+    imageName: string;
     galleryData: GalleryData;
     loadMoreImages: () => void;
 }
 
-export const LightBox: FC<LightBoxProps> = ({ galleryData, loadMoreImages }): ReactElement => {
-    const { imageName } = useParams();
+export const LightBox: FC<LightBoxProps> = ({ imageName, galleryData, loadMoreImages }): ReactElement => {
     const navigate = useNavigate();
     const galleryImages = galleryData.imageList;
     const currImageIndex = galleryImages.findIndex((image) => image.fileName === imageName);

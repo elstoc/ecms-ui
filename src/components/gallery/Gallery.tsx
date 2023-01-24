@@ -4,6 +4,7 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useGalleryList } from '../../hooks/galleryQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
+import { Route, Routes } from 'react-router';
 
 export type GalleryProps = {
     path: string;
@@ -28,20 +29,25 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
 
     const showGallery = (galleryData && galleryDivWidth);
 
+    const galleryElement = ( showGallery &&
+        <GalleryContent
+            galleryData={galleryData}
+            galleryDivWidth={galleryDivWidth}
+            loadMoreImages={loadMoreImages}
+            marginPx={marginPx}
+            threshold={threshold}
+        />
+    );
+
     return (
         <div ref={widthRef} className="galleryContainer">
             <div className="justifiedGallery">
                 {isError && 'There has been an ERROR'}
                 {isLoading && 'Loading images'}
-                {showGallery && (
-                    <GalleryContent
-                        galleryData={galleryData}
-                        galleryDivWidth={galleryDivWidth}
-                        loadMoreImages={loadMoreImages}
-                        marginPx={marginPx}
-                        threshold={threshold}
-                    />
-                )}
+                <Routes>
+                    <Route path=":imageName" element={galleryElement} />
+                    <Route path="*" element={galleryElement} />
+                </Routes>
             </div>
         </div>
     );

@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, createRef } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
@@ -16,6 +16,7 @@ export type GalleryContentProps = {
 }
 
 export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
+    const { imageName } = useParams();
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
 
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
@@ -24,17 +25,13 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
 
     return (
         <>
-            <Routes>
-                <Route
-                    path=":imageName"
-                    element={
-                        <LightBox
-                            galleryData={galleryData}
-                            loadMoreImages={loadMoreImages}
-                        />
-                    }
+            {imageName &&
+                <LightBox
+                    imageName={imageName}
+                    galleryData={galleryData}
+                    loadMoreImages={loadMoreImages}
                 />
-            </Routes>
+            }
             {galleryData.imageList.map((image, index) =>
                 <GalleryThumb
                     key={image.fileName}
