@@ -17,20 +17,22 @@ export type GalleryContentProps = {
 
 export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
-    const lightBoxImageIndex = galleryData.imageList.findIndex((image) => image.fileName === lightBoxImageName);
+    const { imageList, imageCount } = galleryData;
+
+    const lightBoxImageIndex = imageList.findIndex((image) => image.fileName === lightBoxImageName);
 
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     useEffect(() => {
-        if (lightBoxImageIndex >= (galleryData.imageList.length - 2) && galleryData.imageList.length < galleryData.imageCount) {
+        if (lightBoxImageIndex >= (imageList.length - 2) && imageList.length < imageCount) {
             loadMoreImages();
         }
-    }, [galleryData, lightBoxImageIndex, loadMoreImages]);
+    }, [imageList, imageCount, lightBoxImageIndex, loadMoreImages]);
 
     const resizeRatios = useMemo(() => (
-        getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
-    ), [galleryData, galleryDivWidth, marginPx]);
+        getResizeRatios(imageList, galleryDivWidth, marginPx)
+    ), [imageList, galleryDivWidth, marginPx]);
 
     if (lightBoxImageName && lightBoxImageIndex < 0) {
         return <Navigate to='..' replace={true} />;
@@ -44,7 +46,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
                     galleryData={galleryData}
                 />
             }
-            {galleryData.imageList.map((image, index) =>
+            {imageList.map((image, index) =>
                 <GalleryThumb
                     key={image.fileName}
                     fileName={image.fileName}
@@ -54,7 +56,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
                     heightPx={Math.trunc(image.thumbDimensions.height * (resizeRatios[index] || 1))}
                     marginPx={marginPx}
                     ref={
-                        index === galleryData.imageList.length - threshold
+                        index === imageList.length - threshold
                             ? refTriggerLoadWhenVisible
                             : null
                     }
