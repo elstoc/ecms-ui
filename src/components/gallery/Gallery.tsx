@@ -45,7 +45,7 @@ export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, th
                 {isError && 'There has been an ERROR'}
                 {isLoading && 'Loading images'}
                 <Routes>
-                    <Route path=":lightBoxImage" element={galleryElement || ''} />
+                    <Route path=":lightBoxImageName" element={galleryElement || ''} />
                     <Route path="" element={galleryElement || ''} />
                 </Routes>
             </div>

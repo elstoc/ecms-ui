@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, createRef, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
@@ -16,20 +16,25 @@ export type GalleryContentProps = {
 }
 
 export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
-    const { lightBoxImage } = useParams();
-    const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
+    const { lightBoxImageName } = useParams();
+    const lightBoxImageIndex = galleryData.imageList.findIndex((image) => image.fileName === lightBoxImageName);
 
+    const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     const resizeRatios = useMemo(() => (
         getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
     ), [galleryData, galleryDivWidth, marginPx]);
 
+    if (lightBoxImageName && lightBoxImageIndex < 0) {
+        return <Navigate to='..' replace={true} />;
+    }
+
     return (
         <>
-            {lightBoxImage &&
+            {lightBoxImageName &&
                 <LightBox
-                    imageName={lightBoxImage}
+                    imageName={lightBoxImageName}
                     galleryData={galleryData}
                     loadMoreImages={loadMoreImages}
                 />
