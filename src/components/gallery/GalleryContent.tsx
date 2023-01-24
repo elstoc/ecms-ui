@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, createRef } from 'react';
+import React, { FC, ReactElement, createRef, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
@@ -16,18 +16,19 @@ export type GalleryContentProps = {
 }
 
 export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
-    const { imageName } = useParams();
+    const { lightBoxImage } = useParams();
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
 
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
-    const resizeRatios = getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx);
+    const resizeRatios = useMemo(() => getResizeRatios(galleryData.imageList, galleryDivWidth, marginPx)
+        , [galleryData, galleryDivWidth, marginPx]);
 
     return (
         <>
-            {imageName &&
+            {lightBoxImage &&
                 <LightBox
-                    imageName={imageName}
+                    imageName={lightBoxImage}
                     galleryData={galleryData}
                     loadMoreImages={loadMoreImages}
                 />
