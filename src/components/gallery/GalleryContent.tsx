@@ -42,8 +42,9 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
         <>
             {lightBoxImageName &&
                 <LightBox
-                    imageName={lightBoxImageName}
-                    galleryData={galleryData}
+                    currImage={imageList[lightBoxImageIndex]}
+                    nextImage={imageList[lightBoxImageIndex + 1]}
+                    prevImage={imageList[lightBoxImageIndex - 1]}
                 />
             }
             {imageList.map((image, index) =>
