@@ -4,12 +4,13 @@ import { useMarkdownNav } from '../../hooks/markdownQueries';
 import { MdNavContents } from '../../types/Markdown';
 
 export type MarkdownNavProps = {
-    path: string;
+    uiPath: string;
+    apiPath: string;
     title: string;
 }
 
-export const MarkdownNav: FC<MarkdownNavProps> = ({ path, title }): ReactElement => {
-    const { isLoading, isError, data: navContents } = useMarkdownNav(path);
+export const MarkdownNav: FC<MarkdownNavProps> = ({ uiPath, apiPath, title }): ReactElement => {
+    const { isLoading, isError, data: navContents } = useMarkdownNav(apiPath);
 
     if (isError) {
         return <div>There has been an ERROR</div>;

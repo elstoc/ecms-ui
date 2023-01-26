@@ -8,12 +8,14 @@ import { SiteProps } from './types/Site';
 
 const siteProps: SiteProps = [
     {
-        path: '',
+        uiPath: '',
+        apiPath: 'home',
         title: 'Home',
         type: 'markdownPage'
     },
     {
-        path: 'portfolio',
+        uiPath: 'portfolio',
+        apiPath: 'portfolio',
         title: 'Portfolio Photos',
         marginPx: 2,
         batchSize: 50,
@@ -21,12 +23,14 @@ const siteProps: SiteProps = [
         type: 'gallery',
     },
     {
-        path: 'markdown-testing',
+        uiPath: 'markdown-testing',
+        apiPath: 'markdown-testing',
         title: 'Markdown Testing',
         type: 'markdown'
     },
     {
-        path: 'about',
+        uiPath: 'about',
+        apiPath: 'about',
         title: 'About',
         type: 'markdownPage'
     },

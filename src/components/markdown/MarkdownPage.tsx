@@ -6,13 +6,14 @@ import { MarkdownPageRender } from './MarkdownPageRender';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 
 export type MarkdownPageProps = {
-    path: string;
+    uiPath: string;
+    apiPath: string;
     title: string;
 };
 
-export const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactElement => {
+export const MarkdownPage: FC<MarkdownPageProps> = ({ uiPath, apiPath, title }): ReactElement => {
     const { '*': mdFilePath } = useParams();
-    const fullPath = `${path}/${mdFilePath || ''}`;
+    const fullPath = `${apiPath}/${mdFilePath || ''}`;
 
     const {isLoading, isError, data: mdFile} = useMarkdownFile(fullPath);
 
@@ -23,6 +24,6 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ path, title }): ReactEleme
     }
 
     return (
-        <MarkdownPageRender path={fullPath} title={title} markdown={mdFile} />
+        <MarkdownPageRender apiPath={fullPath} uiPath={fullPath} title={title} markdown={mdFile} />
     );
 };

@@ -16,25 +16,25 @@ export const SiteRoutes: FC<SiteRouteProps> = ({ siteProps }): ReactElement => {
         if (props.type === 'gallery') {
             return (
                 <Route
-                    key={props.path}
-                    path={`${props.path}/*`}
-                    element={<Gallery path={props.path} title={props.title} marginPx={props.marginPx} batchSize={props.batchSize} threshold={props.threshold} />}
+                    key={props.apiPath}
+                    path={`${props.uiPath}/*`}
+                    element={<Gallery uiPath={props.uiPath} apiPath={props.apiPath} title={props.title} marginPx={props.marginPx} batchSize={props.batchSize} threshold={props.threshold} />}
                 />
             );
         } else if (props.type === 'markdown') {
             return (
                 <Route
-                    key={props.path}
-                    path={`${props.path}/*`}
-                    element={<Markdown path={props.path} title={props.title} />}
+                    key={props.apiPath}
+                    path={`${props.uiPath}/*`}
+                    element={<Markdown uiPath={props.uiPath} apiPath={props.apiPath} title={props.title} />}
                 />
             );
         } else {
             return (
                 <Route
-                    key={props.path}
-                    path={`${props.path}`}
-                    element={<MarkdownPage path={props.path} title={props.title} />}
+                    key={props.apiPath}
+                    path={`${props.uiPath}`}
+                    element={<MarkdownPage uiPath={props.uiPath} apiPath={props.apiPath} title={props.title} />}
                 />
             );
         }

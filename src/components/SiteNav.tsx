@@ -12,7 +12,7 @@ export const SiteNav: FC<SiteNavProps> = ({ siteProps }): ReactElement => {
     return (
         <div className='site-nav'>
             {siteProps.map((props) =>
-                <NavLink to={props.path} key={props.path}>{props.title}</NavLink>
+                <NavLink to={props.uiPath} key={props.apiPath}>{props.title}</NavLink>
             )}
         </div>
     );

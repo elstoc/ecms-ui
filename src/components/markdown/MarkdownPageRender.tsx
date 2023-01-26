@@ -14,7 +14,8 @@ import './MarkdownPageRender.scss';
 import './MarkdownPageRenderCode.scss';
 
 export type MarkdownPageRenderProps = {
-    path: string;
+    uiPath: string;
+    apiPath: string;
     title: string;
     markdown: string;
 };
@@ -23,9 +24,9 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0];
 };
 
-export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ path, markdown }): ReactElement => {
+export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markdown }): ReactElement => {
     const [yaml, content] = splitFrontMatter(markdown);
-    const pageTitle = YAML.parse(yaml)?.title || basename(path) || 'Home';
+    const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
 
     return (
         <div className='markdown-page'>

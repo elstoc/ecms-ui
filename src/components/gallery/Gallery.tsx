@@ -7,16 +7,17 @@ import './Gallery.css';
 import { Route, Routes } from 'react-router';
 
 export type GalleryProps = {
-    path: string;
+    apiPath: string;
+    uiPath: string;
     title: string;
     marginPx: number;
     batchSize: number;
     threshold: number;
 }
 
-export const Gallery: FC<GalleryProps> = ({ path, marginPx, title, batchSize, threshold }): ReactElement => {
+export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, title, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
-    const { isLoading, isError, data: galleryData } = useGalleryList(path, maxImagesToLoad);
+    const { isLoading, isError, data: galleryData } = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => {

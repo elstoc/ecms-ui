@@ -6,18 +6,19 @@ import { MarkdownNav } from './MarkdownNav';
 import './Markdown.css';
 
 export type MarkdownProps = {
-    path: string;
+    uiPath: string;
+    apiPath: string;
     title: string;
 }
 
-export const Markdown: FC<MarkdownProps> = ({ path, title }): ReactElement => {
+export const Markdown: FC<MarkdownProps> = ({ uiPath, apiPath, title }): ReactElement => {
     return (
         <div className='markdown-content'>
             <nav className='markdown-nav'>
-                <MarkdownNav path={path} title={title} />
+                <MarkdownNav uiPath={uiPath} apiPath={apiPath} title={title} />
             </nav>
             <Routes>
-                <Route path="*" element={<MarkdownPage path={path} title={title} />} />
+                <Route path="*" element={<MarkdownPage uiPath={uiPath} apiPath={apiPath} title={title} />} />
             </Routes>
         </div>
     );
