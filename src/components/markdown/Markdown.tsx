@@ -9,9 +9,14 @@ export type MarkdownProps = {
     uiPath: string;
     apiPath: string;
     title: string;
+    includeNav: boolean;
 }
 
-export const Markdown: FC<MarkdownProps> = ({ uiPath, apiPath, title }): ReactElement => {
+export const Markdown: FC<MarkdownProps> = ({ uiPath, apiPath, title, includeNav }): ReactElement => {
+    if (!includeNav) {
+        return <MarkdownPage uiPath={uiPath} apiPath={apiPath} title={title} />;
+    }
+
     return (
         <div className='markdown-content'>
             <nav className='markdown-nav'>
