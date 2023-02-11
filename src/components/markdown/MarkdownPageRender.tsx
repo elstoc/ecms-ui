@@ -21,7 +21,7 @@ export type MarkdownPageRenderProps = {
 };
 
 const basename = (path: string): string => {
-    return path.split('/').reverse()[0];
+    return path.split('/').reverse()[0].replace(/\.md$/,'');
 };
 
 export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markdown }): ReactElement => {
