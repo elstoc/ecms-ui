@@ -5,7 +5,8 @@ import { MdNavContents } from '../types/Markdown';
 const apiUrl = process.env.API_URL || '';
 
 const markdownFileQuery = async (path: string): Promise<string> => {
-    const { data } = await axios.get<string>(`${apiUrl}/markdown/mdfile/${path}`);
+    const strippedPath = path.replace(/\/$/, '');
+    const { data } = await axios.get<string>(`${apiUrl}/markdown/mdfile/${strippedPath}`);
     return data;
 };
 

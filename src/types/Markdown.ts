@@ -6,6 +6,6 @@ export type MdFileMeta = {
 }
 
 export type MdNavContents = {
-    meta: MdFileMeta;
+    metadata: MdFileMeta;
     children?: MdNavContents[];
 }

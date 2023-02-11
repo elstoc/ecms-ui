@@ -19,10 +19,9 @@ export const MarkdownNav: FC<MarkdownNavProps> = ({ uiPath, apiPath, title }): R
     }
 
     return (
-        <ol>
-            <li><NavLink to={'/' + navContents.meta.uiPath} end >{navContents.meta.title}</NavLink></li>
+        <>
             {navContents.children && <MarkdownNavRecurse children={navContents.children} />}
-        </ol>
+        </>
     );
 };
 
@@ -31,8 +30,8 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): Re
         <ol>
             {children.map((child) => {
                 return (
-                    <React.Fragment key = {child.meta.uiPath } >
-                        <li><NavLink to={'/' + child.meta.uiPath} end>{child.meta.title}</NavLink></li>
+                    <React.Fragment key = {child.metadata.uiPath } >
+                        <li><NavLink to={'/' + child.metadata.uiPath} end>{child.metadata.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse children={child.children} />}
                     </React.Fragment>
                 );

@@ -19,7 +19,7 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ uiPath, apiPath, title }):
 
     if (isError) {
         return <div>There has been an ERROR</div>;
-    } else if (isLoading || !mdFile) {
+    } else if (isLoading) {
         return <div>Loading Page</div>;
     }
 
