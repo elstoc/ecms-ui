@@ -13,7 +13,7 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                 <Route
                     key={props.apiPath}
                     path={`${props.uiPath}/*`}
-                    element={<Gallery uiPath={props.uiPath} apiPath={props.apiPath} title={props.title} marginPx={props.marginPx as number} batchSize={props.batchSize as number} threshold={props.threshold as number} />}
+                    element={<Gallery apiPath={props.apiPath} title={props.title} marginPx={props.marginPx as number} batchSize={props.batchSize as number} threshold={props.threshold as number} />}
                 />
             );
         } else {
@@ -21,7 +21,7 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                 <Route
                     key={props.apiPath}
                     path={`${props.uiPath}/*`}
-                    element={<Markdown uiPath={props.uiPath} apiPath={props.apiPath} title={props.title} includeNav={props.includeNav as boolean} />}
+                    element={<Markdown apiPath={props.apiPath} title={props.title} includeNav={props.includeNav as boolean} />}
                 />
             );
         }

@@ -8,7 +8,6 @@ import { Route, Routes } from 'react-router';
 
 export type GalleryProps = {
     apiPath: string;
-    uiPath: string;
     title: string;
     marginPx: number;
     batchSize: number;

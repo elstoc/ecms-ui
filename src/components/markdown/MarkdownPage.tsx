@@ -6,12 +6,11 @@ import { MarkdownPageRender } from './MarkdownPageRender';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 
 export type MarkdownPageProps = {
-    uiPath: string;
     apiPath: string;
     title: string;
 };
 
-export const MarkdownPage: FC<MarkdownPageProps> = ({ uiPath, apiPath, title }): ReactElement => {
+export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactElement => {
     const { '*': mdFilePath } = useParams();
     const fullPath = `${apiPath}/${mdFilePath || ''}`;
 
