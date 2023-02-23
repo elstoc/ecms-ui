@@ -5,7 +5,7 @@ import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
 import './Gallery.css';
-import { GalleryData, ImageData } from '../../types/Gallery';
+import { GalleryData } from '../../types/Gallery';
 
 export type GalleryContentProps = {
     galleryData: GalleryData;
@@ -30,9 +30,10 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
         }
     }, [imageList, imageCount, lightBoxImageIndex, loadMoreImages]);
 
-    const resizeRatios = useMemo(() => (
-        getResizeRatios(imageList, galleryDivWidth, marginPx)
-    ), [imageList, galleryDivWidth, marginPx]);
+    const resizeRatios = useMemo(() => {
+        const thumbWidths = imageList.map((image) => image.thumbDimensions.width);
+        return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
+    }, [imageList, galleryDivWidth, marginPx]);
 
     if (lightBoxImageName && lightBoxImageIndex < 0) {
         return <Navigate to='..' replace={true} />;
@@ -53,8 +54,8 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
                     fileName={image.fileName}
                     description={image.description}
                     srcUrl={image.thumbSrcUrl}
-                    widthPx={Math.trunc(image.thumbDimensions.width * (resizeRatios[index] || 1))}
-                    heightPx={Math.trunc(image.thumbDimensions.height * (resizeRatios[index] || 1))}
+                    widthPx={Math.trunc(image.thumbDimensions.width * resizeRatios[index])}
+                    heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
                     marginPx={marginPx}
                     ref={
                         index === imageList.length - threshold
@@ -67,23 +68,26 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
     );
 };
 
-const getResizeRatios = (imageList: ImageData[], divWidth: number, marginPx: number): number[] => {
-    let nextRowWidthOfThumbs = 0;
-    let nextRowImageCount = 0;
+const getResizeRatios = (widths: number[], divWidth: number, marginPx: number): number[] => {
+    let nextRowWidthOfThumbs = 0,
+        nextRowImageCount = 0;
     const ratios: number[] = [];
 
-    imageList.forEach((image) => {
+    widths.forEach((width) => {
         nextRowImageCount++;
-        nextRowWidthOfThumbs += image.thumbDimensions.width;
+        nextRowWidthOfThumbs += width;
         const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
 
         if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
             const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
             ratios.push(...Array(nextRowImageCount).fill(resizeRatio));
-            nextRowWidthOfThumbs = 0;
-            nextRowImageCount = 0;
+            nextRowWidthOfThumbs = nextRowImageCount = 0;
         }
     });
+
+    if (widths.length > ratios.length) {
+        ratios.push(...Array(nextRowImageCount).fill(1));
+    }
 
     return ratios;
 };
