@@ -15,7 +15,7 @@ export type GalleryProps = {
     threshold: number;
 }
 
-export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, title, batchSize, threshold }): ReactElement => {
+export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
     const { isLoading, isError, data: galleryData } = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
