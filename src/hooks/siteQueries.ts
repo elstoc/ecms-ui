@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
-import { SiteProps } from '../types/Site';
+import { ComponentMetadata } from '../types/Site';
 
 const apiUrl = process.env.API_URL || '';
 
-const siteNavQuery = async (): Promise<SiteProps> => {
-    const { data } = await axios.get<SiteProps>(`${apiUrl}/site/nav`);
+const siteNavQuery = async (): Promise<ComponentMetadata[]> => {
+    const { data } = await axios.get<ComponentMetadata[]>(`${apiUrl}/site/nav`);
     return data;
 };
 

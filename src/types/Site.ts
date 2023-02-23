@@ -1,5 +1,9 @@
-import { GalleryProps } from '../components/gallery/Gallery';
-import { MarkdownProps } from '../components/markdown/Markdown';
-
-export type SiteProps = (GalleryProps & { type: 'gallery' }
-    | MarkdownProps & { type: 'markdown' })[];
+export type ComponentMetadata = {
+    apiPath: string;
+    uiPath: string;
+    title: string;
+    type: string;
+    weight?: number;
+    restrict?: string;
+    [key: string]: boolean | number | string | undefined;
+}

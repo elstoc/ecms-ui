@@ -8,7 +8,7 @@ import { useSiteNav } from './hooks/siteQueries';
 
 const App = (): ReactElement => {
 
-    const { isLoading, isError, data: siteProps } = useSiteNav();
+    const { isLoading, isError, data: componentMetadata } = useSiteNav();
 
     if (isLoading) return <div>Loading data...</div>;
     if (isError) return <div>There has been an ERROR!</div>;
@@ -16,10 +16,10 @@ const App = (): ReactElement => {
     return (
         <div className='app'>
             <header>
-                <SiteNav siteProps={siteProps}/>
+                <SiteNav componentMetadata={componentMetadata}/>
             </header>
             <div className='content'>
-                <SiteRoutes siteProps={siteProps} />
+                <SiteRoutes componentMetadata={componentMetadata} />
             </div>
             <footer>
                 C Elston 2022
