@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-
 import { useParams } from 'react-router';
 
 import { MarkdownPageRender } from './MarkdownPageRender';
