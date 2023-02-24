@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ComponentMetadata } from '../types/Site';
 
