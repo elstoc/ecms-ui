@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-
 import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
 import remarkGfm from 'remark-gfm';
@@ -9,12 +8,10 @@ import rehypeHighlight from 'rehype-highlight';
 import YAML from 'yaml';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-
 import './MarkdownPageRender.scss';
 import './MarkdownPageRenderCode.scss';
 
 export type MarkdownPageRenderProps = {
-    uiPath: string;
     apiPath: string;
     title: string;
     markdown: string;

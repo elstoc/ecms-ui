@@ -22,6 +22,6 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
     }
 
     return (
-        <MarkdownPageRender apiPath={fullPath} uiPath={fullPath} title={title} markdown={mdFile} />
+        <MarkdownPageRender apiPath={fullPath} title={title} markdown={mdFile} />
     );
 };
