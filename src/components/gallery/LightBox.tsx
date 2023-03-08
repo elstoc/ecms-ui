@@ -1,18 +1,20 @@
 import React, { MouseEvent, FC, ReactElement } from 'react';
+import { Helmet } from 'react-helmet';
+
 import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
-
 import { ImageData } from '../../types/Gallery';
 
 import './LightBox.css';
 
 type LightBoxProps = {
+    parentTitle: string;
     currImage: ImageData;
     prevImage: ImageData | undefined;
     nextImage: ImageData | undefined;
 }
 
-export const LightBox: FC<LightBoxProps> = ({ currImage, prevImage, nextImage }): ReactElement => {
+export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage, nextImage }): ReactElement => {
     const navigate = useNavigate();
 
     const goBack = () => {
@@ -40,6 +42,7 @@ export const LightBox: FC<LightBoxProps> = ({ currImage, prevImage, nextImage })
     
     return (
         <div className='LightBox' onClick={handleOuterClick}>
+            <Helmet><title>{parentTitle} - {currImage.fileName}</title></Helmet>
             <div className='close' onClick={goBack}>&times;</div>
             {prevImage && <div className='prev' onClick={goPrevImage}>&#10094;</div>}
             {nextImage && <div className='next' onClick={goNextImage}>&#10095;</div>}

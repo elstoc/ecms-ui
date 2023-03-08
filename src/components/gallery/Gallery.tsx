@@ -1,5 +1,6 @@
 import { useResizeDetector } from 'react-resize-detector';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { useGalleryList } from '../../hooks/galleryQueries';
 import { GalleryContent } from './GalleryContent';
@@ -14,7 +15,7 @@ export type GalleryProps = {
     threshold: number;
 }
 
-export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, batchSize, threshold }): ReactElement => {
+export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
     const { isLoading, isError, data: galleryData } = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
@@ -31,6 +32,7 @@ export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, batchSize, thresh
 
     const galleryElement = ( showGallery &&
         <GalleryContent
+            title={title}
             galleryData={galleryData}
             galleryDivWidth={galleryDivWidth}
             loadMoreImages={loadMoreImages}
@@ -41,6 +43,7 @@ export const Gallery: FC<GalleryProps> = ({ apiPath, marginPx, batchSize, thresh
 
     return (
         <div ref={widthRef} className="galleryContainer">
+            <Helmet><title>{title}</title></Helmet>
             <div className="justifiedGallery">
                 {isError && 'There has been an ERROR'}
                 {isLoading && 'Loading images'}

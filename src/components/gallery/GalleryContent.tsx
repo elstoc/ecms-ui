@@ -8,6 +8,7 @@ import './Gallery.css';
 import { GalleryData } from '../../types/Gallery';
 
 export type GalleryContentProps = {
+    title: string;
     galleryData: GalleryData;
     galleryDivWidth: number;
     loadMoreImages: () => void;
@@ -15,7 +16,7 @@ export type GalleryContentProps = {
     threshold: number;
 }
 
-export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
+export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
     const { imageList, imageCount } = galleryData;
 
@@ -43,6 +44,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ galleryData, galleryDi
         <>
             {lightBoxImageName &&
                 <LightBox
+                    parentTitle={title}
                     currImage={imageList[lightBoxImageIndex]}
                     nextImage={imageList[lightBoxImageIndex + 1]}
                     prevImage={imageList[lightBoxImageIndex - 1]}

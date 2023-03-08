@@ -1,5 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 import { MarkdownPage } from './MarkdownPage';
 import { MarkdownNav } from './MarkdownNav';
@@ -13,11 +14,17 @@ export type MarkdownProps = {
 
 export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): ReactElement => {
     if (!includeNav) {
-        return <MarkdownPage apiPath={apiPath} title={title} />;
+        return (
+            <>
+                <Helmet><title>{title}</title></Helmet>
+                <MarkdownPage apiPath={apiPath} title={title} />
+            </>
+        );
     }
 
     return (
         <div className='markdown-content'>
+            <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav'>
                 <MarkdownNav apiPath={apiPath} title={title} />
             </nav>
