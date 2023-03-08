@@ -22,7 +22,7 @@ const App = (): ReactElement => {
                 <SiteRoutes componentMetadata={componentMetadata} />
             </div>
             <footer>
-                C Elston 2022
+                C Elston 2023
             </footer>
         </div>
     );
