@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { MdNavContents } from '../types/Markdown';
 
 const apiUrl = process.env.API_URL || '';
+const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL || '10000');
 
 const markdownFileQuery = async (path: string): Promise<string> => {
     const strippedPath = path.replace(/\/$/, '');
@@ -12,7 +13,11 @@ const markdownFileQuery = async (path: string): Promise<string> => {
 
 export const useMarkdownFile = (path: string) => {
     const queryName = `markdown/${path}`;
-    return useQuery([queryName], () => markdownFileQuery(path));
+    return useQuery({
+        queryKey: [queryName],
+        queryFn: () => markdownFileQuery(path),
+        refetchInterval
+    });
 };
 
 const markdownNavQuery = async (path: string): Promise<MdNavContents> => {
@@ -22,5 +27,9 @@ const markdownNavQuery = async (path: string): Promise<MdNavContents> => {
 
 export const useMarkdownNav = (path: string) => {
     const queryName = `markdown/${path}`;
-    return useQuery([queryName], () => markdownNavQuery(path));
+    return useQuery({
+        queryKey: [queryName],
+        queryFn: () => markdownNavQuery(path),
+        refetchInterval
+    });
 };
