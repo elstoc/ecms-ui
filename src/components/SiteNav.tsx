@@ -5,6 +5,9 @@ import { ComponentMetadata } from '../types/Site';
 import './SiteNav.css';
 
 export const SiteNav: FC<{ componentMetadata: ComponentMetadata[] }> = ({ componentMetadata }): ReactElement => {
+    if (componentMetadata.length === 1) {
+        return <></>;
+    }
     return (
         <div className='site-nav'>
             {componentMetadata.map((props) =>
