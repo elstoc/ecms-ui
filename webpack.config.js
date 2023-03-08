@@ -3,6 +3,7 @@ const prod = process.env.NODE_ENV === 'production';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const Dotenv = require('dotenv-webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: prod ? 'production' : 'development',
@@ -15,6 +16,10 @@ module.exports = {
   output: {
     publicPath: '/',
     path: __dirname + '/dist/',
+  },
+  optimization: {
+    minimize: prod ? true : false,
+    minimizer: [new TerserPlugin()]
   },
   module: {
     rules: [
