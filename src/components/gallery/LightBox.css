@@ -18,6 +18,18 @@
     object-fit: scale-down;
 }
 
+@keyframes fadeOut {
+   0% {opacity: 1;}
+   100% {opacity: 0;} 
+} 
+
+.fadeOut {
+    animation-name: fadeOut;
+    animation-duration: 2s;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+}
+
 .prev,
 .next {
     display: flex;
