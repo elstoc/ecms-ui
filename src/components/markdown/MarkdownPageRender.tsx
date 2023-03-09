@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+import { Helmet } from 'react-helmet';
 import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
 import remarkGfm from 'remark-gfm';
@@ -27,6 +28,7 @@ export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markd
 
     return (
         <div className='markdown-page'>
+            <Helmet><title>{pageTitle}</title></Helmet>
             {pageTitle && <h1 className='title'>{pageTitle}</h1>}
             <ReactMarkdown
                 remarkPlugins={[
