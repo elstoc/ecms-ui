@@ -1,4 +1,4 @@
-import React, { MouseEvent, FC, ReactElement } from 'react';
+import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { useNavigate } from 'react-router-dom';
@@ -37,13 +37,13 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
 
     const goPrevImage = () => {
         prevImage && navigate(`../${prevImage.fileName}`, { replace: true });
-        restartFadeOut();
     };
 
     const goNextImage = () => {
         nextImage && navigate(`../${nextImage.fileName}`, { replace: true });
-        restartFadeOut();
     };
+
+    useEffect(() => restartFadeOut());
 
     useKeyPress(['Backspace', 'Escape'], goBack);
     useKeyPress(['ArrowLeft'], goPrevImage);
