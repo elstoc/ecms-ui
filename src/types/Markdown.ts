@@ -1,5 +1,6 @@
 export type MdFileMeta = {
-    uiPath: string;
+    apiPath: string;
+    uiPath?: string;
     filePath?: string;
     title?: string;
     weight?: number;
