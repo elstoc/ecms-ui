@@ -30,7 +30,7 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): Re
             {children.map((child) => {
                 return (
                     <React.Fragment key = {child.metadata.apiPath } >
-                        <li><NavLink to={'/' + child.metadata.apiPath} end>{child.metadata.title}</NavLink></li>
+                        <li><NavLink to={child.metadata.apiPath} end>{child.metadata.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse children={child.children} />}
                     </React.Fragment>
                 );
