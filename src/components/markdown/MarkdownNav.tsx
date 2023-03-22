@@ -19,19 +19,19 @@ export const MarkdownNav: FC<MarkdownNavProps> = ({ apiPath, title }): ReactElem
 
     return (
         <>
-            {navContents.children && <MarkdownNavRecurse children={navContents.children} />}
+            {navContents.children && <MarkdownNavRecurse rootApiPath={apiPath} children={navContents.children} />}
         </>
     );
 };
 
-const MarkdownNavRecurse: FC<{ children: MdNavContents[] }> = ({ children }): ReactElement => {
+const MarkdownNavRecurse: FC<{ children: MdNavContents[], rootApiPath: string }> = ({ children, rootApiPath }): ReactElement => {
     return (
         <ol>
             {children.map((child) => {
                 return (
                     <React.Fragment key = {child.metadata.apiPath } >
-                        <li><NavLink to={child.metadata.apiPath} end>{child.metadata.title}</NavLink></li>
-                        {child.children && <MarkdownNavRecurse children={child.children} />}
+                        <li><NavLink to={child.metadata.apiPath.replace(`${rootApiPath}`, '')} end>{child.metadata.title}</NavLink></li>
+                        {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} />}
                     </React.Fragment>
                 );
             })}
