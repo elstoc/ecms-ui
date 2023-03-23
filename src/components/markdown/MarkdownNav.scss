@@ -24,7 +24,10 @@
         text-decoration: none;
     }
 
-    a:visited {
-        color: inherit;
+    a:visited,
+    a:hover,
+    a:active,
+    a:link {
+        color: black;
     }
 }
