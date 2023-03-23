@@ -1,0 +1,21 @@
+.markdown-nav {
+    margin-left: 0;
+    padding-left: 0;
+
+    ol {
+        list-style-type: none;
+        padding-left: 2em;
+    }
+
+    >ol {
+        padding-left: 0;
+    }
+
+    li {
+        margin: 0.3em 0;
+    }
+
+    a:visited {
+        color: inherit;
+    }
+}

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useMarkdownNav } from '../../hooks/markdownQueries';
 import { MdNavContents } from '../../types/Markdown';
 
-import './MarkdownNav.css';
+import './MarkdownNav.scss';
 
 export type MarkdownNavProps = {
     apiPath: string;
