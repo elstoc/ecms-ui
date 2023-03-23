@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { useMarkdownNav } from '../../hooks/markdownQueries';
 import { MdNavContents } from '../../types/Markdown';
 
+import './MarkdownNav.css';
+
 export type MarkdownNavProps = {
     apiPath: string;
     title: string;
@@ -18,9 +20,9 @@ export const MarkdownNav: FC<MarkdownNavProps> = ({ apiPath, title }): ReactElem
     }
 
     return (
-        <>
+        <span className='markdown-nav'>
             {navContents.children && <MarkdownNavRecurse rootApiPath={apiPath} children={navContents.children} />}
-        </>
+        </span>
     );
 };
 
