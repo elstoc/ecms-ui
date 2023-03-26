@@ -1,6 +1,6 @@
 .site-nav {
-    background-color: #aaa;
     flex-basis: 1.5em;
+    border-bottom: 1px solid black;
 
     height: 2em;
     
@@ -8,8 +8,16 @@
     display: flex;
     align-items: center; /*vertical*/
     justify-content: space-around; /*or space-between*/
-}
 
-a.active {
-    font-weight: bolder;
+    a:visited,
+    a:hover,
+    a:active,
+    a:link {
+        color: black;
+        text-decoration: none;
+    }
+
+    a.active {
+        font-weight: bolder;
+    }
 }

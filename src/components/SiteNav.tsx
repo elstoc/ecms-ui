@@ -2,12 +2,9 @@ import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { ComponentMetadata } from '../types/Site';
-import './SiteNav.css';
+import './SiteNav.scss';
 
 export const SiteNav: FC<{ componentMetadata: ComponentMetadata[] }> = ({ componentMetadata }): ReactElement => {
-    if (componentMetadata.length === 1) {
-        return <></>;
-    }
     return (
         <div className='site-nav'>
             {componentMetadata.map((props) =>
