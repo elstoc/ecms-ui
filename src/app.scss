@@ -22,16 +22,18 @@
 
 .header {
     flex: 0 1 auto;
+    min-height: 2em;
 }
 
 .content {
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
     flex: 1 1 auto;
 }
 
-footer {
+.footer {
     flex: 0 1 auto;
-    flex-basis: 1.5em;
-    
+    min-height: 2em;
     display: flex;
     align-items: center; /*vertical*/
     justify-content: space-around; /*or space-between*/

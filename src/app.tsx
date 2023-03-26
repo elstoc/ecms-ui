@@ -15,15 +15,15 @@ const App = (): ReactElement => {
 
     return (
         <div className='app'>
-            <header>
+            <div className='header'>
                 <SiteNav componentMetadata={componentMetadata}/>
-            </header>
+            </div>
             <div className='content'>
                 <SiteRoutes componentMetadata={componentMetadata} />
             </div>
-            <footer>
+            <div className='footer'>
                 C Elston 2023
-            </footer>
+            </div>
         </div>
     );
 };
