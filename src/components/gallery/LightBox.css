@@ -8,7 +8,7 @@
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    background-color: rgba(0,0,0, 0.8);
+    background-color: rgba(40,40,40,0.9);
     overflow-x: hidden; /* Disable horizontal scroll */
 }
 
@@ -44,7 +44,6 @@
     font-weight: bold;
     font-size: 20px;
     text-decoration: none;
-    transition: 0.6s ease;
     border-radius: 0 3px 3px 0;
     user-select: none;
 }
@@ -59,11 +58,6 @@
     border-radius: 3px 0 0 3px;
 }
 
-.prev:hover,
-.next:hover {
-    background-color: rgba(40, 40, 40, 0.5);
-}
-
 .close {
     color: white;
     position: absolute;
@@ -75,9 +69,10 @@
     text-decoration: none;
 }
 
-.close:hover,
-.close:focus {
-    color: #999;
+.prev:hover,
+.next:hover,
+.close:hover {
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
@@ -91,7 +86,7 @@
     width: 100%;
     height: auto;
     color: white;
-    background-color: rgba(40, 40, 40, 0.5);
+    background-color: rgba(55,55,55,0.5);
 }
 
 .preload {
