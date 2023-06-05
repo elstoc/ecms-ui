@@ -13,8 +13,8 @@
 }
 
 .LightBox img {
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 98%;
+    max-width: 98%;
     object-fit: scale-down;
 }
 
@@ -51,6 +51,7 @@
 .next {
     right: 0;
     border-radius: 3px 0 0 3px;
+    text-align: right;
 }
 
 .prev {
@@ -61,9 +62,9 @@
 .close {
     color: white;
     position: absolute;
-    top: 5px;
-    right: 5px;
-    padding: 10px;
+    top: 0;
+    right: 0;
+    padding: 0 10px;
     font-size: 40px;
     font-weight: bold;
     text-decoration: none;
