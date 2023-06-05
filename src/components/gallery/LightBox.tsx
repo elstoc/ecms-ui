@@ -46,10 +46,13 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
     };
 
     useEffect(() => {
-        const requestFs = async () => document.body.requestFullscreen();
-        requestFs().catch(() => null);
         restartFadeOut();
     });
+
+    useEffect(() => {
+        const requestFs = async () => document.body.requestFullscreen();
+        requestFs().catch(() => null);
+    }, []);
 
     useKeyPress(['Backspace', 'Escape'], goBack);
     useKeyPress(['ArrowLeft'], goPrevImage);
