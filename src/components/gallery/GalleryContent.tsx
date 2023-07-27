@@ -5,36 +5,36 @@ import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
 import './Gallery.css';
-import { GalleryData } from '../../types/Gallery';
+import { GalleryImages } from '../../types/Gallery';
 
 export type GalleryContentProps = {
     title: string;
-    galleryData: GalleryData;
+    galleryImages: GalleryImages;
     galleryDivWidth: number;
     loadMoreImages: () => void;
     marginPx: number;
     threshold: number;
 }
 
-export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryData, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
+export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryImages, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
-    const { imageList, imageCount } = galleryData;
+    const { images, imageCount } = galleryImages;
 
-    const lightBoxImageIndex = imageList.findIndex((image) => image.fileName === lightBoxImageName);
+    const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
 
     const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     useEffect(() => {
-        if (lightBoxImageIndex >= (imageList.length - 2) && imageList.length < imageCount) {
+        if (lightBoxImageIndex >= (images.length - 2) && images.length < imageCount) {
             loadMoreImages();
         }
-    }, [imageList, imageCount, lightBoxImageIndex, loadMoreImages]);
+    }, [images, imageCount, lightBoxImageIndex, loadMoreImages]);
 
     const resizeRatios = useMemo(() => {
-        const thumbWidths = imageList.map((image) => image.thumbDimensions.width);
+        const thumbWidths = images.map((image) => image.thumbDimensions.width);
         return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
-    }, [imageList, galleryDivWidth, marginPx]);
+    }, [images, galleryDivWidth, marginPx]);
 
     if (lightBoxImageName && lightBoxImageIndex < 0) {
         return <Navigate to='..' replace={true} />;
@@ -45,12 +45,12 @@ export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryData, ga
             {lightBoxImageName &&
                 <LightBox
                     parentTitle={title}
-                    currImage={imageList[lightBoxImageIndex]}
-                    nextImage={imageList[lightBoxImageIndex + 1]}
-                    prevImage={imageList[lightBoxImageIndex - 1]}
+                    currImage={images[lightBoxImageIndex]}
+                    nextImage={images[lightBoxImageIndex + 1]}
+                    prevImage={images[lightBoxImageIndex - 1]}
                 />
             }
-            {imageList.map((image, index) =>
+            {images.map((image, index) =>
                 <GalleryThumb
                     key={image.fileName}
                     fileName={image.fileName}
@@ -60,7 +60,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryData, ga
                     heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
                     marginPx={marginPx}
                     ref={
-                        index === imageList.length - threshold
+                        index === images.length - threshold
                             ? refTriggerLoadWhenVisible
                             : null
                     }

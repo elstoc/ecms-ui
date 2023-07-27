@@ -33,7 +33,7 @@ export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize,
     const galleryElement = ( showGallery &&
         <GalleryContent
             title={title}
-            galleryData={galleryData}
+            galleryImages={galleryData}
             galleryDivWidth={galleryDivWidth}
             loadMoreImages={loadMoreImages}
             marginPx={marginPx}

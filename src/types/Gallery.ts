@@ -16,7 +16,7 @@ export type ImageData = {
     fhdSrcUrl: string;
 }
 
-export type GalleryData = {
+export type GalleryImages = {
     imageCount: number;
-    imageList: ImageData[];
+    images: ImageData[];
 }
