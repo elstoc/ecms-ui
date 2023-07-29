@@ -1,7 +1,7 @@
 {
-  "name": "home-api",
+  "name": "ecms-api",
   "version": "1.0.0",
-  "description": "UI for home website",
+  "description": "UI for ecms",
   "main": "dist/index.ts",
   "scripts": {
     "dev": "webpack serve --port 3000",
