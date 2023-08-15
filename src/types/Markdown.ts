@@ -1,10 +1,10 @@
-export type MdFileMeta = {
-    apiPath: string;
-    title: string;
-    weight?: number;
-}
+import { AdditionalData } from './Site';
 
 export type MdNavContents = {
-    metadata: MdFileMeta;
+    apiPath?: string;
+    title?: string;
+    uiPath?: string;
+    weight?: number;
+    additionalData?: AdditionalData;
     children?: MdNavContents[];
 }

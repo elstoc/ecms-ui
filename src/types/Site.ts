@@ -1,3 +1,7 @@
+export type AdditionalData = {
+    [key: string]: boolean | number | string | undefined; 
+};
+
 export type ComponentMetadata = {
     apiPath: string;
     uiPath: string;
@@ -5,5 +9,5 @@ export type ComponentMetadata = {
     type: string;
     weight?: number;
     restrict?: string;
-    [key: string]: boolean | number | string | undefined;
+    additionalData: AdditionalData;
 }

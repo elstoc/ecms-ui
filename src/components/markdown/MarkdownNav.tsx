@@ -30,10 +30,13 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[], rootApiPath: string }>
     return (
         <ol>
             {children.map((child) => {
-                const linkPath = child.metadata.apiPath.replace(`${rootApiPath}/`, './').replace(rootApiPath, '');
+                if (!child.apiPath) {
+                    throw new Error('apiPath not specified');
+                }
+                const linkPath = child.apiPath.replace(`${rootApiPath}/`, './').replace(rootApiPath, '');
                 return (
-                    <React.Fragment key = {child.metadata.apiPath } >
-                        <li><NavLink to={linkPath} end>{child.metadata.title}</NavLink></li>
+                    <React.Fragment key = {child.apiPath } >
+                        <li><NavLink to={linkPath} end>{child?.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} />}
                     </React.Fragment>
                 );
