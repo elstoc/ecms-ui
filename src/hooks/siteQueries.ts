@@ -1,21 +1,14 @@
-import axios from 'axios';
+import { apiGet } from '../utils/apiServices';
 import { useQuery } from '@tanstack/react-query';
 
 import { ComponentMetadata } from '../types/Site';
 
-const apiUrl = process.env.API_URL || '';
-const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL || '10000');
-
-const siteNavQuery = async (): Promise<ComponentMetadata[]> => {
-    const { data } = await axios.get<ComponentMetadata[]>(`${apiUrl}/site/nav`);
-    return data;
-};
+const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
 export const useSiteNav = () => {
-    const queryName = 'siteNav';
     return useQuery({
-        queryKey: [queryName],
-        queryFn: () => siteNavQuery(),
+        queryKey: ['siteNav'],
+        queryFn: () => apiGet<ComponentMetadata[]>('site/nav'),
         refetchInterval
     });
 };
