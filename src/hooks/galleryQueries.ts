@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { GalleryImages } from '../types/Gallery';
-import { apiGet } from '../utils/apiServices';
+import { apiClient } from '../utils/apiClient';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
@@ -12,7 +12,7 @@ export const useGalleryList = (path: string, limit = 0) => {
     return useQuery({
         queryKey: [queryName, limit],
         keepPreviousData: true,
-        queryFn: () => apiGet<GalleryImages>(urlPath),
+        queryFn: async () => (await apiClient.get<GalleryImages>(urlPath)).data,
         refetchInterval
     });
 };

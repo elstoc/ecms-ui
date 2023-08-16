@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { MdNavContents } from '../types/Markdown';
-import { apiGet } from '../utils/apiServices';
+import { apiClient } from '../utils/apiClient';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
@@ -10,7 +10,7 @@ export const useMarkdownFile = (path: string) => {
 
     return useQuery({
         queryKey: [queryName],
-        queryFn: () => apiGet<string>(urlPath),
+        queryFn: async () => (await apiClient.get<string>(urlPath)).data,
         refetchInterval
     });
 };
@@ -21,7 +21,7 @@ export const useMarkdownNav = (path: string) => {
 
     return useQuery({
         queryKey: [queryName],
-        queryFn: () => apiGet<MdNavContents>(urlPath),
+        queryFn: async () => (await apiClient.get<MdNavContents>(urlPath)).data,
         refetchInterval
     });
 };
