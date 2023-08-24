@@ -17,10 +17,13 @@ const Welcome: FC<{ user: string }> = ({ user }): ReactElement => {
         queryClient.invalidateQueries(['auth/get-user-info']);
     }, [queryClient]);
 
+    if (!user) {
+        return <></>;
+    }
     if (user === 'guest') {
         return (
             <>
-                <div>You are currently navigating this site as a guest</div>
+                <div>You are currently viewing this site as a guest</div>
                 <NavLink to="/auth/login"><button>Log In</button></NavLink>
             </>
         );
@@ -36,14 +39,13 @@ const Welcome: FC<{ user: string }> = ({ user }): ReactElement => {
 export const Auth: FC = (): ReactElement => {
     const { isLoading, isError, data: userData } = useUserInfo();
 
-    // TODO: better handle loading state
     return (
         <div className='auth-container'>
             <Helmet><title>User ({userData?.id ?? ''})</title></Helmet>
             {isError && 'There has been an ERROR'}
-            {isLoading && 'Loading user'}
+            {isLoading && 'Loading data'}
             <Routes>
-                <Route path="user" element={<Welcome user={userData?.id ?? 'guest'} />} />
+                <Route path="user" element={<Welcome user={userData?.id ?? ''} />} />
                 <Route path="login" element={<Login />} />
             </Routes>
         </div>
