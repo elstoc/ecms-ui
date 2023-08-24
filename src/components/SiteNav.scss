@@ -1,10 +1,11 @@
 .site-nav {
     height: 100%;
+    width: 50%;
     
     /*center align of links*/
     display: flex;
     align-items: center; /*vertical*/
-    justify-content: space-around; /*or space-between*/
+    justify-content: space-between; /*or space-between*/
 
     a:visited,
     a:hover,
@@ -16,5 +17,19 @@
 
     a.active {
         font-weight: bolder;
+    }
+}
+
+.nav-container {
+    height: 100%;
+    
+    /*center align of links*/
+    display: flex;
+    align-items: center; /*vertical*/
+    justify-content: space-between; /*or space-between*/
+
+    svg {
+        height: 24px;
+        width: 24px;
     }
 }
