@@ -3,6 +3,7 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 import { login } from '../../utils/auth';
+import { Helmet } from 'react-helmet';
 
 export const Login: FC = (): ReactElement => {
     const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const Login: FC = (): ReactElement => {
 
     return(
         <>
+            <Helmet><title>Login</title></Helmet>
             <div>
                 UserId: <input
                     id='userId'

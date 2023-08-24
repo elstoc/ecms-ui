@@ -7,6 +7,7 @@ import { useUserInfo } from '../../hooks/useUserInfo';
 import { logout } from '../../utils/auth';
 import { Login } from './Login';
 import './Auth.css';
+import { Helmet } from 'react-helmet';
 
 const Welcome: FC<{ user: string }> = ({ user }): ReactElement => {
     const queryClient = useQueryClient();
@@ -38,6 +39,7 @@ export const Auth: FC = (): ReactElement => {
     // TODO: better handle loading state
     return (
         <div className='auth-container'>
+            <Helmet><title>User ({userData?.id ?? ''})</title></Helmet>
             {isError && 'There has been an ERROR'}
             {isLoading && 'Loading user'}
             <Routes>
