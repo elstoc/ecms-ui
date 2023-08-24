@@ -13,9 +13,9 @@ const setAccessToken = (token: string): void => {
 
 export const login = async (userId: string, password: string): Promise<void> => {
     const response = await api.post<{ id: string, accessToken: string, accessTokenExpiry: number; }>('auth/login', { id: userId, password });
-    const { accessToken, id } = response.data;
+    const { accessToken } = response.data;
     setAccessToken(accessToken);
-    console.log(`logged in as ${id}`);
+    console.log('logged in');
 };
 
 export const logout = async (): Promise<void> => {
