@@ -22,7 +22,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryImages, 
 
     const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
 
-    const refTriggerLoadWhenVisible = createRef<HTMLImageElement>();
+    const refTriggerLoadWhenVisible = createRef<HTMLAnchorElement>();
     useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     useEffect(() => {
