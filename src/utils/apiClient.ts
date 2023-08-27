@@ -1,5 +1,7 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { getAccessToken, refreshAccessToken } from '../utils/auth';
+
+type ResolveFunction = (value: unknown) => void;
 
 const axiosDefaults = {
     baseURL: process.env.API_URL ?? '',
@@ -7,30 +9,51 @@ const axiosDefaults = {
     withCredentials: true
 };
 
+const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
+    const token = getAccessToken();
+    if (token) {
+        config.headers['authorization'] = `Bearer ${token}`;
+    }
+    return config;
+};
+
 export const api = axios.create(axiosDefaults);
 export const apiSecure = axios.create(axiosDefaults);
+export const apiSecureRetry = axios.create(axiosDefaults);
 
-apiSecure.interceptors.request.use(
-    async (config) => {
-        const token = getAccessToken();
-        if (token) {
-            config.headers['authorization'] = `Bearer ${token}`;
-        }
-        return config;
-    },
-    (error) => Promise.reject(error)
-);
+apiSecure.interceptors.request.use(injectAccessToken);
+apiSecureRetry.interceptors.request.use(injectAccessToken);
+
+let fetchingNewToken = false;
+let retryQueue: ((token: string) => void)[] = [];
+
+const addRequestToRetryQueue = (resolve: ResolveFunction, config: AxiosRequestConfig<unknown>): void => {
+    retryQueue.push((token) => {
+        config.headers.authorization = `Bearer ${token}`;
+        resolve(apiSecureRetry(config));
+    });
+};
+
+const retryFromQueue = (token: string) => {
+    fetchingNewToken = false;
+    retryQueue.forEach((callback) => callback(token));
+    retryQueue = [];
+};
 
 apiSecure.interceptors.response.use(
     (response) => response,
-    async (error) => {
-        const originalRequestConfig = error.config;
-        if (error.response.status === 403 && !originalRequestConfig._retry) {
-            originalRequestConfig._retry = true;
-            const accessToken = await refreshAccessToken();
-            originalRequestConfig.config.headers['authorization'] = `Bearer ${accessToken}`;
-            return apiSecure(originalRequestConfig);
-        }
-        return Promise.reject(error);
+    (error) => {
+        return new Promise((resolve, reject) => {
+            if (error.response.status === 401) {
+                addRequestToRetryQueue(resolve, error.config);
+                if (fetchingNewToken)
+                    return;
+                fetchingNewToken = true;
+                refreshAccessToken()
+                    .then((newToken) => retryFromQueue(newToken));
+            } else {
+                reject(error);
+            }
+        });
     }
 );
