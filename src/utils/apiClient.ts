@@ -9,6 +9,10 @@ const axiosDefaults = {
     withCredentials: true
 };
 
+export const api = axios.create(axiosDefaults);
+export const apiSecure = axios.create(axiosDefaults);
+export const apiSecureRetry = axios.create(axiosDefaults);
+
 const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
     const token = getAccessToken();
     if (token) {
@@ -17,14 +21,9 @@ const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
     return config;
 };
 
-export const api = axios.create(axiosDefaults);
-export const apiSecure = axios.create(axiosDefaults);
-export const apiSecureRetry = axios.create(axiosDefaults);
-
 apiSecure.interceptors.request.use(injectAccessToken);
 apiSecureRetry.interceptors.request.use(injectAccessToken);
 
-let fetchingNewToken = false;
 let retryQueue: ((token: string) => void)[] = [];
 
 const addRequestToRetryQueue = (resolve: ResolveFunction, config: AxiosRequestConfig<unknown>): void => {
@@ -33,6 +32,8 @@ const addRequestToRetryQueue = (resolve: ResolveFunction, config: AxiosRequestCo
         resolve(apiSecureRetry(config));
     });
 };
+
+let fetchingNewToken = false;
 
 const retryFromQueue = (token: string) => {
     fetchingNewToken = false;
