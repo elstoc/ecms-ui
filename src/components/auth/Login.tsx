@@ -17,7 +17,7 @@ export const Login: FC = (): ReactElement => {
             await login(userId, password);
             setLoginFailed(false);
             setUserId('');
-            queryClient.invalidateQueries(['auth/get-user-info']);
+            queryClient.invalidateQueries();
             navigate('/auth/user', { replace: true });
         } catch {
             setLoginFailed(true);

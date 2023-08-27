@@ -14,7 +14,7 @@ const Welcome: FC<{ user: string }> = ({ user }): ReactElement => {
 
     const handleLogout = useCallback(async () => {
         await logout();
-        queryClient.invalidateQueries(['auth/get-user-info']);
+        queryClient.invalidateQueries();
     }, [queryClient]);
 
     if (!user) {
