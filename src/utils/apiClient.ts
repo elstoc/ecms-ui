@@ -45,7 +45,7 @@ apiSecure.interceptors.response.use(
     (response) => response,
     (error) => {
         return new Promise((resolve, reject) => {
-            if (error.response.status === 401) {
+            if (error.response?.status === 401) {
                 addRequestToRetryQueue(resolve, error.config);
                 if (fetchingNewToken)
                     return;
