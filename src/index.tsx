@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import App from './app';
+import { App } from './app';
 
 const container = document.getElementById('app-root')!;
 const root = createRoot(container);

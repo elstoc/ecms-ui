@@ -1,6 +1,8 @@
 .site-nav {
     height: 100%;
     width: 50%;
+    border: 0;
+    padding: 0;
     
     /*center align of links*/
     display: flex;
@@ -22,6 +24,8 @@
 
 .nav-container {
     height: 100%;
+    border: 0;
+    padding: 0;
     
     /*center align of links*/
     display: flex;

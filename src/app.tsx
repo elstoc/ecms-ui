@@ -2,12 +2,12 @@ import React, { ReactElement } from 'react';
 
 import './app.scss';
 import 'modern-normalize';
-import { SiteNav } from './components/site/SiteNav';
 import { SiteRoutes } from './components/site/SiteRoutes';
 import { useSiteNav } from './hooks/siteQueries';
+import { Footer } from './components/site/Footer';
+import { Header } from './components/site/Header';
 
-const App = (): ReactElement => {
-
+export const App = (): ReactElement => {
     const { isLoading, isError, data: componentMetadata } = useSiteNav();
 
     if (isLoading) return <div>Loading data...</div>;
@@ -15,17 +15,15 @@ const App = (): ReactElement => {
 
     return (
         <div className='app'>
-            <div className='header'>
-                <SiteNav componentMetadata={componentMetadata}/>
+            <div className='app-header'>
+                <Header componentMetadata={componentMetadata}/>
             </div>
-            <div className='content'>
+            <div className='app-content'>
                 <SiteRoutes componentMetadata={componentMetadata} />
             </div>
-            <div className='footer'>
-                C Elston 2023
+            <div className='app-footer'>
+                <Footer />
             </div>
         </div>
     );
 };
-
-export default App;

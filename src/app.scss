@@ -15,38 +15,20 @@
 .app {
     display: flex;
     flex-direction: column;
-    border: 0;
-    padding: 0;
-    margin: 0;
-    height: 100%;
+}
+
+.app-header,
+.app-footer {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 2.5rem;
     width: 100%;
 }
 
-.header {
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    min-height: 2em;
-
-    border-bottom: 1px solid lightgray;
-}
-
-.content {
+.app-content {
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
-}
-
-.footer {
-    display: flex;
-    flex-grow: 0;
-    flex-shrink: 1;
-    flex-basis: auto;
-    min-height: 2em;
-    align-items: center; /*vertical*/
-    justify-content: space-around; /*or space-between*/
-
-    border-top: 1px solid lightgray;
 }
 
 @for $i from 5 through 9 {
