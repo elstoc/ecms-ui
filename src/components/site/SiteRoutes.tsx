@@ -1,10 +1,10 @@
 import React, { FC, ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { ComponentMetadata } from '../types/Site';
+import { ComponentMetadata } from '../../types/Site';
 
-import { Gallery } from './gallery/Gallery';
-import { Markdown } from './markdown/Markdown';
-import { Auth } from './auth/Auth';
+import { Gallery } from '../gallery/Gallery';
+import { Markdown } from '../markdown/Markdown';
+import { Auth } from '../auth/Auth';
 
 export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ componentMetadata }): ReactElement => {
     const siteRoutes = componentMetadata.map((component) => {

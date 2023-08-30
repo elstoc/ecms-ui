@@ -2,8 +2,8 @@ import React, { ReactElement } from 'react';
 
 import './app.scss';
 import 'modern-normalize';
-import { SiteNav } from './components/SiteNav';
-import { SiteRoutes } from './components/SiteRoutes';
+import { SiteNav } from './components/site/SiteNav';
+import { SiteRoutes } from './components/site/SiteRoutes';
 import { useSiteNav } from './hooks/siteQueries';
 
 const App = (): ReactElement => {
