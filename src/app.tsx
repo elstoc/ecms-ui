@@ -15,13 +15,13 @@ export const App = (): ReactElement => {
 
     return (
         <div className='app'>
-            <div className='app-header'>
+            <div className='header-container'>
                 <Header componentMetadata={componentMetadata}/>
             </div>
-            <div className='app-content'>
+            <div className='component-container'>
                 <SiteRoutes componentMetadata={componentMetadata} />
             </div>
-            <div className='app-footer'>
+            <div className='footer-container'>
                 <Footer />
             </div>
         </div>

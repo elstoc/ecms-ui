@@ -23,7 +23,7 @@ export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): Rea
     }
 
     return (
-        <div className='markdown-content'>
+        <div className='markdown'>
             <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav'>
                 <MarkdownNav apiPath={apiPath} title={title} />

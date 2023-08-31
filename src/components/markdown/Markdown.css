@@ -1,4 +1,4 @@
-.markdown-content {
+.markdown {
     display: flex;
     flex-direction: row;
     justify-content: left;
@@ -10,6 +10,6 @@
     font-family: sans-serif;
 }
 
-.markdown-content .markdown-page {
+.markdown-page {
     width: 75%;
 }

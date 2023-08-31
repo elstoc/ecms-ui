@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { App } from './app';
 
-const container = document.getElementById('app-root')!;
+const container = document.getElementById('app-container')!;
 const root = createRoot(container);
 const queryClient = new QueryClient();
 

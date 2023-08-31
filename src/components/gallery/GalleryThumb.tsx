@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { GalleryImage } from './GalleryImage';
 
-import './GalleryThumb.css';
+import './GalleryThumb.scss';
 
 type GalleryThumbProps = {
     fileName: string;
@@ -25,7 +25,7 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
         <Link
             to={`./${fileName}`}
             replace={true}
-            className='thumbContainer'
+            className='gallery-thumb'
             style={style}
             ref={ref}
         >

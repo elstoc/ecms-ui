@@ -1,19 +1,7 @@
-.galleryContainer{
-    display: flex;
-    justify-content: center;
+.gallery {
     background-color:#909090;
-    flex: 1;
     width: 100%;
     min-height: 100%;
     padding: 1em;
     font-family: sans-serif;
-}
-
-.justifiedGallery {
-    display: flex;
-    flex-flow: row wrap;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    border: 0;
-    padding: 0;
 }

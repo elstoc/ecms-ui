@@ -4,8 +4,8 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
-import './Gallery.css';
 import { GalleryImages } from '../../types/Gallery';
+import './GalleryContent.css';
 
 export type GalleryContentProps = {
     title: string;
@@ -41,7 +41,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryImages, 
     }
 
     return (
-        <>
+        <div className="gallery-content">
             {lightBoxImageName &&
                 <LightBox
                     parentTitle={title}
@@ -66,7 +66,7 @@ export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryImages, 
                     }
                 />
             )}
-        </>
+        </div>
     );
 };
 

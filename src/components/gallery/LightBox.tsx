@@ -6,7 +6,7 @@ import { useKeyPress } from '../../hooks/useKeyPress';
 import { ImageData } from '../../types/Gallery';
 import { GalleryImage } from './GalleryImage';
 
-import './LightBox.css';
+import './LightBox.scss';
 
 type LightBoxProps = {
     parentTitle: string;
@@ -31,10 +31,10 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
     };
 
     const restartFadeOut = () => {
-        const elements = document.querySelectorAll<HTMLElement>('.fadeOut');
+        const elements = document.querySelectorAll<HTMLElement>('.fadeout');
         elements.forEach((element) => {
-            element.classList.remove('fadeOut');
-            setTimeout(() => { element.classList.add('fadeOut'); }, 10);
+            element.classList.remove('fadeout');
+            setTimeout(() => { element.classList.add('fadeout'); }, 10);
         });
     };
 
@@ -61,13 +61,13 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
     useKeyPress(['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End'], null);
     
     return (
-        <div className='LightBox' onClick={handleOuterClick} onMouseMove={restartFadeOut}>
+        <div className='lightbox' onClick={handleOuterClick} onMouseMove={restartFadeOut}>
             <Helmet><title>{parentTitle} - {currImage.fileName}</title></Helmet>
-            <div className='close fadeOut' onClick={goBack}>&times;</div>
-            {prevImage && <div className='prev fadeOut' onClick={goPrevImage}>&#10094;</div>}
-            {nextImage && <div className='next fadeOut' onClick={goNextImage}>&#10095;</div>}
+            <div className='close fadeout' onClick={goBack}>&times;</div>
+            {prevImage && <div className='prev fadeout' onClick={goPrevImage}>&#10094;</div>}
+            {nextImage && <div className='next fadeout' onClick={goNextImage}>&#10095;</div>}
             <GalleryImage url={currImage.fhdSrcUrl} alt={currImage.fileName} />
-            <div className='image-info fadeOut'>{currImage.description}</div>
+            <div className='image-info fadeout'>{currImage.description}</div>
 
             <div className='preload'>
                 {prevImage && <GalleryImage url={prevImage.fhdSrcUrl} alt='preload' />}

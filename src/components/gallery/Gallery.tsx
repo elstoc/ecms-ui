@@ -17,23 +17,23 @@ export type GalleryProps = {
 
 export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
-    const { isLoading, isError, data: galleryData } = useGalleryList(apiPath, maxImagesToLoad);
+    const { isLoading, isError, data: galleryImages } = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => {
         setMaxImagesToLoad((prevMaxImages) =>
-            prevMaxImages < galleryData!.imageCount
+            prevMaxImages < galleryImages!.imageCount
                 ? prevMaxImages + batchSize
                 : prevMaxImages
         );
-    }, [galleryData, batchSize]);
+    }, [galleryImages, batchSize]);
 
-    const showGallery = (galleryData && galleryDivWidth);
+    const showGallery = (galleryImages && galleryDivWidth);
 
-    const galleryElement = ( showGallery &&
+    const galleryContent = ( showGallery &&
         <GalleryContent
             title={title}
-            galleryImages={galleryData}
+            galleryImages={galleryImages}
             galleryDivWidth={galleryDivWidth}
             loadMoreImages={loadMoreImages}
             marginPx={marginPx}
@@ -42,16 +42,14 @@ export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize,
     );
 
     return (
-        <div ref={widthRef} className="galleryContainer">
+        <div ref={widthRef} className="gallery">
             <Helmet><title>{title}</title></Helmet>
-            <div className="justifiedGallery">
-                {isError && 'There has been an ERROR'}
-                {isLoading && 'Loading images'}
-                <Routes>
-                    <Route path=":lightBoxImageName" element={galleryElement ?? ''} />
-                    <Route path="" element={galleryElement ?? ''} />
-                </Routes>
-            </div>
+            {isError && 'There has been an ERROR'}
+            {isLoading && 'Loading images'}
+            <Routes>
+                <Route path=":lightBoxImageName" element={galleryContent ?? ''} />
+                <Route path="" element={galleryContent ?? ''} />
+            </Routes>
         </div>
     );
 };
