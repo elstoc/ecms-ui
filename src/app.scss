@@ -33,15 +33,15 @@
     flex-basis: auto;
 }
 
-@for $i from 5 through 9 {
-    @media screen and (min-width: #{$i * 150}px) {
+@for $i from 8 through 16 {
+    @media screen and (min-width: #{$i * 75}px) {
         .app {
-            width: #{$i * 150 - 30}px;
+            width: #{$i * 75 - 20}px;
         }
     }
 }
 
-@for $i from 10 through 13 {
+@for $i from 9 through 13 {
     @media screen and (min-width: #{$i * 150}px) {
         .app {
             width: #{$i * 150 - 50}px;

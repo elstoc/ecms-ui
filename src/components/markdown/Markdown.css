@@ -1,8 +1,8 @@
 .markdown {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    align-items: left;
+    justify-content: space-between;
+    align-items: top;
     min-height: 100%;
 }
 
@@ -14,14 +14,14 @@
 }
 
 .markdown-page-container {
-    flex-grow: 1;
+    flex-grow: 0;
     flex-shrink: 1;
-    flex-basis: 900px;
+    flex-basis: 1100px;
     background-color: white;
 }
 
 .markdown-page-right {
     flex-grow: 1;
-    flex-shrink: 1;
+    flex-shrink: 5;
     flex-basis: 50px;
 }
