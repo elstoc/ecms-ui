@@ -1,15 +1,27 @@
 .markdown {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: space-around;
+    align-items: left;
     min-height: 100%;
 }
 
-.markdown-nav {
-    width: 25%;
+.markdown-nav-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 200px;
     font-family: sans-serif;
 }
 
-.markdown-page {
-    width: 75%;
+.markdown-page-container {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 900px;
+    background-color: white;
+}
+
+.markdown-page-right {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 50px;
 }

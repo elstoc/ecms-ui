@@ -8,7 +8,7 @@
     overflow-y: auto;
     scrollbar-gutter: stable both-edges;
 
-    background-color: rgb(242, 240, 240);
+    background-color: #EEEEEE;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -26,6 +26,7 @@
 }
 
 .component-container {
+    margin-top: 10px;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: auto;
@@ -39,7 +40,7 @@
     }
 }
 
-@for $i from 10 through 25 {
+@for $i from 10 through 13 {
     @media screen and (min-width: #{$i * 150}px) {
         .app {
             width: #{$i * 150 - 50}px;

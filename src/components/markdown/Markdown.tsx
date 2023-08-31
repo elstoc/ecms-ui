@@ -13,24 +13,24 @@ export type MarkdownProps = {
 }
 
 export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): ReactElement => {
-    if (!includeNav) {
-        return (
-            <>
-                <Helmet><title>{title}</title></Helmet>
-                <MarkdownPage apiPath={apiPath} title={title} />
-            </>
-        );
-    }
+    const navElement = includeNav
+        ? <MarkdownNav apiPath={apiPath} title={title} />
+        : '';
 
     return (
         <div className='markdown'>
             <Helmet><title>{title}</title></Helmet>
-            <nav className='markdown-nav'>
-                <MarkdownNav apiPath={apiPath} title={title} />
+            <nav className='markdown-nav-container'>
+                {navElement}
             </nav>
-            <Routes>
-                <Route path="*" element={<MarkdownPage apiPath={apiPath} title={title} />} />
-            </Routes>
+            <div className='markdown-page-container'>
+                <Routes>
+                    <Route path="*" element={<MarkdownPage apiPath={apiPath} title={title} />} />
+                </Routes>
+            </div>
+            <div className='markdown-page-right'>
+
+            </div>
         </div>
     );
 };
