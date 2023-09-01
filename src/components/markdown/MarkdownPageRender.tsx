@@ -27,7 +27,7 @@ export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markd
     const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
 
     return (
-        <div className='markdown-page'>
+        <div className='markdown-page-render'>
             <Helmet><title>{pageTitle}</title></Helmet>
             {pageTitle && <h1 className='title'>{pageTitle}</h1>}
             <ReactMarkdown
