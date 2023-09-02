@@ -1,0 +1,18 @@
+@import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
+
+.markdown-page-edit{
+    position: absolute;
+    min-width: 100%;
+    min-height: 100%;
+
+    >div {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    div.cm-line {
+        font-family: 'hack', Courier, monospace;
+        font-size: 0.9em;
+        line-height: 1.5;
+    }
+}
