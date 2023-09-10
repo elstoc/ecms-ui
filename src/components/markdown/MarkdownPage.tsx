@@ -3,9 +3,9 @@ import { useParams } from 'react-router';
 
 import { MarkdownPageRender } from './MarkdownPageRender';
 import { MarkdownPageEdit } from './MarkdownPageEdit';
+import { MarkdownPageToolbox } from './MarkdownPageToolbox';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownPage.scss';
-import { Icon } from '../site/Icon';
 import { useSearchParams } from 'react-router-dom';
 export type MarkdownPageProps = {
     apiPath: string;
@@ -43,8 +43,8 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
             {mode === 'edit' && (
                 <MarkdownPageEdit markdown={mdFile} />
             )}
-            <div className='markdown-page-toolbox'>
-                <div onClick={showSource}><Icon name='showSource' /></div>
+            <div className='markdown-page-toolbox-container'>
+                <MarkdownPageToolbox showSource={showSource} />
             </div>
         </div>
     );

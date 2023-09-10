@@ -9,8 +9,8 @@ import rehypeHighlight from 'rehype-highlight';
 import YAML from 'yaml';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-import './MarkdownPageRender.scss';
 import './MarkdownPageRenderCode.scss';
+import './MarkdownPageRender.scss';
 
 export type MarkdownPageRenderProps = {
     apiPath: string;
