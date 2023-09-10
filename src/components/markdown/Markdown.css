@@ -1,20 +1,16 @@
 .markdown {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: left;
     min-height: 100%;
 }
 
 .markdown-nav-container {
-    min-width: 200px;
+    width: 25%;
     font-family: sans-serif;
 }
 
 .markdown-page-container {
     width: 65%;
     background-color: white;
-}
-
-.markdown-page-right {
-    min-width: 50px;
 }
