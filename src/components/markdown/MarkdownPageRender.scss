@@ -1,3 +1,5 @@
+@import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
+
 .markdown-page-render {
     padding: 2em 3em;
     min-height: 100%;
@@ -40,7 +42,7 @@
     }
 
     blockquote {
-        margin-left: 2em;
+        margin-left: 1.5em;
     }
 
     p {
@@ -56,11 +58,16 @@
         margin-top: 0.5em;
     }
 
+    dd {
+        margin-left: 1.5em;
+    }
+
     dd p:first-child {
         margin-top: 0;
     }
 
-    pre code {
+    code {
         font-size: 0.9em;
+        font-family: 'hack', Courier, monospace;
     }
 }
