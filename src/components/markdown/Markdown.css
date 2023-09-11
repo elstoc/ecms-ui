@@ -3,14 +3,33 @@
     flex-direction: row;
     justify-content: left;
     min-height: 100%;
+    container-type: inline-size;
+    container-name: markdown;
 }
 
 .markdown-nav-container {
-    width: 25%;
     font-family: sans-serif;
+    margin-right: 1em;
 }
 
 .markdown-page-container {
-    width: 65%;
     background-color: white;
+}
+
+@container markdown (min-width: 600px) {
+    .markdown-nav-container {
+        width: 30%;
+    }
+    .markdown-page-container {
+        width: 60%;
+    }
+}
+
+@container markdown (min-width: 1650px) {
+    .markdown-nav-container {
+        width: 450px;
+    }
+    .markdown-page-container {
+        width: 1100px;
+    }
 }

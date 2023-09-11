@@ -1,17 +1,19 @@
 .markdown-page-render {
-    padding: 2em 4em;
+    padding: 2em 3em;
     min-height: 100%;
+    text-align: justify;
 
     * {
-        line-height: normal;
+        font-size: 1.03em;
+        line-height: 1.5em;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        margin: 1.2em 0px 0.5em 0px;
+        margin: 1.2em 0px 0.3em 0px;
         padding: 0;
     }
 
-    h1 { font-size: 2em; }
+    h1 { font-size: 1.9em; }
     h2 { font-size: 1.7em; }
     h3 { font-size: 1.3em; }
     h4, h5, h6 { font-size: 1em; }
@@ -19,9 +21,8 @@
     h6 { color: red; text-decoration: line-through; }
 
     h1.title {
-        font-size: 2.5em;
+        font-size: 2.3em;
         margin-top: 0;
-        margin-bottom: 1.5em;
     }
 
     table {
@@ -42,12 +43,24 @@
         margin-left: 2em;
     }
 
-    p, li, td {
-        margin: 0.5em 0;
+    p {
+        margin: 1em 0;
+    }
+
+    li, li p, tr, td {
+        margin: 0.2em 0;
     }
 
     dt {
         font-weight: bold;
-        margin: 0.4em 0;
+        margin-top: 0.5em;
+    }
+
+    dd p:first-child {
+        margin-top: 0;
+    }
+
+    pre code {
+        font-size: 0.9em;
     }
 }
