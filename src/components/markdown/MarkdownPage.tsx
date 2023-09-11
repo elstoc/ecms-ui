@@ -3,10 +3,10 @@ import { useParams } from 'react-router';
 
 import { MarkdownPageRender } from './MarkdownPageRender';
 import { MarkdownPageEdit } from './MarkdownPageEdit';
-import { MarkdownPageToolbox } from './MarkdownPageToolbox';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownPage.scss';
 import { useSearchParams } from 'react-router-dom';
+import { Icon } from '../site/Icon';
 export type MarkdownPageProps = {
     apiPath: string;
     title: string;
@@ -21,13 +21,9 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
 
     const mode = searchParams.get('mode');
 
-    const showSource = useCallback(() => {
-        if (!mode) {
-            setSearchParams({ mode: 'edit' });
-        } else {
-            setSearchParams();
-        }
-    }, [mode, setSearchParams]);
+    const showHideSource = useCallback(() => (
+        mode ? setSearchParams() : setSearchParams({ mode: 'edit' })
+    ), [mode, setSearchParams]);
 
     if (isError) {
         return <div>There has been an ERROR</div>;
@@ -35,16 +31,21 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
         return <div>Loading Page</div>;
     }
 
+    if (mode === 'edit') {
+        return (
+            <div className='markdown-page'>
+                <MarkdownPageEdit markdown={mdFile} />
+                <div className='markdown-page-toolbox'>
+                    <Icon name='cancel' onClick={showHideSource} />
+                </div>
+            </div>
+        );
+    }
     return (
         <div className='markdown-page'>
-            {mode !== 'edit' && (
-                <MarkdownPageRender apiPath={fullPath} title={title} markdown={mdFile} />
-            )}
-            {mode === 'edit' && (
-                <MarkdownPageEdit markdown={mdFile} />
-            )}
-            <div className='markdown-page-toolbox-container'>
-                <MarkdownPageToolbox showSource={showSource} />
+            <MarkdownPageRender apiPath={fullPath} title={title} markdown={mdFile} />
+            <div className='markdown-page-toolbox'>
+                <Icon name='showSource' onClick={showHideSource} />
             </div>
         </div>
     );
