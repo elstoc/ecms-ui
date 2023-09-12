@@ -4,17 +4,37 @@ import React, { FC, ReactElement } from 'react';
 import { FiUser, FiUserX, FiX } from 'react-icons/fi';
 import { HiOutlineCodeBracket } from 'react-icons/hi2';
 
-import './Icon.css';
+import './Icon.scss';
 import { IconType } from 'react-icons';
+import { Tooltip } from '@primer/react';
 
-export const Icon: FC<{ name: string, onClick?: () => void }> = ({ name, onClick }): ReactElement => {
-    let IconComponent: IconType | undefined;
-    if (name === 'user') IconComponent = FiUser;
-    if (name === 'noUser') IconComponent = FiUserX;
-    if (name === 'showSource') IconComponent = HiOutlineCodeBracket;
-    if (name === 'cancel') IconComponent = FiX;
+const icons: { [key: string]: IconType} = {
+    user: FiUser,
+    noUser: FiUserX,
+    showSource: HiOutlineCodeBracket,
+    cancel: FiX
+};
 
-    return IconComponent
-        ? <IconComponent className='icon' onClick={onClick} />
-        : <></>;
+type IconProps = {
+    name: string;
+    onClick?: () => void;
+    tooltipContent?: string;
+    tooltipDirection?: 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw';
+};
+
+export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipDirection }): ReactElement => {
+    const IconComponent = icons[name];
+
+    if (!IconComponent) return <></>;
+
+    const iconElement = <IconComponent className='icon' onClick={onClick} />;
+
+    if (tooltipContent) {
+        return (
+            <Tooltip className='icon-tooltip' aria-label={tooltipContent} direction={tooltipDirection ?? 'w'}>
+                {iconElement}
+            </Tooltip>
+        );
+    }
+    return iconElement;
 };

@@ -36,7 +36,7 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
             <div className='markdown-page'>
                 <MarkdownPageEdit markdown={mdFile} />
                 <div className='markdown-page-toolbox'>
-                    <Icon name='cancel' onClick={showHideSource} />
+                    <Icon name='cancel' onClick={showHideSource} tooltipContent='cancel edit'/>
                 </div>
             </div>
         );
@@ -45,7 +45,7 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
         <div className='markdown-page'>
             <MarkdownPageRender apiPath={fullPath} title={title} markdown={mdFile} />
             <div className='markdown-page-toolbox'>
-                <Icon name='showSource' onClick={showHideSource} />
+                <Icon name='showSource' onClick={showHideSource} tooltipContent='view/edit page source'/>
             </div>
         </div>
     );
