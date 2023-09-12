@@ -1,4 +1,5 @@
-// See https://react-icons.github.io/react-icons
+// See https://react-icons.github.io/react-icons for summary of available icons
+// See https://github.com/primer/react/blob/main/src/Tooltip.tsx for clues about how to style your own tooltip component
 
 import React, { FC, ReactElement } from 'react';
 import { FiUser, FiUserX, FiX } from 'react-icons/fi';
