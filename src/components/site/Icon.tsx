@@ -2,8 +2,8 @@
 // See https://github.com/primer/react/blob/main/src/Tooltip.tsx for clues about how to style your own tooltip component
 
 import React, { FC, ReactElement } from 'react';
-import { FiUser, FiUserX, FiX } from 'react-icons/fi';
-import { HiOutlineCodeBracket } from 'react-icons/hi2';
+import { FiSave, FiUser, FiUserX, FiX } from 'react-icons/fi';
+import { GrCode } from 'react-icons/gr';
 
 import './Icon.scss';
 import { IconType } from 'react-icons';
@@ -12,8 +12,9 @@ import { Tooltip } from '@primer/react';
 const icons: { [key: string]: IconType} = {
     user: FiUser,
     noUser: FiUserX,
-    showSource: HiOutlineCodeBracket,
-    cancel: FiX
+    showSource: GrCode,
+    cancel: FiX,
+    save: FiSave
 };
 
 type IconProps = {

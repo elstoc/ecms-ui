@@ -25,6 +25,10 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
         mode ? setSearchParams() : setSearchParams({ mode: 'edit' })
     ), [mode, setSearchParams]);
 
+    const saveMd = useCallback(() => (
+        alert('not really saved but you get the idea')
+    ), []);
+
     if (isError) {
         return <div>There has been an ERROR</div>;
     } else if (isLoading) {
@@ -37,6 +41,7 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
                 <MarkdownPageEdit markdown={mdFile} />
                 <div className='markdown-page-toolbox'>
                     <Icon name='cancel' onClick={showHideSource} tooltipContent='cancel edit'/>
+                    <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
                 </div>
             </div>
         );
