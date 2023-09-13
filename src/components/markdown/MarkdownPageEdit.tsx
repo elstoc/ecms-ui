@@ -14,14 +14,12 @@ export const MarkdownPageEdit: FC<{ markdown: string; }> = ({ markdown }): React
         alert('not really saved but you get the idea')
     ), []);
 
-    const hideSource = useCallback(() => (
-        setSearchParams()
-    ), [setSearchParams]);
+    const unsetEditMode = () => setSearchParams();
 
     return (
         <>
             <div className='markdown-page-toolbox'>
-                <Icon name='cancel' onClick={hideSource} tooltipContent='cancel edit'/>
+                <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
             </div>
             <div className='markdown-page-edit'>

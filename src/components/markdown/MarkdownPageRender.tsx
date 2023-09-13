@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useCallback } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Helmet } from 'react-helmet';
 import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
@@ -27,17 +27,14 @@ const basename = (path: string): string => {
 export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markdown }): ReactElement => {
     const [yaml, content] = splitFrontMatter(markdown);
     const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
-
     const [, setSearchParams] = useSearchParams();
 
-    const showSource = useCallback(() => (
-        setSearchParams({ mode: 'edit' })
-    ), [setSearchParams]);
+    const setEditMode = () => setSearchParams({ mode: 'edit' });
 
     return (
         <>
             <div className='markdown-page-toolbox'>
-                <Icon name='showSource' onClick={showSource} tooltipContent='view/edit page source'/>
+                <Icon name='showSource' onClick={setEditMode} tooltipContent='view/edit page source'/>
             </div>
             <div className='markdown-page-render'>
                 <Helmet><title>{pageTitle}</title></Helmet>
