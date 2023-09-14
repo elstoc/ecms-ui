@@ -19,7 +19,6 @@ export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ ma
 
     const saveMd = useCallback(async () => {
         try {
-            console.log('here');
             await apiSecure.put(`markdown/mdFile/${apiPath.replace(/\/$/, '')}`, { fileContents: editedMarkdown });
             queryClient.invalidateQueries([`markdown/${apiPath}`]);
             toast('page saved');
