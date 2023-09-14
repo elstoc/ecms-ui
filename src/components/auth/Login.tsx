@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 
 import { login } from '../../utils/auth';
 import { Helmet } from 'react-helmet';
+import './Login.scss';
 
 export const Login: FC = (): ReactElement => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ export const Login: FC = (): ReactElement => {
     const [loginFailed, setLoginFailed] = useState(false);
     const [userId, setUserId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-
+    
     const handleLogin = useCallback(async () => {
         try {
             await login(userId, password);
@@ -25,22 +26,30 @@ export const Login: FC = (): ReactElement => {
         setPassword('');
     }, [userId, password, queryClient, navigate]);
 
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            handleLogin();
+        }
+    };
+
     return(
-        <>
-            <Helmet><title>Login</title></Helmet>
-            <div>
-                UserId: <input
+        <div className='login'>
+            <div className='login-form'>
+                <Helmet><title>Login</title></Helmet>
+                <label>UserId</label>
+                <input
                     id='userId'
                     type='text'
                     value={userId}
+                    autoFocus={true}
                     onChange={(e) => setUserId(e.target.value)}
                 />
-            </div>
-            <div>
-                Password: <input
+                <label>Password</label>
+                <input
                     id='password'
                     type='password'
                     value={password}
+                    onKeyDown={handleKeyDown}
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
@@ -48,6 +57,6 @@ export const Login: FC = (): ReactElement => {
             <div>
                 {loginFailed && 'Invalid UserId or password'}
             </div>
-        </>
+        </div>
     );
 };

@@ -1,0 +1,22 @@
+.login {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .login-form {
+        display: grid;
+        grid-template-columns: max-content max-content;
+        grid-gap: 10px;
+
+        label {
+            text-align:right;
+            &:after {
+                content: ":";
+            }
+        }
+    }
+    
+    button {
+        align-self: right;
+    }
+}
