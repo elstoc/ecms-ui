@@ -1,22 +1,22 @@
 import React, { FC, ReactElement } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import YAML from 'yaml';
+
 import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
 import remarkGfm from 'remark-gfm';
 import emoji from 'remark-emoji';
 import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
-import YAML from 'yaml';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
+import { Icon } from '../site/Icon';
 import './MarkdownPageRenderCode.scss';
 import './MarkdownPageRender.scss';
-import { Icon } from '../site/Icon';
-import { useSearchParams } from 'react-router-dom';
 
 export type MarkdownPageRenderProps = {
     apiPath: string;
-    title: string;
     markdown: string;
 };
 

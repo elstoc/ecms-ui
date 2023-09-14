@@ -1,14 +1,16 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
-import CodeMirror from '@uiw/react-codemirror';
+import { useSearchParams } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
+
+import CodeMirror from '@uiw/react-codemirror';
 import { markdown as codeMirrorMarkdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import { EditorView } from '@codemirror/view';
-import './MarkdownPageEdit.scss';
+
 import { Icon } from '../site/Icon';
-import { useSearchParams } from 'react-router-dom';
 import { apiSecure } from '../../utils/apiClient';
-import { useQueryClient } from '@tanstack/react-query';
+import './MarkdownPageEdit.scss';
 
 export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
     const queryClient = useQueryClient();
