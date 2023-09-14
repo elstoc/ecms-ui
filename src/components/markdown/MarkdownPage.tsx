@@ -30,7 +30,7 @@ export const MarkdownPage: FC<MarkdownPageProps> = ({ apiPath, title }): ReactEl
         <div className='markdown-page'>
             {
                 mode === 'edit'
-                    ? <MarkdownPageEdit markdown={mdFile} />
+                    ? <MarkdownPageEdit markdown={mdFile} apiPath={fullPath} />
                     : <MarkdownPageRender apiPath={fullPath} title={title} markdown={mdFile} />
             }
         </div>

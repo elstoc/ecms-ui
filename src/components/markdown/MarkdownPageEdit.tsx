@@ -1,21 +1,32 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import toast, { Toaster } from 'react-hot-toast';
 import { markdown as codeMirrorMarkdown, markdownLanguage } from '@codemirror/lang-markdown';
 import { languages } from '@codemirror/language-data';
 import { EditorView } from '@codemirror/view';
 import './MarkdownPageEdit.scss';
 import { Icon } from '../site/Icon';
 import { useSearchParams } from 'react-router-dom';
+import { apiSecure } from '../../utils/apiClient';
+import { useQueryClient } from '@tanstack/react-query';
 
-export const MarkdownPageEdit: FC<{ markdown: string; }> = ({ markdown }): ReactElement => {
+export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
+    const queryClient = useQueryClient();
     const [editedMarkdown, setEditedMarkdown] = useState(markdown);
     const [, setSearchParams] = useSearchParams();
 
-    const saveMd = useCallback(() => (
-        alert(`saving ${editedMarkdown.length} characters`)
-    ), [editedMarkdown]);
+    const unsetEditMode = useCallback(() => setSearchParams(), [setSearchParams]);
 
-    const unsetEditMode = () => setSearchParams();
+    const saveMd = useCallback(async () => {
+        try {
+            console.log('here');
+            await apiSecure.put(`markdown/mdFile/${apiPath.replace(/\/$/, '')}`, { fileContents: editedMarkdown });
+            queryClient.invalidateQueries([`markdown/${apiPath}`]);
+            toast('page saved');
+        } catch (error: unknown) {
+            alert('error ' + error);
+        }
+    }, [editedMarkdown, apiPath, queryClient]);
 
     return (
         <>
@@ -31,6 +42,7 @@ export const MarkdownPageEdit: FC<{ markdown: string; }> = ({ markdown }): React
                     extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
                 />
             </div>
+            <Toaster />
         </>
     );
 };
