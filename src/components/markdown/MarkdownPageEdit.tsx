@@ -8,7 +8,7 @@ import { markdown as codeMirrorMarkdown, markdownLanguage } from '@codemirror/la
 import { languages } from '@codemirror/language-data';
 import { EditorView } from '@codemirror/view';
 
-import { Icon } from '../site/Icon';
+import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
 import './MarkdownPageEdit.scss';
 

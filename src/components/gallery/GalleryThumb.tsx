@@ -1,8 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 
-import { GalleryImage } from './GalleryImage';
-
 import './GalleryThumb.scss';
 
 type GalleryThumbProps = {
@@ -29,8 +27,8 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
             style={style}
             ref={ref}
         >
-            <GalleryImage
-                url={srcUrl}
+            <img
+                src={srcUrl}
                 alt={fileName}
             />
             <div className='overlay'>{description}</div>

@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon } from './Icon';
+import { Icon } from '../utils/Icon';
 import { useUserInfo } from '../../hooks/useUserInfo';
 
 import './ToolBox.scss';

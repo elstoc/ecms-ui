@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet';
 import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
 import { ImageData } from '../../types/Gallery';
-import { GalleryImage } from './GalleryImage';
 
 import './LightBox.scss';
 
@@ -66,12 +65,12 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
             <div className='close fadeout' onClick={goBack}>&times;</div>
             {prevImage && <div className='prev fadeout' onClick={goPrevImage}>&#10094;</div>}
             {nextImage && <div className='next fadeout' onClick={goNextImage}>&#10095;</div>}
-            <GalleryImage url={currImage.fhdSrcUrl} alt={currImage.fileName} />
+            <img src={currImage.fhdSrcUrl} alt={currImage.fileName} />
             <div className='image-info fadeout'>{currImage.description}</div>
 
             <div className='preload'>
-                {prevImage && <GalleryImage url={prevImage.fhdSrcUrl} alt='preload' />}
-                {nextImage && <GalleryImage url={nextImage.fhdSrcUrl} alt='preload' />}
+                {prevImage && <img src={prevImage.fhdSrcUrl} alt='preload' />}
+                {nextImage && <img src={nextImage.fhdSrcUrl} alt='preload' />}
             </div>
         </div>
     );

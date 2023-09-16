@@ -5,9 +5,9 @@ import React, { FC, ReactElement } from 'react';
 import { FiSave, FiUser, FiUserX, FiX } from 'react-icons/fi';
 import { GrCode } from 'react-icons/gr';
 
-import './Icon.scss';
 import { IconType } from 'react-icons';
 import { Tooltip } from '@primer/react';
+import './Icon.scss';
 
 const icons: { [key: string]: IconType} = {
     user: FiUser,

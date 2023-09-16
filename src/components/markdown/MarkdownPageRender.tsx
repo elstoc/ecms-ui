@@ -11,7 +11,7 @@ import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-import { Icon } from '../site/Icon';
+import { Icon } from '../utils/Icon';
 import './MarkdownPageRenderCode.scss';
 import './MarkdownPageRender.scss';
 
