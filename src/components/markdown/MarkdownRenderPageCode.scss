@@ -14,7 +14,7 @@ as-is from the repository directly without the need for a build step
 
 Typically this "required" baseline CSS is added by `makestuff.js` during build.
 */
-.markdown-page-render {
+.markdown-render-page {
     pre code {
     display: block;
     overflow-x: auto;

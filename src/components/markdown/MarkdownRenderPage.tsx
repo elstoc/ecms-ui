@@ -1,6 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 import YAML from 'yaml';
 
 import ReactMarkdown from 'react-markdown';
@@ -11,11 +9,10 @@ import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-import { Icon } from '../utils/Icon';
-import './MarkdownPageRenderCode.scss';
-import './MarkdownPageRender.scss';
+import './MarkdownRenderPageCode.scss';
+import './MarkdownRenderPage.scss';
 
-export type MarkdownPageRenderProps = {
+export type MarkdownRenderPageProps = {
     apiPath: string;
     markdown: string;
 };
@@ -24,20 +21,13 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0].replace(/\.md$/,'');
 };
 
-export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markdown }): ReactElement => {
+export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ apiPath, markdown }): ReactElement => {
     const [yaml, content] = splitFrontMatter(markdown);
     const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
-    const [, setSearchParams] = useSearchParams();
-
-    const setEditMode = () => setSearchParams({ mode: 'edit' });
 
     return (
         <>
-            <div className='markdown-toolbox'>
-                <Icon name='showSource' onClick={setEditMode} tooltipContent='view/edit page source'/>
-            </div>
-            <div className='markdown-page-render'>
-                <Helmet><title>{pageTitle}</title></Helmet>
+            <div className='markdown-render-page'>
                 {pageTitle && <h1 className='title'>{pageTitle}</h1>}
                 <ReactMarkdown
                     remarkPlugins={[

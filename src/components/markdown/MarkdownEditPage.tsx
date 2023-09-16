@@ -10,7 +10,7 @@ import { EditorView } from '@codemirror/view';
 
 import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
-import './MarkdownPageEdit.scss';
+import './MarkdownEditPage.scss';
 
 export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
     const queryClient = useQueryClient();
@@ -35,7 +35,7 @@ export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ ma
                 <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
             </div>
-            <div className='markdown-page-edit'>
+            <div className='markdown-edit-page'>
                 <CodeMirror
                     height='100%'
                     value={editedMarkdown}
