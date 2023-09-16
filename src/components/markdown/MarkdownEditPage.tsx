@@ -12,7 +12,7 @@ import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
 import './MarkdownEditPage.scss';
 
-export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
+export const MarkdownEditPage: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
     const queryClient = useQueryClient();
     const [editedMarkdown, setEditedMarkdown] = useState(markdown);
     const [, setSearchParams] = useSearchParams();

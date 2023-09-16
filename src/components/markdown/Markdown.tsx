@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { MarkdownPage } from './MarkdownContent';
+import { MarkdownContent } from './MarkdownContent';
 import { MarkdownNav } from './MarkdownNav';
 import './Markdown.css';
 
@@ -21,7 +21,7 @@ export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): Rea
             </nav>
             <div className='markdown-page-container'>
                 <Routes>
-                    <Route path="*" element={<MarkdownPage apiPath={apiPath} />} />
+                    <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
                 </Routes>
             </div>
         </div>

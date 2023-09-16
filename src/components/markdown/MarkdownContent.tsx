@@ -2,12 +2,12 @@ import React, { FC, ReactElement } from 'react';
 import { useParams } from 'react-router';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
-import { MarkdownPageEdit } from './MarkdownEditPage';
+import { MarkdownEditPage } from './MarkdownEditPage';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 
-export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const { '*': mdFilePath } = useParams();
     const fullPath = `${apiPath}/${mdFilePath ?? ''}`;
 
@@ -26,7 +26,7 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
         <div className='markdown-content'>
             {
                 mode === 'edit'
-                    ? <MarkdownPageEdit markdown={mdFile} apiPath={fullPath} />
+                    ? <MarkdownEditPage markdown={mdFile} apiPath={fullPath} />
                     : <MarkdownViewPage apiPath={fullPath} markdown={mdFile} />
             }
         </div>
