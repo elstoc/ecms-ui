@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { MarkdownPage } from './MarkdownPage';
+import { MarkdownPage } from './MarkdownContent';
 import { MarkdownNav } from './MarkdownNav';
 import './Markdown.css';
 

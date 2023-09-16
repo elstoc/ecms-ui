@@ -31,7 +31,7 @@ export const MarkdownPageEdit: FC<{ markdown: string; apiPath: string }> = ({ ma
 
     return (
         <>
-            <div className='markdown-page-toolbox'>
+            <div className='markdown-toolbox'>
                 <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
             </div>

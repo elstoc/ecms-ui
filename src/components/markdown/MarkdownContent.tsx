@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { MarkdownPageRender } from './MarkdownPageRender';
 import { MarkdownPageEdit } from './MarkdownPageEdit';
 import { useMarkdownFile } from '../../hooks/markdownQueries';
-import './MarkdownPage.scss';
+import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 
 export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
@@ -23,7 +23,7 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
     }
 
     return (
-        <div className='markdown-page'>
+        <div className='markdown-content'>
             {
                 mode === 'edit'
                     ? <MarkdownPageEdit markdown={mdFile} apiPath={fullPath} />

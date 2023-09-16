@@ -33,7 +33,7 @@ export const MarkdownPageRender: FC<MarkdownPageRenderProps> = ({ apiPath, markd
 
     return (
         <>
-            <div className='markdown-page-toolbox'>
+            <div className='markdown-toolbox'>
                 <Icon name='showSource' onClick={setEditMode} tooltipContent='view/edit page source'/>
             </div>
             <div className='markdown-page-render'>
