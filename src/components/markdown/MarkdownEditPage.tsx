@@ -7,7 +7,7 @@ import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
 
-export const MarkdownEditPage: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
+export const MarkdownEditPage: FC<{ mdFullPath: string; markdown: string;}> = ({ mdFullPath, markdown }): ReactElement => {
     const queryClient = useQueryClient();
     const [editedMarkdown, setEditedMarkdown] = useState(markdown);
     const [, setSearchParams] = useSearchParams();
@@ -16,13 +16,13 @@ export const MarkdownEditPage: FC<{ markdown: string; apiPath: string }> = ({ ma
 
     const saveMd = useCallback(async () => {
         try {
-            await apiSecure.put(`markdown/mdFile/${apiPath.replace(/\/$/, '')}`, { fileContents: editedMarkdown });
-            queryClient.invalidateQueries([`markdown/${apiPath}`]);
+            await apiSecure.put(`markdown/mdFile/${mdFullPath.replace(/\/$/, '')}`, { fileContents: editedMarkdown });
+            queryClient.invalidateQueries([`markdown/${mdFullPath}`]);
             toast('page saved');
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [editedMarkdown, apiPath, queryClient]);
+    }, [editedMarkdown, mdFullPath, queryClient]);
 
     return (
         <>

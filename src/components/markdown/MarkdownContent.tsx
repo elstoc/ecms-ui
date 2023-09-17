@@ -8,10 +8,10 @@ import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 
 export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApiPath }): ReactElement => {
-    const { '*': mdFilePath } = useParams();
-    const fullPath = `${componentApiPath}/${mdFilePath ?? ''}`;
+    const { '*': mdRelPath } = useParams();
+    const mdFullPath = `${componentApiPath}/${mdRelPath ?? ''}`;
 
-    const {isLoading, isError, data: markdown} = useMarkdownFile(fullPath);
+    const {isLoading, isError, data: markdown} = useMarkdownFile(mdFullPath);
     const [searchParams] = useSearchParams();
 
     const mode = searchParams.get('mode');
@@ -26,8 +26,8 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
         <div className='markdown-content'>
             {
                 mode === 'edit'
-                    ? <MarkdownEditPage apiPath={fullPath} markdown={markdown} />
-                    : <MarkdownViewPage apiPath={fullPath} markdown={markdown} />
+                    ? <MarkdownEditPage mdFullPath={mdFullPath} markdown={markdown} />
+                    : <MarkdownViewPage mdFullPath={mdFullPath} markdown={markdown} />
             }
         </div>
     );

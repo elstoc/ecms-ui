@@ -5,8 +5,8 @@ import { useMarkdownNav } from '../../hooks/markdownQueries';
 import { MdNavContents } from '../../types/Markdown';
 import './MarkdownNav.scss';
 
-export const MarkdownNav: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
-    const { isLoading, isError, data: navContents } = useMarkdownNav(apiPath);
+export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
+    const { isLoading, isError, data: navContents } = useMarkdownNav(rootApiPath);
 
     if (isError) {
         return <div>There has been an ERROR</div>;
@@ -16,7 +16,7 @@ export const MarkdownNav: FC<{ apiPath: string }> = ({ apiPath }): ReactElement 
 
     return (
         <span className='markdown-nav'>
-            {navContents.children && <MarkdownNavRecurse rootApiPath={apiPath} children={navContents.children} />}
+            {navContents.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={navContents.children} />}
         </span>
     );
 };

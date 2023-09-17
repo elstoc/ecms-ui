@@ -17,7 +17,7 @@ export const Markdown: FC<MarkdownProps> = ({ componentApiPath, title, includeNa
         <div className='markdown'>
             <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav-container'>
-                {includeNav && <MarkdownNav apiPath={componentApiPath} />}
+                {includeNav && <MarkdownNav rootApiPath={componentApiPath} />}
             </nav>
             <div className='markdown-page-container'>
                 <Routes>
