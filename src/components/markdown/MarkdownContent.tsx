@@ -11,7 +11,7 @@ export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     const { '*': mdFilePath } = useParams();
     const fullPath = `${apiPath}/${mdFilePath ?? ''}`;
 
-    const {isLoading, isError, data: mdFile} = useMarkdownFile(fullPath);
+    const {isLoading, isError, data: markdown} = useMarkdownFile(fullPath);
     const [searchParams] = useSearchParams();
 
     const mode = searchParams.get('mode');
@@ -26,8 +26,8 @@ export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         <div className='markdown-content'>
             {
                 mode === 'edit'
-                    ? <MarkdownEditPage markdown={mdFile} apiPath={fullPath} />
-                    : <MarkdownViewPage apiPath={fullPath} markdown={mdFile} />
+                    ? <MarkdownEditPage apiPath={fullPath} markdown={markdown} />
+                    : <MarkdownViewPage apiPath={fullPath} markdown={markdown} />
             }
         </div>
     );
