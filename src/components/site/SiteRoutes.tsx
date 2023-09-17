@@ -28,7 +28,7 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                     key={component.apiPath}
                     path={`${component.uiPath}/*`}
                     element={<Markdown
-                        apiPath={component.apiPath}
+                        componentApiPath={component.apiPath}
                         title={component.title}
                         includeNav={component.additionalData.includeNav as boolean}
                     />}

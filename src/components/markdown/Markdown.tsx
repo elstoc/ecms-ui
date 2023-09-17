@@ -7,21 +7,21 @@ import { MarkdownNav } from './MarkdownNav';
 import './Markdown.css';
 
 type MarkdownProps = {
-    apiPath: string;
+    componentApiPath: string;
     title: string;
     includeNav: boolean;
 }
 
-export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): ReactElement => {
+export const Markdown: FC<MarkdownProps> = ({ componentApiPath, title, includeNav }): ReactElement => {
     return (
         <div className='markdown'>
             <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav-container'>
-                {includeNav && <MarkdownNav apiPath={apiPath} />}
+                {includeNav && <MarkdownNav apiPath={componentApiPath} />}
             </nav>
             <div className='markdown-page-container'>
                 <Routes>
-                    <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
+                    <Route path="*" element={<MarkdownContent apiPath={componentApiPath} />} />
                 </Routes>
             </div>
         </div>
