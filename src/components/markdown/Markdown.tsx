@@ -21,7 +21,7 @@ export const Markdown: FC<MarkdownProps> = ({ componentApiPath, title, includeNa
             </nav>
             <div className='markdown-page-container'>
                 <Routes>
-                    <Route path="*" element={<MarkdownContent apiPath={componentApiPath} />} />
+                    <Route path="*" element={<MarkdownContent componentApiPath={componentApiPath} />} />
                 </Routes>
             </div>
         </div>

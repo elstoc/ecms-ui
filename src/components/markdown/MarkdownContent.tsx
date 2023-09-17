@@ -7,9 +7,9 @@ import { useMarkdownFile } from '../../hooks/markdownQueries';
 import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 
-export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApiPath }): ReactElement => {
     const { '*': mdFilePath } = useParams();
-    const fullPath = `${apiPath}/${mdFilePath ?? ''}`;
+    const fullPath = `${componentApiPath}/${mdFilePath ?? ''}`;
 
     const {isLoading, isError, data: markdown} = useMarkdownFile(fullPath);
     const [searchParams] = useSearchParams();
