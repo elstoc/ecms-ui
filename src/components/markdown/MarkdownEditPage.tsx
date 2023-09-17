@@ -3,14 +3,9 @@ import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import toast, { Toaster } from 'react-hot-toast';
 
-import CodeMirror from '@uiw/react-codemirror';
-import { markdown as codeMirrorMarkdown, markdownLanguage } from '@codemirror/lang-markdown';
-import { languages } from '@codemirror/language-data';
-import { EditorView } from '@codemirror/view';
-
+import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
-import './MarkdownEditPage.scss';
 
 export const MarkdownEditPage: FC<{ markdown: string; apiPath: string }> = ({ markdown, apiPath }): ReactElement => {
     const queryClient = useQueryClient();
@@ -35,14 +30,7 @@ export const MarkdownEditPage: FC<{ markdown: string; apiPath: string }> = ({ ma
                 <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
             </div>
-            <div className='markdown-edit-page'>
-                <CodeMirror
-                    height='100%'
-                    value={editedMarkdown}
-                    onChange={(value: string) => setEditedMarkdown(value)}
-                    extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
-                />
-            </div>
+            <MarkdownEditSource markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
             <Toaster />
         </>
     );
