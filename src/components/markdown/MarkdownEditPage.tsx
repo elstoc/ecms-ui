@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
@@ -31,7 +31,6 @@ export const MarkdownEditPage: FC<{ mdFullPath: string; markdown: string;}> = ({
                 <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
             </div>
             <MarkdownEditSource markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
-            <Toaster />
         </>
     );
 };
