@@ -1,5 +1,5 @@
 import { api } from './apiClient';
-import { getStorage, setStorage } from './storage';
+import { getStorage, setStorage } from './localStorage';
 
 export const TOKEN_KEY = 'access-token';
 
