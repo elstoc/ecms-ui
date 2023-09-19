@@ -17,13 +17,12 @@ export const Login: FC = (): ReactElement => {
         try {
             await login(userId, password);
             setLoginFailed(false);
-            setUserId('');
             queryClient.invalidateQueries();
             navigate('/auth/user', { replace: true });
         } catch {
             setLoginFailed(true);
+            setPassword('');
         }
-        setPassword('');
     }, [userId, password, queryClient, navigate]);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
