@@ -1,8 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getAccessToken, refreshAccessToken } from '../utils/auth';
 
-type ResolveFunction = (value: unknown) => void;
-
 const axiosDefaults = {
     baseURL: process.env.API_URL ?? '',
     headers: { 'Content-Type': 'application/json' },
@@ -26,7 +24,7 @@ apiSecureRetry.interceptors.request.use(injectAccessToken);
 
 let retryQueue: ((token: string) => void)[] = [];
 
-const addRequestToRetryQueue = (resolve: ResolveFunction, config: AxiosRequestConfig<unknown>): void => {
+const addRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
     retryQueue.push((token) => {
         config.headers.authorization = `Bearer ${token}`;
         resolve(apiSecureRetry(config));
