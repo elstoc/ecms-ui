@@ -1,6 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import YAML from 'yaml';
-
 import ReactMarkdown from 'react-markdown';
 import { remarkDefinitionList, defListHastHandlers } from 'remark-definition-list';
 import remarkGfm from 'remark-gfm';
@@ -8,23 +6,15 @@ import emoji from 'remark-emoji';
 import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
 
-import { splitFrontMatter } from '../../utils/splitFrontMatter';
 import './MarkdownRenderPageCode.scss';
 import './MarkdownRenderPage.scss';
 
 export type MarkdownRenderPageProps = {
-    apiPath: string;
-    markdown: string;
+    content: string;
+    pageTitle: string;
 };
 
-const basename = (path: string): string => {
-    return path.split('/').reverse()[0].replace(/\.md$/,'');
-};
-
-export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ apiPath, markdown }): ReactElement => {
-    const [yaml, content] = splitFrontMatter(markdown);
-    const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
-
+export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, content }): ReactElement => {
     return (
         <>
             <div className='markdown-render-page'>

@@ -18,7 +18,7 @@ const basename = (path: string): string => {
 };
 
 export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, markdown }): ReactElement => {
-    const [yaml] = splitFrontMatter(markdown);
+    const [yaml, content] = splitFrontMatter(markdown);
     const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
     const [, setSearchParams] = useSearchParams();
 
@@ -30,7 +30,7 @@ export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, markdo
             <div className='markdown-toolbox'>
                 <Icon name='showSource' onClick={setEditMode} tooltipContent='view/edit page source'/>
             </div>
-            <MarkdownRenderPage apiPath={mdFullPath} markdown={markdown} />
+            <MarkdownRenderPage pageTitle={pageTitle} content={content} />
         </>
     );
 };
