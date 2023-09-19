@@ -11,7 +11,7 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
     const { '*': mdRelPath } = useParams();
     const mdFullPath = `${componentApiPath}/${mdRelPath ?? ''}`;
 
-    const {isLoading, isError, data: markdown} = useMarkdownFile(mdFullPath);
+    const {isLoading, isError, data: mdFile} = useMarkdownFile(mdFullPath);
     const [searchParams] = useSearchParams();
 
     const mode = searchParams.get('mode');
@@ -26,8 +26,8 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
         <div className='markdown-content'>
             {
                 mode === 'edit'
-                    ? <MarkdownEditPage mdFullPath={mdFullPath} markdown={markdown} />
-                    : <MarkdownViewPage mdFullPath={mdFullPath} markdown={markdown} />
+                    ? <MarkdownEditPage mdFullPath={mdFullPath} mdFile={mdFile} />
+                    : <MarkdownViewPage mdFullPath={mdFullPath} mdFile={mdFile} />
             }
         </div>
     );

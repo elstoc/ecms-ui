@@ -7,9 +7,9 @@ import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
 import { apiSecure } from '../../utils/apiClient';
 
-export const MarkdownEditPage: FC<{ mdFullPath: string; markdown: string;}> = ({ mdFullPath, markdown }): ReactElement => {
+export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ mdFullPath, mdFile }): ReactElement => {
     const queryClient = useQueryClient();
-    const [editedMarkdown, setEditedMarkdown] = useState(markdown);
+    const [editedMarkdown, setEditedMarkdown] = useState(mdFile);
     const [, setSearchParams] = useSearchParams();
 
     const unsetEditMode = useCallback(() => setSearchParams(), [setSearchParams]);

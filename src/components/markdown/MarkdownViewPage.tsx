@@ -10,15 +10,15 @@ import { Icon } from '../utils/Icon';
 
 export type MarkdownViewPageProps = {
     mdFullPath: string;
-    markdown: string;
+    mdFile: string;
 };
 
 const basename = (path: string): string => {
     return path.split('/').reverse()[0].replace(/\.md$/,'');
 };
 
-export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, markdown }): ReactElement => {
-    const [yaml, content] = splitFrontMatter(markdown);
+export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, mdFile }): ReactElement => {
+    const [yaml, markdown] = splitFrontMatter(mdFile);
     const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
     const [, setSearchParams] = useSearchParams();
 
@@ -30,7 +30,7 @@ export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, markdo
             <div className='markdown-toolbox'>
                 <Icon name='showSource' onClick={setEditMode} tooltipContent='view/edit page source'/>
             </div>
-            <MarkdownRenderPage pageTitle={pageTitle} content={content} />
+            <MarkdownRenderPage pageTitle={pageTitle} markdown={markdown} />
         </>
     );
 };

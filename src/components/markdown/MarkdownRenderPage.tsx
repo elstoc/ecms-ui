@@ -10,11 +10,11 @@ import './MarkdownRenderPageCode.scss';
 import './MarkdownRenderPage.scss';
 
 export type MarkdownRenderPageProps = {
-    content: string;
+    markdown: string;
     pageTitle: string;
 };
 
-export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, content }): ReactElement => {
+export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, markdown }): ReactElement => {
     return (
         <>
             <div className='markdown-render-page'>
@@ -31,7 +31,7 @@ export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, con
                         handlers: {...defListHastHandlers},
                     }}
                 >
-                    {content}
+                    {markdown}
                 </ReactMarkdown>
             </div>
         </>
