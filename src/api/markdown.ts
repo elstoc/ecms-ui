@@ -7,6 +7,11 @@ export const getMarkdownFile = async (path: string): Promise<string> => {
     return data;
 };
 
+export const putMarkdownFile = async (path: string, fileContents: string): Promise<void> => {
+    const urlPath = `markdown/mdFile/${path.replace(/\/$/, '')}`;
+    await axiosSecureClient.put(urlPath, { fileContents });
+};
+
 export const getMdNavContents = async (path: string): Promise<MdNavContents> => {
     const urlPath = `markdown/mdnav/${path}`;
     const { data } = await axiosSecureClient.get<MdNavContents>(urlPath);

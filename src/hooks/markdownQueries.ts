@@ -6,7 +6,7 @@ const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
 export const useMarkdownFile = (path: string) => {
     return useQuery({
-        queryKey: ['MarkdownFile',path],
+        queryKey: ['markdownFile', path],
         queryFn: () => getMarkdownFile(path),
         refetchInterval
     });
@@ -14,7 +14,7 @@ export const useMarkdownFile = (path: string) => {
 
 export const useMarkdownNav = (path: string) => {
     return useQuery({
-        queryKey: ['MarkdownNav', path],
+        queryKey: ['markdownNav', path],
         queryFn: () => getMdNavContents(path),
         refetchInterval
     });

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
-import { axiosSecureClient } from '../../api/axiosClients';
+import { putMarkdownFile } from '../../api';
 
 export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ mdFullPath, mdFile }): ReactElement => {
     const queryClient = useQueryClient();
@@ -16,8 +16,8 @@ export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ m
 
     const saveMd = useCallback(async () => {
         try {
-            await axiosSecureClient.put(`markdown/mdFile/${mdFullPath.replace(/\/$/, '')}`, { fileContents: editedMarkdown });
-            queryClient.invalidateQueries([`markdown/${mdFullPath}`]);
+            await putMarkdownFile(mdFullPath, editedMarkdown);
+            queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             toast('page saved');
         } catch (error: unknown) {
             alert('error ' + error);
