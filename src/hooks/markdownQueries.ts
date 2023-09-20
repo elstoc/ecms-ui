@@ -1,27 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { MdNavContents } from '../types/Markdown';
-import { axiosSecureClient } from '../api/axiosClients';
+
+import { getMarkdownFile, getMdNavContents } from '../api';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
 export const useMarkdownFile = (path: string) => {
-    const urlPath = `markdown/mdfile/${path.replace(/\/$/, '')}`;
-    const queryName = `markdown/${path}`;
-
     return useQuery({
-        queryKey: [queryName],
-        queryFn: async () => (await axiosSecureClient.get<string>(urlPath)).data,
+        queryKey: ['MarkdownFile',path],
+        queryFn: () => getMarkdownFile(path),
         refetchInterval
     });
 };
 
 export const useMarkdownNav = (path: string) => {
-    const queryName = `markdown/${path}`;
-    const urlPath = `markdown/mdnav/${path}`;
-
     return useQuery({
-        queryKey: [queryName],
-        queryFn: async () => (await axiosSecureClient.get<MdNavContents>(urlPath)).data,
+        queryKey: ['MarkdownNav', path],
+        queryFn: () => getMdNavContents(path),
         refetchInterval
     });
 };

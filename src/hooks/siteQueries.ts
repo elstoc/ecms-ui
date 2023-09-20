@@ -1,14 +1,13 @@
-import { axiosSecureClient } from '../api/axiosClients';
 import { useQuery } from '@tanstack/react-query';
 
-import { ComponentMetadata } from '../types/Site';
+import { getSiteNav } from '../api';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
 export const useSiteNav = () => {
     return useQuery({
         queryKey: ['siteNav'],
-        queryFn: async () => (await axiosSecureClient.get<ComponentMetadata[]>('site/nav')).data,
+        queryFn: () => getSiteNav(),
         refetchInterval
     });
 };
