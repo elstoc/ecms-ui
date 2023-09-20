@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { getAccessToken, refreshAccessToken } from '../utils/auth';
+import { getAccessToken, refreshAccessToken } from './auth';
 
 const axiosDefaults = {
     baseURL: process.env.API_URL ?? '',
@@ -7,9 +7,10 @@ const axiosDefaults = {
     withCredentials: true
 };
 
-export const api = axios.create(axiosDefaults);
-export const apiSecure = axios.create(axiosDefaults);
-export const apiSecureRetry = axios.create(axiosDefaults);
+export const axiosClient = axios.create(axiosDefaults);
+export const axiosSecureClient = axios.create(axiosDefaults);
+
+const axiosSecureClientRetry = axios.create(axiosDefaults);
 
 const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
     const token = getAccessToken();
@@ -19,15 +20,15 @@ const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
     return config;
 };
 
-apiSecure.interceptors.request.use(injectAccessToken);
-apiSecureRetry.interceptors.request.use(injectAccessToken);
+axiosSecureClient.interceptors.request.use(injectAccessToken);
+axiosSecureClientRetry.interceptors.request.use(injectAccessToken);
 
 let retryQueue: ((token: string) => void)[] = [];
 
 const addRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
     retryQueue.push((token) => {
         config.headers.authorization = `Bearer ${token}`;
-        resolve(apiSecureRetry(config));
+        resolve(axiosSecureClientRetry(config));
     });
 };
 
@@ -39,7 +40,7 @@ const retryFromQueue = (token: string) => {
     retryQueue = [];
 };
 
-apiSecure.interceptors.response.use(
+axiosSecureClient.interceptors.response.use(
     (response) => response,
     (error) => {
         return new Promise((resolve, reject) => {

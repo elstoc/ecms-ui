@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { apiSecure } from '../utils/apiClient';
+import { axiosSecureClient } from '../api/axiosClients';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
@@ -18,7 +18,7 @@ export const useUserInfo = () => {
     return useQuery({
         queryKey: [queryName],
         keepPreviousData: true,
-        queryFn: async () => (await apiSecure.get<User>(urlPath)).data,
+        queryFn: async () => (await axiosSecureClient.get<User>(urlPath)).data,
         refetchInterval
     });
 };

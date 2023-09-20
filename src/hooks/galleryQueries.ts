@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { GalleryImages } from '../types/Gallery';
-import { apiSecure } from '../utils/apiClient';
+import { axiosSecureClient } from '../api/axiosClients';
 
 const refetchInterval = parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000');
 
@@ -12,7 +12,7 @@ export const useGalleryList = (path: string, limit = 0) => {
     return useQuery({
         queryKey: [queryName, limit],
         keepPreviousData: true,
-        queryFn: async () => (await apiSecure.get<GalleryImages>(urlPath)).data,
+        queryFn: async () => (await axiosSecureClient.get<GalleryImages>(urlPath)).data,
         refetchInterval
     });
 };
