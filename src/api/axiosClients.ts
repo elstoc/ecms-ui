@@ -23,10 +23,10 @@ const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
 axiosSecureClient.interceptors.request.use(injectAccessToken);
 axiosSecureClientRetry.interceptors.request.use(injectAccessToken);
 
-let retryQueue: ((token: string) => void)[] = [];
+let failedRequestRetryQueue: ((token: string) => void)[] = [];
 
-const addRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
-    retryQueue.push((token) => {
+const addFailedRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
+    failedRequestRetryQueue.push((token) => {
         config.headers.authorization = `Bearer ${token}`;
         resolve(axiosSecureClientRetry(config));
     });
@@ -34,10 +34,10 @@ const addRequestToRetryQueue = (resolve: (value: unknown) => void, config: Axios
 
 let fetchingNewToken = false;
 
-const retryFromQueue = (token: string) => {
+const retryFailedRequests = (token: string) => {
     fetchingNewToken = false;
-    retryQueue.forEach((callback) => callback(token));
-    retryQueue = [];
+    failedRequestRetryQueue.forEach((callback) => callback(token));
+    failedRequestRetryQueue = [];
 };
 
 axiosSecureClient.interceptors.response.use(
@@ -45,12 +45,12 @@ axiosSecureClient.interceptors.response.use(
     (error) => {
         return new Promise((resolve, reject) => {
             if (error.response?.status === 401) {
-                addRequestToRetryQueue(resolve, error.config);
+                addFailedRequestToRetryQueue(resolve, error.config);
                 if (fetchingNewToken)
                     return;
                 fetchingNewToken = true;
                 refreshAccessToken()
-                    .then((newToken) => retryFromQueue(newToken));
+                    .then((newToken) => retryFailedRequests(newToken));
             } else {
                 reject(error);
             }
