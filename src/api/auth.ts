@@ -1,4 +1,4 @@
-import { axiosClient } from './axiosClients';
+import { axiosClient, axiosSecureClient } from './axiosClients';
 import { getStorage, setStorage } from '../utils/localStorage';
 
 export const TOKEN_KEY = 'access-token';
@@ -35,4 +35,16 @@ export const refreshAccessToken = async (): Promise<string> => {
         console.log('Error', e);   
         return '';
     }
+};
+
+type User = {
+    id: string;
+    fullName?: string;
+    roles?: string[];
+    hashedPassword?: string;
+};
+
+export const getUserInfo = async (): Promise<User> => {
+    const { data } = await axiosSecureClient.get<User>('auth/get-user-info');
+    return data;
 };
