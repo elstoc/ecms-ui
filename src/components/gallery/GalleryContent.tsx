@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, createRef, useMemo, useEffect } from 'react';
-import { Navigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
@@ -14,10 +14,11 @@ export type GalleryContentProps = {
     loadMoreImages: () => void;
     marginPx: number;
     threshold: number;
+    lightBoxImageName?: string;
 }
 
-export const GalleryContent: FC<GalleryContentProps> = ({ title, galleryImages, galleryDivWidth, loadMoreImages, marginPx, threshold }): ReactElement => {
-    const { lightBoxImageName } = useParams();
+export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => {
+    const { title, galleryImages, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageName } = props;
     const { images, imageCount } = galleryImages;
 
     const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
