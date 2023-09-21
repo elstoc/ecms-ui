@@ -7,9 +7,18 @@ import { ThemeProvider } from '@primer/react';
 import { App } from './app';
 import { Toaster } from 'react-hot-toast';
 
+const queryDefaults = {
+    defaultOptions: {
+        queries: {
+            refetchInterval: parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000'),
+            keepPreviousData: true
+        }
+    }
+};
+const queryClient = new QueryClient(queryDefaults);
+
 const container = document.getElementById('app-container')!;
 const root = createRoot(container);
-const queryClient = new QueryClient();
 
 root.render(
     <ThemeProvider>
