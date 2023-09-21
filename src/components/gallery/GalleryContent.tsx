@@ -9,7 +9,7 @@ import './GalleryContent.css';
 
 export type GalleryContentProps = {
     title: string;
-    galleryImages: GalleryImages;
+    galleryContent: GalleryImages;
     galleryDivWidth: number;
     loadMoreImages: () => void;
     marginPx: number;
@@ -18,8 +18,8 @@ export type GalleryContentProps = {
 }
 
 export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => {
-    const { title, galleryImages, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageName } = props;
-    const { images, imageCount } = galleryImages;
+    const { title, galleryContent, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageName } = props;
+    const { images, imageCount } = galleryContent;
 
     const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
 

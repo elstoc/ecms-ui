@@ -2,6 +2,7 @@ import { useResizeDetector } from 'react-resize-detector';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
+import { HandleQueryState } from '../utils/HandleQueryState';
 import { useGalleryList } from '../../hooks/galleryQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
@@ -26,35 +27,35 @@ export const Gallery: FC<GalleryProps> = (props): ReactElement => {
 const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
     const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
-    const { isLoading, isError, data: galleryImages } = useGalleryList(apiPath, maxImagesToLoad);
+    const { queryState, galleryContent } = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => {
         setMaxImagesToLoad((prevMaxImages) =>
-            prevMaxImages < galleryImages!.imageCount
+            prevMaxImages < galleryContent!.imageCount
                 ? prevMaxImages + batchSize
                 : prevMaxImages
         );
-    }, [galleryImages, batchSize]);
+    }, [galleryContent, batchSize]);
 
-    const showGallery = (galleryImages && galleryDivWidth);
+    const showGallery = (galleryContent && galleryDivWidth);
 
     return (
         <div ref={widthRef} className="gallery">
             <Helmet><title>{title}</title></Helmet>
-            {isError && 'There has been an ERROR'}
-            {isLoading && 'Loading images'}
-            {showGallery &&
-                <GalleryContent
-                    title={title}
-                    galleryImages={galleryImages}
-                    galleryDivWidth={galleryDivWidth}
-                    loadMoreImages={loadMoreImages}
-                    marginPx={marginPx}
-                    threshold={threshold}
-                    lightBoxImageName={lightBoxImageName}
-                />
-            }
+            <HandleQueryState {...queryState}>
+                {showGallery &&
+                    <GalleryContent
+                        title={title}
+                        galleryContent={galleryContent}
+                        galleryDivWidth={galleryDivWidth}
+                        loadMoreImages={loadMoreImages}
+                        marginPx={marginPx}
+                        threshold={threshold}
+                        lightBoxImageName={lightBoxImageName}
+                    />
+                }
+            </HandleQueryState>
         </div>
     );
 };
