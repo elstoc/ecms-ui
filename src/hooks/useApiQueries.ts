@@ -1,25 +1,40 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { getGalleryImages, getSiteNav, getMarkdownFile, getMdNavContents } from '../api';
+import { GalleryImages } from '../types/Gallery';
 
-export const useGalleryList = (path: string, limit = 0) => {
+type queryState = {
+    isLoading: boolean,
+    isError: boolean,
+    error: unknown
+};
+
+type customQueryOptions<T> = {
+    queryKey: (string | number)[],
+    queryFn: () => Promise<T>
+}
+
+const useCustomQuery = <T>(options: customQueryOptions<T>): [queryState, T | undefined] => {
+    const { queryKey, queryFn } = options;
     const { isLoading, isError, error, data } = useQuery({
-        queryKey: ['galleryList', path, limit],
-        queryFn: () => getGalleryImages(path, limit),
+        queryKey,
+        queryFn,
     });
 
-    return {
-        queryState: {
-            isLoading, isError, error
-        },
-        galleryContent: data
-    };
+    return [{ isLoading, isError, error }, data ];
 };
 
 export const useSiteNav = () => {
     return useQuery({
         queryKey: ['siteNav'],
         queryFn: () => getSiteNav(),
+    });
+};
+
+export const useGalleryList = (path: string, limit = 0) => {
+    return useCustomQuery<GalleryImages>({
+        queryKey: ['galleryList', path, limit],
+        queryFn: () => getGalleryImages(path, limit),
     });
 };
 
