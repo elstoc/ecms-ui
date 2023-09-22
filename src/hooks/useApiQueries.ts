@@ -25,7 +25,7 @@ const useCustomQuery = <T>(options: customQueryOptions<T>): [queryState, T | und
 };
 
 export const useSiteNav = () => {
-    return useQuery({
+    return useCustomQuery({
         queryKey: ['siteNav'],
         queryFn: () => getSiteNav(),
     });
