@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { useMarkdownNav } from '../../hooks/useApiQueries';
-import { MdNavContents } from '../../types/Markdown';
+import { MarkdownTree } from '../../types/Markdown';
 import './MarkdownNav.scss';
 import { HandleQueryState } from '../utils/HandleQueryState';
 
@@ -18,7 +18,7 @@ export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): React
     );
 };
 
-const MarkdownNavRecurse: FC<{ children: MdNavContents[], rootApiPath: string }> = ({ children, rootApiPath }): ReactElement => {
+const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootApiPath: string }> = ({ children, rootApiPath }): ReactElement => {
     return (
         <ol>
             {children.map((child) => {

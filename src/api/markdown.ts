@@ -1,4 +1,4 @@
-import { MdNavContents } from '../types/Markdown';
+import { MarkdownTree } from '../types/Markdown';
 import { axiosSecureClient } from '../api/axiosClients';
 
 export const getMarkdownFile = async (path: string): Promise<string> => {
@@ -12,8 +12,8 @@ export const putMarkdownFile = async (path: string, fileContents: string): Promi
     await axiosSecureClient.put(urlPath, { fileContents });
 };
 
-export const getMdNavContents = async (path: string): Promise<MdNavContents> => {
+export const getMdNavContents = async (path: string): Promise<MarkdownTree> => {
     const urlPath = `markdown/mdnav/${path}`;
-    const { data } = await axiosSecureClient.get<MdNavContents>(urlPath);
+    const { data } = await axiosSecureClient.get<MarkdownTree>(urlPath);
     return data;
 };
