@@ -38,7 +38,7 @@ export const useGalleryList = (path: string, limit = 0) => {
 };
 
 export const useMarkdownFile = (path: string) => {
-    return useQuery({
+    return useCustomQuery({
         queryKey: ['markdownFile', path],
         queryFn: () => getMarkdownFile(path),
     });
