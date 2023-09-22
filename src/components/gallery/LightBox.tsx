@@ -6,6 +6,7 @@ import { useKeyPress } from '../../hooks/useKeyPress';
 import { ImageData } from '../../types/Gallery';
 
 import './LightBox.scss';
+import { Icon } from '../utils/Icon';
 
 type LightBoxProps = {
     parentTitle: string;
@@ -62,9 +63,19 @@ export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage,
     return (
         <div className='lightbox' onClick={handleOuterClick} onMouseMove={restartFadeOut}>
             <Helmet><title>{parentTitle} - {currImage.fileName}</title></Helmet>
-            <div className='close fadeout' onClick={goBack}>&times;</div>
-            {prevImage && <div className='prev fadeout' onClick={goPrevImage}>&#10094;</div>}
-            {nextImage && <div className='next fadeout' onClick={goNextImage}>&#10095;</div>}
+            <div className='close fadeout' onClick={goBack}>
+                <Icon name='close' />
+            </div>
+            {prevImage &&
+                <div className='prev fadeout' onClick={goPrevImage}>
+                    <Icon name='previous' />
+                </div>
+            }
+            {nextImage &&
+                <div className='next fadeout' onClick={goNextImage}>
+                    <Icon name='next' />
+                </div>
+            }
             <img src={currImage.fhdSrcUrl} alt={currImage.fileName} />
             <div className='image-info fadeout'>{currImage.description}</div>
 

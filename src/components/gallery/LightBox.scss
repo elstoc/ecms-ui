@@ -32,36 +32,43 @@
     .prev,
     .next {
         display: flex;
-        justify-content: center;
         align-items: center;
         cursor: pointer;
         position: absolute;
         top: 10%;
         height: 80%;
         width: 5%;
-        color: white;
         font-weight: bold;
-        font-size: 20px;
         text-decoration: none;
         border-radius: 0 3px 3px 0;
         user-select: none;
     }
 
+    .prev .icon,
+    .next .icon,
+    .close .icon {
+        stroke: white;
+        width: 40px;
+        height: 40px;
+    }
+
     .next {
-        right: 0;
+        justify-content: right;
+        right: 10px;
         border-radius: 3px 0 0 3px;
     }
     
     .prev {
-        left: 0;
+        justify-content: left;
+        left: 10px;
         border-radius: 3px 0 0 3px;
     }
     
     .close {
         color: white;
         position: absolute;
-        top: 0;
-        right: 0;
+        top: 10px;
+        right: 10px;
         padding: 0 10px;
         font-size: 40px;
         font-weight: bold;
@@ -71,8 +78,9 @@
     .prev:hover,
     .next:hover,
     .close:hover {
-        color: black;
-        text-decoration: none;
+        .icon {
+            stroke: grey;
+        }
         cursor: pointer;
     }
     
