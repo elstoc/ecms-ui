@@ -15,10 +15,10 @@ export const App = (): ReactElement => {
         <div className='app'>
             <HandleQueryState {...queryState}>
                 <div className='header-container'>
-                    {componentMetadata && <Header componentMetadata={componentMetadata} />}
+                    <Header componentMetadata={componentMetadata!} />
                 </div>
                 <div className='component-container'>
-                    {componentMetadata && <SiteRoutes componentMetadata={componentMetadata} />}
+                    <SiteRoutes componentMetadata={componentMetadata!} />
                 </div>
                 <div className='footer-container'>
                     <Footer />

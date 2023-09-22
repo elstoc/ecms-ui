@@ -38,23 +38,19 @@ const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, 
         );
     }, [galleryContent, batchSize]);
 
-    const showGallery = (galleryContent && galleryDivWidth);
-
     return (
         <div ref={widthRef} className="gallery">
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
-                {showGallery &&
-                    <GalleryContent
-                        title={title}
-                        galleryContent={galleryContent}
-                        galleryDivWidth={galleryDivWidth}
-                        loadMoreImages={loadMoreImages}
-                        marginPx={marginPx}
-                        threshold={threshold}
-                        lightBoxImageName={lightBoxImageName}
-                    />
-                }
+                <GalleryContent
+                    title={title}
+                    galleryContent={galleryContent!}
+                    galleryDivWidth={galleryDivWidth!}
+                    loadMoreImages={loadMoreImages}
+                    marginPx={marginPx}
+                    threshold={threshold}
+                    lightBoxImageName={lightBoxImageName}
+                />
             </HandleQueryState>
         </div>
     );
