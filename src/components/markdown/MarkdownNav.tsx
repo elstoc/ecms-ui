@@ -4,19 +4,16 @@ import { NavLink } from 'react-router-dom';
 import { useMarkdownNav } from '../../hooks/useApiQueries';
 import { MdNavContents } from '../../types/Markdown';
 import './MarkdownNav.scss';
+import { HandleQueryState } from '../utils/HandleQueryState';
 
 export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
-    const { isLoading, isError, data: navContents } = useMarkdownNav(rootApiPath);
-
-    if (isError) {
-        return <div>There has been an ERROR</div>;
-    } else if (isLoading || !navContents) {
-        return <div>Loading Navigation</div>;
-    }
+    const [ queryState, navContents ] = useMarkdownNav(rootApiPath);
 
     return (
         <span className='markdown-nav'>
-            {navContents.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={navContents.children} />}
+            <HandleQueryState {...queryState}>
+                {navContents?.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={navContents.children} />}
+            </HandleQueryState>
         </span>
     );
 };
@@ -30,7 +27,7 @@ const MarkdownNavRecurse: FC<{ children: MdNavContents[], rootApiPath: string }>
                 }
                 const linkPath = child.apiPath.replace(`${rootApiPath}/`, './').replace(rootApiPath, '');
                 return (
-                    <React.Fragment key = {child.apiPath } >
+                    <React.Fragment key = {child.apiPath} >
                         <li><NavLink to={linkPath} end>{child?.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} />}
                     </React.Fragment>

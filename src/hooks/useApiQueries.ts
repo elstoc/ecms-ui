@@ -45,7 +45,7 @@ export const useMarkdownFile = (path: string) => {
 };
 
 export const useMarkdownNav = (path: string) => {
-    return useQuery({
+    return useCustomQuery({
         queryKey: ['markdownNav', path],
         queryFn: () => getMdNavContents(path),
     });
