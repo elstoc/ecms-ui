@@ -18,6 +18,7 @@ export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ m
         try {
             await putMarkdownFile(mdFullPath, editedMarkdown);
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
+            queryClient.invalidateQueries({ queryKey: ['markdownTree']});
             toast('page saved');
         } catch (error: unknown) {
             alert('error ' + error);

@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { HandleQueryState } from '../utils/HandleQueryState';
-import { useGalleryList } from '../../hooks/useApiQueries';
+import { useGalleryContents } from '../../hooks/useApiQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
 import { Route, Routes, useParams } from 'react-router';
@@ -27,7 +27,7 @@ export const Gallery: FC<GalleryProps> = (props): ReactElement => {
 const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
     const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);
-    const [ queryState, galleryContent ] = useGalleryList(apiPath, maxImagesToLoad);
+    const [ queryState, galleryContent ] = useGalleryContents(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => {

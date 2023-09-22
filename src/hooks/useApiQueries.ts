@@ -1,5 +1,5 @@
 import { useCustomQuery } from './useCustomQuery';
-import { getGalleryImages, getSiteNav, getMarkdownFile, getMarkdownTree } from '../api';
+import { getGalleryContents, getSiteNav, getMarkdownFile, getMarkdownTree } from '../api';
 
 export const useSiteNav = () => {
     return useCustomQuery({
@@ -8,10 +8,10 @@ export const useSiteNav = () => {
     });
 };
 
-export const useGalleryList = (path: string, limit = 0) => {
+export const useGalleryContents = (path: string, limit = 0) => {
     return useCustomQuery({
-        queryKey: ['galleryList', path, limit],
-        queryFn: () => getGalleryImages(path, limit),
+        queryKey: ['galleryContents', path, limit],
+        queryFn: () => getGalleryContents(path, limit),
     });
 };
 
@@ -22,9 +22,9 @@ export const useMarkdownFile = (path: string) => {
     });
 };
 
-export const useMarkdownNav = (path: string) => {
+export const useMarkdownTree = (path: string) => {
     return useCustomQuery({
-        queryKey: ['markdownNav', path],
+        queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),
     });
 };
