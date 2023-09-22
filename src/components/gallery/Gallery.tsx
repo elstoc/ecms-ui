@@ -26,7 +26,7 @@ export const Gallery: FC<GalleryProps> = (props): ReactElement => {
 
 const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
     const { lightBoxImageName } = useParams();
-    const [maxImagesToLoad, setMaxImagesToLoad] = useState(batchSize);
+    const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);
     const [ queryState, galleryContent ] = useGalleryList(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
