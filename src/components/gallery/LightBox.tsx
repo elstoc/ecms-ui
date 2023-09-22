@@ -3,16 +3,16 @@ import { Helmet } from 'react-helmet';
 
 import { useNavigate } from 'react-router-dom';
 import { useKeyPress } from '../../hooks/useKeyPress';
-import { ImageData } from '../../types/Gallery';
+import { ImageMetadata } from '../../types/Gallery';
 
 import './LightBox.scss';
 import { Icon } from '../utils/Icon';
 
 type LightBoxProps = {
     parentTitle: string;
-    currImage: ImageData;
-    prevImage: ImageData | undefined;
-    nextImage: ImageData | undefined;
+    currImage: ImageMetadata;
+    prevImage: ImageMetadata | undefined;
+    nextImage: ImageMetadata | undefined;
 }
 
 export const LightBox: FC<LightBoxProps> = ({ parentTitle, currImage, prevImage, nextImage }): ReactElement => {

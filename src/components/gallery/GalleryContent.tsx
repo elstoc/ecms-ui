@@ -4,12 +4,12 @@ import { Navigate } from 'react-router-dom';
 import { useIsVisible } from '../../hooks/useIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
-import { GalleryImages } from '../../types/Gallery';
+import { GalleryContents } from '../../types/Gallery';
 import './GalleryContent.css';
 
 export type GalleryContentProps = {
     title: string;
-    galleryContent: GalleryImages;
+    galleryContent: GalleryContents;
     galleryDivWidth: number;
     loadMoreImages: () => void;
     marginPx: number;

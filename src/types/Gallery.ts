@@ -7,7 +7,7 @@ export type Dimensions = {
     height: number;
 };
 
-export type ImageData = {
+export type ImageMetadata = {
     fileName: string;
     description: string;
     exif: Exif;
@@ -16,7 +16,7 @@ export type ImageData = {
     fhdSrcUrl: string;
 }
 
-export type GalleryImages = {
+export type GalleryContents = {
     imageCount: number;
-    images: ImageData[];
+    images: ImageMetadata[];
 }
