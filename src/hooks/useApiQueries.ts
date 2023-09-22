@@ -1,22 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
-
+import { useCustomQuery } from './useCustomQuery';
 import { getGalleryImages, getSiteNav, getMarkdownFile, getMdNavContents } from '../api';
-
-type QueryState = {
-    isLoading: boolean,
-    isError: boolean,
-    error: unknown
-};
-
-type QueryOptions<T> = {
-    queryKey: (string | number)[],
-    queryFn: () => Promise<T>
-}
-
-const useCustomQuery = <T>(options: QueryOptions<T>): [QueryState, T | undefined] => {
-    const { isLoading, isError, error, data } = useQuery(options);
-    return [{ isLoading, isError, error }, data ];
-};
 
 export const useSiteNav = () => {
     return useCustomQuery({
