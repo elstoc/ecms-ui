@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { HandleQueryState } from '../utils/HandleQueryState';
-import { useGalleryList } from '../../hooks/galleryQueries';
+import { useGalleryList } from '../../hooks/useApiQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
 import { Route, Routes, useParams } from 'react-router';

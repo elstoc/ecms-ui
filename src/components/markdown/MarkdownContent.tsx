@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
 import { MarkdownEditPage } from './MarkdownEditPage';
-import { useMarkdownFile } from '../../hooks/markdownQueries';
+import { useMarkdownFile } from '../../hooks/useApiQueries';
 import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 

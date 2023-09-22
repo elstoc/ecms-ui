@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useMarkdownNav } from '../../hooks/markdownQueries';
+import { useMarkdownNav } from '../../hooks/useApiQueries';
 import { MdNavContents } from '../../types/Markdown';
 import './MarkdownNav.scss';
 

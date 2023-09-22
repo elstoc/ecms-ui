@@ -3,7 +3,7 @@ import React, { ReactElement } from 'react';
 import './app.scss';
 import 'modern-normalize';
 import { SiteRoutes } from './components/site/SiteRoutes';
-import { useSiteNav } from './hooks/siteQueries';
+import { useSiteNav } from './hooks/useApiQueries';
 import { Footer } from './components/site/Footer';
 import { Header } from './components/site/Header';
 
