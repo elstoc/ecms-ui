@@ -17,6 +17,7 @@ const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
     if (token) {
         config.headers['authorization'] = `Bearer ${token}`;
     }
+    config.url = config.url?.replace(/\/$/, '');
     return config;
 };
 

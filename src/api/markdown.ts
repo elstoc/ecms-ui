@@ -2,13 +2,13 @@ import { MarkdownTree } from '../types/Markdown';
 import { axiosSecureClient } from '../api/axiosClients';
 
 export const getMarkdownFile = async (path: string): Promise<string> => {
-    const urlPath = `markdown/file/${path.replace(/\/$/, '')}`;
+    const urlPath = `markdown/file/${path}`;
     const { data } = await axiosSecureClient.get<string>(urlPath);
     return data;
 };
 
 export const putMarkdownFile = async (path: string, fileContents: string): Promise<void> => {
-    const urlPath = `markdown/file/${path.replace(/\/$/, '')}`;
+    const urlPath = `markdown/file/${path}`;
     await axiosSecureClient.put(urlPath, { fileContents });
 };
 
