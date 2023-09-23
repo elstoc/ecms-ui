@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, createRef, useMemo, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
-import { useIsVisible } from '../../hooks/useIsVisible';
+import { useElementIsVisible } from '../../hooks/useElementIsVisible';
 import { GalleryThumb } from './GalleryThumb';
 import { LightBox } from './LightBox';
 import { GalleryContents } from '../../types/Gallery';
@@ -24,7 +24,7 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
     const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
 
     const refTriggerLoadWhenVisible = createRef<HTMLAnchorElement>();
-    useIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
+    useElementIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     useEffect(() => {
         if (lightBoxImageIndex >= (images.length - 2) && images.length < imageCount) {

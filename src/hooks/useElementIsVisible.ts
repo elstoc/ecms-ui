@@ -1,6 +1,6 @@
 import { useEffect, RefObject, useRef } from 'react';
 
-export const useIsVisible = (ref: RefObject<HTMLElement | null>, cb: () => void) => {
+export const useElementIsVisible = (ref: RefObject<HTMLElement | null>, cb: () => void) => {
     const prevRef = useRef<HTMLElement | null>(null);
 
     useEffect((): void => {
