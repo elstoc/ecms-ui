@@ -1,12 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Icon } from '../utils/Icon';
-import { useUserInfo } from '../../hooks/useUserInfo';
+import { useUserInfo } from '../../hooks/useApiQueries';
 
 import './ToolBox.scss';
 
 export const ToolBox: FC = (): ReactElement => {
-    const { data: userData } = useUserInfo();
+    const [,userData ] = useUserInfo();
     const iconName = userData?.id && userData.id !== 'guest'
         ? 'user'
         : 'noUser';

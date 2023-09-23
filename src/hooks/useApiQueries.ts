@@ -1,5 +1,5 @@
 import { useCustomQuery } from './useCustomQuery';
-import { getGalleryContents, getSiteNav, getMarkdownFile, getMarkdownTree } from '../api';
+import { getGalleryContents, getSiteNav, getMarkdownFile, getMarkdownTree, getUserInfo } from '../api';
 
 export const useSiteNav = () => {
     return useCustomQuery({
@@ -26,5 +26,12 @@ export const useMarkdownTree = (path: string) => {
     return useCustomQuery({
         queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),
+    });
+};
+
+export const useUserInfo = () => {
+    return useCustomQuery({
+        queryKey: ['user-info'],
+        queryFn: () => getUserInfo(),
     });
 };
