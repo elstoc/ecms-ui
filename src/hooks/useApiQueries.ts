@@ -4,7 +4,14 @@ import { getGalleryContents, getSiteNav, getMarkdownFile, getMarkdownTree, getUs
 export const useSiteNav = () => {
     return useCustomQuery({
         queryKey: ['siteNav'],
-        queryFn: () => getSiteNav(),
+        queryFn: getSiteNav,
+    });
+};
+
+export const useUserInfo = () => {
+    return useCustomQuery({
+        queryKey: ['user-info'],
+        queryFn: getUserInfo,
     });
 };
 
@@ -26,12 +33,5 @@ export const useMarkdownTree = (path: string) => {
     return useCustomQuery({
         queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),
-    });
-};
-
-export const useUserInfo = () => {
-    return useCustomQuery({
-        queryKey: ['user-info'],
-        queryFn: () => getUserInfo(),
     });
 };
