@@ -10,6 +10,8 @@ WORKDIR ./app
 RUN npm ci
 RUN npm run build
 
+#################
+
 FROM nginx
 
 WORKDIR /usr/share/nginx/html
