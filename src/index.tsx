@@ -4,13 +4,14 @@ import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@primer/react';
 
+import { config } from './utils/config';
 import { App } from './app';
 import { Toaster } from 'react-hot-toast';
 
 const queryDefaults = {
     defaultOptions: {
         queries: {
-            refetchInterval: parseInt(process.env.QUERY_REFETCH_INTERVAL ?? '10000'),
+            refetchInterval: config.queryRefetchInterval,
             keepPreviousData: true
         }
     }

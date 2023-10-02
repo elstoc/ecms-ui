@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { getAccessToken, refreshAccessToken } from './auth';
+import { config } from '../utils/config';
 
 const axiosDefaults = {
-    baseURL: process.env.API_URL ?? '',
+    baseURL: config.apiUrl,
     headers: { 'Content-Type': 'application/json' },
     withCredentials: true
 };
