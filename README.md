@@ -17,15 +17,27 @@ To build the docker image run
 docker build -t <image-name> .
 ```
 
+or
+
+```
+npm run docker-build
+```
+
 ## Running In Docker
 
-It is recommended that you execute this using a docker compose file that combines the ui and api together (see https://github.com/elstoc/ecms). However, if you wish to run the ui and api separately. Please note that in this case you will need to use `--net=host` in order to allow the container to see the localhost port on which the api is exposed:
+It is recommended that you execute this using a docker compose file that combines the ui and api together (see https://github.com/elstoc/ecms). However, if you choose run the ui and api separately you can use this command to spin up the ui only. Please note that in this case you will need to use `--net=host` in order to allow the container to see the localhost port on which the api is exposed:
 
 ```
 docker run --net=host --env-file=.env <image-name>
 ```
 
-Also note that the `--env-file=.env` instruction allows you to override variables when running the container.
+or
+
+```
+npm run docker-run
+```
+
+**Note: ** You must have created a file named `.env` in the root directory, with variables populated as above. Without them, the docker container will fail to start because the default `.env` file contains only keys, without values.
 
 ## Running without docker
 
