@@ -5,7 +5,7 @@
   "main": "dist/index.ts",
   "scripts": {
     "dev": "chmod +x ./configure-runtime-env.sh && ./configure-runtime-env.sh && mv ./runtime-env.js public && webpack serve --port 3000",
-    "build": "rm -rf ./dist/* && touch dist/runtime-env.js && NODE_ENV=production webpack",
+    "build": "rm -rf ./dist && mkdir ./dist && touch dist/runtime-env.js && NODE_ENV=production webpack",
     "docker-build": "docker build -t ecms-ui .",
     "docker-run": "docker run --net=host --env-file=.env ecms-ui",
     "lint": "eslint . --ext .ts --ext .tsx",
