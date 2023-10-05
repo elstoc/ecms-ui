@@ -1,10 +1,10 @@
 import { useCustomQuery } from './useCustomQuery';
-import { getGalleryContents, getSiteNav, getMarkdownFile, getMarkdownTree, getUserInfo } from '../api';
+import { getGalleryContents, getSiteComponents, getMarkdownFile, getMarkdownTree, getUserInfo } from '../api';
 
-export const useSiteNav = () => {
+export const useSiteComponents = () => {
     return useCustomQuery({
-        queryKey: ['siteNav'],
-        queryFn: getSiteNav,
+        queryKey: ['siteComponents'],
+        queryFn: getSiteComponents,
     });
 };
 

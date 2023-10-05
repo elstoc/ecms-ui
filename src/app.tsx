@@ -3,13 +3,13 @@ import React, { ReactElement } from 'react';
 import './app.scss';
 import 'modern-normalize';
 import { SiteRoutes } from './components/site/SiteRoutes';
-import { useSiteNav } from './hooks/useApiQueries';
+import { useSiteComponents } from './hooks/useApiQueries';
 import { Footer } from './components/site/Footer';
 import { Header } from './components/site/Header';
 import { HandleQueryState } from './components/utils/HandleQueryState';
 
 export const App = (): ReactElement => {
-    const [ queryState, componentMetadata ] = useSiteNav();
+    const [ queryState, componentMetadata ] = useSiteComponents();
 
     return (
         <div className='app'>
