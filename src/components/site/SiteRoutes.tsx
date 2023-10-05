@@ -5,8 +5,11 @@ import { ComponentMetadata } from '../../types/Site';
 import { Gallery } from '../gallery/Gallery';
 import { Markdown } from '../markdown/Markdown';
 import { Auth } from '../auth/Auth';
+import { useSiteConfig } from '../../hooks/useApiQueries';
 
 export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ componentMetadata }): ReactElement => {
+    const [, siteConfig] = useSiteConfig();
+
     const siteRoutes = componentMetadata.map((component) => {
         if (component.type === 'gallery') {
             return (
@@ -39,7 +42,7 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
     return (
         <Routes>
             {siteRoutes}
-            <Route path='auth/*' element={<Auth />} />
+            {siteConfig?.authEnabled && <Route path='auth/*' element={<Auth />} />}
             <Route path='*' element={<Navigate to='/' />} />
         </Routes>
     );
