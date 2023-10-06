@@ -4,6 +4,7 @@ export type AdditionalData = {
 
 export type SiteConfig = {
     authEnabled: boolean;
+    footerText: string;
 };
 
 export type ComponentMetadata = {
