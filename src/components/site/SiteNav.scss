@@ -30,4 +30,11 @@
     a.active {
         font-weight: bolder;
     }
+
+    a.single-component {
+        font-weight: bold;
+        border-right: none;
+        border-left: none;
+        padding-left: 0;
+    }
 }
