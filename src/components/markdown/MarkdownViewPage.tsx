@@ -7,20 +7,23 @@ import { MarkdownRenderPage } from './MarkdownRenderPage';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
 import { Icon } from '../utils/Icon';
+import { MarkdownPage } from '../../types/Markdown';
 
 export type MarkdownViewPageProps = {
     mdFullPath: string;
-    mdFile: string;
+    mdPage?: MarkdownPage;
 };
 
 const basename = (path: string): string => {
     return path.split('/').reverse()[0].replace(/\.md$/,'');
 };
 
-export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, mdFile }): ReactElement => {
-    const [yaml, markdown] = splitFrontMatter(mdFile);
-    const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
+export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdFullPath, mdPage }): ReactElement => {
     const [, setSearchParams] = useSearchParams();
+
+    if (!mdPage) return <></>;
+    const [yaml, markdown] = splitFrontMatter(mdPage?.content ?? '');
+    const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
 
     const setEditMode = () => setSearchParams({ mode: 'edit' });
 

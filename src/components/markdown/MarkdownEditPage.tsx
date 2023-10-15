@@ -6,10 +6,16 @@ import toast from 'react-hot-toast';
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
 import { putMarkdownPage } from '../../api';
+import { MarkdownPage } from '../../types/Markdown';
 
-export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ mdFullPath, mdFile }): ReactElement => {
+export type MarkdownEditPageProps = {
+    mdFullPath: string;
+    mdPage?: MarkdownPage;
+};
+
+export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage }): ReactElement => {
     const queryClient = useQueryClient();
-    const [editedMarkdown, setEditedMarkdown] = useState(mdFile);
+    const [editedMarkdown, setEditedMarkdown] = useState(mdPage?.content ?? '');
     const [, setSearchParams] = useSearchParams();
 
     const unsetEditMode = useCallback(() => setSearchParams(), [setSearchParams]);

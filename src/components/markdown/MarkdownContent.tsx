@@ -15,15 +15,15 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
     const { '*': mdRelPath } = useParams();
     const mdFullPath = `${componentApiPath}/${mdRelPath ?? ''}`;
 
-    const [ queryState, mdPageDetails ] = useMarkdownPage(mdFullPath);
+    const [ queryState, mdPage ] = useMarkdownPage(mdFullPath);
 
     return (
         <div className='markdown-content'>
             <HandleQueryState {...queryState}>
                 {
                     mode === 'edit'
-                        ? <MarkdownEditPage mdFullPath={mdFullPath} mdFile={mdPageDetails?.content ?? ''} />
-                        : <MarkdownViewPage mdFullPath={mdFullPath} mdFile={mdPageDetails?.content ?? ''} />
+                        ? <MarkdownEditPage mdFullPath={mdFullPath} mdPage={mdPage} />
+                        : <MarkdownViewPage mdFullPath={mdFullPath} mdPage={mdPage} />
                 }
             </HandleQueryState>
         </div>
