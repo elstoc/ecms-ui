@@ -10,3 +10,7 @@ export type MarkdownTree = {
     additionalData?: AdditionalData;
     children?: MarkdownTree[];
 }
+
+export type MarkdownPage = {
+    content?: string
+}

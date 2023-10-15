@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
-import { putMarkdownFile } from '../../api';
+import { putMarkdownPage } from '../../api';
 
 export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ mdFullPath, mdFile }): ReactElement => {
     const queryClient = useQueryClient();
@@ -16,7 +16,7 @@ export const MarkdownEditPage: FC<{ mdFullPath: string; mdFile: string;}> = ({ m
 
     const saveMd = useCallback(async () => {
         try {
-            await putMarkdownFile(mdFullPath, editedMarkdown);
+            await putMarkdownPage(mdFullPath, editedMarkdown);
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             queryClient.invalidateQueries({ queryKey: ['markdownTree']});
             toast('page saved');

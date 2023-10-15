@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
 import { MarkdownEditPage } from './MarkdownEditPage';
-import { useMarkdownFile } from '../../hooks/useApiQueries';
+import { useMarkdownPage } from '../../hooks/useApiQueries';
 import './MarkdownContent.scss';
 import { useSearchParams } from 'react-router-dom';
 import { HandleQueryState } from '../utils/HandleQueryState';
@@ -15,15 +15,15 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
     const { '*': mdRelPath } = useParams();
     const mdFullPath = `${componentApiPath}/${mdRelPath ?? ''}`;
 
-    const [ queryState, mdFile ] = useMarkdownFile(mdFullPath);
+    const [ queryState, mdPageDetails ] = useMarkdownPage(mdFullPath);
 
     return (
         <div className='markdown-content'>
             <HandleQueryState {...queryState}>
                 {
                     mode === 'edit'
-                        ? <MarkdownEditPage mdFullPath={mdFullPath} mdFile={mdFile!} />
-                        : <MarkdownViewPage mdFullPath={mdFullPath} mdFile={mdFile!} />
+                        ? <MarkdownEditPage mdFullPath={mdFullPath} mdFile={mdPageDetails?.content ?? ''} />
+                        : <MarkdownViewPage mdFullPath={mdFullPath} mdFile={mdPageDetails?.content ?? ''} />
                 }
             </HandleQueryState>
         </div>

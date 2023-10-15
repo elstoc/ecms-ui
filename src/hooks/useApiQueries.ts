@@ -1,5 +1,5 @@
 import { useCustomQuery } from './useCustomQuery';
-import { getGalleryContents, getSiteComponents, getMarkdownFile, getMarkdownTree, getUserInfo } from '../api';
+import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree, getUserInfo } from '../api';
 import { getSiteConfig } from '../api/site';
 
 export const useSiteComponents = () => {
@@ -30,10 +30,10 @@ export const useGalleryContents = (path: string, limit = 0) => {
     });
 };
 
-export const useMarkdownFile = (path: string) => {
+export const useMarkdownPage = (path: string) => {
     return useCustomQuery({
         queryKey: ['markdownFile', path],
-        queryFn: () => getMarkdownFile(path),
+        queryFn: () => getMarkdownPage(path),
     });
 };
 

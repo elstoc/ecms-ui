@@ -1,14 +1,14 @@
-import { MarkdownTree } from '../types/Markdown';
+import { MarkdownPage, MarkdownTree } from '../types/Markdown';
 import { axiosSecureClient } from '../api/axiosClients';
 
-export const getMarkdownFile = async (path: string): Promise<string> => {
-    const urlPath = `markdown/file/${path}`;
-    const { data } = await axiosSecureClient.get<string>(urlPath);
+export const getMarkdownPage = async (path: string): Promise<MarkdownPage> => {
+    const urlPath = `markdown/page/${path}`;
+    const { data } = await axiosSecureClient.get<MarkdownPage>(urlPath);
     return data;
 };
 
-export const putMarkdownFile = async (path: string, fileContents: string): Promise<void> => {
-    const urlPath = `markdown/file/${path}`;
+export const putMarkdownPage = async (path: string, fileContents: string): Promise<void> => {
+    const urlPath = `markdown/page/${path}`;
     await axiosSecureClient.put(urlPath, { fileContents });
 };
 
