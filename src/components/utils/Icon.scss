@@ -12,6 +12,10 @@ $icon-text-color: black;
     color: darkgrey;
 }
 
+.icon.disabled:hover {
+    cursor: not-allowed;
+}
+
 .icon-tooltip {
     &::after {
         background: $icon-background-color !important;
