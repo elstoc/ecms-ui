@@ -14,4 +14,5 @@ export type MarkdownTree = {
 export type MarkdownPage = {
     content: string;
     pageExists: boolean;
+    canWrite: boolean;
 }

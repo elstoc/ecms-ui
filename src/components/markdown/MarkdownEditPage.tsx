@@ -35,7 +35,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
         <>
             <div className='markdown-toolbox'>
                 <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
-                <Icon name='save' onClick={saveMd} tooltipContent='save edited page'/>
+                <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
             </div>
             <MarkdownEditSource markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
         </>

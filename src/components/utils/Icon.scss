@@ -8,6 +8,10 @@ $icon-text-color: black;
     width: 2rem;
 }
 
+.icon.disabled {
+    color: darkgrey;
+}
+
 .icon-tooltip {
     &::after {
         background: $icon-background-color !important;

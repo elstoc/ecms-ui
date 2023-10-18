@@ -22,17 +22,21 @@ const icons: { [key: string]: IconType} = {
 
 type IconProps = {
     name: string;
+    disabled?: boolean;
     onClick?: () => void;
     tooltipContent?: string;
     tooltipDirection?: 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw';
 };
 
-export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipDirection }): ReactElement => {
+export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipDirection, disabled = false }): ReactElement => {
     const IconComponent = icons[name];
 
     if (!IconComponent) return <></>;
 
-    const iconElement = <IconComponent className='icon' onClick={onClick} />;
+    const iconOnClick = disabled ? undefined : onClick;
+    const iconClass = `icon ${disabled ? 'disabled' : ''}`;
+
+    const iconElement = <IconComponent className={iconClass}  onClick={iconOnClick} />;
 
     if (tooltipContent) {
         return (
