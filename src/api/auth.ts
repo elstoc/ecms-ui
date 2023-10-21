@@ -24,17 +24,15 @@ export const logout = async (): Promise<void> => {
     console.log('logged out');
 };
 
-export const refreshAccessToken = async (): Promise<string> => {
+export const refreshAccessToken = async (): Promise<void> => {
     try {
         const loggedUserInfo = (await axiosClient.post('auth/refresh')).data;
         const { accessToken } = loggedUserInfo;
         setAccessToken(accessToken);
         console.log('access token refreshed');
-        return accessToken as string;
     } catch (e) {
         console.log('Error', e);   
         setAccessToken('');
-        return '';
     }
 };
 

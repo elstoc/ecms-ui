@@ -25,20 +25,19 @@ const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
 axiosSecureClient.interceptors.request.use(injectAccessToken);
 axiosSecureClientRetry.interceptors.request.use(injectAccessToken);
 
-let failedRequestRetryQueue: ((token: string) => void)[] = [];
+let failedRequestRetryQueue: (() => void)[] = [];
 
 const addFailedRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
-    failedRequestRetryQueue.push((token) => {
-        config.headers.authorization = `Bearer ${token}`;
+    failedRequestRetryQueue.push(() => {
         resolve(axiosSecureClientRetry(config));
     });
 };
 
 let fetchingNewToken = false;
 
-const retryFailedRequests = (token: string) => {
+const retryFailedRequests = () => {
     fetchingNewToken = false;
-    failedRequestRetryQueue.forEach((callback) => callback(token));
+    failedRequestRetryQueue.forEach((callback) => callback());
     failedRequestRetryQueue = [];
 };
 
@@ -52,7 +51,7 @@ axiosSecureClient.interceptors.response.use(
                     return;
                 fetchingNewToken = true;
                 refreshAccessToken()
-                    .then((newToken) => retryFailedRequests(newToken));
+                    .then(() => retryFailedRequests());
             } else {
                 reject(error);
             }
