@@ -33,6 +33,7 @@ export const refreshAccessToken = async (): Promise<string> => {
         return accessToken as string;
     } catch (e) {
         console.log('Error', e);   
+        setAccessToken('');
         return '';
     }
 };
