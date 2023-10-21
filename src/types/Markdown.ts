@@ -15,4 +15,5 @@ export type MarkdownPage = {
     content: string;
     pageExists: boolean;
     canWrite: boolean;
+    pathValid: boolean;
 }
