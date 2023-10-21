@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { config } from '../utils/config';
 
 type QueryState = {
     isLoading: boolean,
@@ -12,6 +13,6 @@ type QueryOptions<T> = {
 }
 
 export const useCustomQuery = <T>(options: QueryOptions<T>): [QueryState, T | undefined] => {
-    const { isLoading, isError, error, data } = useQuery(options);
+    const { isLoading, isError, error, data } = useQuery({ ...options, refetchInterval: (_, query) => query.state.error ? 0 : config.queryRefetchInterval });
     return [{ isLoading, isError, error }, data ];
 };
