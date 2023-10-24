@@ -1,7 +1,5 @@
 import React, { FC, ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import YAML from 'yaml';
 
 import { MarkdownRenderPage } from './MarkdownRenderPage';
 import './MarkdownViewPage.scss';
