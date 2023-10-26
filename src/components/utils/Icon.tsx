@@ -2,7 +2,7 @@
 // See https://github.com/primer/react/blob/main/src/Tooltip.tsx for clues about how to style your own tooltip component
 
 import React, { FC, ReactElement } from 'react';
-import { FiChevronLeft, FiChevronRight, FiEdit, FiSave, FiUser, FiUserX, FiX } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiEdit, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
 
 import { IconType } from 'react-icons';
 import { Tooltip } from '@primer/react';
@@ -12,6 +12,7 @@ const icons: { [key: string]: IconType} = {
     user: FiUser,
     noUser: FiUserX,
     edit: FiEdit,
+    delete: FiTrash2,
     cancel: FiX,
     save: FiSave,
     next: FiChevronRight,

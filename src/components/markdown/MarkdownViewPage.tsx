@@ -29,6 +29,7 @@ export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdPage, pageTitle 
         <>
             <div className='markdown-toolbox'>
                 <Icon name='edit' disabled={!mdPage.pathValid} onClick={setEditMode} tooltipContent='view/edit page source'/>
+                <Icon name='delete' disabled={!mdPage.canDelete} tooltipContent='delete page'/>
             </div>
             {mdPage.pageExists && <MarkdownRenderPage pageTitle={pageTitle} markdown={markdown} />}
             {!mdPage.pageExists && mdPage.pathValid && <h2 className='notExist'>This page does not exist yet but you can click <a href='#' onClick={setEditMode}>here</a> to create it</h2>}
