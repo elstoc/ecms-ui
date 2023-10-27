@@ -12,6 +12,11 @@ export const putMarkdownPage = async (path: string, fileContents: string): Promi
     await axiosSecureClient.put(urlPath, { fileContents });
 };
 
+export const deleteMarkdownPage = async (path: string): Promise<void> => {
+    const urlPath = `markdown/page/${path}`;
+    await axiosSecureClient.delete(urlPath);
+};
+
 export const getMarkdownTree = async (path: string): Promise<MarkdownTree> => {
     const urlPath = `markdown/tree/${path}`;
     const { data } = await axiosSecureClient.get<MarkdownTree>(urlPath);

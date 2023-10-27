@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
-import { putMarkdownPage } from '../../api';
+import { deleteMarkdownPage, putMarkdownPage } from '../../api';
 import { MarkdownPage } from '../../types/Markdown';
 
 export type MarkdownEditPageProps = {
@@ -31,11 +31,27 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
         }
     }, [editedMarkdown, mdFullPath, queryClient]);
 
+    const deleteMd = useCallback(async () => {
+        try {
+            // eslint-disable-next-line no-restricted-globals
+            if (confirm('Are you sure you want to delete this page')) {
+                await deleteMarkdownPage(mdFullPath);
+                queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
+                queryClient.invalidateQueries({ queryKey: ['markdownTree']});
+                toast('page deleted');
+                unsetEditMode();
+            }
+        } catch (error: unknown) {
+            alert('error ' + error);
+        }
+    }, [mdFullPath, queryClient, unsetEditMode]);
+
     return (
         <>
             <div className='markdown-toolbox'>
                 <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
+                <Icon name='delete' disabled={!mdPage?.canDelete} onClick={deleteMd} tooltipContent='delete page'/>
             </div>
             <MarkdownEditSource markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
         </>
