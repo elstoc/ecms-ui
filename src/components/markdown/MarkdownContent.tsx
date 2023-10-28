@@ -12,7 +12,7 @@ import { Helmet } from 'react-helmet';
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
 
 const basename = (path: string): string => {
-    return path.split('/').reverse()[0].replace(/\.md$/,'');
+    return path.split('/').reverse()[0];
 };
 
 export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApiPath }): ReactElement => {
