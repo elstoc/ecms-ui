@@ -26,10 +26,11 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             queryClient.invalidateQueries({ queryKey: ['markdownTree']});
             toast('page saved');
+            unsetEditMode();
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [editedMarkdown, mdFullPath, queryClient]);
+    }, [editedMarkdown, mdFullPath, queryClient, unsetEditMode]);
 
     const deleteMd = useCallback(async () => {
         try {
