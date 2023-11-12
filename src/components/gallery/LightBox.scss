@@ -14,11 +14,11 @@
     z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    background-color: rgba(40,40,40,0.9);
+    background-color: rgba(40,40,40,0.95);
     overflow-x: hidden; /* Disable horizontal scroll */
 
     img {
-        max-height: 96%;
+        max-height: 95%;
         max-width: 96%;
         object-fit: scale-down;
     }
