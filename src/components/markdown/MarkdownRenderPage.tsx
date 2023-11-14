@@ -16,24 +16,22 @@ export type MarkdownRenderPageProps = {
 
 export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, markdown }): ReactElement => {
     return (
-        <>
-            <div className='markdown-render-page'>
-                {pageTitle && <h1 className='title'>{pageTitle}</h1>}
-                <ReactMarkdown
-                    remarkPlugins={[
-                        [remarkGfm, { singleTilde: false }],
-                        remarkDefinitionList,
-                        [emoji, { emoticon: true }],
-                        [smartypants],
-                    ]}
-                    rehypePlugins={[rehypeHighlight]}
-                    remarkRehypeOptions={{
-                        handlers: {...defListHastHandlers},
-                    }}
-                >
-                    {markdown}
-                </ReactMarkdown>
-            </div>
-        </>
+        <div className='markdown-render-page'>
+            {pageTitle && <h1 className='title'>{pageTitle}</h1>}
+            <ReactMarkdown
+                remarkPlugins={[
+                    [remarkGfm, { singleTilde: false }],
+                    remarkDefinitionList,
+                    [emoji, { emoticon: false }],
+                    [smartypants],
+                ]}
+                rehypePlugins={[rehypeHighlight]}
+                remarkRehypeOptions={{
+                    handlers: {...defListHastHandlers},
+                }}
+            >
+                {markdown}
+            </ReactMarkdown>
+        </div>
     );
 };
