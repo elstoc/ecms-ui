@@ -1,12 +1,13 @@
 .sitenav {
     height: 100%;
-    width: 100%;
+    width: 90%;
     border: 0;
     padding: 0;
     
     display: flex;
     align-items: center;
     justify-content: left;
+    flex-wrap: wrap;
 
     a {
         display: block;

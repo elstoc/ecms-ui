@@ -1,5 +1,5 @@
 .markdown-nav {
-    padding: 1.5rem 0 0 0;
+    padding: 1.5rem 1rem;
     margin-left: 0;
     min-height: 100%;
     display: block;
@@ -33,5 +33,11 @@
 
     a.active {
         font-weight: bold;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .markdown-nav {
+        padding: 1.5rem 0 0 0;
     }
 }

@@ -1,6 +1,6 @@
 .markdown {
     display: flex;
-    flex-direction: row;
+    flex-direction: column-reverse;
     justify-content: left;
     min-height: 100%;
     container-type: inline-size;
@@ -10,13 +10,19 @@
 .markdown-nav-container {
     font-family: sans-serif;
     margin-right: 1em;
+    width: 100%;
 }
 
 .markdown-page-container {
     background-color: white;
+    width: 100%;
 }
 
-@container markdown (min-width: 600px) {
+@media screen and (min-width: 600px) {
+    .markdown {
+        flex-direction: row;
+    }
+
     .markdown-nav-container {
         width: 30%;
     }
@@ -25,7 +31,7 @@
     }
 }
 
-@container markdown (min-width: 1650px) {
+@media screen and (min-width: 1650px) {
     .markdown-nav-container {
         width: 450px;
     }
