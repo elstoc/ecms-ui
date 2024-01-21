@@ -1,7 +1,8 @@
 import cookies from 'js-cookie';
 
 export const setStorage = (key: string, value: string): void => {
-    cookies.set(key, value, { expires: 7 });
+    localStorage.setItem(key, value);
+    cookies.set(key, value, { expires: 7, path: '' });
     window.dispatchEvent(new Event('storage'));
 };
 
