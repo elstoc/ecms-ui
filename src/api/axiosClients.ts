@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { InternalAxiosRequestConfig } from 'axios';
 import { getAccessToken, refreshAccessToken } from './auth';
 import { config } from '../utils/config';
 
@@ -13,7 +13,7 @@ export const axiosSecureClient = axios.create(axiosDefaults);
 
 const axiosSecureClientRetry = axios.create(axiosDefaults);
 
-const injectAccessToken = async (config: AxiosRequestConfig<unknown>) => {
+const injectAccessToken = async (config: InternalAxiosRequestConfig<unknown>) => {
     const token = getAccessToken();
     if (token) {
         config.headers['authorization'] = `Bearer ${token}`;
@@ -27,7 +27,7 @@ axiosSecureClientRetry.interceptors.request.use(injectAccessToken);
 
 let failedRequestRetryQueue: (() => void)[] = [];
 
-const addFailedRequestToRetryQueue = (resolve: (value: unknown) => void, config: AxiosRequestConfig<unknown>): void => {
+const addFailedRequestToRetryQueue = (resolve: (value: unknown) => void, config: InternalAxiosRequestConfig<unknown>): void => {
     failedRequestRetryQueue.push(() => {
         resolve(axiosSecureClientRetry(config));
     });
