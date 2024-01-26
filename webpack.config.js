@@ -16,6 +16,7 @@ module.exports = {
   output: {
     publicPath: '/',
     path: __dirname + '/dist/',
+    filename: '[name].[contenthash].js'
   },
   optimization: {
     minimize: prod,
@@ -48,5 +49,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.html',
       favicon: 'favicon.png'
-    })].concat(prod ? [new MiniCssExtractPlugin()] : []),
+    })].concat(prod ? [new MiniCssExtractPlugin({
+        filename: '[name].[contenthash].css'
+    })] : []),
 };
