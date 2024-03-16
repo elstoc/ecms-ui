@@ -25,7 +25,7 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                     />}
                 />
             );
-        } else {
+        } else if (component.type === 'markdown') {
             return (
                 <Route
                     key={component.apiPath}
@@ -37,7 +37,16 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                     />}
                 />
             );
+        } else if (component.type === 'mediadb') {
+            return (
+                <Route
+                    key={component.apiPath}
+                    path={`${component.uiPath}/*`}
+                    element={<div>MediaDb component not yet implemented</div>}
+                />
+            );
         }
+        throw new Error(`incompatible component type ${component.type}`);
     });
     return (
         <Routes>
