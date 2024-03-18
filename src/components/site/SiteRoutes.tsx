@@ -37,12 +37,12 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                     />}
                 />
             );
-        } else if (component.type === 'mediadb') {
+        } else if (component.type === 'videodb') {
             return (
                 <Route
                     key={component.apiPath}
                     path={`${component.uiPath}/*`}
-                    element={<div>MediaDb component not yet implemented</div>}
+                    element={<div>videodb component not yet implemented</div>}
                 />
             );
         }
