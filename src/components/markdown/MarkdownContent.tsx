@@ -20,7 +20,10 @@ export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApi
     const mode = searchParams.get('mode');
 
     const { '*': mdRelPath } = useParams();
-    const mdFullPath = `${componentApiPath}/${mdRelPath ?? ''}`;
+    let mdFullPath = componentApiPath;
+    if (mdRelPath) {
+        mdFullPath += `/${mdRelPath}`;
+    }
 
     const [ queryState, mdPage ] = useMarkdownPage(mdFullPath);
     const [yaml] = splitFrontMatter(mdPage?.content ?? '');
