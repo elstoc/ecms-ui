@@ -14,9 +14,9 @@ export const axiosSecureClient = axios.create(axiosDefaults);
 const axiosSecureClientRetry = axios.create(axiosDefaults);
 
 const injectAccessToken = async (config: InternalAxiosRequestConfig<unknown>) => {
-    const token = getAccessToken();
-    if (token) {
-        config.headers['authorization'] = `Bearer ${token}`;
+    const { accessToken } = getAccessToken();
+    if (accessToken) {
+        config.headers['authorization'] = `Bearer ${accessToken}`;
     }
     config.url = config.url?.replace(/\/$/, '');
     return config;

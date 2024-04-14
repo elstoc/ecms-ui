@@ -2,37 +2,41 @@ import { axiosClient, axiosSecureClient } from './axiosClients';
 import { getStorage, setStorage } from '../utils/localStorage';
 
 export const TOKEN_KEY = 'access-token';
+export const TOKEN_EXPIRY_KEY = 'access-token-expiry';
 
-export const getAccessToken = (): string => {
-    return getStorage(TOKEN_KEY);
+export const getAccessToken = (): { accessToken: string, accessTokenExpiry: number } => {
+    const accessToken = getStorage(TOKEN_KEY);
+    const accessTokenExpiry = parseInt(getStorage(TOKEN_EXPIRY_KEY) || '0');
+    return { accessToken, accessTokenExpiry };
 };
 
-const setAccessToken = (token: string): void => {
+const setAccessToken = (token: string, expiry: number): void => {
     setStorage(TOKEN_KEY, token);
+    setStorage(TOKEN_EXPIRY_KEY, expiry.toString());
 };
 
 export const login = async (userId: string, password: string): Promise<void> => {
     const response = await axiosClient.post<{ id: string, accessToken: string, accessTokenExpiry: number; }>('auth/login', { id: userId, password });
-    const { accessToken } = response.data;
-    setAccessToken(accessToken);
+    const { accessToken, accessTokenExpiry } = response.data;
+    setAccessToken(accessToken, accessTokenExpiry);
     console.log('logged in');
 };
 
 export const logout = async (): Promise<void> => {
     await axiosClient.post('auth/logout');
-    setAccessToken('');
+    setAccessToken('', 0);
     console.log('logged out');
 };
 
 export const refreshAccessToken = async (): Promise<void> => {
     try {
         const loggedUserInfo = (await axiosClient.post('auth/refresh')).data;
-        const { accessToken } = loggedUserInfo;
-        setAccessToken(accessToken);
+        const { accessToken, accessTokenExpiry } = loggedUserInfo;
+        setAccessToken(accessToken, accessTokenExpiry);
         console.log('access token refreshed');
     } catch (e) {
         console.log('Error', e);   
-        setAccessToken('');
+        setAccessToken('', 0);
     }
 };
 
