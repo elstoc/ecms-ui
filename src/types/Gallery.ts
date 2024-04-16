@@ -17,6 +17,6 @@ export type ImageMetadata = {
 }
 
 export type GalleryContents = {
-    imageCount: number;
     images: ImageMetadata[];
+    allImageFiles: string[];
 }

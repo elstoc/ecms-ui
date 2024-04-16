@@ -1,12 +1,12 @@
+import React, { FC, ReactElement, useCallback, useEffect, useState } from 'react';
+import { Navigate, Route, Routes, useParams } from 'react-router';
 import { useResizeDetector } from 'react-resize-detector';
-import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Helmet } from 'react-helmet';
 
 import { HandleQueryState } from '../utils/HandleQueryState';
 import { useGalleryContents } from '../../hooks/useApiQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
-import { Route, Routes, useParams } from 'react-router';
 
 export type GalleryProps = {
     apiPath: string;
@@ -29,14 +29,30 @@ const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, 
     const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);
     const [ queryState, galleryContent ] = useGalleryContents(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
+    const { images, allImageFiles } = galleryContent ?? {};
 
-    const loadMoreImages = useCallback(() => {
+    const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === lightBoxImageName) ?? -1;
+
+    const loadMoreImages = useCallback((minimum?: number) => {
         setMaxImagesToLoad((prevMaxImages) =>
-            prevMaxImages < galleryContent!.imageCount
-                ? prevMaxImages + batchSize
+            prevMaxImages < (allImageFiles?.length ?? 0)
+                ? Math.max(prevMaxImages, minimum ?? 0) + batchSize
                 : prevMaxImages
         );
-    }, [galleryContent, batchSize]);
+    }, [allImageFiles, batchSize]);
+
+    useEffect(() => {
+        if ( images && allImageFiles
+             && lightBoxImageIndex >= (images.length - 2) 
+             && images.length < allImageFiles.length
+        ) {
+            loadMoreImages(lightBoxImageIndex);
+        }
+    }, [images, allImageFiles, loadMoreImages, lightBoxImageIndex]);
+
+    if (galleryContent?.images && lightBoxImageName && lightBoxImageIndex < 0) {
+        return <Navigate to='..' replace={true} />;
+    }
 
     return (
         <div ref={widthRef} className="gallery">
@@ -49,7 +65,7 @@ const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, 
                     loadMoreImages={loadMoreImages}
                     marginPx={marginPx}
                     threshold={threshold}
-                    lightBoxImageName={lightBoxImageName}
+                    lightBoxImageIndex={lightBoxImageIndex}
                 />
             </HandleQueryState>
         </div>

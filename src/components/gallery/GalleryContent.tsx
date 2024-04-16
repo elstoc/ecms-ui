@@ -1,5 +1,4 @@
-import React, { FC, ReactElement, createRef, useMemo, useEffect } from 'react';
-import { Navigate } from 'react-router-dom';
+import React, { FC, ReactElement, createRef, useMemo } from 'react';
 
 import { useElementIsVisible } from '../../hooks/useElementIsVisible';
 import { GalleryThumb } from './GalleryThumb';
@@ -14,36 +13,24 @@ export type GalleryContentProps = {
     loadMoreImages: () => void;
     marginPx: number;
     threshold: number;
-    lightBoxImageName?: string;
+    lightBoxImageIndex: number;
 }
 
 export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => {
-    const { title, galleryContent, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageName } = props;
-    const { images, imageCount } = galleryContent;
-
-    const lightBoxImageIndex = images.findIndex((image) => image.fileName === lightBoxImageName);
+    const { title, galleryContent, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageIndex } = props;
+    const { images } = galleryContent;
 
     const refTriggerLoadWhenVisible = createRef<HTMLAnchorElement>();
     useElementIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
-
-    useEffect(() => {
-        if (lightBoxImageIndex >= (images.length - 2) && images.length < imageCount) {
-            loadMoreImages();
-        }
-    }, [images, imageCount, lightBoxImageIndex, loadMoreImages]);
 
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
         return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
     }, [images, galleryDivWidth, marginPx]);
 
-    if (lightBoxImageName && lightBoxImageIndex < 0) {
-        return <Navigate to='..' replace={true} />;
-    }
-
     return (
         <div className="gallery-content">
-            {lightBoxImageName &&
+            {images[lightBoxImageIndex] &&
                 <LightBox
                     parentTitle={title}
                     currImage={images[lightBoxImageIndex]}
@@ -71,26 +58,26 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
     );
 };
 
-const getResizeRatios = (widths: number[], divWidth: number, marginPx: number): number[] => {
+const getResizeRatios = (thumbWidths: number[], divWidth: number, marginPx: number): number[] => {
     let nextRowWidthOfThumbs = 0,
         nextRowImageCount = 0;
-    const ratios: number[] = [];
+    const resizeRatios: number[] = [];
 
-    widths.forEach((width) => {
+    thumbWidths.forEach((thumbWidth) => {
         nextRowImageCount++;
-        nextRowWidthOfThumbs += width;
+        nextRowWidthOfThumbs += thumbWidth;
         const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
 
         if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
             const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
-            ratios.push(...Array(nextRowImageCount).fill(resizeRatio));
+            resizeRatios.push(...Array(nextRowImageCount).fill(resizeRatio));
             nextRowWidthOfThumbs = nextRowImageCount = 0;
         }
     });
 
-    if (widths.length > ratios.length) {
-        ratios.push(...Array(nextRowImageCount).fill(1));
+    if (thumbWidths.length > resizeRatios.length) {
+        resizeRatios.push(...Array(nextRowImageCount).fill(1));
     }
 
-    return ratios;
+    return resizeRatios;
 };
