@@ -50,8 +50,11 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if (lastLightBoxImageIndex !== -1 && lightBoxImageIndex === -1) {
-            refLastLightBoxImage.current?.scrollIntoView({ block: 'nearest' });
+        const refElement = refLastLightBoxImage.current;
+        if (refElement && lightBoxImageIndex === -1) {
+            setTimeout(() => {
+                refElement.scrollIntoView({ block: 'nearest' });
+            }, 1);
         }
         setLastLighBoxImageIndex(lightBoxImageIndex);
     });
