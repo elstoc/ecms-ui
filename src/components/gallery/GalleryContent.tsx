@@ -34,8 +34,8 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
     const processedImages: GalleryThumbProps[] = useMemo(() => (
         images.map((image, index) => {
             const { fileName, description, thumbSrcUrl } = image;
-            const widthPx = image.thumbDimensions.width * resizeRatios[index];
-            const heightPx = image.thumbDimensions.height * resizeRatios[index];
+            const widthPx = Math.trunc(image.thumbDimensions.width * resizeRatios[index]);
+            const heightPx = Math.trunc(image.thumbDimensions.height * resizeRatios[index]);
 
             let ref: React.RefObject<HTMLAnchorElement> | null = null;
             if (index === lastLightBoxImageIndex) {
