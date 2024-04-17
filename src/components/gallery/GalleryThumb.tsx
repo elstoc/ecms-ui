@@ -3,16 +3,17 @@ import { Link } from 'react-router-dom';
 
 import './GalleryThumb.scss';
 
-type GalleryThumbProps = {
+export type GalleryThumbProps = {
     fileName: string;
     description: string;
-    srcUrl: string;
+    thumbSrcUrl: string;
     widthPx: number;
     heightPx: number;
     marginPx: number;
+    ref: React.RefObject<HTMLAnchorElement> | null;
 }
 
-export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, srcUrl, widthPx, heightPx, marginPx }, ref) => {
+export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, widthPx, heightPx, marginPx }, ref) => {
     const style = {
         width: `${widthPx}px`,
         height: `${heightPx}px`,
@@ -28,7 +29,7 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
             ref={ref}
         >
             <img
-                src={srcUrl}
+                src={thumbSrcUrl}
                 alt={fileName}
             />
             <div className='overlay'>{description}</div>

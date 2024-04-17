@@ -1,7 +1,7 @@
-import React, { FC, ReactElement, createRef, useMemo } from 'react';
+import React, { FC, ReactElement, createRef, useEffect, useMemo } from 'react';
 
 import { useElementIsVisible } from '../../hooks/useElementIsVisible';
-import { GalleryThumb } from './GalleryThumb';
+import { GalleryThumb, GalleryThumbProps } from './GalleryThumb';
 import { LightBox } from './LightBox';
 import { GalleryContents } from '../../types/Gallery';
 import './GalleryContent.css';
@@ -21,12 +21,37 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
     const { images } = galleryContent;
 
     const refTriggerLoadWhenVisible = createRef<HTMLAnchorElement>();
+    const refLightBoxImage = createRef<HTMLAnchorElement>();
+
     useElementIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
         return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
     }, [images, galleryDivWidth, marginPx]);
+
+    const processedImages: GalleryThumbProps[] = useMemo(() => (
+        images.map((image, index) => {
+            const { fileName, description, thumbSrcUrl } = image;
+            const widthPx = image.thumbDimensions.width * resizeRatios[index];
+            const heightPx = image.thumbDimensions.height * resizeRatios[index];
+
+            let ref: React.RefObject<HTMLAnchorElement> | null = null;
+            if (index === lightBoxImageIndex) {
+                ref = refLightBoxImage;
+            } else if (index === images.length - threshold) {
+                ref = refTriggerLoadWhenVisible;
+            }
+
+            return { thumbSrcUrl, fileName, description, marginPx, widthPx, heightPx, ref };
+        })
+    ) , [images, resizeRatios, marginPx, lightBoxImageIndex, refLightBoxImage, refTriggerLoadWhenVisible, threshold]);
+
+    useEffect(() => {
+        if (images[lightBoxImageIndex]) {
+            refLightBoxImage.current?.scrollIntoView({ block: 'center' });
+        }
+    });
 
     return (
         <div className="gallery-content">
@@ -38,20 +63,10 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
                     prevImage={images[lightBoxImageIndex - 1]}
                 />
             }
-            {images.map((image, index) =>
+            {processedImages.map((thumbProps) =>
                 <GalleryThumb
-                    key={image.fileName}
-                    fileName={image.fileName}
-                    description={image.description}
-                    srcUrl={image.thumbSrcUrl}
-                    widthPx={Math.trunc(image.thumbDimensions.width * resizeRatios[index])}
-                    heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
-                    marginPx={marginPx}
-                    ref={
-                        index === images.length - threshold
-                            ? refTriggerLoadWhenVisible
-                            : null
-                    }
+                    key={thumbProps.fileName}
+                    {...thumbProps}
                 />
             )}
         </div>
