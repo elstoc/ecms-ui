@@ -19,6 +19,13 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     const [, setSearchParams] = useSearchParams();
 
     const unsetEditMode = useCallback(() => setSearchParams(), [setSearchParams]);
+    
+    const cancelEdit = useCallback(() => {
+        // eslint-disable-next-line no-restricted-globals
+        if (editedMarkdown === mdPage?.content || confirm('You have unsaved changes. Are you sure you wish to leave?')) {
+            unsetEditMode();
+        }
+    }, [editedMarkdown, mdPage, unsetEditMode]);
 
     const saveMd = useCallback(async () => {
         try {
@@ -50,7 +57,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     return (
         <>
             <div className='markdown-toolbox'>
-                <Icon name='cancel' onClick={unsetEditMode} tooltipContent='cancel edit'/>
+                <Icon name='cancel' onClick={cancelEdit} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
                 <Icon name='delete' disabled={!mdPage?.canDelete} onClick={deleteMd} tooltipContent='delete page'/>
             </div>
