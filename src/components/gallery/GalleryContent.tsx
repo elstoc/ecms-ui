@@ -53,7 +53,7 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
         const refElement = refLastLightBoxImage.current;
         if (refElement && lightBoxImageIndex === -1) {
             setTimeout(() => {
-                refElement.scrollIntoView({ block: 'nearest' });
+                refElement.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
             }, 1);
         }
         setLastLighBoxImageIndex(lightBoxImageIndex);
