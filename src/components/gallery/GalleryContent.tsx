@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, createRef, useEffect, useMemo } from 'react';
+import React, { FC, ReactElement, createRef, useEffect, useMemo, useState } from 'react';
 
 import { useElementIsVisible } from '../../hooks/useElementIsVisible';
 import { GalleryThumb, GalleryThumbProps } from './GalleryThumb';
@@ -19,9 +19,10 @@ export type GalleryContentProps = {
 export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => {
     const { title, galleryContent, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageIndex } = props;
     const { images } = galleryContent;
-
+    
+    const [lastLightBoxImageIndex, setLastLighBoxImageIndex] = useState(-1);
     const refTriggerLoadWhenVisible = createRef<HTMLAnchorElement>();
-    const refLightBoxImage = createRef<HTMLAnchorElement>();
+    const refLastLightBoxImage = createRef<HTMLAnchorElement>();
 
     useElementIsVisible(refTriggerLoadWhenVisible, loadMoreImages);
 
@@ -37,20 +38,22 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
             const heightPx = image.thumbDimensions.height * resizeRatios[index];
 
             let ref: React.RefObject<HTMLAnchorElement> | null = null;
-            if (index === lightBoxImageIndex) {
-                ref = refLightBoxImage;
+            if (index === lastLightBoxImageIndex) {
+                ref = refLastLightBoxImage;
             } else if (index === images.length - threshold) {
                 ref = refTriggerLoadWhenVisible;
             }
 
             return { thumbSrcUrl, fileName, description, marginPx, widthPx, heightPx, ref };
         })
-    ) , [images, resizeRatios, marginPx, lightBoxImageIndex, refLightBoxImage, refTriggerLoadWhenVisible, threshold]);
+    ) , [images, resizeRatios, marginPx, lastLightBoxImageIndex, refLastLightBoxImage, refTriggerLoadWhenVisible, threshold]);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
-        if (images[lightBoxImageIndex]) {
-            refLightBoxImage.current?.scrollIntoView({ block: 'center' });
+        if (lastLightBoxImageIndex !== -1 && lightBoxImageIndex === -1) {
+            refLastLightBoxImage.current?.scrollIntoView({ block: 'nearest' });
         }
+        setLastLighBoxImageIndex(lightBoxImageIndex);
     });
 
     return (
