@@ -5,6 +5,7 @@ import { ComponentMetadata } from '../../types/Site';
 import { Gallery } from '../gallery/Gallery';
 import { Markdown } from '../markdown/Markdown';
 import { Auth } from '../auth/Auth';
+import { VideoDb } from '../videodb/VideoDb';
 import { useSiteConfig } from '../../hooks/useApiQueries';
 
 export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ componentMetadata }): ReactElement => {
@@ -42,7 +43,10 @@ export const SiteRoutes: FC<{ componentMetadata: ComponentMetadata[] }> = ({ com
                 <Route
                     key={component.apiPath}
                     path={`${component.uiPath}/*`}
-                    element={<div>videodb component not yet implemented</div>}
+                    element={<VideoDb
+                        apiPath={component.apiPath}
+                        title={component.title}
+                    />}
                 />
             );
         }
