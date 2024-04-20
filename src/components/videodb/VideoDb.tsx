@@ -1,7 +1,11 @@
 import React, { FC, ReactElement } from 'react';
+import { Helmet } from 'react-helmet';
+
 import { useVideoDbVideos } from '../../hooks/useApiQueries';
 import { HandleQueryState } from '../utils/HandleQueryState';
-import { Helmet } from 'react-helmet';
+import { VideoListItem } from './VideoListItem';
+
+import './VideoListItem.scss';
 
 type VideoDbProps = {
     apiPath: string;
@@ -15,7 +19,7 @@ export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
         <>
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
-                <div>{JSON.stringify(videos)}</div>
+                {videos?.map((video) => <VideoListItem key={video.id}  video={video} />)}
             </HandleQueryState>
         </>
     );
