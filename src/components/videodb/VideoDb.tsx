@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { useVideoDbVideos } from '../../hooks/useApiQueries';
 import { HandleQueryState } from '../utils/HandleQueryState';
-import { VideoListItem } from './VideoListItem';
+import { VideoDbContent } from './VideoDbContent';
 
 import './VideoListItem.scss';
 
@@ -16,11 +16,11 @@ export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
     const [ queryState, videos ] = useVideoDbVideos(apiPath);
 
     return (
-        <>
+        <div className='videodb'>
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
-                {videos?.map((video) => <VideoListItem key={video.id}  video={video} />)}
+                {videos && <VideoDbContent videos={videos} />}
             </HandleQueryState>
-        </>
+        </div>
     );
 };
