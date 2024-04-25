@@ -1,6 +1,7 @@
 import { useCustomQuery } from './useCustomQuery';
 import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree, getUserInfo, getVideoDbVideos } from '../api';
 import { getSiteConfig } from '../api/site';
+import { VideoQueryParams } from '../types/VideoDb';
 
 export const useSiteComponents = () => {
     return useCustomQuery({
@@ -44,9 +45,9 @@ export const useMarkdownTree = (path: string) => {
     });
 };
 
-export const useVideoDbVideos = (path: string) => {
+export const useVideoDbVideos = (path: string, params?: VideoQueryParams) => {
     return useCustomQuery({
-        queryKey: ['markdownTree', path],
-        queryFn: () => getVideoDbVideos(path),
+        queryKey: ['videoDb', `${path}:${JSON.stringify(params)}`],
+        queryFn: () => getVideoDbVideos(path, params),
     });
 };

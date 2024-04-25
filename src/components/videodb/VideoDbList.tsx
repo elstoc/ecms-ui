@@ -7,9 +7,9 @@ type VideoDbContentProps = {
     videos: VideoWithId[];
 }
 
-export const VideoDbContent: FC<VideoDbContentProps> = ({ videos }): ReactElement => {
+export const VideoDbList: FC<VideoDbContentProps> = ({ videos }): ReactElement => {
     return (
-        <div className='videodb-content'>
+        <div className='videodb-list'>
             {videos?.map((video) => <VideoListItem key={video.id}  video={video} />)}
         </div>
     );

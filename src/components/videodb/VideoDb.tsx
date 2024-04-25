@@ -1,11 +1,11 @@
 import React, { FC, ReactElement } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { useVideoDbVideos } from '../../hooks/useApiQueries';
 import { HandleQueryState } from '../utils/HandleQueryState';
-import { VideoDbContent } from './VideoDbContent';
-
-import './VideoListItem.scss';
+import { VideoDbList } from './VideoDbList';
+import { VideoQueryParams } from './VideoQueryParams';
 
 type VideoDbProps = {
     apiPath: string;
@@ -13,13 +13,16 @@ type VideoDbProps = {
 }
 
 export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
-    const [ queryState, videos ] = useVideoDbVideos(apiPath);
+    const [searchParams] = useSearchParams();
+    const params = Object.fromEntries([...searchParams]);
+    const [ queryState, videos ] = useVideoDbVideos(apiPath, params);
 
     return (
         <div className='videodb'>
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
-                {videos && <VideoDbContent videos={videos} />}
+                <VideoQueryParams />
+                {videos && <VideoDbList videos={videos} />}
             </HandleQueryState>
         </div>
     );

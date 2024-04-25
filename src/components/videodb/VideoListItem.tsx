@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from 'react';
 
 import { VideoWithId } from '../../types/VideoDb';
 
+import './VideoListItem.scss';
+
 type VideoDbProps = {
     video: VideoWithId;
 }

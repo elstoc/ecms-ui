@@ -12,3 +12,7 @@ type videoIdOnly = {
 }
 
 export type VideoWithId = Video & videoIdOnly;
+
+export type VideoQueryParams = {
+   maxLength?: number;
+}

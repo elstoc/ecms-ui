@@ -2,6 +2,8 @@ import React, { ReactElement } from 'react';
 
 import './app.scss';
 import 'modern-normalize';
+import '@blueprintjs/core/lib/css/blueprint.css';
+import '@blueprintjs/icons/lib/css/blueprint-icons.css';
 import { SiteRoutes } from './components/site/SiteRoutes';
 import { useSiteComponents } from './hooks/useApiQueries';
 import { Footer } from './components/site/Footer';
