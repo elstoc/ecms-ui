@@ -14,7 +14,7 @@ type VideoDbProps = {
 
 export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { maxLength, titleLike } = Object.fromEntries([...searchParams]);
+    const { maxLength, titleLike, categories } = Object.fromEntries([...searchParams]);
 
     const videoQueryParams: { [key: string]: string } = {};
     if (maxLength !== undefined) {
@@ -23,13 +23,16 @@ export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
     if (titleLike !== undefined) {
         videoQueryParams.titleLike = titleLike;
     }
+    if (categories !== undefined) {
+        videoQueryParams.categories = categories;
+    }
     const [ queryState, videos ] = useVideoDbVideos(apiPath, videoQueryParams);
 
     return (
         <div className='videodb'>
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
-                <VideoQueryParams />
+                <VideoQueryParams apiPath={apiPath} />
                 {videos && <VideoDbList videos={videos} />}
             </HandleQueryState>
         </div>
