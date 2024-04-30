@@ -11,7 +11,7 @@ type VideoDbProps = {
 export const VideoListItem: FC<VideoDbProps> = ({ video }): ReactElement => {
     return (
         <div className='video-list-item'>
-            <div className='video-name'>{ video.name }</div>
+            <div className='video-name'>{ video.title }</div>
             <div className='sub-info'>
                 <span className='category'>{video.category}</span>
                 {video.length_mins > 0 && <span> | {video.length_mins} mins</span>}

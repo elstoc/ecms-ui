@@ -1,5 +1,5 @@
 export type Video = {
-    name: string;
+    title: string;
     category: string;
     director: string;
     length_mins: number;
