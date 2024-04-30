@@ -27,7 +27,10 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
             newParams['titleLike'] = titleLike;
         }
         if (selectedCategories) {
-            newParams['categories'] = selectedCategories.join('|');
+            const categories = selectedCategories.join('|');
+            if (categories.length > 0) {
+                newParams['categories'] = categories;
+            }
         }
         setSearchParams(newParams, {replace: true});
     }, [maxLength, setSearchParams, titleLike, selectedCategories]);
