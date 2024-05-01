@@ -42,7 +42,7 @@ export const OptionalMultiSelectLookup: FC<OptionalMultiSelectLookupParams> = ({
                 key={keyValue.key}
                 roleStructure='listoption'
                 selected={selectedKeys?.includes(keyValue.key)}
-                shouldDismissPopover={false}
+                shouldDismissPopover={true}
                 onClick={() => toggleItem(keyValue)}
             />
         );
@@ -66,7 +66,7 @@ export const OptionalMultiSelectLookup: FC<OptionalMultiSelectLookupParams> = ({
                         itemRenderer={itemRenderer}
                         items={allItemsArray}
                         itemsEqual={areTheyEqual}
-                        onItemSelect={toggleItem}
+                        onItemSelect={() => undefined}
                         onRemove={toggleItem}
                         selectedItems={selectedItems}
                         tagRenderer={tagRenderer}
