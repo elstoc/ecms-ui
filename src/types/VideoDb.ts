@@ -8,12 +8,21 @@ export type Video = {
     progress: string;
 }
 
+export type PrimaryMedium = {
+    pm_media_type: string;
+    pm_watched: string;
+}
+
 type videoIdOnly = {
     id: number;
 }
 
 export type VideoWithId = Video & videoIdOnly;
 
+export type VideoWithIdAndPrimaryMedium = VideoWithId & PrimaryMedium;
+
 export type VideoQueryParams = {
-   maxLength?: number;
+    maxLength?: number;
+    titleLike?: string;
+    categories?: string;
 }

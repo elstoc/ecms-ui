@@ -1,13 +1,13 @@
 import React, { FC, ReactElement } from 'react';
 
-import { VideoWithId } from '../../types/VideoDb';
+import { VideoWithIdAndPrimaryMedium } from '../../types/VideoDb';
 
 import './VideoListItem.scss';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
 
 type VideoDbProps = {
     apiPath: string;
-    video: VideoWithId;
+    video: VideoWithIdAndPrimaryMedium;
 }
 
 export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElement => {
@@ -21,6 +21,7 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
                 {video.length_mins > 0 && <span> | {video.length_mins} mins</span>}
                 {video.watched && <span> | watched: {watchedStatusLookup?.[video.watched]}</span>}
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
+                <span> | {video.pm_media_type} ({watchedStatusLookup?.[video.pm_watched]})</span>
             </div>
         </div>
     );

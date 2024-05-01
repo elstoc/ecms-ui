@@ -1,11 +1,11 @@
 import React, { FC, ReactElement } from 'react';
 
 import { VideoListItem } from './VideoListItem';
-import { VideoWithId } from '../../types/VideoDb';
+import { VideoWithIdAndPrimaryMedium } from '../../types/VideoDb';
 
 type VideoDbContentProps = {
     apiPath: string;
-    videos: VideoWithId[];
+    videos: VideoWithIdAndPrimaryMedium[];
 }
 
 export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath, videos }): ReactElement => {
