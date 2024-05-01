@@ -3,6 +3,7 @@ export type Video = {
     category: string;
     director: string;
     length_mins: number;
+    watched: string;
     to_watch_priority: number;
     progress: string;
 }

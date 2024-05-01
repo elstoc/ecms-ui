@@ -33,7 +33,7 @@ export const VideoDb: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
                 <VideoQueryParams apiPath={apiPath} />
-                {videos && <VideoDbList videos={videos} />}
+                {videos && <VideoDbList videos={videos} apiPath={apiPath} />}
             </HandleQueryState>
         </div>
     );
