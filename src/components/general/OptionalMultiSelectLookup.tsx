@@ -31,6 +31,10 @@ export const OptionalMultiSelectLookup: FC<OptionalMultiSelectLookupParams> = ({
         }
     };
 
+    const clearItems = () => {
+        onSelectionChange?.([]);
+    };
+
     const areTheyEqual = (item1: KeyValue, item2: KeyValue): boolean => {
         return item1.key === item2.key;
     };
@@ -68,6 +72,7 @@ export const OptionalMultiSelectLookup: FC<OptionalMultiSelectLookupParams> = ({
                         itemsEqual={areTheyEqual}
                         onItemSelect={() => undefined}
                         onRemove={toggleItem}
+                        onClear={clearItems}
                         selectedItems={selectedItems}
                         tagRenderer={tagRenderer}
                     />
