@@ -39,8 +39,6 @@ export type VideoSummary = {
     progress: string;
     year: number;
     actors: string;
-    pm_media_type: string;
-    pm_watched: string;
 }
 
 export type PrimaryMedium = {
