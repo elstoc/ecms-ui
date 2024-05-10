@@ -15,36 +15,3 @@ $icon-text-color: black;
 .icon.disabled:hover {
     cursor: not-allowed;
 }
-
-.icon-tooltip {
-    &::after {
-        background: $icon-background-color !important;
-        color: $icon-text-color !important;
-        font-size: 1em !important;
-        padding: 5px !important;
-    }
-    
-    &::before {
-        color: $icon-background-color !important;
-    }
-    
-    &.tooltipped-w::before {
-        border-left-color: $icon-background-color !important;
-    }
-    
-    &.tooltipped-e::before {
-        border-right-color: $icon-background-color !important;
-    }
-    
-    &.tooltipped-n::before,
-    &.tooltipped-ne::before,
-    &.tooltipped-nw::before {
-        border-top-color: $icon-background-color !important;
-    }
-    
-    &.tooltipped-s::before,
-    &.tooltipped-se::before,
-    &.tooltipped-sw::before {
-        border-bottom-color: $icon-background-color !important;
-    }
-}

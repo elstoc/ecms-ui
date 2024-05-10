@@ -1,11 +1,10 @@
 // See https://react-icons.github.io/react-icons for summary of available icons
-// See https://github.com/primer/react/blob/main/src/Tooltip.tsx for clues about how to style your own tooltip component
 
 import React, { FC, ReactElement } from 'react';
 import { FiChevronLeft, FiChevronRight, FiEdit, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
 
 import { IconType } from 'react-icons';
-import { Tooltip } from '@primer/react';
+import { PopoverPosition, Tooltip } from '@blueprintjs/core';
 import './Icon.scss';
 
 const icons: { [key: string]: IconType} = {
@@ -25,10 +24,10 @@ type IconProps = {
     disabled?: boolean;
     onClick?: () => void;
     tooltipContent?: string;
-    tooltipDirection?: 'n' | 'ne' | 'e' | 'se' | 's' | 'sw' | 'w' | 'nw';
+    tooltipPosition?: PopoverPosition;
 };
 
-export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipDirection, disabled = false }): ReactElement => {
+export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosition, disabled = false }): ReactElement => {
     const IconComponent = icons[name];
 
     if (!IconComponent) return <></>;
@@ -40,7 +39,7 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipDire
 
     if (tooltipContent) {
         return (
-            <Tooltip className='icon-tooltip' aria-label={tooltipContent} direction={tooltipDirection ?? 'w'}>
+            <Tooltip className='icon-tooltip' content={tooltipContent} position={tooltipPosition ?? 'left'}>
                 {iconElement}
             </Tooltip>
         );
