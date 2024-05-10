@@ -1,12 +1,12 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import toast from 'react-hot-toast';
 
 import { MarkdownEditSource } from './MarkdownEditSource';
 import { Icon } from '../utils/Icon';
 import { deleteMarkdownPage, putMarkdownPage } from '../../api';
 import { MarkdownPage } from '../../types/Markdown';
+import { OverlayToaster } from '@blueprintjs/core';
 
 export type MarkdownEditPageProps = {
     mdFullPath: string;
@@ -32,7 +32,8 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             await putMarkdownPage(mdFullPath, editedMarkdown);
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-            toast('page saved');
+            const toaster = OverlayToaster.create();
+            toaster.show({ message: 'page saved', timeout: 2000 });
             unsetEditMode();
         } catch (error: unknown) {
             alert('error ' + error);
@@ -46,7 +47,8 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
                 await deleteMarkdownPage(mdFullPath);
                 queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
                 queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                toast('page deleted');
+                const toaster = OverlayToaster.create();
+                toaster.show({ message: 'page deleted', timeout: 2000 });
                 unsetEditMode();
             }
         } catch (error: unknown) {
