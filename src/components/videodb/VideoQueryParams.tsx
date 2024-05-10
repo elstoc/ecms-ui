@@ -19,27 +19,20 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
     const [selectedCategories, setSelectedCategories] = useState(searchParams.get('categories')?.split('|') || undefined);
 
     const setQueryParams = useCallback(() => {
-        const newParams: { [key: string]: string } = { };
-        if (maxLength) {
-            newParams['maxLength'] = maxLength.toString();
-        }
-        if (titleLike !== undefined) {
-            newParams['titleLike'] = titleLike;
-        }
-        if (selectedCategories) {
-            const categories = selectedCategories.join('|');
-            if (categories.length > 0) {
-                newParams['categories'] = categories;
-            }
-        }
-        setSearchParams(newParams, {replace: true});
+        setSearchParams((params) => {
+            params.delete('id');
+            maxLength ? params.set('maxLength', maxLength.toString()) : params.delete('maxLength');
+            titleLike ? params.set('titleLike', titleLike) : params.delete('titleLike');
+            selectedCategories && selectedCategories.length > 0 ? params.set('categories', selectedCategories.join('|')) : params.delete('categories');
+            return params;
+        });
     }, [maxLength, setSearchParams, titleLike, selectedCategories]);
 
     return (
         <div className='video-query-params'>
             <h1>Video Query Params</h1>
-            <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} defaultValue={999} label='Max Length'/>
-            <OptionalStringInput value={titleLike} onValueChange={(value) => setTitleLike(value)} defaultValue='%%' label='Title' />
+            <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} defaultValue={999} label='Shorter Than'/>
+            <OptionalStringInput value={titleLike} onValueChange={(value) => setTitleLike(value)} defaultValue='%%' label='Title Contains' />
             <OptionalMultiSelectLookup allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
             <Button onClick={setQueryParams}>Submit</Button>
         </div>
