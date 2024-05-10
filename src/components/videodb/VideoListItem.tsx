@@ -1,9 +1,11 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useCallback } from 'react';
 
 import { VideoSummaryAndPrimaryMedium } from '../../types/VideoDb';
 
 import './VideoListItem.scss';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
+import { useSearchParams } from 'react-router-dom';
+import { Button } from '@blueprintjs/core';
 
 type VideoDbProps = {
     apiPath: string;
@@ -11,9 +13,17 @@ type VideoDbProps = {
 }
 
 export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElement => {
+    const [, setSearchParams] = useSearchParams();
     const [, categoryLookup] = useVideoDbLookup(apiPath, 'categories');
     const [, watchedStatusLookup] = useVideoDbLookup(apiPath, 'watched_status');
     const [, mediaTypeLookup] = useVideoDbLookup(apiPath, 'media_types');
+
+    const addIdToParams = useCallback((id: string): void => {
+        setSearchParams((params) => {
+            params.set('id', id);
+            return params;
+        });
+    }, [setSearchParams]);
 
     const category = categoryLookup?.[video.category];
     const watchedStatus = watchedStatusLookup?.[video.watched];
@@ -22,7 +32,7 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
 
     return (
         <div className='video-list-item'>
-            <div className='video-name'>{ video.title }</div>
+            <div className='video-name'>{ video.title } <Button onClick={() => addIdToParams(video.id)}>Edit</Button></div>
             <div className='sub-info'>
                 <span className='category'>{category}</span>
                 {video.length_mins > 0 && <span> | {video.length_mins} mins</span>}
