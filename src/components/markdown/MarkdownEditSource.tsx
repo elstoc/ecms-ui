@@ -14,15 +14,13 @@ type MarkdownEditSourceProps = {
 
 export const MarkdownEditSource: FC<MarkdownEditSourceProps> = ({ markdown, setMarkdown }): ReactElement => {
     return (
-        <>
-            <div className='markdown-edit-source'>
-                <CodeMirror
-                    height='100%'
-                    value={markdown}
-                    onChange={(value: string) => setMarkdown(value)}
-                    extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
-                />
-            </div>
-        </>
+        <div className='markdown-edit-source'>
+            <CodeMirror
+                height='100%'
+                value={markdown}
+                onChange={(value: string) => setMarkdown(value)}
+                extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
+            />
+        </div>
     );
 };
