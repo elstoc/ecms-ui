@@ -1,6 +1,6 @@
 @import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
 
-.markdown-render-page {
+.rendered-md {
     padding: 1.5rem 1rem;
     min-height: 100%;
     text-align: justify;
@@ -73,13 +73,13 @@
 }
 
 @media screen and (min-width: 600px) {
-    .markdown-render-page {
+    .rendered-md {
         padding: 1.5rem;
     }
 }
 
 @media screen and (min-width: 1000px) {
-    .markdown-render-page {
+    .rendered-md {
         padding: 1.5rem 3rem;
     }
 }

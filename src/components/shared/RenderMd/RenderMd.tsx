@@ -6,17 +6,17 @@ import emoji from 'remark-emoji';
 import smartypants from 'remark-smartypants';
 import rehypeHighlight from 'rehype-highlight';
 
-import './MarkdownRenderPageCode.scss';
-import './MarkdownRenderPage.scss';
+import './RenderMdCode.scss';
+import './RenderMd.scss';
 
-export type MarkdownRenderPageProps = {
+export type RenderMdProps = {
     markdown: string;
     pageTitle: string;
 };
 
-export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, markdown }): ReactElement => {
+export const RenderMd: FC<RenderMdProps> = ({ pageTitle, markdown }): ReactElement => {
     return (
-        <div className='markdown-render-page'>
+        <span className='rendered-md'>
             {pageTitle && <h1 className='title'>{pageTitle}</h1>}
             <ReactMarkdown
                 remarkPlugins={[
@@ -32,6 +32,6 @@ export const MarkdownRenderPage: FC<MarkdownRenderPageProps> = ({ pageTitle, mar
             >
                 {markdown}
             </ReactMarkdown>
-        </div>
+        </span>
     );
 };
