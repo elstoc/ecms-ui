@@ -4,9 +4,9 @@ import { Button, FocusStyleManager } from '@blueprintjs/core';
 
 import './VideoQueryParams.scss';
 import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
-import { OptionalIntInput } from '../general/OptionalIntInput';
-import { OptionalStringInput } from '../general/OptionaStringInput';
-import { OptionalMultiSelectLookup } from '../general/OptionalMultiSelectLookup';
+import { OptionalIntInput } from '../shared/OptionalIntInput';
+import { OptionalStringInput } from '../shared/OptionaStringInput';
+import { OptionalMultiSelectLookup } from '../shared/OptionalMultiSelectLookup';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
 
 FocusStyleManager.onlyShowFocusOnTabs();
