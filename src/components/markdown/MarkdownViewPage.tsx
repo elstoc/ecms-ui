@@ -6,7 +6,7 @@ import { RenderMd } from '../shared/RenderMd/RenderMd';
 import './MarkdownViewPage.scss';
 
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-import { Icon } from '../utils/Icon';
+import { Icon } from '../shared/Icon/Icon';
 import { MarkdownPage } from '../../types/Markdown';
 
 export type MarkdownViewPageProps = {

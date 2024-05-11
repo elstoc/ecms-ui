@@ -3,7 +3,7 @@ import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
 import { useKeyPress } from '../../../hooks/useKeyPress';
 
 import './LightBox.scss';
-import { Icon } from '../../utils/Icon';
+import { Icon } from '../Icon/Icon';
 
 type LightBoxProps = {
     onClose?: () => void;

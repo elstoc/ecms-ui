@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { EditMd } from '../shared/EditMd/EditMd';
-import { Icon } from '../utils/Icon';
+import { Icon } from '../shared/Icon/Icon';
 import { deleteMarkdownPage, putMarkdownPage } from '../../api';
 import { MarkdownPage } from '../../types/Markdown';
 import { OverlayToaster } from '@blueprintjs/core';
