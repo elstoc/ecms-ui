@@ -1,7 +1,7 @@
 import { AdditionalData } from './Site';
 
 export type MarkdownTree = {
-    apiPath?: string;
+    apiPath: string;
     title?: string;
     uiPath?: string;
     weight?: number;

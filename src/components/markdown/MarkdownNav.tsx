@@ -22,12 +22,9 @@ const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootApiPath: string }> 
     return (
         <ol>
             {children.map((child) => {
-                if (!child.apiPath) {
-                    throw new Error('apiPath not specified');
-                }
                 const linkPath = child.apiPath.replace(`${rootApiPath}/`, './').replace(rootApiPath, '');
                 return (
-                    <React.Fragment key = {child.apiPath} >
+                    <React.Fragment key = {child.apiPath}>
                         <li><NavLink to={linkPath} end>{child?.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} />}
                     </React.Fragment>
