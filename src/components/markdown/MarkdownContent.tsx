@@ -15,12 +15,12 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0];
 };
 
-export const MarkdownContent: FC<{ componentApiPath: string }> = ({ componentApiPath }): ReactElement => {
+export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [ searchParams ] = useSearchParams();
     const mode = searchParams.get('mode');
 
     const { '*': mdRelPath } = useParams();
-    let mdFullPath = componentApiPath;
+    let mdFullPath = apiPath;
     if (mdRelPath) {
         mdFullPath += `/${mdRelPath}`;
     }
