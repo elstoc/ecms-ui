@@ -2,7 +2,7 @@ import React, { FC, ReactElement, createRef, useEffect, useMemo, useState } from
 
 import { useElementIsVisible } from '../../hooks/useElementIsVisible';
 import { GalleryThumb, GalleryThumbProps } from './GalleryThumb';
-import { LightBox } from './LightBox';
+import { GalleryLightBox } from './GalleryLightBox';
 import { GalleryContents } from '../../types/Gallery';
 import './GalleryContent.css';
 
@@ -62,7 +62,7 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
     return (
         <div className="gallery-content">
             {images[lightBoxImageIndex] &&
-                <LightBox
+                <GalleryLightBox
                     parentTitle={title}
                     currImage={images[lightBoxImageIndex]}
                     nextImage={images[lightBoxImageIndex + 1]}
