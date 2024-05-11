@@ -5,16 +5,16 @@ import { markdown as codeMirrorMarkdown, markdownLanguage } from '@codemirror/la
 import { languages } from '@codemirror/language-data';
 import { EditorView } from '@codemirror/view';
 
-import './MarkdownEditSource.scss';
+import './EditMd.scss';
 
-type MarkdownEditSourceProps = {
+type EditMdProps = {
     markdown: string;
     setMarkdown: (value: string) => void;
 }
 
-export const MarkdownEditSource: FC<MarkdownEditSourceProps> = ({ markdown, setMarkdown }): ReactElement => {
+export const EditMd: FC<EditMdProps> = ({ markdown, setMarkdown }): ReactElement => {
     return (
-        <div className='markdown-edit-source'>
+        <div className='edit-markdown'>
             <CodeMirror
                 height='100%'
                 value={markdown}

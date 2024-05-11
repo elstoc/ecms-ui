@@ -1,0 +1,12 @@
+.markdown-edit-source {
+    position: fixed;
+    min-width: 100%;
+    min-height: 100%;
+
+}
+
+@media screen and (min-width: 600px) {
+    .markdown-edit-source {
+        position: absolute;
+    }
+}

@@ -2,11 +2,13 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { MarkdownEditSource } from './MarkdownEditSource';
+import { EditMd } from '../shared/EditMd/EditMd';
 import { Icon } from '../utils/Icon';
 import { deleteMarkdownPage, putMarkdownPage } from '../../api';
 import { MarkdownPage } from '../../types/Markdown';
 import { OverlayToaster } from '@blueprintjs/core';
+
+import './MarkdownEditPage.scss';
 
 export type MarkdownEditPageProps = {
     mdFullPath: string;
@@ -63,7 +65,9 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
                 <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
                 <Icon name='delete' disabled={!mdPage?.canDelete} onClick={deleteMd} tooltipContent='delete page'/>
             </div>
-            <MarkdownEditSource markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
+            <div className='markdown-edit-source'>
+                <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
+            </div>
         </>
     );
 };

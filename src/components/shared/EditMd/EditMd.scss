@@ -1,10 +1,6 @@
 @import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
 
-.markdown-edit-source {
-    position: fixed;
-    min-width: 100%;
-    min-height: 100%;
-
+.edit-markdown {
     >div {
         position: absolute;
         width: 100%;
@@ -14,11 +10,5 @@
         font-family: 'hack', Courier, monospace;
         font-size: 0.9em;
         line-height: 1.5;
-    }
-}
-
-@media screen and (min-width: 600px) {
-    .markdown-edit-source {
-        position: absolute;
     }
 }
