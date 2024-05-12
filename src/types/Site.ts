@@ -7,12 +7,34 @@ export type SiteConfig = {
     footerText: string;
 };
 
-export type ComponentMetadata = {
+export enum ComponentTypes {
+    gallery = 'gallery',
+    markdown = 'markdown',
+    videodb = 'videodb'
+}
+
+export type ComponentMetadataCommon = {
     apiPath: string;
     uiPath: string;
     title: string;
-    type: string;
     weight?: number;
     restrict?: string;
-    additionalData: AdditionalData;
 }
+
+export type GalleryComponentMetadata = ComponentMetadataCommon & {
+    type: ComponentTypes.gallery;
+    marginPx: number;
+    batchSize: number;
+    threshold: number;
+}
+
+export type MarkdownComponentMetadata = ComponentMetadataCommon & {
+    type: ComponentTypes.markdown;
+    includeNav: boolean;
+}
+
+export type VideoDbComponentMetadata = ComponentMetadataCommon & {
+    type: ComponentTypes.videodb;
+}
+
+export type ComponentMetadata = GalleryComponentMetadata | MarkdownComponentMetadata | VideoDbComponentMetadata;
