@@ -1,7 +1,3 @@
-export type AdditionalData = {
-    [key: string]: boolean | number | string | undefined; 
-};
-
 export type MarkdownTree = {
     apiPath: string;
     title?: string;
@@ -9,7 +5,6 @@ export type MarkdownTree = {
     weight?: number;
     restrict?: string;
     allowWrite?: string;
-    additionalData?: AdditionalData;
     children?: MarkdownTree[];
 }
 
