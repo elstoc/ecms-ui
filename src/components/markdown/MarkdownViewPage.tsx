@@ -2,12 +2,11 @@
 import React, { FC, ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { RenderMd } from '../shared/RenderMd/RenderMd';
-import './MarkdownViewPage.scss';
-
+import { RenderMd, Icon } from '../shared';
 import { splitFrontMatter } from '../../utils/splitFrontMatter';
-import { Icon } from '../shared/Icon/Icon';
 import { MarkdownPage } from '../../types/Markdown';
+
+import './MarkdownViewPage.scss';
 
 export type MarkdownViewPageProps = {
     mdFullPath: string;

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { ComponentMetadata } from '../../types/Site';
 import { Component } from './Component';
-import { Auth } from '../auth/Auth';
+import { Auth } from '../auth';
 import { useSiteConfig } from '../../hooks/useApiQueries';
 
 export const Components: FC<{ siteComponents?: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {

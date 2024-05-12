@@ -1,9 +1,9 @@
 import React, { MouseEvent, FC, ReactElement, useEffect } from 'react';
 
 import { useKeyPress } from '../../../hooks/useKeyPress';
+import { Icon } from '..';
 
 import './LightBox.scss';
-import { Icon } from '../Icon/Icon';
 
 type LightBoxProps = {
     onClose?: () => void;

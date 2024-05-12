@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 
 import { ComponentMetadata, ComponentTypes } from '../../types/Site';
-import { Gallery } from '../gallery/Gallery';
-import { Markdown } from '../markdown/Markdown';
+import { Gallery } from '../gallery';
+import { Markdown } from '../markdown';
 import { VideoDb } from '../videodb/VideoDb';
 
 export const Component: FC<{ metadata: ComponentMetadata }> = ({ metadata }): ReactElement => {
