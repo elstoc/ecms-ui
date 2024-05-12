@@ -1,4 +1,6 @@
-import { AdditionalData } from './Site';
+export type AdditionalData = {
+    [key: string]: boolean | number | string | undefined; 
+};
 
 export type MarkdownTree = {
     apiPath: string;

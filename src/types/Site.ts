@@ -1,7 +1,3 @@
-export type AdditionalData = {
-    [key: string]: boolean | number | string | undefined; 
-};
-
 export type SiteConfig = {
     authEnabled: boolean;
     footerText: string;
