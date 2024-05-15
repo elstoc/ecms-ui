@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "chmod +x ./configure-runtime-env.sh && ./configure-runtime-env.sh && mv ./runtime-env.js public && webpack serve --port 3000",
     "build": "rm -rf ./dist && mkdir ./dist && touch dist/runtime-env.js && NODE_ENV=production webpack",
+    "get-stats": "rm -rf ./dist && mkdir ./dist && NODE_ENV=production webpack --profile --json > dist/stats.json",
+    "analyse-stats": "webpack-bundle-analyzer dist/stats.json",
     "docker-build": "docker build -t ecms-ui .",
     "docker-run": "docker run --net=host --env-file=.env ecms-ui",
     "lint": "eslint . --ext .ts --ext .tsx",
@@ -42,6 +44,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4",
     "webpack": "^5.74.0",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^4.10.0",
     "webpack-dev-server": "^4.11.1"
   },

@@ -1,13 +1,15 @@
-import React, { FC, ReactElement, useCallback, useState } from 'react';
+import React, { FC, ReactElement, Suspense, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { EditMd, Icon } from '../shared';
+import { Icon } from '../shared/icon';
 import { deleteMarkdownPage, putMarkdownPage } from '../../api';
 import { MarkdownPage } from '../../types/Markdown';
 import { OverlayToaster } from '@blueprintjs/core';
 
 import './MarkdownEditPage.scss';
+
+const EditMd = React.lazy(() => import(/* webpackChunkName: 'EditMd' */ '../shared/editmd/EditMdAsDefault'));
 
 export type MarkdownEditPageProps = {
     mdFullPath: string;
@@ -58,7 +60,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     }, [mdFullPath, queryClient, unsetEditMode]);
 
     return (
-        <>
+        <Suspense fallback='Loading...'>
             <div className='markdown-toolbox'>
                 <Icon name='cancel' onClick={cancelEdit} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
@@ -67,6 +69,6 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             <div className='markdown-edit-source'>
                 <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
             </div>
-        </>
+        </Suspense>
     );
 };

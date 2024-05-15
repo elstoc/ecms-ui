@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 
 import { useNavigate } from 'react-router-dom';
 import { ImageMetadata } from '../../types/Gallery';
-import { LightBox } from '../shared';
+import { LightBox } from '../shared/lightbox';
 
 type GLightBoxProps = {
     parentTitle: string;

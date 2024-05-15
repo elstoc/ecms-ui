@@ -16,7 +16,8 @@ module.exports = {
   output: {
     publicPath: '/',
     path: __dirname + '/dist/',
-    filename: '[name].[contenthash].js'
+    filename: '[name].[contenthash].js',
+    chunkFilename: '[name].chunk.[chunkhash].js'
   },
   optimization: {
     minimize: prod,
