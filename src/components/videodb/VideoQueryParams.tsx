@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Button, FocusStyleManager } from '@blueprintjs/core';
+import { Button } from '@blueprintjs/core';
 
 import './VideoQueryParams.scss';
 import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
@@ -8,8 +8,6 @@ import { OptionalIntInput } from '../shared/OptionalIntInput';
 import { OptionalStringInput } from '../shared/OptionaStringInput';
 import { OptionalMultiSelectLookup } from '../shared/OptionalMultiSelectLookup';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
-
-FocusStyleManager.onlyShowFocusOnTabs();
 
 export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
     const [, categoryLookup] = useVideoDbLookup(apiPath, 'categories');
