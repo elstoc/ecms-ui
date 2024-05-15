@@ -4,6 +4,7 @@
     min-height: 100%;
     display: block;
     font-size: 1.08rem;
+    font-weight: 350;
 
     ol {
         list-style-type: none;
@@ -15,12 +16,12 @@
     }
 
     >ol>li:first-child {
-        padding-bottom: 0.5em;
+        padding-bottom: 0.5rem;
         font-size: 1.5rem;
     }
 
     li {
-        margin: 0.3em 0;
+        margin: 0.4em 0;
     }
 
     a:visited,
@@ -32,7 +33,7 @@
     }
 
     a.active {
-        font-weight: bold;
+        font-weight: 500;
     }
 }
 
