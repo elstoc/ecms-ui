@@ -14,7 +14,7 @@ export type MarkdownEditPageProps = {
     mdPage?: MarkdownPage;
 };
 
-export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage }): ReactElement => {
+const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage }): ReactElement => {
     const queryClient = useQueryClient();
     const [editedMarkdown, setEditedMarkdown] = useState(mdPage?.content ?? '');
     const [, setSearchParams] = useSearchParams();
@@ -70,3 +70,5 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
         </>
     );
 };
+
+export default MarkdownEditPage;
