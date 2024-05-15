@@ -9,7 +9,7 @@ import { OverlayToaster } from '@blueprintjs/core';
 
 import './MarkdownEditPage.scss';
 
-const EditMd = React.lazy(() => import(/* webpackChunkName: 'EditMd' */ '../shared/editmd/EditMdAsDefault'));
+const EditMd = React.lazy(() => import('../shared/editmd/EditMdAsDefault'));
 
 export type MarkdownEditPageProps = {
     mdFullPath: string;

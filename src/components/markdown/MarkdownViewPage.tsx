@@ -8,7 +8,7 @@ import { MarkdownPage } from '../../types/Markdown';
 
 import './MarkdownViewPage.scss';
 
-const RenderMd = React.lazy(() => import(/* webpackChunkName: 'RenderMd' */'../shared/rendermd/RenderMdAsDefault'));
+const RenderMd = React.lazy(() => import('../shared/rendermd/RenderMdAsDefault'));
 
 export type MarkdownViewPageProps = {
     mdFullPath: string;
