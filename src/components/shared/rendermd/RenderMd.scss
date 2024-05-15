@@ -12,7 +12,7 @@
     h1, h2, h3, h4, h5, h6 {
         margin: 2rem 0px 1.5rem 0px;
         padding: 0;
-        font-weight: 400;
+        font-weight: 500;
     }
 
     h1 { font-size: 1.9em; font-weight: 500 }
@@ -54,7 +54,7 @@
     }
 
     dt {
-        font-weight: 400;
+        font-weight: 500;
         margin-top: 0.5em;
         margin-bottom: 0.5em;
     }
@@ -70,5 +70,9 @@
     code, code * {
         font-size: 1rem;
         font-family: 'hack', Courier, monospace;
+    }
+
+    strong {
+        font-weight: 500;
     }
 }
