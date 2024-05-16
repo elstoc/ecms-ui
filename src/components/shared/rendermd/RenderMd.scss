@@ -5,25 +5,26 @@
 
     * {
         font-size: 1.1rem;
-        line-height: 1.65rem;
+        line-height: 1.7rem;
         font-weight: 300;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        margin: 2rem 0px 1.5rem 0px;
+        margin: 2.5rem 0px 1.5rem 0px;
         padding: 0;
-        font-weight: 500;
+        font-weight: 600;
+        font-family: 'Raleway', sans-serif;
     }
 
-    h1 { font-size: 1.9em; }
-    h2 { font-size: 1.7em; }
-    h3 { font-size: 1.3em; }
-    h4, h5, h6 { font-size: 1em; }
+    h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.7rem; }
+    h3 { font-size: 1.3rem; }
+    h4, h5, h6 { font-size: 1rem; }
     h5 { font-style: italic; }
     h6 { color: red; text-decoration: line-through; }
 
     h1.title {
-        font-size: 2.3em;
+        font-size: 2.3rem;
         margin-top: 0;
     }
 
@@ -34,33 +35,33 @@
     table, th, td {
         border: 1px solid;
         margin: 0;
-        padding: 0.2em;
+        padding: 0.2rem;
     }
 
     ol, ul {
-        padding-left: 2em;
+        padding-left: 2rem;
     }
 
     blockquote {
-        margin-left: 1.5em;
+        margin-left: 1.5rem;
     }
 
     p {
-        margin: 1em 0;
+        margin: 1rem 0;
     }
 
     li, li p, tr, td {
-        margin: 0.2em 0;
+        margin: 0.2rem 0;
     }
 
     dt {
         font-weight: 500;
-        margin-top: 0.5em;
-        margin-bottom: 0.5em;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
     }
 
     dd {
-        margin-left: 1.5em;
+        margin-left: 1.5rem;
     }
 
     dd p:first-child {
@@ -68,7 +69,9 @@
     }
 
     code, code * {
-        font-size: 1rem;
+        line-height: 1.4rem;
+        padding: 0;
+        font-size: 0.95rem;
         font-family: 'hack', Courier, monospace;
     }
 
