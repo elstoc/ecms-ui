@@ -3,9 +3,8 @@
     margin-left: 0;
     min-height: 100%;
     display: block;
-    font-size: 1.08rem;
-    font-weight: 300;
-    font-family: 'Raleway', sans-serif;
+    font-size: 1.03rem;
+    font-weight: 400;
 
     ol {
         list-style-type: none;
@@ -17,7 +16,7 @@
     }
 
     >ol>li:first-child {
-        padding-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
         font-size: 1.4rem;
         font-weight: 600;
     }
@@ -36,6 +35,10 @@
 
     a.active {
         font-weight: 600;
+    }
+
+    a:focus {
+        outline: none; // remove BlueprintJS outline
     }
 }
 

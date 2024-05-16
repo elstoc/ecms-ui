@@ -32,9 +32,9 @@
 
 @media screen and (min-width: 1650px) {
     .markdown-nav-container {
-        width: 500px;
+        width: 450px;
     }
     .markdown-page-container {
-        width: 1000px;
+        width: 1050px;
     }
 }

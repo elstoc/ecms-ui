@@ -29,14 +29,18 @@
     }
 
     a.active {
-        font-weight: bolder;
+        font-weight: 600;
     }
 
     a.single-component {
-        font-size: 1.2em;
-        font-weight: bold;
+        font-size: 1.2rem;
+        font-weight: 600;
         border-right: none;
         border-left: none;
         padding-left: 0;
+    }
+
+    a:focus {
+        outline: none; // remove BlueprintJS outline
     }
 }
