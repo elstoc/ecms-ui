@@ -69,15 +69,21 @@
         margin-top: 0;
     }
 
-    pre code {
-        padding: 0.5em 0.8em;
+    code,
+    code * {
+        padding: 0;
+        font-family: 'hack', Courier, monospace;
+        font-size: 1rem;
     }
 
-    code, code * {
+    pre code,
+    pre code * {
         line-height: 1.4rem;
-        padding: 0;
-        font-size: 0.95rem;
-        font-family: 'hack', Courier, monospace;
+        font-size: 0.9rem;
+    }
+
+    pre code {
+        padding: 0.5em 0.8em;
     }
 
     strong {
