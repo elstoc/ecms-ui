@@ -13,6 +13,6 @@ type QueryOptions<T> = {
 }
 
 export const useCustomQuery = <T>(options: QueryOptions<T>): [QueryState, T | undefined] => {
-    const { isLoading, isError, error, data } = useQuery({ ...options, refetchInterval: (_, query) => query.state.error ? 0 : config.queryRefetchInterval });
+    const { isLoading, isError, error, data } = useQuery({ ...options, refetchInterval: (query) => query.state.error ? 0 : config.queryRefetchInterval });
     return [{ isLoading, isError, error }, data ];
 };
