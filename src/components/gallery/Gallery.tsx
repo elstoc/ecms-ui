@@ -1,5 +1,6 @@
 import React, { FC, ReactElement, useCallback, useEffect, useState } from 'react';
-import { Navigate, Route, Routes, useParams } from 'react-router';
+import { Navigate } from 'react-router';
+import { useSearchParams } from 'react-router-dom';
 import { useResizeDetector } from 'react-resize-detector';
 import { Helmet } from 'react-helmet';
 
@@ -17,16 +18,9 @@ export type GalleryProps = {
     threshold: number;
 }
 
-export const Gallery: FC<GalleryProps> = (props): ReactElement => {
-    return (
-        <Routes>
-            <Route path=":lightBoxImageName?" element={<RoutedGallery {...props} />} />
-        </Routes>
-    );
-};
-
-const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
-    const { lightBoxImageName } = useParams();
+export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
+    const [searchParams] = useSearchParams();
+    const lightBoxImageName = searchParams.get('file');
     const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);
     const [ queryState, galleryContent ] = useGalleryContents(apiPath, maxImagesToLoad);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });

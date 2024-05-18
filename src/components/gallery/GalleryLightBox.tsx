@@ -18,9 +18,9 @@ export const GalleryLightBox: FC<GLightBoxProps> = ({ parentTitle, currImage, pr
         return <></>;
     }
 
-    const goBack = () => navigate('..', { replace: true });
-    const goPrevImage = () => navigate(`../${prevImage?.fileName}`, { replace: true });
-    const goNextImage = () => navigate(`../${nextImage?.fileName}`, { replace: true });
+    const goBack = () => navigate('.', { replace: true });
+    const goPrevImage = () => navigate(`.?file=${prevImage?.fileName}`, { replace: true });
+    const goNextImage = () => navigate(`.?file=${nextImage?.fileName}`, { replace: true });
 
     return (
         <>
