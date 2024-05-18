@@ -3,6 +3,8 @@ import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree
 import { getSiteConfig } from '../api/site';
 import { VideoQueryParams } from '../types/VideoDb';
 import { getVideoDbLookup } from '../api/videodb';
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { config } from '../utils/config';
 
 export const useSiteComponents = () => {
     return useCustomQuery({
@@ -25,11 +27,13 @@ export const useUserInfo = () => {
     });
 };
 
-export const useGalleryContents = (path: string, limit = 0) => {
-    return useCustomQuery({
+export const useGalleryContent = (path: string, limit = 0) => {
+    const { data } = useSuspenseQuery({
         queryKey: ['galleryContents', path, limit],
         queryFn: () => getGalleryContents(path, limit),
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useMarkdownPage = (path: string) => {
