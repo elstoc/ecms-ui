@@ -7,17 +7,12 @@ import { Helmet } from 'react-helmet';
 import { HandleQueryState } from '../utils/HandleQueryState';
 import { useGalleryContents } from '../../hooks/useApiQueries';
 import { JustifiedGallery } from './JustifiedGallery';
-import './GalleryContent.css';
 import { GalleryLightBox } from './GalleryLightBox';
+import { GalleryComponentMetadata } from '../../types/Site';
 
-export type GalleryContentProps = {
-    apiPath: string;
-    title: string;
-    marginPx: number;
-    batchSize: number;
-}
+import './GalleryContent.css';
 
-export const GalleryContent: FC<GalleryContentProps> = ({ title, apiPath, marginPx, batchSize }): ReactElement => {
+export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, marginPx, batchSize }): ReactElement => {
     const [searchParams] = useSearchParams();
     const lightBoxImageName = searchParams.get('file');
     const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);

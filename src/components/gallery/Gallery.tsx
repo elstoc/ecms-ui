@@ -1,13 +1,12 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, Suspense } from 'react';
+
 import { GalleryContent } from './GalleryContent';
+import { GalleryComponentMetadata } from '../../types/Site';
 
-export type GalleryProps = {
-    apiPath: string;
-    title: string;
-    marginPx: number;
-    batchSize: number;
-}
-
-export const Gallery: FC<GalleryProps> = (props): ReactElement => {
-    return <GalleryContent {...props} />;
+export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
+    return (
+        <Suspense fallback={<div>Loading...</div>}>
+            <GalleryContent {...props} />
+        </Suspense>
+    );
 };
