@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useCallback, useContext, useEffect } from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { Navigate } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 import { useResizeDetector } from 'react-resize-detector';
@@ -19,15 +19,6 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
 
     const { images, allImageFiles } = galleryContent;
 
-    // TODO: Move to context so that LightBox and Gallery can update independently
-    const loadMoreImages = useCallback((minimum?: number) => {
-        setMaxImages?.((prevMaxImages) =>
-            prevMaxImages < (allImageFiles?.length ?? 0)
-                ? Math.max(prevMaxImages, minimum ?? 0) + batchSize
-                : prevMaxImages
-        );
-    }, [allImageFiles, batchSize, setMaxImages]);
-
     // TODO: Move to LightBox component once
     //       (a) maxImages is in global context
     //       (b) useQuery uses Suspense and error boundary (GalleryBoundary component?)
@@ -36,13 +27,12 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
     const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === lightBoxImageName) ?? -1;
 
     useEffect(() => {
-        if ( images && allImageFiles
-             && lightBoxImageIndex >= (images.length - 2) 
+        if ( lightBoxImageIndex > (images.length - 1) 
              && images.length < allImageFiles.length
         ) {
-            loadMoreImages(lightBoxImageIndex);
+            setMaxImages?.(lightBoxImageIndex + 1);
         }
-    }, [images, allImageFiles, loadMoreImages, lightBoxImageIndex]);
+    }, [images, allImageFiles, lightBoxImageIndex, setMaxImages]);
 
     // TODO: Move to LightBox component
     if (galleryContent.images && lightBoxImageName && lightBoxImageIndex < 0) {
@@ -52,9 +42,8 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
 
     return (
         <div ref={widthRef} className="gallery-content">
-            <Helmet><title>{title}</title></Helmet>
+            <Helmet><title>{title}{lightBoxImageName ? ` - ${lightBoxImageName}` : ''}</title></Helmet>
             <GalleryLightBox
-                parentTitle={title}
                 currImage={images?.[lightBoxImageIndex]}
                 nextImage={images?.[lightBoxImageIndex + 1]}
                 prevImage={images?.[lightBoxImageIndex - 1]}
@@ -62,7 +51,6 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
             <JustifiedGallery
                 galleryContent={galleryContent!}
                 galleryDivWidth={galleryDivWidth!}
-                loadMoreImages={loadMoreImages}
                 marginPx={marginPx}
                 lightBoxImageIndex={lightBoxImageIndex}
             />
