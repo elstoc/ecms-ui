@@ -7,6 +7,7 @@ import { HandleQueryState } from '../utils/HandleQueryState';
 import { useGalleryContents } from '../../hooks/useApiQueries';
 import { GalleryContent } from './GalleryContent';
 import './Gallery.css';
+import { GalleryLightBox } from './GalleryLightBox';
 
 export type GalleryProps = {
     apiPath: string;
@@ -58,8 +59,13 @@ const RoutedGallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, 
         <div ref={widthRef} className="gallery">
             <Helmet><title>{title}</title></Helmet>
             <HandleQueryState {...queryState}>
+                <GalleryLightBox
+                    parentTitle={title}
+                    currImage={images?.[lightBoxImageIndex]}
+                    nextImage={images?.[lightBoxImageIndex + 1]}
+                    prevImage={images?.[lightBoxImageIndex - 1]}
+                />
                 <GalleryContent
-                    title={title}
                     galleryContent={galleryContent!}
                     galleryDivWidth={galleryDivWidth!}
                     loadMoreImages={loadMoreImages}

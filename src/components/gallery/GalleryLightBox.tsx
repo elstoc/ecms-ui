@@ -7,13 +7,16 @@ import { LightBox } from '../shared/lightbox';
 
 type GLightBoxProps = {
     parentTitle: string;
-    currImage: ImageMetadata;
-    prevImage: ImageMetadata | undefined;
-    nextImage: ImageMetadata | undefined;
+    currImage?: ImageMetadata;
+    prevImage?: ImageMetadata;
+    nextImage?: ImageMetadata;
 }
 
 export const GalleryLightBox: FC<GLightBoxProps> = ({ parentTitle, currImage, prevImage, nextImage }): ReactElement => {
     const navigate = useNavigate();
+    if (!currImage) {
+        return <></>;
+    }
 
     const goBack = () => navigate('..', { replace: true });
     const goPrevImage = () => navigate(`../${prevImage?.fileName}`, { replace: true });
