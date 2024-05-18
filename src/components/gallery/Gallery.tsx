@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet';
 
 import { HandleQueryState } from '../utils/HandleQueryState';
 import { useGalleryContents } from '../../hooks/useApiQueries';
-import { GalleryContent } from './GalleryContent';
+import { JustifiedGallery } from './JustifiedGallery';
 import './Gallery.css';
 import { GalleryLightBox } from './GalleryLightBox';
 
@@ -15,10 +15,9 @@ export type GalleryProps = {
     title: string;
     marginPx: number;
     batchSize: number;
-    threshold: number;
 }
 
-export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize, threshold }): ReactElement => {
+export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize }): ReactElement => {
     const [searchParams] = useSearchParams();
     const lightBoxImageName = searchParams.get('file');
     const [ maxImagesToLoad, setMaxImagesToLoad ] = useState(batchSize);
@@ -59,12 +58,11 @@ export const Gallery: FC<GalleryProps> = ({ title, apiPath, marginPx, batchSize,
                     nextImage={images?.[lightBoxImageIndex + 1]}
                     prevImage={images?.[lightBoxImageIndex - 1]}
                 />
-                <GalleryContent
+                <JustifiedGallery
                     galleryContent={galleryContent!}
                     galleryDivWidth={galleryDivWidth!}
                     loadMoreImages={loadMoreImages}
                     marginPx={marginPx}
-                    threshold={threshold}
                     lightBoxImageIndex={lightBoxImageIndex}
                 />
             </HandleQueryState>

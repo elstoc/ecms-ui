@@ -21,7 +21,6 @@ export type GalleryComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
     marginPx: number;
     batchSize: number;
-    threshold: number;
 }
 
 export type MarkdownComponentMetadata = ComponentMetadataCommon & {

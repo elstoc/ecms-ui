@@ -4,19 +4,18 @@ import { useNthElementIsVisible } from '../../hooks/useNthElementIsVisible';
 import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
 import { GalleryThumb } from './GalleryThumb';
 import { GalleryContents } from '../../types/Gallery';
-import './GalleryContent.css';
+import './JustifiedGallery.css';
 
-export type GalleryContentProps = {
+export type JustifiedGalleryProps = {
     galleryContent: GalleryContents;
     galleryDivWidth: number;
     loadMoreImages: () => void;
     marginPx: number;
-    threshold: number;
     lightBoxImageIndex: number;
 }
 
-export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => {
-    const { galleryContent, galleryDivWidth, loadMoreImages, marginPx, threshold, lightBoxImageIndex } = props;
+export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement => {
+    const { galleryContent, galleryDivWidth, loadMoreImages, marginPx, lightBoxImageIndex } = props;
     const { images } = galleryContent;
     
     const resizeRatios = useMemo(() => {
@@ -36,11 +35,11 @@ export const GalleryContent: FC<GalleryContentProps> = (props): ReactElement => 
         />
     ));
 
-    useNthElementIsVisible(galleryThumbs, images.length - threshold, loadMoreImages);
+    useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
     useScrollToNthElement(galleryThumbs, lightBoxImageIndex);
 
     return (
-        <div className="gallery-content">
+        <div className="justified-gallery">
             {galleryThumbs}
         </div>
     );

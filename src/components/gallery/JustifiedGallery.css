@@ -1,4 +1,4 @@
-.gallery-content {
+.justified-gallery {
     display: flex;
     flex-flow: row wrap;
     flex-wrap: wrap;
