@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { config } from '../utils/config';
 
 type QueryState = {
-    isLoading: boolean,
+    isPending: boolean,
     isError: boolean,
     error: unknown
 };
@@ -13,6 +13,6 @@ type QueryOptions<T> = {
 }
 
 export const useCustomQuery = <T>(options: QueryOptions<T>): [QueryState, T | undefined] => {
-    const { isLoading, isError, error, data } = useQuery({ ...options, refetchInterval: (query) => query.state.error ? 0 : config.queryRefetchInterval });
-    return [{ isLoading, isError, error }, data ];
+    const { isPending, isError, error, data } = useQuery({ ...options, placeholderData: keepPreviousData, refetchInterval: (query) => query.state.error ? 0 : config.queryRefetchInterval });
+    return [{ isPending, isError, error }, data ];
 };
