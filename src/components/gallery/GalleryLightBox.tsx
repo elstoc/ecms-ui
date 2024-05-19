@@ -12,7 +12,7 @@ export const GalleryLightBox: FC = (): ReactElement => {
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
 
     const imageName = searchParams.get('image');
-    const imageIndex = allImageFiles?.findIndex((fileName) => fileName === imageName) ?? -1;
+    const imageIndex = allImageFiles.findIndex((fileName) => fileName === imageName);
 
     if (images && imageName && imageIndex < 0) {
         // requested LightBox image does not exist

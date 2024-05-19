@@ -31,7 +31,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
     ));
 
     const loadMoreImages = useCallback(() => (
-        alterGalleryState?.({ action: 'incrementMaxImages', maximum: allImageFiles.length })
+        alterGalleryState({ action: 'incrementMaxImages', maximum: allImageFiles.length })
     ), [allImageFiles, alterGalleryState]);
 
     useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
