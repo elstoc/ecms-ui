@@ -1,5 +1,4 @@
-import React, { FC, ReactElement, useContext, useEffect } from 'react';
-import { Navigate } from 'react-router';
+import React, { FC, ReactElement, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useResizeDetector } from 'react-resize-detector';
 import { Helmet } from 'react-helmet';
@@ -12,12 +11,12 @@ import { GalleryLightBox } from './GalleryLightBox';
 import './GalleryContent.css';
 
 export const GalleryContent: FC = (): ReactElement => {
-    const { galleryState, alterGalleryState } = useContext(GalleryStateContext);
-    const { apiPath, title } = galleryState;
-    const galleryContent = useGalleryContent(apiPath, galleryState.maxImages);
+    const { galleryState } = useContext(GalleryStateContext);
+    const { apiPath, title, maxImages } = galleryState;
+    // TODO: combine the following
+    const galleryContent = useGalleryContent(apiPath, maxImages);
+    const { allImageFiles } = galleryContent;
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
-
-    const { images, allImageFiles } = galleryContent;
 
     // TODO: Move to LightBox component once
     //       (a) maxImages is in global context
@@ -26,28 +25,10 @@ export const GalleryContent: FC = (): ReactElement => {
     const lightBoxImageName = searchParams.get('file');
     const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === lightBoxImageName) ?? -1;
 
-    useEffect(() => {
-        if ( lightBoxImageIndex > (images.length - 1) 
-             && images.length < allImageFiles.length
-        ) {
-            alterGalleryState?.({ action: 'setMaxImages', value: lightBoxImageIndex + 1 });
-        }
-    }, [images, allImageFiles, lightBoxImageIndex, alterGalleryState]);
-
-    // TODO: Move to LightBox component
-    if (galleryContent.images && lightBoxImageName && lightBoxImageIndex < 0) {
-        // Handle invalid lightBox image
-        return <Navigate to='..' replace={true} />;
-    }
-
     return (
         <div ref={widthRef} className="gallery-content">
             <Helmet><title>{title}{lightBoxImageName ? ` - ${lightBoxImageName}` : ''}</title></Helmet>
-            <GalleryLightBox
-                currImage={images[lightBoxImageIndex]}
-                nextImage={images[lightBoxImageIndex + 1]}
-                prevImage={images[lightBoxImageIndex - 1]}
-            />
+            <GalleryLightBox />
             <JustifiedGallery
                 galleryContent={galleryContent!}
                 galleryDivWidth={galleryDivWidth!}
