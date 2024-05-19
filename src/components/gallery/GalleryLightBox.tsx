@@ -33,8 +33,8 @@ export const GalleryLightBox: FC = (): ReactElement => {
     return currImage && (
         <LightBox
             onClose={() => setSearchParams({}, { replace: true })}
-            onPrev={prevImage && (() => setSearchParams({ image: prevImage?.fileName }, { replace: true }))}
-            onNext={nextImage && (() => setSearchParams({ image: nextImage?.fileName }, { replace: true }))}
+            onPrev={prevImage && (() => setSearchParams({ image: prevImage.fileName }, { replace: true }))}
+            onNext={nextImage && (() => setSearchParams({ image: nextImage.fileName }, { replace: true }))}
             caption={currImage.description}
             alt={currImage.fileName}
             imageUrl={currImage.fhdSrcUrl}
