@@ -2,8 +2,10 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './app';
+import { ErrorFallback } from './components/site/ErrorFallback';
 
 const queryDefaults = {
     defaultOptions: {
@@ -21,7 +23,9 @@ const root = createRoot(container);
 root.render(
     <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-            <App />
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+                <App />
+            </ErrorBoundary>
         </BrowserRouter>
     </QueryClientProvider>
 );

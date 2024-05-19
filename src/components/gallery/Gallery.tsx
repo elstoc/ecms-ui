@@ -14,7 +14,6 @@ export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
         marginPx, batchSize, apiPath, title
     };
     const { galleryState, alterGalleryState } = useGalleryStateReducer(initialState);
-    // TODO: Add Error Boundary
 
     return (
         <GalleryStateContext.Provider value={{galleryState, alterGalleryState}}>
