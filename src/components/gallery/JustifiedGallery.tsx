@@ -1,27 +1,23 @@
 import React, { FC, ReactElement, useCallback, useContext, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { useNthElementIsVisible } from '../../hooks/useNthElementIsVisible';
 import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
 import { GalleryThumb } from './GalleryThumb';
-import { GalleryContents } from '../../types/Gallery';
-import './JustifiedGallery.css';
 import { GalleryStateContext } from './Gallery';
+import { useGalleryContent } from '../../hooks/useApiQueries';
 
-export type JustifiedGalleryProps = {
-    galleryContent: GalleryContents;
-    galleryDivWidth: number;
-    lightBoxImageIndex: number;
-}
+import './JustifiedGallery.css';
 
-export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement => {
-    const { galleryState, alterGalleryState } = useContext(GalleryStateContext);
-    const { galleryContent, galleryDivWidth, lightBoxImageIndex } = props;
-    const { images, allImageFiles } = galleryContent;
+export const JustifiedGallery: FC<{ galleryDivWidth: number }> = ({ galleryDivWidth }): ReactElement => {
+    const { galleryState: { apiPath, maxImages, marginPx }, alterGalleryState } = useContext(GalleryStateContext);
+    const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
+    const [searchParams] = useSearchParams();
     
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
-        return getResizeRatios(thumbWidths, galleryDivWidth, galleryState.marginPx);
-    }, [images, galleryDivWidth, galleryState.marginPx]);
+        return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
+    }, [images, galleryDivWidth, marginPx]);
 
     const galleryThumbs = images.map((image, index) => (
         <GalleryThumb
@@ -34,12 +30,14 @@ export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement
         />
     ));
 
-    // TODO: Decide whether to make batchsize parameterised
-    const loadMoreImages = useCallback(() => {
-        alterGalleryState?.({ action: 'incrementMaxImages', maximum: allImageFiles.length });
-    }, [allImageFiles, alterGalleryState]);
+    const loadMoreImages = useCallback(() => (
+        alterGalleryState?.({ action: 'incrementMaxImages', maximum: allImageFiles.length })
+    ), [allImageFiles, alterGalleryState]);
 
     useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
+
+    const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === searchParams.get('file')) ?? -1;
+
     useScrollToNthElement(galleryThumbs, lightBoxImageIndex);
 
     return (
