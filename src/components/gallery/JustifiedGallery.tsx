@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, useCallback, useContext, useMemo } from 'react';
+import { useResizeDetector } from 'react-resize-detector';
 
 import { useNthElementIsVisible } from '../../hooks/useNthElementIsVisible';
 import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
@@ -7,12 +8,10 @@ import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../../hooks/useApiQueries';
 
 import './JustifiedGallery.css';
-import { useResizeDetector } from 'react-resize-detector';
 
 export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, marginPx, lightBoxIndex }, alterGalleryState } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
-    
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const resizeRatios = useMemo(() => {
