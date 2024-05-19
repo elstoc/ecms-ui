@@ -44,9 +44,9 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
         <div ref={widthRef} className="gallery-content">
             <Helmet><title>{title}{lightBoxImageName ? ` - ${lightBoxImageName}` : ''}</title></Helmet>
             <GalleryLightBox
-                currImage={images?.[lightBoxImageIndex]}
-                nextImage={images?.[lightBoxImageIndex + 1]}
-                prevImage={images?.[lightBoxImageIndex - 1]}
+                currImage={images[lightBoxImageIndex]}
+                nextImage={images[lightBoxImageIndex + 1]}
+                prevImage={images[lightBoxImageIndex - 1]}
             />
             <JustifiedGallery
                 galleryContent={galleryContent!}

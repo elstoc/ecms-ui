@@ -13,7 +13,6 @@ export const MaxImagesContext = createContext<GalleryContextProps>({});
 export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
     const [maxImages, setMaxImages] = useState(props.batchSize);
     // TODO: Add Error Boundary
-    // TODO: Add context provider
     return (
         <MaxImagesContext.Provider value={{maxImages, setMaxImages}}>
             <Suspense fallback={<div>Loading...</div>}>
