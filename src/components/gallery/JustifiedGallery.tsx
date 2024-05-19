@@ -7,14 +7,17 @@ import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../../hooks/useApiQueries';
 
 import './JustifiedGallery.css';
+import { useResizeDetector } from 'react-resize-detector';
 
-export const JustifiedGallery: FC<{ galleryDivWidth: number }> = ({ galleryDivWidth }): ReactElement => {
+export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, marginPx, lightBoxIndex }, alterGalleryState } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
     
+    const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
+
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
-        return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
+        return getResizeRatios(thumbWidths, galleryDivWidth ?? 0, marginPx);
     }, [images, galleryDivWidth, marginPx]);
 
     const galleryThumbs = images.map((image, index) => (
@@ -36,7 +39,7 @@ export const JustifiedGallery: FC<{ galleryDivWidth: number }> = ({ galleryDivWi
     useScrollToNthElement(galleryThumbs, lightBoxIndex);
 
     return (
-        <div className="justified-gallery">
+        <div ref={widthRef} className="justified-gallery">
             {galleryThumbs}
         </div>
     );
