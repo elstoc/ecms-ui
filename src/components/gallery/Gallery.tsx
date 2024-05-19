@@ -10,7 +10,7 @@ export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
     const { batchSize, marginPx, apiPath, title } = props;
     const initialState: GalleryState = {
         maxImages: batchSize,
-        lightBoxIndex: -1,
+        activeImageIndex: -1,
         marginPx, batchSize, apiPath, title
     };
     const { galleryState, alterGalleryState } = useGalleryStateReducer(initialState);

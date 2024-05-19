@@ -10,7 +10,7 @@ import { useGalleryContent } from '../../hooks/useApiQueries';
 import './JustifiedGallery.css';
 
 export const JustifiedGallery: FC = (): ReactElement => {
-    const { galleryState: { apiPath, maxImages, marginPx, lightBoxIndex }, alterGalleryState } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, marginPx, activeImageIndex }, alterGalleryState } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
@@ -35,7 +35,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
     ), [allImageFiles, alterGalleryState]);
 
     useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
-    useScrollToNthElement(galleryThumbs, lightBoxIndex);
+    useScrollToNthElement(galleryThumbs, activeImageIndex);
 
     return (
         <div ref={widthRef} className="justified-gallery">

@@ -6,7 +6,7 @@ export type GalleryState = {
     batchSize: number;
     title: string;
     apiPath: string;
-    lightBoxIndex: number;
+    activeImageIndex: number;
 };
 
 export type GalleryStateContextProps = {
@@ -25,7 +25,7 @@ type SetMaxImagesAction = {
 };
 
 type SetLightboxImageAction = {
-    action: 'setLightBoxImage',
+    action: 'setActiveImageIndex',
     value: number
 };
 
@@ -36,8 +36,8 @@ const galleryStateReducer: (state: GalleryState, actions: GalleryReducerActions)
         return { ...state, maxImages: Math.min(state.maxImages + state.batchSize, actions.maximum)};
     } else if (actions.action === 'setMaxImages') {
         return { ...state, maxImages: actions.value };
-    } else if (actions.action === 'setLightBoxImage') {
-        return { ...state, lightBoxIndex: actions.value };
+    } else if (actions.action === 'setActiveImageIndex') {
+        return { ...state, activeImageIndex: actions.value };
     }
     return state;
 };
