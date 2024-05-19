@@ -34,7 +34,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
         alterGalleryState({ action: 'incrementMaxImages', maximum: allImageFiles.length })
     ), [allImageFiles, alterGalleryState]);
 
-    useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
+    useNthElementIsVisible(galleryThumbs, images.length - 1, loadMoreImages);
     useScrollToNthElement(galleryThumbs, activeImageIndex);
 
     return (
