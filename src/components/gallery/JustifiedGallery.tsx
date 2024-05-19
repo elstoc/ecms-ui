@@ -1,5 +1,4 @@
 import React, { FC, ReactElement, useCallback, useContext, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 import { useNthElementIsVisible } from '../../hooks/useNthElementIsVisible';
 import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
@@ -10,9 +9,8 @@ import { useGalleryContent } from '../../hooks/useApiQueries';
 import './JustifiedGallery.css';
 
 export const JustifiedGallery: FC<{ galleryDivWidth: number }> = ({ galleryDivWidth }): ReactElement => {
-    const { galleryState: { apiPath, maxImages, marginPx }, alterGalleryState } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, marginPx, lightBoxIndex }, alterGalleryState } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
-    const [searchParams] = useSearchParams();
     
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
@@ -35,10 +33,7 @@ export const JustifiedGallery: FC<{ galleryDivWidth: number }> = ({ galleryDivWi
     ), [allImageFiles, alterGalleryState]);
 
     useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
-
-    const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === searchParams.get('file')) ?? -1;
-
-    useScrollToNthElement(galleryThumbs, lightBoxImageIndex);
+    useScrollToNthElement(galleryThumbs, lightBoxIndex);
 
     return (
         <div className="justified-gallery">

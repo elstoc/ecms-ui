@@ -6,6 +6,7 @@ export type GalleryState = {
     batchSize: number;
     title: string;
     apiPath: string;
+    lightBoxIndex: number;
 };
 
 export type GalleryStateContextProps = {
@@ -13,23 +14,30 @@ export type GalleryStateContextProps = {
     alterGalleryState: React.Dispatch<GalleryReducerActions>;
 };
 
-type GalleryReducerIncrementAction = {
+type IncrementMaxImagesAction = {
     action: 'incrementMaxImages',
     maximum: number,
 };
 
-type GalleryReducerSetAction = {
+type SetMaxImagesAction = {
     action: 'setMaxImages',
     value: number
 };
 
-type GalleryReducerActions = GalleryReducerIncrementAction | GalleryReducerSetAction;
+type SetLightboxImageAction = {
+    action: 'setLightBoxImage',
+    value: number
+};
+
+type GalleryReducerActions = IncrementMaxImagesAction | SetMaxImagesAction | SetLightboxImageAction;
 
 const galleryStateReducer: (state: GalleryState, actions: GalleryReducerActions) => GalleryState = (state, actions) => {
     if (actions.action === 'incrementMaxImages') {
         return { ...state, maxImages: Math.min(state.maxImages + state.batchSize, actions.maximum)};
     } else if (actions.action === 'setMaxImages') {
         return { ...state, maxImages: actions.value };
+    } else if (actions.action === 'setLightBoxImage') {
+        return { ...state, lightBoxIndex: actions.value };
     }
     return state;
 };

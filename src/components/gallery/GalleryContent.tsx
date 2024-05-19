@@ -14,7 +14,7 @@ export const GalleryContent: FC = (): ReactElement => {
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const [searchParams] = useSearchParams();
-    const imageName = searchParams.get('file');
+    const imageName = searchParams.get('image');
 
     return (
         <div ref={widthRef} className="gallery-content">

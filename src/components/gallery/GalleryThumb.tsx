@@ -23,7 +23,7 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
 
     return (
         <Link
-            to={`?file=${fileName}`}
+            to={`?image=${fileName}`}
             replace={true}
             className='gallery-thumb'
             style={style}

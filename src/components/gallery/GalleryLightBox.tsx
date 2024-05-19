@@ -10,13 +10,15 @@ export const GalleryLightBox: FC = (): ReactElement => {
     const { galleryState, alterGalleryState } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(galleryState.apiPath, galleryState.maxImages);
 
-    const lightBoxImageName = searchParams.get('file');
+    const lightBoxImageName = searchParams.get('image');
     const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === lightBoxImageName) ?? -1;
 
     useEffect(() => {
-        if ( lightBoxImageIndex > (images.length - 1) && images.length < allImageFiles.length) {
-            alterGalleryState?.({ action: 'setMaxImages', value: lightBoxImageIndex + 1 });
+        if ( lightBoxImageIndex >= images.length && images.length < allImageFiles.length) {
+            // requested LightBox image is not currently loaded
+            alterGalleryState({ action: 'setMaxImages', value: lightBoxImageIndex + 1 });
         }
+        alterGalleryState({ action: 'setLightBoxImage', value: lightBoxImageIndex });
     }, [images, allImageFiles, lightBoxImageIndex, alterGalleryState]);
 
     const currImage = images[lightBoxImageIndex];
@@ -24,19 +26,20 @@ export const GalleryLightBox: FC = (): ReactElement => {
     const prevImage = images[lightBoxImageIndex - 1];
 
     if (images && lightBoxImageName && lightBoxImageIndex < 0) {
-        // Handle invalid lightBox image
+        // requested LightBox image does not exist
         setSearchParams({}, { replace: true });
     }
 
     if (!currImage) {
+        // perhaps we are waiting for it to be loaded
         return <></>;
     }
 
     return (
         <LightBox
             onClose={() => setSearchParams({}, { replace: true })}
-            onPrev={prevImage && (() => setSearchParams({ file: prevImage?.fileName }, { replace: true }))}
-            onNext={nextImage && (() => setSearchParams({ file: nextImage?.fileName }, { replace: true }))}
+            onPrev={prevImage && (() => setSearchParams({ image: prevImage?.fileName }, { replace: true }))}
+            onNext={nextImage && (() => setSearchParams({ image: nextImage?.fileName }, { replace: true }))}
             caption={currImage.description}
             alt={currImage.fileName}
             imageUrl={currImage.fhdSrcUrl}
