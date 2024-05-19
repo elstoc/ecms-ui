@@ -13,9 +13,14 @@ export const GalleryLightBox: FC = (): ReactElement => {
     const lightBoxImageName = searchParams.get('image');
     const lightBoxImageIndex = allImageFiles?.findIndex((fileName) => fileName === lightBoxImageName) ?? -1;
 
+    if (images && lightBoxImageName && lightBoxImageIndex < 0) {
+        // requested LightBox image does not exist
+        setSearchParams({}, { replace: true });
+    }
+
     useEffect(() => {
         if ( lightBoxImageIndex >= images.length && images.length < allImageFiles.length) {
-            // requested LightBox image is not currently loaded
+            // requested LightBox image is available but not currently loaded
             alterGalleryState({ action: 'setMaxImages', value: lightBoxImageIndex + 1 });
         }
         alterGalleryState({ action: 'setLightBoxImage', value: lightBoxImageIndex });
@@ -25,17 +30,7 @@ export const GalleryLightBox: FC = (): ReactElement => {
     const nextImage = images[lightBoxImageIndex + 1];
     const prevImage = images[lightBoxImageIndex - 1];
 
-    if (images && lightBoxImageName && lightBoxImageIndex < 0) {
-        // requested LightBox image does not exist
-        setSearchParams({}, { replace: true });
-    }
-
-    if (!currImage) {
-        // perhaps we are waiting for it to be loaded
-        return <></>;
-    }
-
-    return (
+    return currImage && (
         <LightBox
             onClose={() => setSearchParams({}, { replace: true })}
             onPrev={prevImage && (() => setSearchParams({ image: prevImage?.fileName }, { replace: true }))}
