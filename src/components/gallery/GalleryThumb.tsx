@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import './GalleryThumb.scss';
+import { GalleryStateContext } from './Gallery';
 
 export type GalleryThumbProps = {
     fileName: string;
@@ -9,15 +10,15 @@ export type GalleryThumbProps = {
     thumbSrcUrl: string;
     widthPx: number;
     heightPx: number;
-    marginPx: number;
     ref?: React.RefObject<HTMLAnchorElement> | null;
 }
 
-export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, widthPx, heightPx, marginPx }, ref) => {
+export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, widthPx, heightPx }, ref) => {
+    const { galleryState } = useContext(GalleryStateContext);
     const style = {
         width: `${widthPx}px`,
         height: `${heightPx}px`,
-        margin: `${marginPx}px`,
+        margin: `${galleryState.marginPx}px`,
     };
 
     return (

@@ -6,15 +6,15 @@ import { Helmet } from 'react-helmet';
 
 import { useGalleryContent } from '../../hooks/useApiQueries';
 import { JustifiedGallery } from './JustifiedGallery';
-import { MaxImagesContext } from './Gallery';
+import { GalleryStateContext } from './Gallery';
 import { GalleryLightBox } from './GalleryLightBox';
-import { GalleryComponentMetadata } from '../../types/Site';
 
 import './GalleryContent.css';
 
-export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, marginPx, batchSize }): ReactElement => {
-    const { maxImages, setMaxImages } = useContext(MaxImagesContext);
-    const galleryContent = useGalleryContent(apiPath, maxImages);
+export const GalleryContent: FC = (): ReactElement => {
+    const { galleryState, alterGalleryState } = useContext(GalleryStateContext);
+    const { apiPath, title } = galleryState;
+    const galleryContent = useGalleryContent(apiPath, galleryState.maxImages);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const { images, allImageFiles } = galleryContent;
@@ -30,9 +30,9 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
         if ( lightBoxImageIndex > (images.length - 1) 
              && images.length < allImageFiles.length
         ) {
-            setMaxImages?.(lightBoxImageIndex + 1);
+            alterGalleryState?.({ action: 'setMaxImages', value: lightBoxImageIndex + 1 });
         }
-    }, [images, allImageFiles, lightBoxImageIndex, setMaxImages]);
+    }, [images, allImageFiles, lightBoxImageIndex, alterGalleryState]);
 
     // TODO: Move to LightBox component
     if (galleryContent.images && lightBoxImageName && lightBoxImageIndex < 0) {
@@ -51,7 +51,6 @@ export const GalleryContent: FC<GalleryComponentMetadata> = ({ title, apiPath, m
             <JustifiedGallery
                 galleryContent={galleryContent!}
                 galleryDivWidth={galleryDivWidth!}
-                marginPx={marginPx}
                 lightBoxImageIndex={lightBoxImageIndex}
             />
         </div>

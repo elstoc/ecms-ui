@@ -1,23 +1,25 @@
-import React, { FC, ReactElement, Suspense, createContext, useState } from 'react';
+import React, { FC, ReactElement, Suspense, createContext } from 'react';
 
 import { GalleryContent } from './GalleryContent';
 import { GalleryComponentMetadata } from '../../types/Site';
+import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '../../hooks/useGalleryStateReducer';
 
-export type GalleryContextProps = {
-    maxImages?: number;
-    setMaxImages?: React.Dispatch<React.SetStateAction<number>>;
-};
-
-export const MaxImagesContext = createContext<GalleryContextProps>({});
+export const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
 export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
-    const [maxImages, setMaxImages] = useState(props.batchSize);
+    const { batchSize, marginPx, apiPath, title } = props;
+    const initialState: GalleryState = {
+        maxImages: batchSize,
+        marginPx, batchSize, apiPath, title
+    };
+    const { galleryState, alterGalleryState } = useGalleryStateReducer(initialState);
     // TODO: Add Error Boundary
+
     return (
-        <MaxImagesContext.Provider value={{maxImages, setMaxImages}}>
+        <GalleryStateContext.Provider value={{galleryState, alterGalleryState}}>
             <Suspense fallback={<div>Loading...</div>}>
-                <GalleryContent {...props} />
+                <GalleryContent />
             </Suspense>
-        </MaxImagesContext.Provider>
+        </GalleryStateContext.Provider>
     );
 };

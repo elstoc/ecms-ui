@@ -5,24 +5,23 @@ import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
 import { GalleryThumb } from './GalleryThumb';
 import { GalleryContents } from '../../types/Gallery';
 import './JustifiedGallery.css';
-import { MaxImagesContext } from './Gallery';
+import { GalleryStateContext } from './Gallery';
 
 export type JustifiedGalleryProps = {
     galleryContent: GalleryContents;
     galleryDivWidth: number;
-    marginPx: number;
     lightBoxImageIndex: number;
 }
 
 export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement => {
-    const { setMaxImages } = useContext(MaxImagesContext);
-    const { galleryContent, galleryDivWidth, marginPx, lightBoxImageIndex } = props;
+    const { galleryState, alterGalleryState } = useContext(GalleryStateContext);
+    const { galleryContent, galleryDivWidth, lightBoxImageIndex } = props;
     const { images, allImageFiles } = galleryContent;
     
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
-        return getResizeRatios(thumbWidths, galleryDivWidth, marginPx);
-    }, [images, galleryDivWidth, marginPx]);
+        return getResizeRatios(thumbWidths, galleryDivWidth, galleryState.marginPx);
+    }, [images, galleryDivWidth, galleryState.marginPx]);
 
     const galleryThumbs = images.map((image, index) => (
         <GalleryThumb
@@ -30,7 +29,6 @@ export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement
             fileName={image.fileName}
             description={image.description}
             thumbSrcUrl={image.thumbSrcUrl}
-            marginPx={marginPx}
             widthPx={Math.trunc(image.thumbDimensions.width * resizeRatios[index])}
             heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
         />
@@ -38,10 +36,8 @@ export const JustifiedGallery: FC<JustifiedGalleryProps> = (props): ReactElement
 
     // TODO: Decide whether to make batchsize parameterised
     const loadMoreImages = useCallback(() => {
-        setMaxImages?.((prevMax) =>
-            (prevMax < allImageFiles.length) ? (prevMax + 50) : allImageFiles.length
-        );
-    }, [allImageFiles, setMaxImages]);
+        alterGalleryState?.({ action: 'incrementMaxImages', maximum: allImageFiles.length });
+    }, [allImageFiles, alterGalleryState]);
 
     useNthElementIsVisible(galleryThumbs, images.length -1, loadMoreImages);
     useScrollToNthElement(galleryThumbs, lightBoxImageIndex);
