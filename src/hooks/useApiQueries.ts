@@ -55,15 +55,19 @@ export const useMarkdownTree = (path: string) => {
 };
 
 export const useVideoDbVideos = (path: string, params?: VideoQueryParams) => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['videoDb', 'videos', `${path}:${JSON.stringify(params)}`],
         queryFn: () => getVideoDbVideos(path, params),
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useVideoDbLookup = (path: string, lookupTable: string) => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['videoDb', 'lookup', path, lookupTable],
         queryFn: () => getVideoDbLookup(path, lookupTable),
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };

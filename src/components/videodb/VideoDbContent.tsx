@@ -3,7 +3,6 @@ import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 import { useVideoDbVideos } from '../../hooks/useApiQueries';
-import { HandleQueryState } from '../utils/HandleQueryState';
 import { VideoDbList } from './VideoDbList';
 import { VideoQueryParams } from './VideoQueryParams';
 import { ViewEditVideo } from './ViewEditVideo';
@@ -27,16 +26,14 @@ export const VideoDbContent: FC<VideoDbProps> = ({ apiPath, title }): ReactEleme
     if (categories !== undefined) {
         videoQueryParams.categories = categories;
     }
-    const [ queryState, videos ] = useVideoDbVideos(apiPath, videoQueryParams);
+    const videos = useVideoDbVideos(apiPath, videoQueryParams);
 
     return (
         <div className='videodb'>
             <Helmet><title>{title}</title></Helmet>
-            <HandleQueryState {...queryState}>
-                <ViewEditVideo apiPath={apiPath} videoId={id === undefined ? undefined : parseInt(id)} />
-                <VideoQueryParams apiPath={apiPath} />
-                {videos && <VideoDbList videos={videos} apiPath={apiPath} />}
-            </HandleQueryState>
+            <ViewEditVideo apiPath={apiPath} videoId={id === undefined ? undefined : parseInt(id)} />
+            <VideoQueryParams apiPath={apiPath} />
+            {videos && <VideoDbList videos={videos} apiPath={apiPath} />}
         </div>
     );
 };

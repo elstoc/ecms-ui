@@ -14,9 +14,9 @@ type VideoDbProps = {
 
 export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElement => {
     const [, setSearchParams] = useSearchParams();
-    const [, categoryLookup] = useVideoDbLookup(apiPath, 'categories');
-    const [, watchedStatusLookup] = useVideoDbLookup(apiPath, 'watched_status');
-    const [, mediaTypeLookup] = useVideoDbLookup(apiPath, 'media_types');
+    const categoryLookup = useVideoDbLookup(apiPath, 'categories');
+    const watchedStatusLookup = useVideoDbLookup(apiPath, 'watched_status');
+    const mediaTypeLookup = useVideoDbLookup(apiPath, 'media_types');
 
     const addIdToParams = useCallback((id: string): void => {
         setSearchParams((params) => {

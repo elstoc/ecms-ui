@@ -10,7 +10,7 @@ import { OptionalMultiSelectLookup } from '../shared/OptionalMultiSelectLookup';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
 
 export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
-    const [, categoryLookup] = useVideoDbLookup(apiPath, 'categories');
+    const categoryLookup = useVideoDbLookup(apiPath, 'categories');
     const [searchParams, setSearchParams] = useSearchParams();
     const [maxLength, setMaxLength] = useState(toIntOrUndefined(searchParams.get('maxLength') || undefined));
     const [titleLike, setTitleLike] = useState(searchParams.get('titleLike') || undefined);
