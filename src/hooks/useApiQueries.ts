@@ -2,76 +2,60 @@ import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree
 import { getSiteConfig } from '../api/site';
 import { VideoQueryParams } from '../types/VideoDb';
 import { getVideoDbLookup } from '../api/videodb';
-import { useSuspenseQuery } from '@tanstack/react-query';
-import { config } from '../utils/config';
+import { useCustomQuery } from './useCustomQuery';
 
 export const useSiteComponents = () => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['siteComponents'],
         queryFn: getSiteComponents,
     });
-    return data;
 };
 
 export const useSiteConfig = () => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['siteConfig'],
         queryFn: getSiteConfig,
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useUserInfo = () => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['user-info'],
         queryFn: getUserInfo,
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useGalleryContent = (path: string, limit = 0) => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['galleryContents', path, limit],
         queryFn: () => getGalleryContents(path, limit),
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useMarkdownPage = (path: string) => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['markdownFile', path],
         queryFn: () => getMarkdownPage(path),
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useMarkdownTree = (path: string) => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useVideoDbVideos = (path: string, params?: VideoQueryParams) => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['videoDb', 'videos', `${path}:${JSON.stringify(params)}`],
         queryFn: () => getVideoDbVideos(path, params),
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
 
 export const useVideoDbLookup = (path: string, lookupTable: string) => {
-    const { data } = useSuspenseQuery({
+    return useCustomQuery({
         queryKey: ['videoDb', 'lookup', path, lookupTable],
         queryFn: () => getVideoDbLookup(path, lookupTable),
-        refetchInterval: config.queryRefetchInterval
     });
-    return data;
 };
