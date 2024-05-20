@@ -5,7 +5,7 @@ import { Button } from '@blueprintjs/core';
 import './VideoQueryParams.scss';
 import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
 import { OptionalIntInput } from '../shared/forms/OptionalIntInput';
-import { OptionalStringInput } from '../shared/OptionaStringInput';
+import { OptionalStringInput } from '../shared/forms/OptionaStringInput';
 import { OptionalMultiSelectLookup } from '../shared/OptionalMultiSelectLookup';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
 
@@ -13,23 +13,23 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
     const [searchParams, setSearchParams] = useSearchParams();
     const [maxLength, setMaxLength] = useState(toIntOrUndefined(searchParams.get('maxLength') || undefined));
-    const [titleLike, setTitleLike] = useState(searchParams.get('titleLike') || undefined);
+    const [titleContains, setTitleContains] = useState(searchParams.get('titleContains') || undefined);
     const [selectedCategories, setSelectedCategories] = useState(searchParams.get('categories')?.split('|') || undefined);
 
     const setQueryParams = useCallback(() => {
         setSearchParams((params) => {
             params.delete('id');
             maxLength ? params.set('maxLength', maxLength.toString()) : params.delete('maxLength');
-            titleLike ? params.set('titleLike', `%${titleLike}%`) : params.delete('titleLike');
+            titleContains ? params.set('titleContains', `${titleContains}`) : params.delete('titleContains');
             selectedCategories && selectedCategories.length > 0 ? params.set('categories', selectedCategories.join('|')) : params.delete('categories');
             return params;
         });
-    }, [maxLength, setSearchParams, titleLike, selectedCategories]);
+    }, [maxLength, setSearchParams, titleContains, selectedCategories]);
 
     return (
         <div className='video-query-params'>
-            <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} placeholder='&infin;' onValueChange={(value) => setMaxLength(value)} label='Shorter Than'/>
-            <OptionalStringInput value={titleLike} onValueChange={(value) => setTitleLike(value)} defaultValue='%%' label='Title Contains' />
+            <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} label='Shorter Than'/>
+            <OptionalStringInput value={titleContains} onValueChange={(value) => setTitleContains(value)} placeholder='Use % as wildcard' label='Title Contains' />
             <OptionalMultiSelectLookup allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
             <Button onClick={setQueryParams}>Submit</Button>
         </div>

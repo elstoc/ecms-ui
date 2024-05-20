@@ -14,14 +14,14 @@ export type VideoDbProps = {
 
 export const VideoDbContent: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { maxLength, titleLike, categories, id } = Object.fromEntries([...searchParams]);
+    const { maxLength, titleContains, categories, id } = Object.fromEntries([...searchParams]);
 
     const videoQueryParams: { [key: string]: string } = {};
     if (maxLength !== undefined) {
         videoQueryParams.maxLength = maxLength;
     }
-    if (titleLike !== undefined) {
-        videoQueryParams.titleLike = titleLike;
+    if (titleContains !== undefined) {
+        videoQueryParams.titleContains = titleContains;
     }
     if (categories !== undefined) {
         videoQueryParams.categories = categories;
