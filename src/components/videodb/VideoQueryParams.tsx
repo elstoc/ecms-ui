@@ -26,11 +26,19 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
         });
     }, [maxLength, setSearchParams, titleContains, selectedCategories]);
 
+    const clearQueryParams = useCallback(() => {
+        setMaxLength(undefined);
+        setTitleContains(undefined);
+        setSelectedCategories([]);
+        setSearchParams({});
+    }, [setSearchParams]);
+
     return (
         <div className='video-query-params'>
             <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} label='Shorter Than'/>
             <OptionalStringInput value={titleContains} onValueChange={(value) => setTitleContains(value)} placeholder='Use % as wildcard' label='Title Contains' />
             <MultiSelectKeyValue allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
+            <Button onClick={clearQueryParams}>Clear All</Button>
             <Button onClick={setQueryParams}>Submit</Button>
         </div>
     );
