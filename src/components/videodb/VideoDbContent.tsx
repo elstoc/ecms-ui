@@ -1,8 +1,6 @@
-import React, { FC, ReactElement } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { FC, ReactElement, Suspense } from 'react';
 import { Helmet } from 'react-helmet';
 
-import { useVideoDbVideos } from '../../hooks/useApiQueries';
 import { VideoDbList } from './VideoDbList';
 import { VideoQueryParams } from './VideoQueryParams';
 import { ViewEditVideo } from './ViewEditVideo';
@@ -13,27 +11,18 @@ export type VideoDbProps = {
 }
 
 export const VideoDbContent: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
-    const [searchParams] = useSearchParams();
-    const { maxLength, titleContains, categories, id } = Object.fromEntries([...searchParams]);
-
-    const videoQueryParams: { [key: string]: string } = {};
-    if (maxLength !== undefined) {
-        videoQueryParams.maxLength = maxLength;
-    }
-    if (titleContains !== undefined) {
-        videoQueryParams.titleContains = titleContains;
-    }
-    if (categories !== undefined) {
-        videoQueryParams.categories = categories;
-    }
-    const videos = useVideoDbVideos(apiPath, videoQueryParams);
-
     return (
         <div className='videodb'>
             <Helmet><title>{title}</title></Helmet>
-            <ViewEditVideo apiPath={apiPath} videoId={id === undefined ? undefined : parseInt(id)} />
-            <VideoQueryParams apiPath={apiPath} />
-            {videos && <VideoDbList videos={videos} apiPath={apiPath} />}
+            <Suspense fallback='Loading...'>
+                <ViewEditVideo apiPath={apiPath} />
+            </Suspense>
+            <Suspense fallback='Loading...'>
+                <VideoQueryParams apiPath={apiPath} />
+            </Suspense>
+            <Suspense fallback='Loading...'>
+                <VideoDbList apiPath={apiPath} />
+            </Suspense>
         </div>
     );
 };
