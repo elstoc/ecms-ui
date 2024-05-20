@@ -6,7 +6,7 @@ import './VideoQueryParams.scss';
 import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
 import { OptionalIntInput } from '../shared/forms/OptionalIntInput';
 import { OptionalStringInput } from '../shared/forms/OptionaStringInput';
-import { OptionalMultiSelectLookup } from '../shared/OptionalMultiSelectLookup';
+import { MultiSelectKeyValue } from '../shared/forms/MultiSelectKeyValue';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
 
 export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
@@ -14,7 +14,7 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
     const [searchParams, setSearchParams] = useSearchParams();
     const [maxLength, setMaxLength] = useState(toIntOrUndefined(searchParams.get('maxLength') || undefined));
     const [titleContains, setTitleContains] = useState(searchParams.get('titleContains') || undefined);
-    const [selectedCategories, setSelectedCategories] = useState(searchParams.get('categories')?.split('|') || undefined);
+    const [selectedCategories, setSelectedCategories] = useState(searchParams.get('categories')?.split('|') || []);
 
     const setQueryParams = useCallback(() => {
         setSearchParams((params) => {
@@ -30,7 +30,7 @@ export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElem
         <div className='video-query-params'>
             <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} label='Shorter Than'/>
             <OptionalStringInput value={titleContains} onValueChange={(value) => setTitleContains(value)} placeholder='Use % as wildcard' label='Title Contains' />
-            <OptionalMultiSelectLookup allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
+            <MultiSelectKeyValue allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
             <Button onClick={setQueryParams}>Submit</Button>
         </div>
     );
