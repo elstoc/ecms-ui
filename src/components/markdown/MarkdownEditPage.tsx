@@ -35,7 +35,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             await putMarkdownPage(mdFullPath, editedMarkdown);
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-            const toaster = OverlayToaster.create();
+            const toaster = await OverlayToaster.createAsync();
             toaster.show({ message: 'page saved', timeout: 2000 });
             unsetEditMode();
         } catch (error: unknown) {
@@ -50,7 +50,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
                 await deleteMarkdownPage(mdFullPath);
                 queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
                 queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                const toaster = OverlayToaster.create();
+                const toaster = await OverlayToaster.createAsync();
                 toaster.show({ message: 'page deleted', timeout: 2000 });
                 unsetEditMode();
             }
