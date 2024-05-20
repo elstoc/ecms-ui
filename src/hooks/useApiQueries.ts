@@ -37,17 +37,21 @@ export const useGalleryContent = (path: string, limit = 0) => {
 };
 
 export const useMarkdownPage = (path: string) => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['markdownFile', path],
         queryFn: () => getMarkdownPage(path),
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useMarkdownTree = (path: string) => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useVideoDbVideos = (path: string, params?: VideoQueryParams) => {

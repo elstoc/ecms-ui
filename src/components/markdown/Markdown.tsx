@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
@@ -17,12 +17,16 @@ export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): Rea
         <div className='markdown'>
             <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav-container'>
-                {includeNav && <MarkdownNav rootApiPath={apiPath} />}
+                <Suspense fallback='Loading...'>
+                    {includeNav && <MarkdownNav rootApiPath={apiPath} />}
+                </Suspense>
             </nav>
             <div className='markdown-page-container'>
-                <Routes>
-                    <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
-                </Routes>
+                <Suspense fallback='Loading...'>
+                    <Routes>
+                        <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
+                    </Routes>
+                </Suspense>
             </div>
         </div>
     );

@@ -4,16 +4,13 @@ import { NavLink } from 'react-router-dom';
 import { useMarkdownTree } from '../../hooks/useApiQueries';
 import { MarkdownTree } from '../../types/Markdown';
 import './MarkdownNav.scss';
-import { HandleQueryState } from '../utils/HandleQueryState';
 
 export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
-    const [ queryState, markdownTree ] = useMarkdownTree(rootApiPath);
+    const markdownTree = useMarkdownTree(rootApiPath);
 
     return (
         <span className='markdown-nav'>
-            <HandleQueryState {...queryState}>
-                {markdownTree?.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={markdownTree.children} />}
-            </HandleQueryState>
+            {markdownTree?.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={markdownTree.children} />}
         </span>
     );
 };
