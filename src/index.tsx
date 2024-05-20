@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -24,7 +24,9 @@ root.render(
     <QueryClientProvider client={queryClient}>
         <BrowserRouter>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <App />
+                <Suspense fallback='Loading...'>
+                    <App />
+                </Suspense>
             </ErrorBoundary>
         </BrowserRouter>
     </QueryClientProvider>
