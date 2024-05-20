@@ -21,10 +21,12 @@ export const useSiteConfig = () => {
 };
 
 export const useUserInfo = () => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['user-info'],
         queryFn: getUserInfo,
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useGalleryContent = (path: string, limit = 0) => {

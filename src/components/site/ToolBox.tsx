@@ -6,7 +6,7 @@ import { useSiteConfig, useUserInfo } from '../../hooks/useApiQueries';
 import './ToolBox.scss';
 
 export const ToolBox: FC = (): ReactElement => {
-    const [,userData ] = useUserInfo();
+    const userData = useUserInfo();
     const [, siteConfig] = useSiteConfig();
 
     const iconName = userData?.id && userData.id !== 'guest'
