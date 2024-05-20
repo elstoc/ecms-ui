@@ -6,19 +6,19 @@ import { Component } from './Component';
 import { Auth } from '../auth';
 import { useSiteConfig } from '../../hooks/useApiQueries';
 
-export const Components: FC<{ siteComponents?: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
-    const [, siteConfig] = useSiteConfig();
+export const Components: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
+    const siteConfig = useSiteConfig();
 
     return (
         <Routes>
-            {siteComponents?.map((metadata) => (
+            {siteComponents.map((metadata) => (
                 <Route
                     key={metadata.apiPath}
                     path={`${metadata.uiPath}/*`}
                     element={<Component metadata={metadata} />}
                 />
             ))}
-            {siteConfig?.authEnabled &&
+            {siteConfig.authEnabled &&
                 <Route path='auth/*' element={<Auth />} />
             }
             <Route path='*' element={<Navigate to='/' />} />

@@ -7,7 +7,7 @@ import './ToolBox.scss';
 
 export const ToolBox: FC = (): ReactElement => {
     const userData = useUserInfo();
-    const [, siteConfig] = useSiteConfig();
+    const siteConfig = useSiteConfig();
 
     const iconName = userData?.id && userData.id !== 'guest'
         ? 'user'
@@ -16,7 +16,7 @@ export const ToolBox: FC = (): ReactElement => {
     return (
         <div className='toolbox'>
             {
-                siteConfig?.authEnabled &&
+                siteConfig.authEnabled &&
                 <NavLink to="auth/user">
                     <Icon name={iconName} />
                 </NavLink>

@@ -1,4 +1,3 @@
-import { useCustomQuery } from './useCustomQuery';
 import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree, getUserInfo, getVideoDbVideos } from '../api';
 import { getSiteConfig } from '../api/site';
 import { VideoQueryParams } from '../types/VideoDb';
@@ -7,17 +6,20 @@ import { useSuspenseQuery } from '@tanstack/react-query';
 import { config } from '../utils/config';
 
 export const useSiteComponents = () => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['siteComponents'],
         queryFn: getSiteComponents,
     });
+    return data;
 };
 
 export const useSiteConfig = () => {
-    return useCustomQuery({
+    const { data } = useSuspenseQuery({
         queryKey: ['siteConfig'],
         queryFn: getSiteConfig,
+        refetchInterval: config.queryRefetchInterval
     });
+    return data;
 };
 
 export const useUserInfo = () => {

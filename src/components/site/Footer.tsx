@@ -4,10 +4,10 @@ import './Footer.css';
 import { useSiteConfig } from '../../hooks/useApiQueries';
 
 export const Footer: FC = (): ReactElement => {
-    const [, siteConfig] = useSiteConfig();
+    const siteConfig = useSiteConfig();
     return (
         <div className='footer'>
-            {siteConfig?.footerText ?? ''}
+            {siteConfig.footerText}
         </div>
     );
 };
