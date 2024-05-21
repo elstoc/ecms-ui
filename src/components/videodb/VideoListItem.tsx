@@ -25,10 +25,10 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
         });
     }, [setSearchParams]);
 
-    const category = categoryLookup?.[video.category];
-    const watchedStatus = watchedStatusLookup?.[video.watched];
-    const pmWatchedStatus = watchedStatusLookup?.[video.pm_watched];
-    const pMediaType = mediaTypeLookup?.[video.pm_media_type];
+    const category = categoryLookup[video.category];
+    const watchedStatus = watchedStatusLookup[video.watched];
+    const pmWatchedStatus = watchedStatusLookup[video.pm_watched];
+    const pMediaType = mediaTypeLookup[video.pm_media_type];
 
     return (
         <div className='video-list-item'>
