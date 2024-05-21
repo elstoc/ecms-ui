@@ -1,5 +1,5 @@
 {
-  "name": "ecms-api",
+  "name": "ecms-ui",
   "version": "1.0.0",
   "description": "UI for ecms",
   "main": "dist/index.ts",
