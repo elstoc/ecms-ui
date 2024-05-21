@@ -14,7 +14,7 @@ export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath }): ReactElement 
 
     return (
         <div className='videodb-list'>
-            {videos?.map((video) => <VideoListItem key={video.id} video={video} apiPath={apiPath} />)}
+            {videos.map((video) => <VideoListItem key={video.id} video={video} apiPath={apiPath} />)}
         </div>
     );
 };
