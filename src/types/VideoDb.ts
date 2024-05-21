@@ -52,5 +52,5 @@ export type VideoQueryParams = {
     maxLength?: number;
     categories?: string[];
     tags?: string[];
-    titleLike?: string;
+    titleContains?: string;
 }

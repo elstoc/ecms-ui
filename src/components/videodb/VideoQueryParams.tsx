@@ -1,43 +1,40 @@
-import React, { FC, ReactElement, useCallback, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { Button } from '@blueprintjs/core';
 
-import './VideoQueryParams.scss';
-import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
 import { OptionalIntInput } from '../shared/forms/OptionalIntInput';
 import { OptionalStringInput } from '../shared/forms/OptionaStringInput';
 import { MultiSelectKeyValue } from '../shared/forms/MultiSelectKeyValue';
 import { useVideoDbLookup } from '../../hooks/useApiQueries';
+import { VideoDbQueryParamContext } from './VideoDb';
+
+import './VideoQueryParams.scss';
 
 export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
+    const { queryState, queryStateReducer, updateSearchParamsFromState, clearAll } = useContext(VideoDbQueryParamContext);
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [maxLength, setMaxLength] = useState(toIntOrUndefined(searchParams.get('maxLength') || undefined));
-    const [titleContains, setTitleContains] = useState(searchParams.get('titleContains') || undefined);
-    const [selectedCategories, setSelectedCategories] = useState(searchParams.get('categories')?.split('|') || []);
 
-    const setQueryParams = useCallback(() => {
-        setSearchParams((params) => {
-            params.delete('id');
-            maxLength ? params.set('maxLength', maxLength.toString()) : params.delete('maxLength');
-            titleContains ? params.set('titleContains', `${titleContains}`) : params.delete('titleContains');
-            selectedCategories && selectedCategories.length > 0 ? params.set('categories', selectedCategories.join('|')) : params.delete('categories');
-            return params;
-        });
-    }, [maxLength, setSearchParams, titleContains, selectedCategories]);
-
-    const clearQueryParams = useCallback(() => {
-        setMaxLength(undefined);
-        setTitleContains(undefined);
-        setSelectedCategories([]);
-        setSearchParams({});
-    }, [setSearchParams]);
+    const setQueryParams = useCallback(() => updateSearchParamsFromState(), [updateSearchParamsFromState]);
+    const clearQueryParams = useCallback(() => clearAll(), [clearAll]);
 
     return (
         <div className='video-query-params'>
-            <OptionalIntInput value={toIntOrUndefined(maxLength?.toString())} onValueChange={(value) => setMaxLength(value)} label='Shorter Than'/>
-            <OptionalStringInput value={titleContains} onValueChange={(value) => setTitleContains(value)} placeholder='Use % as wildcard' label='Title Contains' />
-            <MultiSelectKeyValue allItems={categoryLookup} selectedKeys={selectedCategories} label='Categories' onSelectionChange={(selectedItems) => setSelectedCategories(selectedItems)}/>
+            <OptionalIntInput
+                value={queryState.maxLength}
+                label='Shorter Than' 
+                onValueChange={(value) => queryStateReducer({ action: 'set', key: 'maxLength', value })}
+            />
+            <OptionalStringInput
+                value={queryState.titleContains}
+                label='Title Contains'
+                placeholder='Use % as wildcard'
+                onValueChange={(value) => queryStateReducer({ action: 'set', key: 'titleContains', value })}
+            />
+            <MultiSelectKeyValue
+                allItems={categoryLookup}
+                selectedKeys={queryState.categories ?? []}
+                label='Categories'
+                onSelectionChange={(value) => queryStateReducer({ action: 'set', key: 'categories', value })}
+            />
             <Button onClick={clearQueryParams}>Clear All</Button>
             <Button onClick={setQueryParams}>Submit</Button>
         </div>

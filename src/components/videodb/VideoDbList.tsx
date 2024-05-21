@@ -1,28 +1,16 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 
 import { VideoListItem } from './VideoListItem';
-import { useSearchParams } from 'react-router-dom';
 import { useVideoDbVideos } from '../../hooks/useApiQueries';
+import { VideoDbQueryParamContext } from './VideoDb';
 
 type VideoDbContentProps = {
     apiPath: string;
 }
 
 export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath }): ReactElement => {
-    const [searchParams] = useSearchParams();
-    const { maxLength, titleContains, categories } = Object.fromEntries([...searchParams]);
-
-    const videoQueryParams: { [key: string]: string } = {};
-    if (maxLength !== undefined) {
-        videoQueryParams.maxLength = maxLength;
-    }
-    if (titleContains !== undefined) {
-        videoQueryParams.titleContains = titleContains;
-    }
-    if (categories !== undefined) {
-        videoQueryParams.categories = categories;
-    }
-    const videos = useVideoDbVideos(apiPath, videoQueryParams);
+    const { querySearchParams } = useContext(VideoDbQueryParamContext);
+    const videos = useVideoDbVideos(apiPath, querySearchParams);
 
     return (
         <div className='videodb-list'>
