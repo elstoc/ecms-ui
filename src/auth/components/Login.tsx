@@ -2,7 +2,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
 
-import { login } from '../../api/auth';
+import { login } from '../api/auth';
 import { Helmet } from 'react-helmet';
 import './Login.scss';
 

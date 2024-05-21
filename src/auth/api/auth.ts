@@ -1,5 +1,6 @@
-import { axiosClient, axiosSecureClient } from './axiosClients';
-import { getStorage, setStorage } from '../utils/localStorage';
+import { axiosClient, axiosSecureClient } from '../../api/axiosClients';
+import { getStorage, setStorage } from '../../utils/localStorage';
+import { IdAndAccessToken, User } from './auth.types';
 
 export const TOKEN_KEY = 'access-token';
 export const TOKEN_EXPIRY_KEY = 'access-token-expiry';
@@ -16,7 +17,7 @@ const setAccessToken = (token: string, expiry: number): void => {
 };
 
 export const login = async (userId: string, password: string): Promise<void> => {
-    const response = await axiosClient.post<{ id: string, accessToken: string, accessTokenExpiry: number; }>('auth/login', { id: userId, password });
+    const response = await axiosClient.post<IdAndAccessToken>('auth/login', { id: userId, password });
     const { accessToken, accessTokenExpiry } = response.data;
     setAccessToken(accessToken, accessTokenExpiry);
     console.log('logged in');
@@ -38,13 +39,6 @@ export const refreshAccessToken = async (): Promise<void> => {
         console.log('Error', e);   
         setAccessToken('', 0);
     }
-};
-
-type User = {
-    id: string;
-    fullName?: string;
-    roles?: string[];
-    hashedPassword?: string;
 };
 
 export const getUserInfo = async (): Promise<User> => {

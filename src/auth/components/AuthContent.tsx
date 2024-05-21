@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router';
 import { Helmet } from 'react-helmet';
 
-import { useUserInfo } from '../../hooks/useApiQueries';
+import { useUserInfo } from '../hooks/useAuthQueries';
 import { Login } from './Login';
 import { Welcome } from './Welcome';
 

@@ -1,4 +1,4 @@
-import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree, getUserInfo, getVideoDbVideos } from '../api';
+import { getGalleryContents, getSiteComponents, getMarkdownPage, getMarkdownTree, getVideoDbVideos } from '../api';
 import { getSiteConfig } from '../api/site';
 import { VideoQueryParams } from '../types/VideoDb';
 import { getVideoDbLookup, getVideoDbVideo } from '../api/videodb';
@@ -15,13 +15,6 @@ export const useSiteConfig = () => {
     return useCustomQuery({
         queryKey: ['siteConfig'],
         queryFn: getSiteConfig,
-    });
-};
-
-export const useUserInfo = () => {
-    return useCustomQuery({
-        queryKey: ['user-info'],
-        queryFn: getUserInfo,
     });
 };
 
