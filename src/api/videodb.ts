@@ -1,9 +1,15 @@
 import { axiosSecureClient } from '../api/axiosClients';
-import { VideoQueryParams, VideoSummaryAndPrimaryMedium } from '../types/VideoDb';
+import { VideoQueryParams, VideoSummaryAndPrimaryMedium, VideoWithId } from '../types/VideoDb';
 
 export const getVideoDbVideos = async (path: string, params?: VideoQueryParams): Promise<VideoSummaryAndPrimaryMedium[]> => {
     const url = 'videodb/videos';
     const { data } = await axiosSecureClient.get<VideoSummaryAndPrimaryMedium[]>(url, { params: { path, ...params }});
+    return data;
+};
+
+export const getVideoDbVideo = async (path: string, id: number): Promise<VideoWithId> => {
+    const url = 'videodb/video';
+    const { data } = await axiosSecureClient.get<VideoWithId>(url, { params: { path, id }});
     return data;
 };
 

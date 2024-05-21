@@ -1,6 +1,8 @@
 import { Dialog, DialogBody } from '@blueprintjs/core';
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
+
+import { ViewVideo } from './ViewVideo';
 
 export const ViewEditVideo: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [ searchParams, setSearchParams] = useSearchParams();
@@ -14,9 +16,11 @@ export const ViewEditVideo: FC<{ apiPath: string }> = ({ apiPath }): ReactElemen
     };
 
     return (
-        <Dialog title="Video" isOpen={id !== null} onClose={exitVideo}>
+        <Dialog title="Video" isOpen={id !== null && id === parseInt(id).toString()} onClose={exitVideo}>
             <DialogBody>
-                <div>You chose id {id}. Well done!</div>
+                <Suspense fallback='Loading'>
+                    <ViewVideo apiPath={apiPath} id={parseInt(id || '')} />
+                </Suspense>
             </DialogBody>
         </Dialog>
     );
