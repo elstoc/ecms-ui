@@ -5,7 +5,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
 import { MarkdownEditPage } from './MarkdownEditPage';
-import { useMarkdownPage } from '../../hooks/useApiQueries';
+import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import './MarkdownContent.scss';
 import { Helmet } from 'react-helmet';
 import { splitFrontMatter } from '../../utils/splitFrontMatter';

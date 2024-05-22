@@ -1,4 +1,4 @@
-import { getSiteComponents, getMarkdownPage, getMarkdownTree, getVideoDbVideos } from '../api';
+import { getSiteComponents, getVideoDbVideos } from '../api';
 import { getSiteConfig } from '../api/site';
 import { VideoQueryParams } from '../types/VideoDb';
 import { getVideoDbLookup, getVideoDbVideo } from '../api/videodb';
@@ -15,20 +15,6 @@ export const useSiteConfig = () => {
     return useCustomQuery({
         queryKey: ['siteConfig'],
         queryFn: getSiteConfig,
-    });
-};
-
-export const useMarkdownPage = (path: string) => {
-    return useCustomQuery({
-        queryKey: ['markdownFile', path],
-        queryFn: () => getMarkdownPage(path),
-    });
-};
-
-export const useMarkdownTree = (path: string) => {
-    return useCustomQuery({
-        queryKey: ['markdownTree', path],
-        queryFn: () => getMarkdownTree(path),
     });
 };
 
