@@ -9,8 +9,8 @@ type VideoDbContentProps = {
 }
 
 export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath }): ReactElement => {
-    const { querySearchParams } = useContext(VideoDbContext);
-    const videos = useVideoDbVideos(apiPath, querySearchParams);
+    const { getQuerySearchParams } = useContext(VideoDbContext);
+    const videos = useVideoDbVideos(apiPath, getQuerySearchParams());
 
     return (
         <div className='videodb-list'>

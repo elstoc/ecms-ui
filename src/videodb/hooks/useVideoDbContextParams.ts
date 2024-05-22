@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useReducer } from 'react';
+import { useCallback, useReducer } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { toIntOrUndefined } from '../../utils';
@@ -14,7 +14,7 @@ type VideoDbContextProps = {
     queryState: VideoQueryParams;
     queryStateReducer: React.Dispatch<QueryOperations>;
     updateSearchParamsFromState: () => void;
-    querySearchParams: { [key: string]: string | undefined };
+    getQuerySearchParams: () => { [key: string]: string | undefined };
     clearAll: () => void;
 };
 
@@ -31,16 +31,15 @@ const useVideoDbContextProps: () => VideoDbContextProps = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [queryState, queryStateReducer] = useReducer(videoDbQueryReducer, ({
-        maxLength: toIntOrUndefined(searchParams.get('maxLength') ?? undefined),
+        maxLength: toIntOrUndefined(searchParams.get('maxLength')),
         titleContains: searchParams.get('titleContains') ?? undefined,
         categories: searchParams.get('categories')?.split('|') ?? undefined
     }));
 
-    const querySearchParams = useMemo(() => ({
-        maxLength: searchParams.get('maxLength') ?? undefined,
-        titleContains: searchParams.get('titleContains') ?? undefined,
-        categories: searchParams.get('categories') ?? undefined
-    }), [searchParams]);
+    const getQuerySearchParams = useCallback(() => {
+        const { maxLength, titleContains, categories } = Object.fromEntries(searchParams.entries());
+        return { maxLength, titleContains, categories };
+    }, [searchParams]);
 
     const updateSearchParamsFromState = useCallback(() => {
         setSearchParams((params) => {
@@ -62,7 +61,7 @@ const useVideoDbContextProps: () => VideoDbContextProps = () => {
         setSearchParams({});
     }, [queryStateReducer, setSearchParams]);
 
-    return { queryState, queryStateReducer, querySearchParams, updateSearchParamsFromState, clearAll };
+    return { queryState, queryStateReducer, getQuerySearchParams, updateSearchParamsFromState, clearAll };
 };
 
 export { VideoDbContextProps, useVideoDbContextProps };
