@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { logout } from '../api/auth';
+import { logout } from '../api';
 
 export const WelcomeUser: FC<{ user: string }> = ({ user }): ReactElement => {
     const queryClient = useQueryClient();

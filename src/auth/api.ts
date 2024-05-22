@@ -1,9 +1,21 @@
-import { axiosClient, axiosSecureClient } from '../../api/axiosClients';
-import { getStorage, setStorage } from '../../utils/localStorage';
-import { IdAndAccessToken, User } from './auth.types';
+import { axiosClient, axiosSecureClient } from '../api/axiosClients';
+import { getStorage, setStorage } from '../utils/localStorage';
 
 export const TOKEN_KEY = 'access-token';
 export const TOKEN_EXPIRY_KEY = 'access-token-expiry';
+
+export type User = {
+    id: string;
+    fullName?: string;
+    roles?: string[];
+    hashedPassword?: string;
+};
+
+export type IdAndAccessToken = {
+    id: string,
+    accessToken: string,
+    accessTokenExpiry: number;
+};
 
 export const getAccessToken = (): { accessToken: string, accessTokenExpiry: number } => {
     const accessToken = getStorage(TOKEN_KEY);

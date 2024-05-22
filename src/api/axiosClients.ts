@@ -1,5 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { getAccessToken, refreshAccessToken } from '../auth/api/auth';
+import { getAccessToken, refreshAccessToken } from '../auth/api';
 import { config } from '../utils/config';
 
 const axiosDefaults = {
