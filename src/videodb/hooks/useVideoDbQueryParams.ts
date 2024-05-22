@@ -1,8 +1,8 @@
 import { useCallback, useMemo, useReducer } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { toIntOrUndefined } from '../utils/toIntOrUndefined';
-import { VideoQueryParams } from '../types/VideoDb';
+import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
+import { VideoQueryParams } from '../../types/VideoDb';
 
 type SetMaxLength = { action: 'set'; key: 'maxLength'; value?: number; }
 type SetTitleContains = { action: 'set'; key: 'titleContains'; value?: string; }

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
 import { VideoListItem } from './VideoListItem';
-import { useVideoDbVideos } from '../../hooks/useApiQueries';
+import { useVideoDbVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbQueryParamContext } from './VideoDb';
 
 type VideoDbContentProps = {

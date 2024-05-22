@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense, createContext } from 'react';
 
 import { VideoDbProps, VideoDbContent } from './VideoDbContent';
-import { VideoDbQueryStateContextProps, useVideoDbQueryParams } from '../../hooks/useVideoDbQueryParams';
+import { VideoDbQueryStateContextProps, useVideoDbQueryParams } from '../hooks/useVideoDbQueryParams';
 
 export const VideoDbQueryParamContext = createContext({} as VideoDbQueryStateContextProps);
 

@@ -1,9 +1,9 @@
 import React, { FC, ReactElement, useCallback } from 'react';
 
-import { VideoSummaryAndPrimaryMedium } from '../../types/VideoDb';
+import { VideoSummaryAndPrimaryMedium } from '../api';
 
 import './VideoListItem.scss';
-import { useVideoDbLookup } from '../../hooks/useApiQueries';
+import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
 import { useSearchParams } from 'react-router-dom';
 import { Button } from '@blueprintjs/core';
 
