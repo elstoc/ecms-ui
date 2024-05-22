@@ -13,10 +13,10 @@ const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
         activeImageIndex: -1,
         marginPx, batchSize, apiPath, title
     };
-    const { galleryState, alterGalleryState } = useGalleryStateReducer(initialState);
+    const { galleryState, galleryStateReducer } = useGalleryStateReducer(initialState);
 
     return (
-        <GalleryStateContext.Provider value={{galleryState, alterGalleryState}}>
+        <GalleryStateContext.Provider value={{galleryState, galleryStateReducer}}>
             <Suspense fallback={<div>Loading...</div>}>
                 <GalleryContent />
             </Suspense>

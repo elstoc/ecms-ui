@@ -11,7 +11,7 @@ export type GalleryState = {
 
 type GalleryStateContextProps = {
     galleryState: GalleryState;
-    alterGalleryState: React.Dispatch<GalleryReducerActions>;
+    galleryStateReducer: React.Dispatch<GalleryReducerActions>;
 };
 
 type IncrementMaxImagesAction = {
@@ -31,7 +31,7 @@ type SetLightboxImageAction = {
 
 type GalleryReducerActions = IncrementMaxImagesAction | SetMaxImagesAction | SetLightboxImageAction;
 
-const galleryStateReducer: (state: GalleryState, actions: GalleryReducerActions) => GalleryState = (state, actions) => {
+const stateReducer: (state: GalleryState, actions: GalleryReducerActions) => GalleryState = (state, actions) => {
     if (actions.action === 'incrementMaxImages') {
         return { ...state, maxImages: Math.min(state.maxImages + state.batchSize, actions.maximum)};
     } else if (actions.action === 'setMaxImages') {
@@ -43,8 +43,8 @@ const galleryStateReducer: (state: GalleryState, actions: GalleryReducerActions)
 };
 
 const useGalleryStateReducer: (initialState: GalleryState) => GalleryStateContextProps = (initialState) => {
-    const [galleryState, alterGalleryState] = useReducer(galleryStateReducer, initialState);
-    return { galleryState, alterGalleryState };
+    const [galleryState, galleryStateReducer] = useReducer(stateReducer, initialState);
+    return { galleryState, galleryStateReducer };
 };
 
 export { GalleryStateContextProps, useGalleryStateReducer };

@@ -8,7 +8,7 @@ import { useTitle } from '../../common/hooks';
 
 export const GalleryLightBox: FC = (): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { galleryState: { apiPath, maxImages, title }, alterGalleryState } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, title }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
 
     const imageName = searchParams.get('image');
@@ -22,10 +22,10 @@ export const GalleryLightBox: FC = (): ReactElement => {
     useEffect(() => {
         if ( imageIndex >= images.length && images.length < allImageFiles.length) {
             // requested LightBox image is available but not currently loaded
-            alterGalleryState({ action: 'setMaxImages', value: imageIndex + 1 });
+            galleryStateReducer({ action: 'setMaxImages', value: imageIndex + 1 });
         }
-        alterGalleryState({ action: 'setActiveImageIndex', value: imageIndex });
-    }, [images, allImageFiles, imageIndex, alterGalleryState]);
+        galleryStateReducer({ action: 'setActiveImageIndex', value: imageIndex });
+    }, [images, allImageFiles, imageIndex, galleryStateReducer]);
 
     useTitle(`${title} - ${imageName}`);
 
