@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import { ComponentMetadata, ComponentTypes } from '../../types/Site';
-import { Gallery } from '../gallery';
+import { Gallery } from '../../gallery/components';
 import { Markdown } from '../markdown';
 import { VideoDb } from '../videodb/VideoDb';
 

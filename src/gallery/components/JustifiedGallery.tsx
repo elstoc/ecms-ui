@@ -5,7 +5,7 @@ import { useNthElementIsVisible } from '../../hooks/useNthElementIsVisible';
 import { useScrollToNthElement } from '../../hooks/useScrollToNthElement';
 import { GalleryThumb } from './GalleryThumb';
 import { GalleryStateContext } from './Gallery';
-import { useGalleryContent } from '../../hooks/useApiQueries';
+import { useGalleryContent } from '../hooks/useGalleryQueries';
 
 import './JustifiedGallery.css';
 

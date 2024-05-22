@@ -2,8 +2,8 @@ import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { LightBox } from '../shared/lightbox';
-import { useGalleryContent } from '../../hooks/useApiQueries';
+import { LightBox } from '../../components/shared/lightbox';
+import { useGalleryContent } from '../hooks/useGalleryQueries';
 import { GalleryStateContext } from './Gallery';
 
 export const GalleryLightBox: FC = (): ReactElement => {
