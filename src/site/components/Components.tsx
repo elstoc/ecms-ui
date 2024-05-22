@@ -1,10 +1,10 @@
 import React, { FC, ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ComponentMetadata } from '../../types/Site';
+import { ComponentMetadata } from '../../site/api';
 import { Component } from './Component';
 import { Auth } from '../../auth/components';
-import { useSiteConfig } from '../../hooks/useApiQueries';
+import { useSiteConfig } from '../hooks/useSiteQueries';
 
 export const Components: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
     const siteConfig = useSiteConfig();

@@ -1,3 +1,5 @@
+import { axiosSecureClient } from '../api/axiosClients';
+
 export type SiteConfig = {
     authEnabled: boolean;
     footerText: string;
@@ -33,3 +35,13 @@ export type VideoDbComponentMetadata = ComponentMetadataCommon & {
 }
 
 export type ComponentMetadata = GalleryComponentMetadata | MarkdownComponentMetadata | VideoDbComponentMetadata;
+
+export const getSiteComponents = async (): Promise<ComponentMetadata[]> => {
+    const { data } = await axiosSecureClient.get<ComponentMetadata[]>('site/components');
+    return data;
+};
+
+export const getSiteConfig = async (): Promise<SiteConfig> => {
+    const { data } = await axiosSecureClient.get<SiteConfig>('site/config');
+    return data;
+};

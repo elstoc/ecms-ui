@@ -1,6 +1,6 @@
 import { getSiteComponents } from '../api';
-import { getSiteConfig } from '../api/site';
-import { useCustomQuery } from './useCustomQuery';
+import { getSiteConfig } from '../api';
+import { useCustomQuery } from '../../hooks/useCustomQuery';
 
 export const useSiteComponents = () => {
     return useCustomQuery({

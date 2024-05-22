@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
 import './Footer.css';
-import { useSiteConfig } from '../../hooks/useApiQueries';
+import { useSiteConfig } from '../hooks/useSiteQueries';
 
 export const Footer: FC = (): ReactElement => {
     const siteConfig = useSiteConfig();

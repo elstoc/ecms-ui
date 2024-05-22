@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 
-import { Components } from './components/site/Components';
-import { useSiteComponents } from './hooks/useApiQueries';
-import { Footer } from './components/site/Footer';
-import { Header } from './components/site/Header';
+import { Components } from './site/components/Components';
+import { useSiteComponents } from './site/hooks/useSiteQueries';
+import { Footer } from './site/components/Footer';
+import { Header } from './site/components/Header';
 import { FocusStyleManager } from '@blueprintjs/core';
 
 import './app.scss';

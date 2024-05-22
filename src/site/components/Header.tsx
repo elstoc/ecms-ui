@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 
-import { ComponentMetadata } from '../../types/Site';
+import { ComponentMetadata } from '../../site/api';
 import { Nav } from './Nav';
 import { ToolBox } from './ToolBox';
 
