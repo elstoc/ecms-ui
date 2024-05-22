@@ -3,12 +3,12 @@ import { Button } from '@blueprintjs/core';
 
 import { OptionalIntInput, OptionalStringInput, MultiSelectKeyValue } from '../../common/components/forms';
 import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
-import { VideoDbQueryParamContext } from './VideoDb';
+import { VideoDbContext } from './VideoDb';
 
 import './VideoQueryParams.scss';
 
 export const VideoQueryParams: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
-    const { queryState, queryStateReducer, updateSearchParamsFromState, clearAll } = useContext(VideoDbQueryParamContext);
+    const { queryState, queryStateReducer, updateSearchParamsFromState, clearAll } = useContext(VideoDbContext);
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
 
     return (

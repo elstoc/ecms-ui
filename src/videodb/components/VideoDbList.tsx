@@ -2,14 +2,14 @@ import React, { FC, ReactElement, useContext } from 'react';
 
 import { VideoListItem } from './VideoListItem';
 import { useVideoDbVideos } from '../hooks/useVideoDbQueries';
-import { VideoDbQueryParamContext } from './VideoDb';
+import { VideoDbContext } from './VideoDb';
 
 type VideoDbContentProps = {
     apiPath: string;
 }
 
 export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath }): ReactElement => {
-    const { querySearchParams } = useContext(VideoDbQueryParamContext);
+    const { querySearchParams } = useContext(VideoDbContext);
     const videos = useVideoDbVideos(apiPath, querySearchParams);
 
     return (

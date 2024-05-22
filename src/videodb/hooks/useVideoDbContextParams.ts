@@ -10,7 +10,7 @@ type SetCategories = { action: 'set'; key: 'categories'; value?: string[] }
 type SetAll = { action: 'setAll'; value: VideoQueryParams }
 type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll;
 
-type VideoDbQueryStateContextProps = {
+type VideoDbContextProps = {
     queryState: VideoQueryParams;
     queryStateReducer: React.Dispatch<QueryOperations>;
     updateSearchParamsFromState: () => void;
@@ -27,7 +27,7 @@ const videoDbQueryReducer: (state: VideoQueryParams, operation: QueryOperations)
     return state;
 };
 
-const useVideoDbQueryParams: () => VideoDbQueryStateContextProps = () => {
+const useVideoDbContextProps: () => VideoDbContextProps = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [queryState, queryStateReducer] = useReducer(videoDbQueryReducer, ({
@@ -65,4 +65,4 @@ const useVideoDbQueryParams: () => VideoDbQueryStateContextProps = () => {
     return { queryState, queryStateReducer, querySearchParams, updateSearchParamsFromState, clearAll };
 };
 
-export { VideoDbQueryStateContextProps, useVideoDbQueryParams };
+export { VideoDbContextProps, useVideoDbContextProps };
