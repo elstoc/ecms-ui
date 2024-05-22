@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Helmet } from 'react-helmet';
 
 import { login } from '../api';
+import { useTitle } from '../../common/hooks';
 
 import './Login.scss';
 
@@ -13,6 +13,8 @@ export const Login: FC = (): ReactElement => {
     const [loginFailed, setLoginFailed] = useState(false);
     const [userId, setUserId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+
+    useTitle('Login');
     
     const handleLogin = useCallback(async () => {
         try {
@@ -35,7 +37,6 @@ export const Login: FC = (): ReactElement => {
     return(
         <div className='login'>
             <div className='login-form'>
-                <Helmet><title>Login</title></Helmet>
                 <label>UserId</label>
                 <input
                     id='userId'

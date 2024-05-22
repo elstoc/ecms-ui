@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 import { LightBox } from '../../common/components/lightbox';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
 import { GalleryStateContext } from './Gallery';
+import { useTitle } from '../../common/hooks';
 
 export const GalleryLightBox: FC = (): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -27,23 +27,22 @@ export const GalleryLightBox: FC = (): ReactElement => {
         alterGalleryState({ action: 'setActiveImageIndex', value: imageIndex });
     }, [images, allImageFiles, imageIndex, alterGalleryState]);
 
+    useTitle(`${title} - ${imageName}`);
+
     const currImage = images[imageIndex];
     const nextImage = images[imageIndex + 1];
     const prevImage = images[imageIndex - 1];
 
     return currImage && (
-        <>
-            <Helmet><title>{title} - {imageName}</title></Helmet>
-            <LightBox
-                onClose={() => setSearchParams({}, { replace: true })}
-                onPrev={prevImage && (() => setSearchParams({ image: prevImage.fileName }, { replace: true }))}
-                onNext={nextImage && (() => setSearchParams({ image: nextImage.fileName }, { replace: true }))}
-                caption={currImage.description}
-                alt={currImage.fileName}
-                imageUrl={currImage.fhdSrcUrl}
-                prevImageUrl={prevImage?.fhdSrcUrl}
-                nextImageUrl={nextImage?.fhdSrcUrl}
-            />
-        </>
+        <LightBox
+            onClose={() => setSearchParams({}, { replace: true })}
+            onPrev={prevImage && (() => setSearchParams({ image: prevImage.fileName }, { replace: true }))}
+            onNext={nextImage && (() => setSearchParams({ image: nextImage.fileName }, { replace: true }))}
+            caption={currImage.description}
+            alt={currImage.fileName}
+            imageUrl={currImage.fhdSrcUrl}
+            prevImageUrl={prevImage?.fhdSrcUrl}
+            nextImageUrl={nextImage?.fhdSrcUrl}
+        />
     );
 };

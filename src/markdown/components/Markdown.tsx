@@ -1,9 +1,9 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
 
 import { MarkdownContent } from './MarkdownContent';
 import { MarkdownNav } from './MarkdownNav';
+import { useTitle } from '../../common/hooks';
 
 import './Markdown.css';
 
@@ -14,9 +14,9 @@ type MarkdownProps = {
 }
 
 export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): ReactElement => {
+    useTitle(title);
     return (
         <div className='markdown'>
-            <Helmet><title>{title}</title></Helmet>
             <nav className='markdown-nav-container'>
                 <Suspense fallback='Loading...'>
                     {includeNav && <MarkdownNav rootApiPath={apiPath} />}
