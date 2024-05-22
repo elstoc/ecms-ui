@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
+
 import './MarkdownNav.scss';
 
 export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {

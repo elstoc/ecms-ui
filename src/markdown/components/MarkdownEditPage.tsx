@@ -1,17 +1,16 @@
 import React, { FC, ReactElement, Suspense, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { OverlayToaster } from '@blueprintjs/core';
 
 import { Icon } from '../../common/components/icon';
-import { deleteMarkdownPage, putMarkdownPage } from '../api';
-import { MarkdownPage } from '../api';
-import { OverlayToaster } from '@blueprintjs/core';
+import { MarkdownPage, deleteMarkdownPage, putMarkdownPage } from '../api';
 
 import './MarkdownEditPage.scss';
 
 const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
 
-export type MarkdownEditPageProps = {
+type MarkdownEditPageProps = {
     mdFullPath: string;
     mdPage?: MarkdownPage;
 };

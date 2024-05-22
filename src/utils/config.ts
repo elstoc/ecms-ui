@@ -2,7 +2,7 @@ declare const window: {
     _env_?: { [key: string]: string }
 } & Window;
 
-export const getConfig = (key: string, defaultValue: string): string => {
+const getConfig = (key: string, defaultValue: string): string => {
     return window?._env_?.[key] ?? process.env[key] ?? defaultValue;
 };
 

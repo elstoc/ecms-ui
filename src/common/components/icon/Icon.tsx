@@ -1,10 +1,9 @@
 // See https://react-icons.github.io/react-icons for summary of available icons
-
 import React, { FC, ReactElement } from 'react';
 import { FiChevronLeft, FiChevronRight, FiEdit, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
-
 import { IconType } from 'react-icons';
 import { PopoverPosition, Tooltip } from '@blueprintjs/core';
+
 import './Icon.scss';
 
 const icons: { [key: string]: IconType} = {

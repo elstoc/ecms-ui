@@ -1,8 +1,7 @@
 import React, { FC, ReactElement, useCallback, useContext, useMemo } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { useNthElementIsVisible } from '../../common/hooks/useNthElementIsVisible';
-import { useScrollToNthElement } from '../../common/hooks/useScrollToNthElement';
+import { useNthElementIsVisible, useScrollToNthElement } from '../../common/hooks';
 import { GalleryThumb } from './GalleryThumb';
 import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../hooks/useGalleryQueries';

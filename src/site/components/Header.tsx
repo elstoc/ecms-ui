@@ -1,12 +1,13 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 
-import { ComponentMetadata } from '../../site/api';
 import { Nav } from './Nav';
 import { ToolBox } from './ToolBox';
+import { useSiteComponents } from '../hooks/useSiteQueries';
 
 import './Header.css';
 
-export const Header: FC<{ siteComponents: ComponentMetadata[]; }> = ({ siteComponents }): ReactElement => {
+export const Header: FC = (): ReactElement => {
+    const siteComponents = useSiteComponents();
     return (
         <Suspense fallback='Loading...' >
             <div className='header'>

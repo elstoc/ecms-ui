@@ -1,10 +1,11 @@
 import React, { forwardRef, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
-import './GalleryThumb.scss';
 import { GalleryStateContext } from './Gallery';
 
-export type GalleryThumbProps = {
+import './GalleryThumb.scss';
+
+type GalleryThumbProps = {
     fileName: string;
     description: string;
     thumbSrcUrl: string;

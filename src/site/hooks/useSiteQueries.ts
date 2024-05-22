@@ -1,17 +1,18 @@
-import { getSiteComponents } from '../api';
-import { getSiteConfig } from '../api';
-import { useCustomQuery } from '../../common/hooks/useCustomQuery';
+import { getSiteConfig, getSiteComponents } from '../api';
+import { useCustomQuery } from '../../common/hooks';
 
-export const useSiteComponents = () => {
+const useSiteComponents = () => {
     return useCustomQuery({
         queryKey: ['siteComponents'],
         queryFn: getSiteComponents,
     });
 };
 
-export const useSiteConfig = () => {
+const useSiteConfig = () => {
     return useCustomQuery({
         queryKey: ['siteConfig'],
         queryFn: getSiteConfig,
     });
 };
+
+export { useSiteComponents, useSiteConfig };

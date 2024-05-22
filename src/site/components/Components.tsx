@@ -1,12 +1,12 @@
 import React, { FC, ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { ComponentMetadata } from '../../site/api';
 import { Component } from './Component';
-import { Auth } from '../../auth/components';
-import { useSiteConfig } from '../hooks/useSiteQueries';
+import { Auth } from '../../auth';
+import { useSiteComponents, useSiteConfig } from '../hooks/useSiteQueries';
 
-export const Components: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
+export const Components: FC = (): ReactElement => {
+    const siteComponents = useSiteComponents();
     const siteConfig = useSiteConfig();
 
     return (

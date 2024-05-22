@@ -1,9 +1,10 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router';
+import { Helmet } from 'react-helmet';
 
 import { login } from '../api';
-import { Helmet } from 'react-helmet';
+
 import './Login.scss';
 
 export const Login: FC = (): ReactElement => {

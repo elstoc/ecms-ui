@@ -1,17 +1,17 @@
 import { axiosSecureClient } from '../common/api';
 
-export type SiteConfig = {
+type SiteConfig = {
     authEnabled: boolean;
     footerText: string;
 };
 
-export enum ComponentTypes {
+enum ComponentTypes {
     gallery = 'gallery',
     markdown = 'markdown',
     videodb = 'videodb'
 }
 
-export type ComponentMetadataCommon = {
+type ComponentMetadataCommon = {
     apiPath: string;
     uiPath: string;
     title: string;
@@ -19,29 +19,31 @@ export type ComponentMetadataCommon = {
     restrict?: string;
 }
 
-export type GalleryComponentMetadata = ComponentMetadataCommon & {
+type GalleryComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
     marginPx: number;
     batchSize: number;
 }
 
-export type MarkdownComponentMetadata = ComponentMetadataCommon & {
+type MarkdownComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.markdown;
     includeNav: boolean;
 }
 
-export type VideoDbComponentMetadata = ComponentMetadataCommon & {
+type VideoDbComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.videodb;
 }
 
-export type ComponentMetadata = GalleryComponentMetadata | MarkdownComponentMetadata | VideoDbComponentMetadata;
+type ComponentMetadata = GalleryComponentMetadata | MarkdownComponentMetadata | VideoDbComponentMetadata;
 
-export const getSiteComponents = async (): Promise<ComponentMetadata[]> => {
+const getSiteComponents = async (): Promise<ComponentMetadata[]> => {
     const { data } = await axiosSecureClient.get<ComponentMetadata[]>('site/components');
     return data;
 };
 
-export const getSiteConfig = async (): Promise<SiteConfig> => {
+const getSiteConfig = async (): Promise<SiteConfig> => {
     const { data } = await axiosSecureClient.get<SiteConfig>('site/config');
     return data;
 };
+
+export { ComponentTypes, GalleryComponentMetadata, ComponentMetadata, getSiteComponents, getSiteConfig };

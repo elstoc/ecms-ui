@@ -4,9 +4,9 @@ import { GalleryContent } from './GalleryContent';
 import { GalleryComponentMetadata } from '../../site/api';
 import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '../hooks/useGalleryStateReducer';
 
-export const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
+const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
-export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
+const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
     const { batchSize, marginPx, apiPath, title } = props;
     const initialState: GalleryState = {
         maxImages: batchSize,
@@ -23,3 +23,5 @@ export const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
         </GalleryStateContext.Provider>
     );
 };
+
+export { GalleryStateContext, Gallery };

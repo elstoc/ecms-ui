@@ -1,15 +1,15 @@
 import { axiosSecureClient } from '../common/api';
 
-export type Exif = {
+type Exif = {
     [key: string]: string | undefined;
 };
 
-export type Dimensions = {
+type Dimensions = {
     width: number;
     height: number;
 };
 
-export type ImageMetadata = {
+type ImageMetadata = {
     fileName: string;
     description: string;
     exif: Exif;
@@ -18,7 +18,7 @@ export type ImageMetadata = {
     fhdSrcUrl: string;
 }
 
-export type GalleryContents = {
+type GalleryContents = {
     images: ImageMetadata[];
     allImageFiles: string[];
 }

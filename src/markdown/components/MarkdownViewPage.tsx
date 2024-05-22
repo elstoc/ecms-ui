@@ -3,14 +3,14 @@ import React, { FC, ReactElement, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Icon } from '../../common/components/icon';
-import { splitFrontMatter } from '../../utils/splitFrontMatter';
+import { splitFrontMatter } from '../../utils';
 import { MarkdownPage } from '../api';
 
 import './MarkdownViewPage.scss';
 
 const RenderMd = React.lazy(() => import('../../common/components/rendermd/RenderMdAsDefault'));
 
-export type MarkdownViewPageProps = {
+type MarkdownViewPageProps = {
     mdFullPath: string;
     mdPage?: MarkdownPage;
     pageTitle: string;

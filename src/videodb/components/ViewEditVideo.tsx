@@ -1,6 +1,6 @@
-import { Dialog, DialogBody } from '@blueprintjs/core';
 import React, { FC, ReactElement, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { ViewVideo } from './ViewVideo';
 

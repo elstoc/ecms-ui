@@ -1,17 +1,16 @@
 import { useCallback, useMemo, useReducer } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { toIntOrUndefined } from '../../utils/toIntOrUndefined';
+import { toIntOrUndefined } from '../../utils';
 import { VideoQueryParams } from '../api';
 
 type SetMaxLength = { action: 'set'; key: 'maxLength'; value?: number; }
 type SetTitleContains = { action: 'set'; key: 'titleContains'; value?: string; }
 type SetCategories = { action: 'set'; key: 'categories'; value?: string[] }
 type SetAll = { action: 'setAll'; value: VideoQueryParams }
-
 type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll;
 
-export type VideoDbQueryStateContextProps = {
+type VideoDbQueryStateContextProps = {
     queryState: VideoQueryParams;
     queryStateReducer: React.Dispatch<QueryOperations>;
     updateSearchParamsFromState: () => void;
@@ -28,7 +27,7 @@ const videoDbQueryReducer: (state: VideoQueryParams, operation: QueryOperations)
     return state;
 };
 
-export const useVideoDbQueryParams: () => VideoDbQueryStateContextProps = () => {
+const useVideoDbQueryParams: () => VideoDbQueryStateContextProps = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [queryState, queryStateReducer] = useReducer(videoDbQueryReducer, ({
@@ -65,3 +64,5 @@ export const useVideoDbQueryParams: () => VideoDbQueryStateContextProps = () => 
 
     return { queryState, queryStateReducer, querySearchParams, updateSearchParamsFromState, clearAll };
 };
+
+export { VideoDbQueryStateContextProps, useVideoDbQueryParams };

@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './app';
-import { ErrorFallback } from './site/components/ErrorFallback';
+import { ErrorFallback } from './common/components/fallbacks';
 
 const queryDefaults = {
     defaultOptions: {
@@ -15,8 +15,8 @@ const queryDefaults = {
         }
     }
 };
-const queryClient = new QueryClient(queryDefaults);
 
+const queryClient = new QueryClient(queryDefaults);
 const container = document.getElementById('app-container')!;
 const root = createRoot(container);
 

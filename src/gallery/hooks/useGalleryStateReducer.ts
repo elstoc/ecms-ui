@@ -9,7 +9,7 @@ export type GalleryState = {
     activeImageIndex: number;
 };
 
-export type GalleryStateContextProps = {
+type GalleryStateContextProps = {
     galleryState: GalleryState;
     alterGalleryState: React.Dispatch<GalleryReducerActions>;
 };
@@ -42,7 +42,9 @@ const galleryStateReducer: (state: GalleryState, actions: GalleryReducerActions)
     return state;
 };
 
-export const useGalleryStateReducer: (initialState: GalleryState) => GalleryStateContextProps = (initialState) => {
+const useGalleryStateReducer: (initialState: GalleryState) => GalleryStateContextProps = (initialState) => {
     const [galleryState, alterGalleryState] = useReducer(galleryStateReducer, initialState);
     return { galleryState, alterGalleryState };
 };
+
+export { GalleryStateContextProps, useGalleryStateReducer };

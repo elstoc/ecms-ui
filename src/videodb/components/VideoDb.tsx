@@ -3,9 +3,9 @@ import React, { FC, ReactElement, Suspense, createContext } from 'react';
 import { VideoDbProps, VideoDbContent } from './VideoDbContent';
 import { VideoDbQueryStateContextProps, useVideoDbQueryParams } from '../hooks/useVideoDbQueryParams';
 
-export const VideoDbQueryParamContext = createContext({} as VideoDbQueryStateContextProps);
+const VideoDbQueryParamContext = createContext({} as VideoDbQueryStateContextProps);
 
-export const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
+const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
     const contextProps = useVideoDbQueryParams();
 
     return (
@@ -16,3 +16,5 @@ export const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
         </VideoDbQueryParamContext.Provider>
     );
 };
+
+export { VideoDb, VideoDbQueryParamContext };
