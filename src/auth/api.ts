@@ -11,13 +11,14 @@ type User = {
     hashedPassword?: string;
 };
 
-type IdAndAccessToken = {
-    id: string,
+type AccessToken = {
     accessToken: string,
     accessTokenExpiry: number;
-};
+}
 
-const getAccessToken = (): { accessToken: string, accessTokenExpiry: number } => {
+type IdAndAccessToken = AccessToken & { id: string };
+
+const getAccessToken = (): AccessToken => {
     const accessToken = getStorage(TOKEN_KEY);
     const accessTokenExpiry = parseInt(getStorage(TOKEN_EXPIRY_KEY) || '0');
     return { accessToken, accessTokenExpiry };
