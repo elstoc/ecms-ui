@@ -1,5 +1,5 @@
 import { VideoQueryParams, getVideoDbVideos, getVideoDbVideo, getVideoDbLookup } from '../api';
-import { useCustomQuery } from '../../hooks/useCustomQuery';
+import { useCustomQuery } from '../../common/hooks/useCustomQuery';
 
 export const useVideoDbVideos = (path: string, params?: VideoQueryParams) => {
     return useCustomQuery({

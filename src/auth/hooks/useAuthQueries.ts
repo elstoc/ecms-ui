@@ -1,5 +1,5 @@
 import { getUserInfo } from '../api';
-import { useCustomQuery } from '../../hooks/useCustomQuery';
+import { useCustomQuery } from '../../common/hooks/useCustomQuery';
 
 export const useUserInfo = () => {
     return useCustomQuery({

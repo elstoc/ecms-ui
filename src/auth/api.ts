@@ -1,4 +1,4 @@
-import { axiosClient, axiosSecureClient } from '../api/axiosClients';
+import { axiosClient, axiosSecureClient } from '../common/api';
 import { getStorage, setStorage } from '../utils/localStorage';
 
 export const TOKEN_KEY = 'access-token';

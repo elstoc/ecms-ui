@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon } from '../../components/shared/icon';
+import { Icon } from '../../common/components/icon';
 import { useSiteConfig } from '../hooks/useSiteQueries';
 import { useUserInfo } from '../../auth/hooks/useAuthQueries';
 

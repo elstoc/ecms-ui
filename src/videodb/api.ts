@@ -1,4 +1,4 @@
-import { axiosSecureClient } from '../api/axiosClients';
+import { axiosSecureClient } from '../common/api';
 
 export type VideoMedia = {
     media_type: string;

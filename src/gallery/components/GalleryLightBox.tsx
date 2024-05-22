@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
-import { LightBox } from '../../components/shared/lightbox';
+import { LightBox } from '../../common/components/lightbox';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
 import { GalleryStateContext } from './Gallery';
 

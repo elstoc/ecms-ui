@@ -1,4 +1,4 @@
-import { useCustomQuery } from '../../hooks/useCustomQuery';
+import { useCustomQuery } from '../../common/hooks/useCustomQuery';
 import { getGalleryContents } from '../api';
 
 export const useGalleryContent = (path: string, limit = 0) => {

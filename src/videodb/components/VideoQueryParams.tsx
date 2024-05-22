@@ -1,9 +1,9 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Button } from '@blueprintjs/core';
 
-import { OptionalIntInput } from '../../components/shared/forms/OptionalIntInput';
-import { OptionalStringInput } from '../../components/shared/forms/OptionaStringInput';
-import { MultiSelectKeyValue } from '../../components/shared/forms/MultiSelectKeyValue';
+import { OptionalIntInput } from '../../common/components/forms/OptionalIntInput';
+import { OptionalStringInput } from '../../common/components/forms/OptionaStringInput';
+import { MultiSelectKeyValue } from '../../common/components/forms/MultiSelectKeyValue';
 import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbQueryParamContext } from './VideoDb';
 

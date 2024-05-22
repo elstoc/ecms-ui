@@ -1,5 +1,5 @@
 import { getMarkdownPage, getMarkdownTree } from '../api';
-import { useCustomQuery } from '../../hooks/useCustomQuery';
+import { useCustomQuery } from '../../common/hooks/useCustomQuery';
 
 export const useMarkdownPage = (path: string) => {
     return useCustomQuery({

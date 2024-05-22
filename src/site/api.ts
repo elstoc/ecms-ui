@@ -1,4 +1,4 @@
-import { axiosSecureClient } from '../api/axiosClients';
+import { axiosSecureClient } from '../common/api';
 
 export type SiteConfig = {
     authEnabled: boolean;
