@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useReducer } from 'react';
+import { createContext, useCallback, useContext, useEffect, useReducer } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { toIntOrUndefined } from '../../utils';
@@ -23,6 +23,7 @@ const VideoDbContext = createContext({} as VideoDbStateContextProps);
 
 const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => VideoDbState = (state, operation) => {
     const { filters } = state;
+
     if (operation.action === 'setFilter') {
         return { ...state, filters: { ...filters, [operation.key]: operation.value } };
     } else if (operation.action === 'setAllFilters') {
@@ -33,15 +34,35 @@ const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => 
 
 const useGetFilterSearchParams = () => {
     const [searchParams] = useSearchParams();
+
     return useCallback(() => {
         const { maxLength, titleContains, categories } = Object.fromEntries(searchParams.entries());
         return { maxLength, titleContains, categories };
     }, [searchParams]);
 };
 
+const useUpdateStateOnSearchParamChange = () => {
+    const [searchParams] = useSearchParams();
+    const { stateReducer } = useContext(VideoDbContext);
+
+    useEffect(() => {
+        if (!searchParams.get('id')) {
+            stateReducer({
+                action: 'setAllFilters',
+                value: {
+                    maxLength: toIntOrUndefined(searchParams.get('maxLength')),
+                    titleContains: searchParams.get('titleContains') ?? undefined,
+                    categories: searchParams.get('categories')?.split('|') ?? undefined
+                }
+            });
+        }
+    }, [searchParams, stateReducer]);
+};
+
 const useSetSearchParamsFromFilterState = () => {
     const [, setSearchParams] = useSearchParams();
     const { state: { filters } } = useContext(VideoDbContext);
+
     return useCallback(() => {
         const { categories, maxLength, titleContains } = filters;
         setSearchParams((params) => {
@@ -60,23 +81,12 @@ const useSetSearchParamsFromFilterState = () => {
     }, [setSearchParams, JSON.stringify(filters)]);
 };
 
-const useGetFilterStateFromSearchParams = () => {
-    const [searchParams] = useSearchParams();
-    return useCallback(() => ({
-        maxLength: toIntOrUndefined(searchParams.get('maxLength')),
-        titleContains: searchParams.get('titleContains') ?? undefined,
-        categories: searchParams.get('categories')?.split('|') ?? undefined
-    }), [searchParams]);
-};
-
 const useClearSearchParams = () => {
     const [, setSearchParams] = useSearchParams();
-    const { stateReducer } = useContext(VideoDbContext);
 
     return useCallback(() => {
-        stateReducer({ action: 'setAllFilters', value: {} });
         setSearchParams({});
-    }, [stateReducer, setSearchParams]);
+    }, [setSearchParams]);
 };
 
 const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps = (initialState) => {
@@ -84,4 +94,4 @@ const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps 
     return { state, stateReducer };
 };
 
-export { VideoDbContext, useVideoDbState, useGetFilterStateFromSearchParams, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams };
+export { VideoDbState, VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };

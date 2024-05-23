@@ -4,6 +4,7 @@ import { VideoDbList } from './VideoDbList';
 import { VideoDbFilters } from './VideoDbFilters';
 import { ViewEditVideo } from './ViewEditVideo';
 import { useTitle } from '../../common/hooks';
+import { useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
 
 export type VideoDbProps = {
     apiPath: string;
@@ -11,6 +12,7 @@ export type VideoDbProps = {
 }
 
 export const VideoDbContent: FC<VideoDbProps> = ({ apiPath, title }): ReactElement => {
+    useUpdateStateOnSearchParamChange();
     useTitle(title);
     return (
         <div className='videodb'>
