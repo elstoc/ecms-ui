@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 
 import { VideoDbList } from './VideoDbList';
-import { VideoQueryParams } from './VideoQueryParams';
+import { VideoDbFilters } from './VideoDbFilters';
 import { ViewEditVideo } from './ViewEditVideo';
 import { useTitle } from '../../common/hooks';
 
@@ -18,7 +18,7 @@ export const VideoDbContent: FC<VideoDbProps> = ({ apiPath, title }): ReactEleme
                 <ViewEditVideo apiPath={apiPath} />
             </Suspense>
             <Suspense fallback='Loading...'>
-                <VideoQueryParams apiPath={apiPath} />
+                <VideoDbFilters apiPath={apiPath} />
             </Suspense>
             <Suspense fallback='Loading...'>
                 <VideoDbList apiPath={apiPath} />

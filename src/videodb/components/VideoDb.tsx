@@ -1,20 +1,17 @@
-import React, { FC, ReactElement, Suspense, createContext } from 'react';
+import React, { FC, ReactElement, Suspense} from 'react';
 
 import { VideoDbProps, VideoDbContent } from './VideoDbContent';
-import { VideoDbContextProps, useVideoDbContextProps } from '../hooks/useVideoDbContextParams';
+import { VideoDbContext, useGetFilterStateFromSearchParams, useVideoDbState } from '../hooks/useVideoDbState';
 
-const VideoDbContext = createContext({} as VideoDbContextProps);
-
-const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
-    const contextProps = useVideoDbContextProps();
+export const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
+    const getInitialFilters = useGetFilterStateFromSearchParams();
+    const initialState = { filters: getInitialFilters() };
 
     return (
-        <VideoDbContext.Provider value={contextProps} >
+        <VideoDbContext.Provider value={useVideoDbState(initialState)} >
             <Suspense fallback='Loading...'>
                 <VideoDbContent {...props} />
             </Suspense>
         </VideoDbContext.Provider>
     );
 };
-
-export { VideoDb, VideoDbContext };
