@@ -2,13 +2,23 @@ import { createContext, useCallback, useContext, useEffect, useReducer } from 'r
 import { useSearchParams } from 'react-router-dom';
 
 import { toIntOrUndefined } from '../../utils';
-import { VideoFilters } from '../api';
+
+const BATCH_SIZE = 100;
 
 type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value?: number; }
 type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value?: string; }
 type SetCategories = { action: 'setFilter'; key: 'categories'; value?: string[] }
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
-type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll;
+type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
+type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit;
+
+type VideoFilters = {
+    limit: number;
+    maxLength?: number;
+    categories?: string[];
+    tags?: string[];
+    titleContains?: string;
+}
 
 type VideoDbState = {
     apiPath: string;
@@ -30,6 +40,8 @@ const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => 
         return { ...state, filters: { ...filters, [operation.key]: operation.value } };
     } else if (operation.action === 'setAllFilters') {
         return { ...state, filters: operation.value };
+    } else if (operation.action === 'increaseLimit' && operation.currentlyLoaded + BATCH_SIZE >= state.filters.limit + BATCH_SIZE) {
+        return { ...state, filters: { ...filters, limit: state.filters.limit + BATCH_SIZE } };
     }
     return state;
 };
@@ -52,6 +64,7 @@ const useUpdateStateOnSearchParamChange = () => {
             stateReducer({
                 action: 'setAllFilters',
                 value: {
+                    limit: BATCH_SIZE,
                     maxLength: toIntOrUndefined(searchParams.get('maxLength')),
                     titleContains: searchParams.get('titleContains') ?? undefined,
                     categories: searchParams.get('categories')?.split('|') ?? undefined

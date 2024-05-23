@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useCallback } from 'react';
+import React, { FC, forwardRef, ReactElement, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { VideoSummaryAndPrimaryMedium } from '../api';
@@ -11,7 +11,7 @@ type VideoDbProps = {
     video: VideoSummaryAndPrimaryMedium;
 }
 
-export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElement => {
+export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
     const [, setSearchParams] = useSearchParams();
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
     const watchedStatusLookup = useVideoDbLookup(apiPath, 'watched_status');
@@ -30,7 +30,7 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
     const pMediaType = mediaTypeLookup[video.pm_media_type];
 
     return (
-        <div className='video-list-item'>
+        <div ref={ref} className='video-list-item'>
             <div className='video-name'onClick={() => addIdToParams(video.id)}>{ video.title }</div>
             <div className='sub-info'>
                 <span className='category'>{category}</span>
@@ -41,4 +41,4 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
             </div>
         </div>
     );
-};
+});

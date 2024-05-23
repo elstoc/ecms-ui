@@ -50,15 +50,7 @@ type PrimaryMedium = {
 
 type VideoSummaryAndPrimaryMedium = VideoSummary & PrimaryMedium;
 
-type VideoFilters = {
-    maxLength?: number;
-    categories?: string[];
-    tags?: string[];
-    titleContains?: string;
-}
-
-
-const getVideoDbVideos = async (path: string, filters?: VideoFilters): Promise<VideoSummaryAndPrimaryMedium[]> => {
+const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoSummaryAndPrimaryMedium[]> => {
     const url = 'videodb/videos';
     const { data } = await axiosSecureClient.get<VideoSummaryAndPrimaryMedium[]>(url, { params: { path, ...filters }});
     return data;
@@ -76,4 +68,4 @@ const getVideoDbLookup = async (path: string, lookupTable: string): Promise<{ [k
     return data;
 };
 
-export { VideoFilters, VideoSummaryAndPrimaryMedium, getVideoDbVideos, getVideoDbVideo, getVideoDbLookup };
+export { VideoSummaryAndPrimaryMedium, getVideoDbVideos, getVideoDbVideo, getVideoDbLookup };

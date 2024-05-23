@@ -6,7 +6,7 @@ import { VideoDbContext, useVideoDbState } from '../hooks/useVideoDbState';
 
 export const VideoDb: FC<VideoDbComponentMetadata> = ({ title, apiPath }): ReactElement => {
     const initialState = {
-        title, apiPath, filters: {}
+        title, apiPath, filters: { limit: 50 }
     };
     return (
         <VideoDbContext.Provider value={useVideoDbState(initialState)} >
