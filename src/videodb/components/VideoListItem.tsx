@@ -1,6 +1,5 @@
 import React, { FC, ReactElement, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Button } from '@blueprintjs/core';
 
 import { VideoSummaryAndPrimaryMedium } from '../api';
 import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
@@ -32,7 +31,7 @@ export const VideoListItem: FC<VideoDbProps> = ({ apiPath, video }): ReactElemen
 
     return (
         <div className='video-list-item'>
-            <div className='video-name'>{ video.title } <Button onClick={() => addIdToParams(video.id)}>Edit</Button></div>
+            <div className='video-name'onClick={() => addIdToParams(video.id)}>{ video.title }</div>
             <div className='sub-info'>
                 <span className='category'>{category}</span>
                 {video.length_mins > 0 && <span> | {video.length_mins} mins</span>}
