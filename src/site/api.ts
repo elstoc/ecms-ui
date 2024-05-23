@@ -46,4 +46,4 @@ const getSiteConfig = async (): Promise<SiteConfig> => {
     return data;
 };
 
-export { ComponentTypes, GalleryComponentMetadata, ComponentMetadata, getSiteComponents, getSiteConfig };
+export { ComponentTypes, GalleryComponentMetadata, VideoDbComponentMetadata, MarkdownComponentMetadata, ComponentMetadata, getSiteComponents, getSiteConfig };

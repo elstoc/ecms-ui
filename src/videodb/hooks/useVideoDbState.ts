@@ -11,7 +11,9 @@ type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll;
 
 type VideoDbState = {
-    filters: VideoFilters
+    apiPath: string;
+    title: string;
+    filters: VideoFilters;
 };
 
 type VideoDbStateContextProps = {
@@ -94,4 +96,4 @@ const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps 
     return { state, stateReducer };
 };
 
-export { VideoDbState, VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };
+export { VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };

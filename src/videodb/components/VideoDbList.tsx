@@ -1,14 +1,11 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 
 import { VideoListItem } from './VideoListItem';
 import { useVideoDbVideos } from '../hooks/useVideoDbQueries';
-import { useGetFilterSearchParams } from '../hooks/useVideoDbState';
+import { VideoDbContext, useGetFilterSearchParams } from '../hooks/useVideoDbState';
 
-type VideoDbContentProps = {
-    apiPath: string;
-}
-
-export const VideoDbList: FC<VideoDbContentProps> = ({ apiPath }): ReactElement => {
+export const VideoDbList: FC = (): ReactElement => {
+    const { state: { apiPath } } = useContext(VideoDbContext);
     const getFilterSearchParams = useGetFilterSearchParams();
     const videos = useVideoDbVideos(apiPath, getFilterSearchParams());
 

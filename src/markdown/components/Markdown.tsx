@@ -1,19 +1,14 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { MarkdownComponentMetadata } from '../../site/api';
 import { MarkdownContent } from './MarkdownContent';
 import { MarkdownNav } from './MarkdownNav';
 import { useTitle } from '../../common/hooks';
 
 import './Markdown.css';
 
-type MarkdownProps = {
-    apiPath: string;
-    title: string;
-    includeNav: boolean;
-}
-
-export const Markdown: FC<MarkdownProps> = ({ apiPath, title, includeNav }): ReactElement => {
+export const Markdown: FC<MarkdownComponentMetadata> = ({ apiPath, title, includeNav }): ReactElement => {
     useTitle(title);
     return (
         <div className='markdown'>

@@ -1,13 +1,17 @@
 import React, { FC, ReactElement, Suspense} from 'react';
 
-import { VideoDbProps, VideoDbContent } from './VideoDbContent';
-import { VideoDbContext, VideoDbState, useVideoDbState } from '../hooks/useVideoDbState';
+import { VideoDbComponentMetadata } from '../../site/api';
+import { VideoDbContent } from './VideoDbContent';
+import { VideoDbContext, useVideoDbState } from '../hooks/useVideoDbState';
 
-export const VideoDb: FC<VideoDbProps> = (props): ReactElement => {
+export const VideoDb: FC<VideoDbComponentMetadata> = ({ title, apiPath }): ReactElement => {
+    const initialState = {
+        title, apiPath, filters: {}
+    };
     return (
-        <VideoDbContext.Provider value={useVideoDbState({ filters: {} } as VideoDbState)} >
+        <VideoDbContext.Provider value={useVideoDbState(initialState)} >
             <Suspense fallback='Loading...'>
-                <VideoDbContent {...props} />
+                <VideoDbContent />
             </Suspense>
         </VideoDbContext.Provider>
     );

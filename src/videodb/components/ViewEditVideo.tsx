@@ -1,10 +1,12 @@
-import React, { FC, ReactElement, Suspense } from 'react';
+import React, { FC, ReactElement, Suspense, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { ViewVideo } from './ViewVideo';
+import { VideoDbContext } from '../hooks/useVideoDbState';
 
-export const ViewEditVideo: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+export const ViewEditVideo: FC = (): ReactElement => {
+    const { state: { apiPath } } = useContext(VideoDbContext);
     const [ searchParams, setSearchParams] = useSearchParams();
     const id = searchParams.get('id');
 

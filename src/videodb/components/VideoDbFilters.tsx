@@ -7,8 +7,8 @@ import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState
 
 import './VideoDbFilters.scss';
 
-export const VideoDbFilters: FC<{ apiPath: string}> = ({ apiPath }): ReactElement => {
-    const { state: { filters: { titleContains, maxLength, categories } }, stateReducer } = useContext(VideoDbContext);
+export const VideoDbFilters: FC = (): ReactElement => {
+    const { state: { apiPath, filters: { titleContains, maxLength, categories } }, stateReducer } = useContext(VideoDbContext);
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
     const clearSearchParams = useClearSearchParams();
