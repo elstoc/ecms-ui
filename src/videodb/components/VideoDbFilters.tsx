@@ -14,7 +14,7 @@ export const VideoDbFilters: FC = (): ReactElement => {
     const clearSearchParams = useClearSearchParams();
 
     return (
-        <div className='video-query-params'>
+        <div className='video-filters'>
             <OptionalIntInput
                 value={maxLength}
                 label='Shorter Than' 

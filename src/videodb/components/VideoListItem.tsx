@@ -26,15 +26,15 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
 
     const category = categoryLookup[video.category];
     const watchedStatus = watchedStatusLookup[video.watched];
-    const pmWatchedStatus = watchedStatusLookup[video.pm_watched];
-    const pMediaType = mediaTypeLookup[video.pm_media_type];
+    const pmWatchedStatus = video.pm_watched && watchedStatusLookup[video.pm_watched];
+    const pMediaType = video.pm_media_type && mediaTypeLookup[video.pm_media_type];
 
     return (
         <div ref={ref} className='video-list-item'>
             <div className='video-name'onClick={() => addIdToParams(video.id)}>{ video.title }</div>
             <div className='sub-info'>
                 <span className='category'>{category}</span>
-                {video.length_mins > 0 && <span> | {video.length_mins} mins</span>}
+                {video.length_mins && <span> | {video.length_mins} mins</span>}
                 {video.watched && <span> | watched: {watchedStatus}</span>}
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
                 <span> | {pMediaType} ({pmWatchedStatus})</span>

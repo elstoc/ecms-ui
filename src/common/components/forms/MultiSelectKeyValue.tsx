@@ -12,9 +12,10 @@ type MultiSelectKeyValueParams = {
     selectedKeys: string[];
     onSelectionChange?: (selectedKeys: string[]) => void;
     label: string;
+    inline?: boolean;
 };
 
-export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, selectedKeys, onSelectionChange, label }): ReactElement => {
+export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, selectedKeys, onSelectionChange, label, inline }): ReactElement => {
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
     const selectedItems = selectedKeys.map((key) => ({ key, value: allItems[key] ?? '' }));
 
@@ -50,7 +51,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
     const tagRenderer = (keyValue: KeyValue) => keyValue.value;
 
     return (
-        <FormGroup label={label} inline={true}>
+        <FormGroup label={label} inline={inline}>
             <MultiSelect<KeyValue>
                 fill={false}
                 itemRenderer={itemRenderer}

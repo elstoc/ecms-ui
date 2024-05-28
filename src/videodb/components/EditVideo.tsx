@@ -2,7 +2,8 @@ import React, { FC, ReactElement, useReducer } from 'react';
 
 import { useVideoDbLookup, useVideoDbVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { SelectKeyValue, StringInput } from '../../common/components/forms';
+import { OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
+import { Button } from '@blueprintjs/core';
 
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
     const video = useVideoDbVideo(apiPath, id);
@@ -28,6 +29,19 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 selectedKey={state.watched}
                 onSelectionChange={(value) => stateReducer({ key: 'watched', value})}
             />
+            <OptionalStringInput
+                label='Director'
+                value={state.director}
+                onValueChange={(value) => stateReducer({ key: 'director', value })}
+            />
+            <OptionalIntInput
+                label='Length (mins)'
+                value={state.length_mins}
+                onValueChange={(value) => stateReducer({ key: 'length_mins', value})}
+            />
+            <Button onClick={() => console.log(JSON.stringify(state))}>
+                Click Me
+            </Button>
         </div>
     );
 };

@@ -10,16 +10,16 @@ type VideoMedia = {
 type Video = {
     title: string;
     category: string;
-    director: string;
-    length_mins: number;
+    director: string | null;
+    length_mins: number | null;
     watched: string;
-    to_watch_priority: number;
-    progress: string;
-    imdb_id: string;
-    image_url: string;
-    year: number;
-    actors: string;
-    plot: string;
+    to_watch_priority: number | null;
+    progress: string | null;
+    imdb_id: string | null;
+    image_url: string | null;
+    year: number | null;
+    actors: string | null;
+    plot: string | null;
     media?: VideoMedia[];
     tags?: string[];
 }
@@ -34,18 +34,18 @@ type VideoSummary = {
     id: string;
     title: string;
     category: string;
-    director: string;
-    length_mins: number;
+    director: string | null;
+    length_mins: number | null;
     watched: string;
-    to_watch_priority: number;
-    progress: string;
-    year: number;
-    actors: string;
+    to_watch_priority: number | null;
+    progress: string | null;
+    year: number | null;
+    actors: string | null;
 }
 
 type PrimaryMedium = {
-    pm_media_type: string;
-    pm_watched: string;
+    pm_media_type: string | null;
+    pm_watched: string | null;
 }
 
 type VideoSummaryAndPrimaryMedium = VideoSummary & PrimaryMedium;

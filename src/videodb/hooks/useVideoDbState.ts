@@ -5,25 +5,33 @@ import { toIntOrUndefined } from '../../utils';
 
 const BATCH_SIZE = 100;
 
-type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value?: number; }
-type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value?: string; }
-type SetCategories = { action: 'setFilter'; key: 'categories'; value?: string[] }
+type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value: number | null; }
+type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value: string | null; }
+type SetCategories = { action: 'setFilter'; key: 'categories'; value: string[] | null}
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
 type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit;
 
 type VideoFilters = {
     limit: number;
-    maxLength?: number;
-    categories?: string[];
-    tags?: string[];
-    titleContains?: string;
+    maxLength: number | null;
+    categories: string[] | null;
+    tags: string[] | null;
+    titleContains: string | null;
 }
 
 type VideoDbState = {
     apiPath: string;
     title: string;
     filters: VideoFilters;
+};
+
+const initialFilters = {
+    limit: BATCH_SIZE,
+    maxLength: null,
+    categories: null,
+    tags: null,
+    titleContains: null
 };
 
 type VideoDbStateContextProps = {
@@ -65,9 +73,10 @@ const useUpdateStateOnSearchParamChange = () => {
                 action: 'setAllFilters',
                 value: {
                     limit: BATCH_SIZE,
-                    maxLength: toIntOrUndefined(searchParams.get('maxLength')),
-                    titleContains: searchParams.get('titleContains') ?? undefined,
-                    categories: searchParams.get('categories')?.split('|') ?? undefined
+                    maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
+                    titleContains: searchParams.get('titleContains'),
+                    categories: searchParams.get('categories')?.split('|') ?? null,
+                    tags: null
                 }
             });
         }
@@ -109,4 +118,4 @@ const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps 
     return { state, stateReducer };
 };
 
-export { VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };
+export { initialFilters, VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };
