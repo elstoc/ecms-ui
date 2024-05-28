@@ -7,6 +7,7 @@ import { SelectKeyValue, StringInput } from '../../common/components/forms';
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
     const video = useVideoDbVideo(apiPath, id);
     const categoryLookup = useVideoDbLookup(apiPath, 'categories');
+    const watchedStatusLookup = useVideoDbLookup(apiPath, 'watched_status');
     const [state, stateReducer] = useReducer(videoReducer, video);
     return (
         <div>
@@ -20,6 +21,12 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 allItems={categoryLookup}
                 selectedKey={state.category}
                 onSelectionChange={(value) => stateReducer({ key: 'category', value})}
+            />
+            <SelectKeyValue
+                label='Watched'
+                allItems={watchedStatusLookup}
+                selectedKey={state.watched}
+                onSelectionChange={(value) => stateReducer({ key: 'watched', value})}
             />
         </div>
     );
