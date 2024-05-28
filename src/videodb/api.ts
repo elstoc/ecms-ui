@@ -68,4 +68,4 @@ const getVideoDbLookup = async (path: string, lookupTable: string): Promise<{ [k
     return data;
 };
 
-export { VideoSummaryAndPrimaryMedium, getVideoDbVideos, getVideoDbVideo, getVideoDbLookup };
+export { Video, VideoSummaryAndPrimaryMedium, getVideoDbVideos, getVideoDbVideo, getVideoDbLookup };

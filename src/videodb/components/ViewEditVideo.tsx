@@ -2,7 +2,7 @@ import React, { FC, ReactElement, Suspense, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 
-import { ViewVideo } from './ViewVideo';
+import { EditVideo } from './EditVideo';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 
 export const ViewEditVideo: FC = (): ReactElement => {
@@ -21,7 +21,7 @@ export const ViewEditVideo: FC = (): ReactElement => {
         <Dialog title="Video" isOpen={id !== null && id === parseInt(id).toString()} onClose={exitVideo}>
             <DialogBody>
                 <Suspense fallback='Loading'>
-                    <ViewVideo apiPath={apiPath} id={parseInt(id || '')} />
+                    <EditVideo apiPath={apiPath} id={parseInt(id || '')} />
                 </Suspense>
             </DialogBody>
         </Dialog>
