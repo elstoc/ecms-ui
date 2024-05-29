@@ -16,54 +16,57 @@ type MultiTagInputParams = {
 };
 
 export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, onSelectionChange, label, inline }): ReactElement => {
-    const [myQuery, setMyQuery] = useState('');
+    const [queryString, setQueryString] = useState('');
     const allTags = Array.from(new Set([...selectableTags, ...tags]))
         .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
-    const createTag = (query: string) => {
-        return query;
-    };
-
-    const toggleItem = (tag: string) => {
+    const toggleTag = (tag: string) => {
         if (!tags.includes(tag)) {
             onSelectionChange?.([...(tags), tag]);
         } else {
             onSelectionChange?.(tags.filter((tagToRemove) => tag !== tagToRemove));
         }
-        setMyQuery('');
+        setQueryString('');
     };
 
-    const clearItems = () => {
+    const clearTags = () => {
         onSelectionChange?.([]);
-        setMyQuery('');
+        setQueryString('');
     };
 
-    const itemRenderer: ItemRenderer<string> = (tag) => {
+    const itemRenderer: ItemRenderer<string> = (tag, { handleClick, handleFocus, modifiers }) => {
         return (
             <MenuItem
                 text={tag}
                 key={tag}
-                roleStructure='listoption'
                 selected={tags.includes(tag)}
                 shouldDismissPopover={true}
-                onClick={() => toggleItem(tag)}
+                roleStructure='listoption'
+                active={modifiers.active}
+                disabled={modifiers.disabled}
+                onFocus={handleFocus}
+                onClick={handleClick}
             />
         );
     };
 
-    const createItemRenderer = (tag: string) => {
+    const createItemRenderer = (
+        query: string,
+        active: boolean,
+        handleClick: React.MouseEventHandler<HTMLElement>
+    ) => {
         return (
             <MenuItem
-                text={` + ${tag}`}
-                key={tag}
+                icon='add'
+                text={query}
+                key={query}
+                active={active}
+                onClick={handleClick}
                 roleStructure='listoption'
                 shouldDismissPopover={true}
-                onClick={() => toggleItem(tag)}
             />
         );
     };
-
-    const tagRenderer = (tag: string) => tag;
 
     const filterTag: ItemPredicate<string> = (query: string, tag: string) => {
         if (!query || tag.includes(query)) {
@@ -75,19 +78,18 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
     return (
         <FormGroup label={label} inline={inline}>
             <MultiSelect<string>
-                fill={false}
-                itemRenderer={itemRenderer}
                 items={allTags}
-                onItemSelect={toggleItem}
-                onRemove={toggleItem}
-                onClear={clearItems}
                 selectedItems={tags}
-                tagRenderer={tagRenderer}
+                tagRenderer={(tag) => tag}
+                itemRenderer={itemRenderer}
+                createNewItemFromQuery={(tag) => tag}
                 createNewItemRenderer={createItemRenderer}
-                createNewItemFromQuery={createTag}
+                onItemSelect={toggleTag}
+                onRemove={toggleTag}
+                onClear={clearTags}
                 itemPredicate={filterTag}
-                query={myQuery}
-                onQueryChange={setMyQuery}
+                query={queryString}
+                onQueryChange={setQueryString}
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
             />
         </FormGroup>
