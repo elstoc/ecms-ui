@@ -31,6 +31,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 disabled={modifiers.disabled}
                 onFocus={handleFocus}
                 onClick={handleClick}
+                selected={keyValue.key === selectedKey}
             />
         );
     };
