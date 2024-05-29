@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useReducer } from 'react';
 
 import { useVideoDbLookup, useVideoDbVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
+import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
 import { Button } from '@blueprintjs/core';
 
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
@@ -38,6 +38,12 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 label='Length (mins)'
                 value={state.length_mins}
                 onValueChange={(value) => stateReducer({ key: 'length_mins', value})}
+            />
+            <MultiTagInput
+                selectableTags={[]}
+                tags={state.tags ?? []}
+                onSelectionChange={(value: string[]) => stateReducer({key: 'tags', value})}
+                label='Tags'
             />
             <Button onClick={() => console.log(JSON.stringify(state))}>
                 Click Me

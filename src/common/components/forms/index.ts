@@ -3,3 +3,4 @@ export { OptionalIntInput } from './OptionalIntInput';
 export { OptionalStringInput } from './OptionaStringInput';
 export { StringInput } from './StringInput';
 export { SelectKeyValue } from './SelectKeyValue';
+export { MultiTagInput } from './MultiTagInput';
