@@ -1,15 +1,31 @@
-import React, { FC, ReactElement, useReducer } from 'react';
+import React, { FC, ReactElement, useCallback, useReducer } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { Button, OverlayToaster } from '@blueprintjs/core';
 
 import { useGetLookup, useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
 import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
-import { Button } from '@blueprintjs/core';
+import { putVideoDbVideo } from '../api';
 
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
+    const queryClient = useQueryClient();
     const video = useGetVideo(apiPath, id);
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const [state, stateReducer] = useReducer(videoReducer, video);
+
+    const saveVideo = useCallback(async () => {
+        try {
+            await putVideoDbVideo(apiPath, state);
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', state.id]});
+            const toaster = await OverlayToaster.createAsync();
+            toaster.show({ message: 'saved', timeout: 2000 });
+        } catch (error: unknown) {
+            alert('error ' + error);
+        }
+    }, [apiPath, queryClient, state]);
+
     return (
         <div>
             <StringInput
@@ -45,7 +61,7 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 onSelectionChange={(value: string[]) => stateReducer({key: 'tags', value})}
                 label='Tags'
             />
-            <Button onClick={() => console.log(JSON.stringify(state))}>
+            <Button onClick={saveVideo}>
                 Update
             </Button>
         </div>

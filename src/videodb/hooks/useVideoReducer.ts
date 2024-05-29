@@ -1,4 +1,4 @@
-import { Video } from '../api';
+import { VideoWithId } from '../api';
 
 type SetStringField = {
     key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot';
@@ -17,6 +17,6 @@ type SetStringArrayField = {
 
 type SetFieldActions = SetStringField | SetNumericField | SetStringArrayField;
 
-export const videoReducer: (state: Video, action: SetFieldActions) => Video = (state, action) => {
+export const videoReducer: (state: VideoWithId, action: SetFieldActions) => VideoWithId = (state, action) => {
     return { ...state, [action.key]: action.value };
 };
