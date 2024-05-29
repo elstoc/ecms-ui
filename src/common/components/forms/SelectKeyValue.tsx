@@ -17,13 +17,20 @@ type SelectKeyValueParams = {
 export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label }): ReactElement => {
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
 
-    const itemRenderer: ItemRenderer<KeyValue> = (keyValue: KeyValue) => {
+    const changeSelection = (kv: KeyValue) => {
+        onSelectionChange?.(kv.key);
+    };
+
+    const itemRenderer: ItemRenderer<KeyValue> = (keyValue: KeyValue, { handleClick, handleFocus, modifiers }) => {
         return (
             <MenuItem
                 text={keyValue.value}
                 key={keyValue.key}
                 roleStructure='listoption'
-                onClick={() => onSelectionChange?.(keyValue.key)}
+                active={modifiers.active}
+                disabled={modifiers.disabled}
+                onFocus={handleFocus}
+                onClick={handleClick}
             />
         );
     };
@@ -33,7 +40,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
             <Select<KeyValue>
                 items={allItemsArray}
                 itemRenderer={itemRenderer}
-                onItemSelect={() => undefined}
+                onItemSelect={changeSelection}
                 filterable={false}
                 popoverProps={{minimal: true}}
             >
