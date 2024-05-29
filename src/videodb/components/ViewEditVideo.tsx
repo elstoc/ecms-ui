@@ -18,7 +18,12 @@ export const ViewEditVideo: FC = (): ReactElement => {
     };
 
     return (
-        <Dialog title="Video" isOpen={id !== null && id === parseInt(id).toString()} onClose={exitVideo}>
+        <Dialog
+            title="Video"
+            isOpen={id !== null && id === parseInt(id).toString()}
+            onClose={exitVideo}
+            canEscapeKeyClose={false}
+        >
             <DialogBody>
                 <Suspense fallback='Loading'>
                     <EditVideo apiPath={apiPath} id={parseInt(id || '')} />
