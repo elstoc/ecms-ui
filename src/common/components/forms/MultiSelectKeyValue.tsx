@@ -35,7 +35,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
         return item1.key === item2.key;
     };
 
-    const itemRenderer: ItemRenderer<KeyValue> = (keyValue: KeyValue) => {
+    const itemRenderer: ItemRenderer<KeyValue> = (keyValue: KeyValue, { handleClick, handleFocus, modifiers }) => {
         return (
             <MenuItem
                 text={keyValue.value}
@@ -43,7 +43,10 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 roleStructure='listoption'
                 selected={selectedKeys.includes(keyValue.key)}
                 shouldDismissPopover={true}
-                onClick={() => toggleItem(keyValue)}
+                active={modifiers.active}
+                disabled={modifiers.disabled}
+                onFocus={handleFocus}
+                onClick={handleClick}
             />
         );
     };
@@ -57,7 +60,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 itemRenderer={itemRenderer}
                 items={allItemsArray}
                 itemsEqual={areTheyEqual}
-                onItemSelect={() => undefined}
+                onItemSelect={toggleItem}
                 onRemove={toggleItem}
                 onClear={clearItems}
                 selectedItems={selectedItems}
