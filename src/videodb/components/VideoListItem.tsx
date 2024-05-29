@@ -2,7 +2,7 @@ import React, { FC, forwardRef, ReactElement, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { VideoSummaryAndPrimaryMedium } from '../api';
-import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
+import { useGetLookup } from '../hooks/useVideoDbQueries';
 
 import './VideoListItem.scss';
 
@@ -13,9 +13,9 @@ type VideoDbProps = {
 
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
     const [, setSearchParams] = useSearchParams();
-    const categoryLookup = useVideoDbLookup(apiPath, 'categories');
-    const watchedStatusLookup = useVideoDbLookup(apiPath, 'watched_status');
-    const mediaTypeLookup = useVideoDbLookup(apiPath, 'media_types');
+    const categoryLookup = useGetLookup(apiPath, 'categories');
+    const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
+    const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
 
     const addIdToParams = useCallback((id: string): void => {
         setSearchParams((params) => {

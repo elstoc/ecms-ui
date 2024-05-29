@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { Button } from '@blueprintjs/core';
 
 import { OptionalIntInput, OptionalStringInput, MultiSelectKeyValue } from '../../common/components/forms';
-import { useVideoDbLookup } from '../hooks/useVideoDbQueries';
+import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
 import './VideoDbFilters.scss';
@@ -10,7 +10,7 @@ import './VideoDbFilters.scss';
 export const VideoDbFilters: FC = (): ReactElement => {
     const { state: { apiPath, filters: { titleContains, maxLength, categories } }, stateReducer } = useContext(VideoDbContext);
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
-    const categoryLookup = useVideoDbLookup(apiPath, 'categories');
+    const categoryLookup = useGetLookup(apiPath, 'categories');
     const clearSearchParams = useClearSearchParams();
 
     return (
