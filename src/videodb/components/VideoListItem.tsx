@@ -1,4 +1,4 @@
-import React, { FC, forwardRef, ReactElement, useCallback } from 'react';
+import React, { forwardRef, ReactElement, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { VideoSummaryAndPrimaryMedium } from '../api';
