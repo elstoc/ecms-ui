@@ -2,20 +2,19 @@ import React, { FC, ReactElement, useCallback, useContext, useReducer } from 're
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, OverlayToaster } from '@blueprintjs/core';
 
-import { useGetLookup, useGetTags, useGetVideo } from '../hooks/useVideoDbQueries';
+import { useGetTags, useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
+import { MultiTagInput, OptionalIntInput, OptionalStringInput, StringInput } from '../../common/components/forms';
 import { putVideoDbVideo } from '../api';
 import { createRoot } from 'react-dom/client';
 import { VideoDbContext } from '../hooks/useVideoDbState';
+import { SelectLookup } from './SelectLookup';
 
 export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
     const queryClient = useQueryClient();
     const video = useGetVideo(apiPath, id);
     const tagLookup = useGetTags(apiPath);
-    const categoryLookup = useGetLookup(apiPath, 'categories');
-    const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const [state, stateReducer] = useReducer(videoReducer, video);
 
     const saveVideo = useCallback(async () => {
@@ -37,15 +36,15 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 value={state.title}
                 onValueChange={(value) => stateReducer({ key: 'title', value })}
             />
-            <SelectKeyValue
+            <SelectLookup
                 label='Category'
-                allItems={categoryLookup}
+                lookupTable='categories'
                 selectedKey={state.category}
                 onSelectionChange={(value) => stateReducer({ key: 'category', value})}
             />
-            <SelectKeyValue
+            <SelectLookup
                 label='Watched'
-                allItems={watchedStatusLookup}
+                lookupTable='watched_status'
                 selectedKey={state.watched}
                 onSelectionChange={(value) => stateReducer({ key: 'watched', value})}
             />
