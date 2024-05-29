@@ -35,6 +35,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 itemRenderer={itemRenderer}
                 onItemSelect={() => undefined}
                 filterable={false}
+                popoverProps={{minimal: true}}
             >
                 <Button text={allItems[selectedKey]} rightIcon='caret-down' />
             </Select>

@@ -46,7 +46,7 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 label='Tags'
             />
             <Button onClick={() => console.log(JSON.stringify(state))}>
-                Click Me
+                Update
             </Button>
         </div>
     );
