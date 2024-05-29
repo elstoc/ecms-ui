@@ -6,6 +6,7 @@ import { useGetLookup, useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
 import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
 import { putVideoDbVideo } from '../api';
+import { createRoot } from 'react-dom/client';
 
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
     const queryClient = useQueryClient();
@@ -19,7 +20,7 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
             await putVideoDbVideo(apiPath, state);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', state.id]});
-            const toaster = await OverlayToaster.createAsync();
+            const toaster = await OverlayToaster.createAsync({}, { domRenderer: (toaster, containerElement) => createRoot(containerElement).render(toaster), });
             toaster.show({ message: 'saved', timeout: 2000 });
         } catch (error: unknown) {
             alert('error ' + error);
