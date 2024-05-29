@@ -17,7 +17,7 @@ export const OptionalIntInput: FC<OptionalIntInputParams> = ({ value, onValueCha
                 fill={true}
                 buttonPosition='none'
                 placeholder={placeholder}
-                onValueChange={(num, str) => onValueChange?.(str === NumericInput.VALUE_EMPTY ? null : num)}
+                onValueChange={(num, str) => onValueChange?.(str === NumericInput.VALUE_EMPTY ? null : parseInt(str))}
             />
         </FormGroup>
     );
