@@ -1,8 +1,10 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 
 import { useGetVideo } from '../hooks/useVideoDbQueries';
+import { VideoDbContext } from '../hooks/useVideoDbState';
 
-export const ViewVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
+export const ViewVideo: FC<{ id: number }> = ({ id }): ReactElement => {
+    const { state: { apiPath } } = useContext(VideoDbContext);
     const video = useGetVideo(apiPath, id);
     return (
         <div>You chose {video.title}. Well done!</div>

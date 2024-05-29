@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useCallback, useReducer } from 'react';
+import React, { FC, ReactElement, useCallback, useContext, useReducer } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, OverlayToaster } from '@blueprintjs/core';
 
@@ -7,8 +7,10 @@ import { videoReducer } from '../hooks/useVideoReducer';
 import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
 import { putVideoDbVideo } from '../api';
 import { createRoot } from 'react-dom/client';
+import { VideoDbContext } from '../hooks/useVideoDbState';
 
-export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
+export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
+    const { state: { apiPath } } = useContext(VideoDbContext);
     const queryClient = useQueryClient();
     const video = useGetVideo(apiPath, id);
     const tagLookup = useGetTags(apiPath);
