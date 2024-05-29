@@ -1,5 +1,5 @@
 import { useCustomQuery } from '../../common/hooks';
-import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup } from '../api';
+import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags } from '../api';
 
 const useGetVideos = (path: string, params?: { [key: string]: string }) => {
     return useCustomQuery({
@@ -22,4 +22,11 @@ const useGetLookup = (path: string, lookupTable: string) => {
     });
 };
 
-export { useGetVideos, useGetVideo, useGetLookup };
+const useGetTags = (path: string) => {
+    return useCustomQuery({
+        queryKey: ['videoDb', 'tags', path],
+        queryFn: () => getVideoDbTags(path),
+    });
+};
+
+export { useGetVideos, useGetVideo, useGetLookup, useGetTags };

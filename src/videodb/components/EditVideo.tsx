@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useCallback, useReducer } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, OverlayToaster } from '@blueprintjs/core';
 
-import { useGetLookup, useGetVideo } from '../hooks/useVideoDbQueries';
+import { useGetLookup, useGetTags, useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
 import { MultiTagInput, OptionalIntInput, OptionalStringInput, SelectKeyValue, StringInput } from '../../common/components/forms';
 import { putVideoDbVideo } from '../api';
@@ -11,6 +11,7 @@ import { createRoot } from 'react-dom/client';
 export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }): ReactElement => {
     const queryClient = useQueryClient();
     const video = useGetVideo(apiPath, id);
+    const tagLookup = useGetTags(apiPath);
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const [state, stateReducer] = useReducer(videoReducer, video);
@@ -57,7 +58,7 @@ export const EditVideo: FC<{ apiPath: string, id: number }> = ({ apiPath, id }):
                 onValueChange={(value) => stateReducer({ key: 'length_mins', value})}
             />
             <MultiTagInput
-                selectableTags={[]}
+                selectableTags={tagLookup}
                 tags={state.tags ?? []}
                 onSelectionChange={(value: string[]) => stateReducer({key: 'tags', value})}
                 label='Tags'

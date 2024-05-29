@@ -67,6 +67,12 @@ const putVideoDbVideo = async (path: string, video: VideoWithId): Promise<void> 
     await axiosSecureClient.put(url, { path, video });
 };
 
+const getVideoDbTags = async (path: string): Promise<string[]> => {
+    const url = 'videodb/tags';
+    const { data } = await axiosSecureClient.get<string[]>(url, { params: { path } });
+    return data;
+};
+
 const getVideoDbLookup = async (path: string, lookupTable: string): Promise<{ [key: string]: string }> => {
     const url = 'videodb/lookup';
     const { data } = await axiosSecureClient.get<{ [key: string]: string }>(url, { params: { path, table: lookupTable } });
@@ -80,5 +86,6 @@ export {
     getVideoDbVideos,
     getVideoDbVideo,
     putVideoDbVideo,
+    getVideoDbTags,
     getVideoDbLookup
 };
