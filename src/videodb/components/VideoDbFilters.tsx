@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Button } from '@blueprintjs/core';
 
-import { OptionalIntInput, OptionalStringInput, MultiSelectKeyValue } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../../common/components/forms';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
@@ -15,12 +15,12 @@ export const VideoDbFilters: FC = (): ReactElement => {
 
     return (
         <div className='video-filters'>
-            <OptionalIntInput
+            <NullableIntInput
                 value={maxLength}
                 label='Shorter Than' 
                 onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
             />
-            <OptionalStringInput
+            <NullableStringInput
                 value={titleContains}
                 label='Title Contains'
                 placeholder='Use % as wildcard'

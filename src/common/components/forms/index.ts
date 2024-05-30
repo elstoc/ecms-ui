@@ -1,6 +1,6 @@
 export { MultiSelectKeyValue } from './MultiSelectKeyValue';
-export { OptionalIntInput } from './OptionalIntInput';
-export { OptionalStringInput } from './OptionaStringInput';
+export { NullableIntInput } from './NullableIntInput';
+export { NullableStringInput } from './NullableStringInput';
 export { StringInput } from './StringInput';
 export { SelectKeyValue } from './SelectKeyValue';
 export { MultiTagInput } from './MultiTagInput';

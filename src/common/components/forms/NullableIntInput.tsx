@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { FormGroup, NumericInput } from '@blueprintjs/core';
 
-type OptionalIntInputParams = {
+type NullableIntInputParams = {
     value: number | null;
     onValueChange?: (value: number | null) => void;
     label: string;
@@ -9,7 +9,7 @@ type OptionalIntInputParams = {
     inline?: boolean;
 };
 
-export const OptionalIntInput: FC<OptionalIntInputParams> = ({ value, onValueChange, label, placeholder, inline }): ReactElement => {
+export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueChange, label, placeholder, inline }): ReactElement => {
     return (
         <FormGroup label={label} inline={inline}>
             <NumericInput

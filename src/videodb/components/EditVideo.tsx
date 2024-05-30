@@ -4,7 +4,7 @@ import { Button, OverlayToaster } from '@blueprintjs/core';
 
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { OptionalIntInput, OptionalStringInput, StringInput } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 import { putVideoDbVideo } from '../api';
 import { createRoot } from 'react-dom/client';
 import { VideoDbContext } from '../hooks/useVideoDbState';
@@ -48,12 +48,12 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 selectedKey={videoState.watched}
                 onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
             />
-            <OptionalStringInput
+            <NullableStringInput
                 label='Director'
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
             />
-            <OptionalIntInput
+            <NullableIntInput
                 label='Length (mins)'
                 value={videoState.length_mins}
                 onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}
