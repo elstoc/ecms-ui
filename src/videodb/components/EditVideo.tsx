@@ -49,11 +49,6 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 selectedKey={videoState.watched}
                 onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
             />
-            <NullableStringInput
-                label='Director'
-                value={videoState.director}
-                onValueChange={(value) => videoStateReducer({ key: 'director', value })}
-            />
             <NullableIntInput
                 label='Length (mins)'
                 value={videoState.length_mins}
@@ -63,6 +58,11 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 tags={videoState.tags ?? []}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
+            />
+            <NullableStringInput
+                label='Director'
+                value={videoState.director}
+                onValueChange={(value) => videoStateReducer({ key: 'director', value })}
             />
             <EditMedia
                 media={videoState.media}
