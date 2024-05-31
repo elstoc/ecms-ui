@@ -9,9 +9,10 @@ import './EditMedium.scss';
 type EditMediumParams = {
     medium: VideoMedium;
     onChange?: (medium: VideoMedium) => void;
+    onDelete?: () => void
 };
 
-export const EditMedium: FC<EditMediumParams> = ({ medium, onChange }): ReactElement => {
+export const EditMedium: FC<EditMediumParams> = ({ medium, onChange, onDelete }): ReactElement => {
     return (
         <ControlGroup >
             <ControlGroup vertical={true}>
@@ -37,7 +38,7 @@ export const EditMedium: FC<EditMediumParams> = ({ medium, onChange }): ReactEle
                         onSelectionChange={(watched) => onChange?.({...medium, watched})}
                         small={true}
                     />
-                    <Button small={true} icon='delete' />
+                    <Button small={true} icon='delete' onClick={() => onDelete?.()} />
                 </ControlGroup>
                 <NullableStringInput
                     label=''

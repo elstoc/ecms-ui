@@ -21,10 +21,29 @@ export const EditMedia: FC<EditMediaParams> = ({ media, onChange }): ReactElemen
         onChange?.(newMedia);
     };
 
+    const removeMedium = (index: number) => {
+        const newMedia = [...media];
+        newMedia.splice(index, 1);
+        onChange?.(newMedia);
+    };
+
+    const addMedium = () => {
+        const newMedia = [...media];
+        newMedia.push({ media_type: 'BD4K', media_location: 'NAS', watched: 'N', notes: null });
+        onChange?.(newMedia);
+    };
+
     return (
         <FormGroup label='Media' className='edit-media'>
-            {media?.map((medium, index) => <EditMedium key={index} onChange={(medium) => replaceMedium(index, medium)} medium={medium} />)}
-            <Button icon='add' />
+            {media?.map((medium, index) =>
+                <EditMedium
+                    key={index}
+                    medium={medium}
+                    onChange={(medium) => replaceMedium(index, medium)}
+                    onDelete={() => removeMedium(index)}
+                />)
+            }
+            <Button icon='add' onClick={addMedium} />
         </FormGroup>
     );
 };
