@@ -9,9 +9,10 @@ type SelectLookupParams = {
     selectedKey: string;
     onSelectionChange?: (selectedKey: string) => void;
     label: string;
+    small?: boolean;
 };
 
-export const SelectLookup: FC<SelectLookupParams> = ({ lookupTable, selectedKey, onSelectionChange, label }): ReactElement => {
+export const SelectLookup: FC<SelectLookupParams> = ({ lookupTable, selectedKey, onSelectionChange, label, small }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
     const lookupKeyValues = useGetLookup(apiPath, lookupTable);
     return (
@@ -20,6 +21,7 @@ export const SelectLookup: FC<SelectLookupParams> = ({ lookupTable, selectedKey,
             allItems={lookupKeyValues}
             onSelectionChange={onSelectionChange}
             selectedKey={selectedKey}
+            small={small}
         />
     );
 };

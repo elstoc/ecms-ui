@@ -10,6 +10,7 @@ import { createRoot } from 'react-dom/client';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { SelectLookup } from './SelectLookup';
 import { EditTags } from './EditTags';
+import { EditMedia } from './EditMedia';
 
 export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
@@ -62,6 +63,10 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 tags={videoState.tags ?? []}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
+            />
+            <EditMedia
+                media={videoState.media}
+                onChange={(value) => videoStateReducer({ key: 'media', value })}
             />
             <Button onClick={saveVideo}>
                 Update

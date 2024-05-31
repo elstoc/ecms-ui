@@ -7,9 +7,10 @@ type NullableIntInputParams = {
     label: string;
     placeholder?: string;
     inline?: boolean;
+    small?: boolean;
 };
 
-export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueChange, label, placeholder, inline }): ReactElement => {
+export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueChange, label, placeholder, inline, small }): ReactElement => {
     return (
         <FormGroup label={label} inline={inline}>
             <NumericInput
@@ -18,6 +19,7 @@ export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueCha
                 buttonPosition='none'
                 placeholder={placeholder}
                 onValueChange={(num, str) => onValueChange?.(str === NumericInput.VALUE_EMPTY ? null : parseInt(str))}
+                small={small}
             />
         </FormGroup>
     );

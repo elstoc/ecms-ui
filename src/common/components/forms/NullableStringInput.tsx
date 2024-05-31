@@ -7,15 +7,17 @@ type NullableStringInputParams = {
     placeholder?: string;
     label: string;
     inline?: boolean;
+    small?: boolean;
 };
 
-export const NullableStringInput: FC<NullableStringInputParams> = ({ value, onValueChange, placeholder, label, inline }): ReactElement => {
+export const NullableStringInput: FC<NullableStringInputParams> = ({ value, onValueChange, placeholder, label, inline, small }): ReactElement => {
     return (
         <FormGroup label={label} inline={inline}>
             <InputGroup
                 value={value || ''}
                 onValueChange={(value) => onValueChange?.(value === '' ? null : value)}
                 placeholder={placeholder}
+                small={small}
             />
         </FormGroup>
     );
