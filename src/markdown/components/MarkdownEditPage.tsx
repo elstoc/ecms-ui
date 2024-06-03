@@ -1,13 +1,12 @@
 import React, { FC, ReactElement, Suspense, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { OverlayToaster } from '@blueprintjs/core';
 
 import { Icon } from '../../common/components/icon';
 import { MarkdownPage, deleteMarkdownPage, putMarkdownPage } from '../api';
+import { AppToaster } from '../../common/components/toaster';
 
 import './MarkdownEditPage.scss';
-import { createRoot } from 'react-dom/client';
 
 const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
 
@@ -35,8 +34,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             await putMarkdownPage(mdFullPath, editedMarkdown);
             queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-            const toaster = await OverlayToaster.createAsync({}, { domRenderer: (toaster, containerElement) => createRoot(containerElement).render(toaster), });
-            toaster.show({ message: 'page saved', timeout: 2000 });
+            (await AppToaster).show({ message: 'page saved', timeout: 2000 });
             unsetEditMode();
         } catch (error: unknown) {
             alert('error ' + error);
@@ -50,8 +48,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
                 await deleteMarkdownPage(mdFullPath);
                 queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
                 queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                const toaster = await OverlayToaster.createAsync({}, { domRenderer: (toaster, containerElement) => createRoot(containerElement).render(toaster), });
-                toaster.show({ message: 'page deleted', timeout: 2000 });
+                (await AppToaster).show({ message: 'page deleted', timeout: 2000 });
                 unsetEditMode();
             }
         } catch (error: unknown) {

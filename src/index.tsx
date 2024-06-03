@@ -6,6 +6,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './app';
 import { ErrorFallback } from './common/components/fallbacks';
+import { BlueprintProvider } from '@blueprintjs/core';
 
 const queryDefaults = {
     defaultOptions: {
@@ -23,11 +24,13 @@ const root = createRoot(container);
 root.render(
     <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-            <ErrorBoundary FallbackComponent={ErrorFallback}>
-                <Suspense fallback='Loading...'>
-                    <App />
-                </Suspense>
-            </ErrorBoundary>
+            <BlueprintProvider>
+                <ErrorBoundary FallbackComponent={ErrorFallback}>
+                    <Suspense fallback='Loading...'>
+                        <App />
+                    </Suspense>
+                </ErrorBoundary>
+            </BlueprintProvider>
         </BrowserRouter>
     </QueryClientProvider>
 );
