@@ -27,7 +27,7 @@ export const GalleryLightBox: FC = (): ReactElement => {
         galleryStateReducer({ action: 'setActiveImageIndex', value: imageIndex });
     }, [images, allImageFiles, imageIndex, galleryStateReducer]);
 
-    useTitle(`${title} - ${imageName}`);
+    useTitle(imageName ? `${title} - ${imageName}` : title);
 
     const currImage = images[imageIndex];
     const nextImage = images[imageIndex + 1];
