@@ -1,7 +1,5 @@
-import React, { forwardRef, useContext } from 'react';
+import React, { forwardRef } from 'react';
 import { Link } from 'react-router-dom';
-
-import { GalleryStateContext } from './Gallery';
 
 import './GalleryThumb.scss';
 
@@ -15,11 +13,9 @@ type GalleryThumbProps = {
 }
 
 export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, widthPx, heightPx }, ref) => {
-    const { galleryState } = useContext(GalleryStateContext);
     const style = {
         width: `${widthPx}px`,
         height: `${heightPx}px`,
-        margin: `${galleryState.marginPx}px`,
     };
 
     return (
