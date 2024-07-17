@@ -38,6 +38,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                 {video.watched && <span> | watched: {watchedStatus}</span>}
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
                 <span> | {pMediaType} ({pmWatchedStatus})</span>
+                {video.tags && <span> | {video.tags}</span>}
             </div>
         </div>
     );

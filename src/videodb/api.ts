@@ -41,6 +41,7 @@ type VideoSummary = {
     progress: string | null;
     year: number | null;
     actors: string | null;
+    tags: string | null;
 }
 
 type PrimaryMedium = {
