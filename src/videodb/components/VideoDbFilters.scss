@@ -1,5 +1,4 @@
 .video-filters {
-    max-width: 400px;
     padding-bottom: 2em;
     margin-bottom: 2em;
     font-size: .95em;
@@ -7,5 +6,11 @@
     .bp5-label {
         font-size: .9em;
         font-weight: 500;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .video-filters {
+        width: 550px;
     }
 }
