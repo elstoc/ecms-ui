@@ -1,25 +1,27 @@
-.view_edit_video {
-    min-width: 500px;
-}
-
-.edit_video {
-    .video_category {
-        width: 17em;
+@media screen and (min-width: 600px) {
+    .view_edit_video {
+        min-width: 500px;
     }
-    .video_length {
-        width: 7em;
-        margin-right: 2em !important;
-    }
-    .media_type {
-        width: 12em;
-    }
-    .media_location {
-        width: 13em;
-    }
-    .watched_status {
-        width: 7em;
-    }
-    .update_button {
-        margin-top: 1em;
+    
+    .edit_video {
+        .video_category {
+            width: 17em;
+        }
+        .video_length {
+            width: 7em;
+            margin-right: 2em !important;
+        }
+        .media_type {
+            width: 11.5em;
+        }
+        .media_location {
+            width: 13em;
+        }
+        .watched_status {
+            width: 7em;
+        }
+        .update_button {
+            margin-top: 1em;
+        }
     }
 }
