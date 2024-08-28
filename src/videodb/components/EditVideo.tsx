@@ -9,7 +9,6 @@ import { putVideoDbVideo } from '../api';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { SelectLookup } from './SelectLookup';
 import { EditTags } from './EditTags';
-import { EditMedia } from './EditMedia';
 import { AppToaster } from '../../common/components/toaster';
 
 export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
