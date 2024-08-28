@@ -63,10 +63,6 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
             />
-            <EditMedia
-                media={videoState.media}
-                onChange={(value) => videoStateReducer({ key: 'media', value })}
-            />
             <Button onClick={saveVideo}>
                 Update
             </Button>
