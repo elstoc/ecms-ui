@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useCallback, useContext, useReducer } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { Button } from '@blueprintjs/core';
+import { Button, Card, ControlGroup, Label } from '@blueprintjs/core';
 
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
@@ -11,6 +11,8 @@ import { SelectLookup } from './SelectLookup';
 import { EditTags } from './EditTags';
 import { AppToaster } from '../../common/components/toaster';
 import { NullableSelectLookup } from './NullableSelectLookup';
+
+import './EditVideo.scss';
 
 export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
@@ -30,29 +32,34 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     }, [apiPath, queryClient, videoState]);
 
     return (
-        <div>
+        <div className='edit_video'>
             <StringInput
                 label='Title'
                 value={videoState.title}
                 onValueChange={(value) => videoStateReducer({ key: 'title', value })}
             />
-            <SelectLookup
-                label='Category'
-                lookupTable='categories'
-                selectedKey={videoState.category}
-                onSelectionChange={(value) => videoStateReducer({ key: 'category', value})}
-            />
-            <SelectLookup
-                label='Watched'
-                lookupTable='watched_status'
-                selectedKey={videoState.watched}
-                onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
-            />
-            <NullableIntInput
-                label='Length (mins)'
-                value={videoState.length_mins}
-                onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}
-            />
+            <ControlGroup>
+                <NullableIntInput
+                    label='Length (mins)'
+                    value={videoState.length_mins}
+                    onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}
+                    className='video_length'
+                />
+                <SelectLookup
+                    label='Watched'
+                    lookupTable='watched_status'
+                    selectedKey={videoState.watched}
+                    onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
+                    className='watched_status'
+                />
+                <SelectLookup
+                    label='Category'
+                    lookupTable='categories'
+                    selectedKey={videoState.category}
+                    onSelectionChange={(value) => videoStateReducer({ key: 'category', value})}
+                    className='video_category'
+                />
+            </ControlGroup>
             <EditTags
                 tags={videoState.tags ?? []}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
@@ -63,42 +70,53 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
             />
-            <NullableSelectLookup
-                label='Media Type'
-                lookupTable='media_types'
-                selectedKey={videoState.primary_media_type}
-                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_type', value})}
-            />
-            <NullableSelectLookup
-                label='Media Location'
-                lookupTable='media_locations'
-                selectedKey={videoState.primary_media_location}
-                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_location', value})}
-            />
-            <NullableSelectLookup
-                label='Media Watched'
-                lookupTable='watched_status'
-                selectedKey={videoState.primary_media_watched}
-                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_watched', value})}
-            />
-            <NullableSelectLookup
-                label='Other Media Type'
-                lookupTable='media_types'
-                selectedKey={videoState.other_media_type}
-                onSelectionChange={(value) => videoStateReducer({ key: 'other_media_type', value})}
-            />
-            <NullableSelectLookup
-                label='Other Media Location'
-                lookupTable='media_locations'
-                selectedKey={videoState.other_media_location}
-                onSelectionChange={(value) => videoStateReducer({ key: 'other_media_location', value})}
-            />
-            <NullableStringInput
-                label='Media Notes'
-                value={videoState.media_notes}
-                onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
-            />
-            <Button onClick={saveVideo}>
+            <Card>
+                <ControlGroup>
+                    <NullableSelectLookup
+                        label='Media'
+                        lookupTable='media_types'
+                        selectedKey={videoState.primary_media_type}
+                        onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_type', value})}
+                        className='media_type'
+                    />
+                    <NullableSelectLookup
+                        label='Location'
+                        lookupTable='media_locations'
+                        selectedKey={videoState.primary_media_location}
+                        onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_location', value})}
+                        className='media_location'
+                    />
+                    <NullableSelectLookup
+                        label='Watched'
+                        lookupTable='watched_status'
+                        selectedKey={videoState.primary_media_watched}
+                        onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_watched', value})}
+                        className='watched_status'
+                    />
+                </ControlGroup>
+                <ControlGroup>
+                    <NullableSelectLookup
+                        label=''
+                        lookupTable='media_types'
+                        selectedKey={videoState.other_media_type}
+                        onSelectionChange={(value) => videoStateReducer({ key: 'other_media_type', value})}
+                        className='media_type'
+                    />
+                    <NullableSelectLookup
+                        label=''
+                        lookupTable='media_locations'
+                        selectedKey={videoState.other_media_location}
+                        onSelectionChange={(value) => videoStateReducer({ key: 'other_media_location', value})}
+                        className='media_location'
+                    />
+                </ControlGroup>
+                <NullableStringInput
+                    label='Notes'
+                    value={videoState.media_notes}
+                    onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
+                />
+            </Card>
+            <Button className='update_button' onClick={saveVideo}>
                 Update
             </Button>
         </div>

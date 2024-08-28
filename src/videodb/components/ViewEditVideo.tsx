@@ -21,6 +21,7 @@ export const ViewEditVideo: FC = (): ReactElement => {
             isOpen={id !== null && id === parseInt(id).toString()}
             onClose={exitVideo}
             canEscapeKeyClose={false}
+            className='view_edit_video'
         >
             <DialogBody>
                 <Suspense fallback='Loading'>

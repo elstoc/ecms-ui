@@ -13,9 +13,10 @@ type SelectKeyValueParams = {
     onSelectionChange?: (selectedKey: string) => void;
     label: string;
     small?: boolean;
+    className?: string;
 };
 
-export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label, small }): ReactElement => {
+export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label, small, className }): ReactElement => {
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
 
     const changeSelection = (kv: KeyValue) => {
@@ -45,6 +46,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 onItemSelect={changeSelection}
                 filterable={false}
                 popoverProps={{minimal: true}}
+                className={className}
             >
                 <Button text={allItems[selectedKey]} small={small} rightIcon='caret-down' />
             </Select>

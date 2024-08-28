@@ -8,11 +8,12 @@ type NullableIntInputParams = {
     placeholder?: string;
     inline?: boolean;
     small?: boolean;
+    className?: string;
 };
 
-export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueChange, label, placeholder, inline, small }): ReactElement => {
+export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueChange, label, placeholder, inline, small, className }): ReactElement => {
     return (
-        <FormGroup label={label} inline={inline}>
+        <FormGroup label={label} inline={inline} className={className}>
             <NumericInput
                 value={value == null ? NumericInput.VALUE_EMPTY : value}
                 fill={true}

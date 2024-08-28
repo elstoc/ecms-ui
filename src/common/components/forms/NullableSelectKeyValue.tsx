@@ -7,6 +7,7 @@ type NullableSelectKeyValueParams = {
     onSelectionChange?: (selectedKey: string | null) => void;
     label: string;
     small?: boolean;
+    className?: string;
 };
 
 export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params): ReactElement => {
@@ -24,6 +25,7 @@ export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params)
             onSelectionChange={changeSelection}
             label={params.label}
             small={params.small}
+            className={params.className}
         />
     );
 };
