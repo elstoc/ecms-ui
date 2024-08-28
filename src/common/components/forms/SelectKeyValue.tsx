@@ -40,7 +40,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
     return (
         <FormGroup label={label} inline={false}>
             <Select<KeyValue>
-                items={allItemsArray}
+                items={allItemsArray.sort((a, b) => a.value.localeCompare(b.value))}
                 itemRenderer={itemRenderer}
                 onItemSelect={changeSelection}
                 filterable={false}

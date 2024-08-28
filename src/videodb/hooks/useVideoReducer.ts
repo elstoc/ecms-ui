@@ -1,7 +1,8 @@
 import { VideoWithId } from '../api';
 
 type SetStringField = {
-    key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot';
+    key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot'
+       | 'primary_media_type' | 'primary_media_location' | 'primary_media_watched' | 'other_media_type' | 'other_media_location' | 'media_notes';
     value: string | null;
 };
 

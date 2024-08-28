@@ -10,6 +10,7 @@ import { VideoDbContext } from '../hooks/useVideoDbState';
 import { SelectLookup } from './SelectLookup';
 import { EditTags } from './EditTags';
 import { AppToaster } from '../../common/components/toaster';
+import { NullableSelectLookup } from './NullableSelectLookup';
 
 export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
@@ -61,6 +62,41 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 label='Director'
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
+            />
+            <NullableSelectLookup
+                label='Media Type'
+                lookupTable='media_types'
+                selectedKey={videoState.primary_media_type}
+                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_type', value})}
+            />
+            <NullableSelectLookup
+                label='Media Location'
+                lookupTable='media_locations'
+                selectedKey={videoState.primary_media_location}
+                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_location', value})}
+            />
+            <NullableSelectLookup
+                label='Media Watched'
+                lookupTable='watched_status'
+                selectedKey={videoState.primary_media_watched}
+                onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_watched', value})}
+            />
+            <NullableSelectLookup
+                label='Other Media Type'
+                lookupTable='media_types'
+                selectedKey={videoState.other_media_type}
+                onSelectionChange={(value) => videoStateReducer({ key: 'other_media_type', value})}
+            />
+            <NullableSelectLookup
+                label='Other Media Location'
+                lookupTable='media_locations'
+                selectedKey={videoState.other_media_location}
+                onSelectionChange={(value) => videoStateReducer({ key: 'other_media_location', value})}
+            />
+            <NullableStringInput
+                label='Media Notes'
+                value={videoState.media_notes}
+                onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
             />
             <Button onClick={saveVideo}>
                 Update
