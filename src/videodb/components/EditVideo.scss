@@ -4,24 +4,36 @@
     }
     
     .edit_video {
-        .video_category {
+        .category {
             width: 17em;
         }
-        .video_length {
+
+        .length {
             width: 7em;
             margin-right: 2em !important;
         }
-        .media_type {
-            width: 11.5em;
+
+        .media {
+            padding: .7em;
+
+            .media_type {
+                width: 11.5em;
+            }
+            .media_location {
+                width: 13em;
+            }
         }
-        .media_location {
-            width: 13em;
-        }
+
         .watched_status {
             width: 7em;
         }
+
         .update_button {
             margin-top: 1em;
+        }
+
+        .notes {
+            margin-bottom: 0;
         }
     }
 }

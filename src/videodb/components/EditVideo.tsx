@@ -1,6 +1,6 @@
 import React, { FC, ReactElement, useCallback, useContext, useReducer } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { Button, Card, ControlGroup, Label } from '@blueprintjs/core';
+import { Button, Card, ControlGroup } from '@blueprintjs/core';
 
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
@@ -43,7 +43,7 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                     label='Length (mins)'
                     value={videoState.length_mins}
                     onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}
-                    className='video_length'
+                    className='length'
                 />
                 <SelectLookup
                     label='Watched'
@@ -57,7 +57,7 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                     lookupTable='categories'
                     selectedKey={videoState.category}
                     onSelectionChange={(value) => videoStateReducer({ key: 'category', value})}
-                    className='video_category'
+                    className='category'
                 />
             </ControlGroup>
             <EditTags
@@ -70,7 +70,7 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
             />
-            <Card>
+            <Card className='media'>
                 <ControlGroup>
                     <NullableSelectLookup
                         label='Media'
@@ -112,6 +112,7 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                 </ControlGroup>
                 <NullableStringInput
                     label='Notes'
+                    className='notes'
                     value={videoState.media_notes}
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />

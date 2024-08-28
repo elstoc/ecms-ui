@@ -5,6 +5,7 @@ import { VideoSummaryAndPrimaryMedium } from '../api';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 
 import './VideoListItem.scss';
+import { Card } from '@blueprintjs/core';
 
 type VideoDbProps = {
     apiPath: string;
@@ -30,17 +31,17 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
     const pMediaType = video.primary_media_type && mediaTypeLookup[video.primary_media_type];
 
     return (
-        <div ref={ref} className='video-list-item'>
+        <Card ref={ref} className='video-list-item'>
             <div className='video-name'onClick={() => addIdToParams(video.id)}>{ video.title }</div>
             <div className='sub-info'>
+                {video.length_mins && <span> {video.length_mins} mins | </span>}
                 <span className='category'>{category}</span>
-                {video.length_mins && <span> | {video.length_mins} mins</span>}
                 {video.watched && <span> | watched: {watchedStatus}</span>}
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
                 <span> | {pMediaType} ({pmWatchedStatus})</span>
 
                 {video.tags && <span> | {video.tags}</span>}
             </div>
-        </div>
+        </Card>
     );
 });

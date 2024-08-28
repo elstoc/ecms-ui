@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button } from '@blueprintjs/core';
+import { Button, Card } from '@blueprintjs/core';
 
 import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../../common/components/forms';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
@@ -14,7 +14,7 @@ export const VideoDbFilters: FC = (): ReactElement => {
     const clearSearchParams = useClearSearchParams();
 
     return (
-        <div className='video-filters'>
+        <Card className='video-filters'>
             <NullableIntInput
                 value={maxLength}
                 label='Shorter Than' 
@@ -34,6 +34,6 @@ export const VideoDbFilters: FC = (): ReactElement => {
             />
             <Button onClick={clearSearchParams}>Clear All</Button>
             <Button onClick={setSearchParamsFromState}>Submit</Button>
-        </div>
+        </Card>
     );
 };
