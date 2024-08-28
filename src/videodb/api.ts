@@ -22,6 +22,12 @@ type Video = {
     plot: string | null;
     media?: VideoMedium[];
     tags?: string[];
+    primary_media_type: string | null;
+    primary_media_location: string | null;
+    primary_media_watched: string | null;
+    other_media_type: string | null;
+    other_media_location: string | null;
+    media_notes: string | null;
 }
 
 type VideoIdOnly = {
@@ -42,6 +48,12 @@ type VideoSummary = {
     year: number | null;
     actors: string | null;
     tags: string | null;
+    primary_media_type: string | null;
+    primary_media_location: string | null;
+    primary_media_watched: string | null;
+    other_media_type: string | null;
+    other_media_location: string | null;
+    media_notes: string | null;
 }
 
 type PrimaryMedium = {

@@ -26,8 +26,8 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
 
     const category = categoryLookup[video.category];
     const watchedStatus = watchedStatusLookup[video.watched];
-    const pmWatchedStatus = video.pm_watched && watchedStatusLookup[video.pm_watched];
-    const pMediaType = video.pm_media_type && mediaTypeLookup[video.pm_media_type];
+    const pmWatchedStatus = video.primary_media_watched && watchedStatusLookup[video.primary_media_watched];
+    const pMediaType = video.primary_media_type && mediaTypeLookup[video.primary_media_type];
 
     return (
         <div ref={ref} className='video-list-item'>
@@ -38,6 +38,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                 {video.watched && <span> | watched: {watchedStatus}</span>}
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
                 <span> | {pMediaType} ({pmWatchedStatus})</span>
+
                 {video.tags && <span> | {video.tags}</span>}
             </div>
         </div>
