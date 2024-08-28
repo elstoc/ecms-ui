@@ -1,4 +1,4 @@
-import { VideoMedium, VideoWithId } from '../api';
+import { VideoWithId } from '../api';
 
 type SetStringField = {
     key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot';
@@ -15,12 +15,7 @@ type SetStringArrayField = {
     value: string[]
 };
 
-type SetMedia = {
-    key: 'media',
-    value: VideoMedium[]
-};
-
-type SetFieldActions = SetStringField | SetNumericField | SetStringArrayField | SetMedia;
+type SetFieldActions = SetStringField | SetNumericField | SetStringArrayField;
 
 export const videoReducer: (state: VideoWithId, action: SetFieldActions) => VideoWithId = (state, action) => {
     return { ...state, [action.key]: action.value };

@@ -1,12 +1,5 @@
 import { axiosSecureClient } from '../common/api';
 
-type VideoMedium = {
-    media_type: string;
-    media_location: string;
-    watched: string;
-    notes: string | null;
-}
-
 type Video = {
     title: string;
     category: string;
@@ -20,7 +13,6 @@ type Video = {
     year: number | null;
     actors: string | null;
     plot: string | null;
-    media?: VideoMedium[];
     tags?: string[];
     primary_media_type: string | null;
     primary_media_location: string | null;
@@ -95,7 +87,6 @@ const getVideoDbLookup = async (path: string, lookupTable: string): Promise<{ [k
 export {
     Video,
     VideoWithId,
-    VideoMedium,
     VideoSummaryAndPrimaryMedium,
     getVideoDbVideos,
     getVideoDbVideo,
