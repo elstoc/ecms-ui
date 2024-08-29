@@ -1,4 +1,4 @@
-.markdown {
+.content-container {
     display: flex;
     flex-direction: column-reverse;
     justify-content: left;
@@ -7,34 +7,34 @@
     container-name: markdown;
 }
 
-.markdown-nav-container {
+.sidebar-container {
     margin-right: 1em;
     width: 100%;
 }
 
-.markdown-page-container {
+.mainpage-container {
     background-color: white;
     width: 100%;
 }
 
 @media screen and (min-width: 600px) {
-    .markdown {
+    .content-container {
         flex-direction: row;
     }
 
-    .markdown-nav-container {
+    .sidebar-container {
         width: 30%;
     }
-    .markdown-page-container {
+    .mainpage-container {
         width: 60%;
     }
 }
 
 @media screen and (min-width: 1650px) {
-    .markdown-nav-container {
+    .sidebar-container {
         width: 450px;
     }
-    .markdown-page-container {
+    .mainpage-container {
         width: 1050px;
     }
 }
