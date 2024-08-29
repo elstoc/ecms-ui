@@ -7,6 +7,10 @@
     container-name: markdown;
 }
 
+.content-container.sidebar-top {
+    flex-direction: column;
+}
+
 .sidebar-container {
     margin-right: 1em;
     width: 100%;
@@ -18,7 +22,8 @@
 }
 
 @media screen and (min-width: 600px) {
-    .content-container {
+    .content-container,
+    .content-container.sidebar-top {
         flex-direction: row;
     }
 

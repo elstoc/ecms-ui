@@ -5,22 +5,35 @@ import { VideoDbFilters } from './VideoDbFilters';
 import { ViewEditVideo } from './ViewEditVideo';
 import { useTitle } from '../../common/hooks';
 import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
+import { ContentWithSidebar } from '../../common/components/layout';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const { state: { title } } = useContext(VideoDbContext);
     useUpdateStateOnSearchParamChange();
     useTitle(title);
+
+    const videoFiltersElement = (
+        <Suspense fallback='Loading...'>
+            <VideoDbFilters />
+        </Suspense>
+    );
+
+    const videoListElement = (
+        <Suspense fallback='Loading...'>
+            <VideoDbList />
+        </Suspense>
+    );
+
     return (
-        <div className='videodb'>
+        <>
             <Suspense fallback='Loading...'>
                 <ViewEditVideo />
             </Suspense>
-            <Suspense fallback='Loading...'>
-                <VideoDbFilters />
-            </Suspense>
-            <Suspense fallback='Loading...'>
-                <VideoDbList />
-            </Suspense>
-        </div>
+            <ContentWithSidebar
+                mainPageElement={videoListElement}
+                sidebarElement={videoFiltersElement}
+                mobileSidebarAtTop={true}
+            />
+        </>
     );
 };
