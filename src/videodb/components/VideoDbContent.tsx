@@ -2,13 +2,16 @@ import React, { FC, ReactElement, Suspense, useContext } from 'react';
 
 import { VideoDbList } from './VideoDbList';
 import { VideoDbFilters } from './VideoDbFilters';
-import { ViewEditVideo } from './ViewEditVideo';
+import { UpdateVideo } from './UpdateVideo';
 import { useTitle } from '../../common/hooks';
 import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
 import { ContentWithSidebar } from '../../common/components/layout';
+import { useSearchParams } from 'react-router-dom';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const { state: { title } } = useContext(VideoDbContext);
+    const [ searchParams ] = useSearchParams();
+    const id = parseInt(searchParams.get('id') || '');
     useUpdateStateOnSearchParamChange();
     useTitle(title);
 
@@ -27,7 +30,7 @@ export const VideoDbContent: FC = (): ReactElement => {
     return (
         <>
             <Suspense fallback='Loading...'>
-                <ViewEditVideo />
+                {id > 0 && <UpdateVideo id={id} />}
             </Suspense>
             <ContentWithSidebar
                 mainPageElement={videoListElement}

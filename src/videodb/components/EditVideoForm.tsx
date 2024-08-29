@@ -1,40 +1,30 @@
-import React, { FC, ReactElement, useCallback, useContext, useReducer } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
+import React, { FC, ReactElement, useCallback, useReducer } from 'react';
 import { Button, Card, ControlGroup } from '@blueprintjs/core';
 
-import { AppToaster } from '../../common/components/toaster';
 import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 
-import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { VideoDbContext } from '../hooks/useVideoDbState';
-import { putVideoDbVideo } from '../api';
-
+import { VideoWithId } from '../api';
 import { SelectLookup } from './SelectLookup';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { EditTags } from './EditTags';
 
-import './EditVideo.scss';
+import './EditVideoForm.scss';
 
-export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
-    const { state: { apiPath } } = useContext(VideoDbContext);
-    const queryClient = useQueryClient();
-    const storedVideo = useGetVideo(apiPath, id);
-    const [videoState, videoStateReducer] = useReducer(videoReducer, storedVideo);
+type EditVideoFormProps = {
+    initialVideoState: VideoWithId;
+    onSave: (video: VideoWithId) => Promise<void>;
+}
+
+export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSave }): ReactElement => {
+    const [videoState, videoStateReducer] = useReducer(videoReducer, initialVideoState);
 
     const saveVideo = useCallback(async () => {
-        try {
-            await putVideoDbVideo(apiPath, videoState);
-            queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', videoState.id]});
-            (await AppToaster).show({ message: 'saved', timeout: 2000 });
-        } catch (error: unknown) {
-            alert('error ' + error);
-        }
-    }, [apiPath, queryClient, videoState]);
+        onSave(videoState);
+    }, [onSave, videoState]);
 
     return (
-        <div className='edit_video'>
+        <div className='edit-video-form'>
             <StringInput
                 label='Title'
                 value={videoState.title}
@@ -52,7 +42,7 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                     lookupTable='watched_status'
                     selectedKey={videoState.watched}
                     onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
-                    className='watched_status'
+                    className='watched-status'
                 />
                 <SelectLookup
                     label='Category'
@@ -79,21 +69,21 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                         lookupTable='media_types'
                         selectedKey={videoState.primary_media_type}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_type', value})}
-                        className='media_type'
+                        className='media-type'
                     />
                     <NullableSelectLookup
                         label='Location'
                         lookupTable='media_locations'
                         selectedKey={videoState.primary_media_location}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_location', value})}
-                        className='media_location'
+                        className='media-location'
                     />
                     <NullableSelectLookup
                         label='Watched'
                         lookupTable='watched_status'
                         selectedKey={videoState.primary_media_watched}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_watched', value})}
-                        className='watched_status'
+                        className='watched-status'
                     />
                 </ControlGroup>
                 <ControlGroup>
@@ -102,14 +92,14 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                         lookupTable='media_types'
                         selectedKey={videoState.other_media_type}
                         onSelectionChange={(value) => videoStateReducer({ key: 'other_media_type', value})}
-                        className='media_type'
+                        className='media-type'
                     />
                     <NullableSelectLookup
                         label=''
                         lookupTable='media_locations'
                         selectedKey={videoState.other_media_location}
                         onSelectionChange={(value) => videoStateReducer({ key: 'other_media_location', value})}
-                        className='media_location'
+                        className='media-location'
                     />
                 </ControlGroup>
                 <NullableStringInput
@@ -119,8 +109,8 @@ export const EditVideo: FC<{ id: number }> = ({ id }): ReactElement => {
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />
             </Card>
-            <Button className='update_button' onClick={saveVideo}>
-                Update
+            <Button className='save-button' onClick={saveVideo}>
+                Save Changes
             </Button>
         </div>
     );

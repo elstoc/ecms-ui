@@ -1,9 +1,9 @@
 @media screen and (min-width: 600px) {
-    .view_edit_video {
+    .update-video {
         min-width: 500px;
     }
     
-    .edit_video {
+    .edit-video-form {
         .category {
             width: 17em;
         }
@@ -16,19 +16,19 @@
         .media {
             padding: .7em;
 
-            .media_type {
+            .media-type {
                 width: 11.5em;
             }
-            .media_location {
+            .media-location {
                 width: 13em;
             }
         }
 
-        .watched_status {
+        .watched-status {
             width: 7em;
         }
 
-        .update_button {
+        .save-button {
             margin-top: 1em;
         }
 
