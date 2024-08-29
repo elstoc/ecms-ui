@@ -4,14 +4,14 @@ import { MultiTagInput } from '../../common/components/forms';
 import { useGetTags } from '../hooks/useVideoDbQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 
-type EditTagsParams = {
+type TagInputParams = {
     tags: string[];
     onSelectionChange?: (selectedKeys: string[]) => void;
     label: string;
     inline?: boolean;
 };
 
-export const EditTags: FC<EditTagsParams> = ({ tags, onSelectionChange, label, inline }): ReactElement => {
+export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
     const tagLookup = useGetTags(apiPath);
     return (

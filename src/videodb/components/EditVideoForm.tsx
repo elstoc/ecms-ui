@@ -7,7 +7,7 @@ import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
 import { SelectLookup } from './SelectLookup';
 import { NullableSelectLookup } from './NullableSelectLookup';
-import { EditTags } from './EditTags';
+import { TagInput } from './TagInput';
 
 import './EditVideoForm.scss';
 
@@ -52,7 +52,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     className='category'
                 />
             </ControlGroup>
-            <EditTags
+            <TagInput
                 tags={videoState.tags ?? []}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
