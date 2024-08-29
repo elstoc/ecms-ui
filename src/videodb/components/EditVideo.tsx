@@ -2,15 +2,17 @@ import React, { FC, ReactElement, useCallback, useContext, useReducer } from 're
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, ControlGroup } from '@blueprintjs/core';
 
+import { AppToaster } from '../../common/components/toaster';
+import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
+
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { videoReducer } from '../hooks/useVideoReducer';
-import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
-import { putVideoDbVideo } from '../api';
 import { VideoDbContext } from '../hooks/useVideoDbState';
+import { putVideoDbVideo } from '../api';
+
 import { SelectLookup } from './SelectLookup';
-import { EditTags } from './EditTags';
-import { AppToaster } from '../../common/components/toaster';
 import { NullableSelectLookup } from './NullableSelectLookup';
+import { EditTags } from './EditTags';
 
 import './EditVideo.scss';
 
