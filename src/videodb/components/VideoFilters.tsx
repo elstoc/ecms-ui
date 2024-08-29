@@ -5,9 +5,9 @@ import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../.
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
-import './VideoDbFilters.scss';
+import './VideoFilters.scss';
 
-export const VideoDbFilters: FC = (): ReactElement => {
+export const VideoFilters: FC = (): ReactElement => {
     const { state: { apiPath, filters: { titleContains, maxLength, categories } }, stateReducer } = useContext(VideoDbContext);
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
     const categoryLookup = useGetLookup(apiPath, 'categories');

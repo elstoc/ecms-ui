@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense, useContext } from 'react';
 
-import { VideoDbList } from './VideoDbList';
-import { VideoDbFilters } from './VideoDbFilters';
+import { VideoList } from './VideoList';
+import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';
 import { useTitle } from '../../common/hooks';
 import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
@@ -17,13 +17,13 @@ export const VideoDbContent: FC = (): ReactElement => {
 
     const videoFiltersElement = (
         <Suspense fallback='Loading...'>
-            <VideoDbFilters />
+            <VideoFilters />
         </Suspense>
     );
 
     const videoListElement = (
         <Suspense fallback='Loading...'>
-            <VideoDbList />
+            <VideoList />
         </Suspense>
     );
 

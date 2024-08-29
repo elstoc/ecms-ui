@@ -5,9 +5,9 @@ import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useGetFilterSearchParams } from '../hooks/useVideoDbState';
 import { useNthElementIsVisible } from '../../common/hooks';
 
-import './VideoDbList.scss';
+import './VideoList.scss';
 
-export const VideoDbList: FC = (): ReactElement => {
+export const VideoList: FC = (): ReactElement => {
     const { state: { apiPath, filters: { limit } }, stateReducer } = useContext(VideoDbContext);
     const getFilterSearchParams = useGetFilterSearchParams();
     const videos = useGetVideos(apiPath, { ...getFilterSearchParams(), limit: limit?.toString() } );
