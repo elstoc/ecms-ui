@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, Suspense, useCallback, useContext } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -9,18 +9,12 @@ import { VideoDbContext } from '../hooks/useVideoDbState';
 import { putVideoDbVideo, VideoWithId } from '../api';
 import { AppToaster } from '../../common/components/toaster';
 
-export const UpdateVideo: FC<{ id: number }> = ({ id }): ReactElement => {
+export const UpdateVideo: FC = (): ReactElement => {
+    const navigate = useNavigate();
+    const { id } = useParams();
     const { state: { apiPath } } = useContext(VideoDbContext);
-    const [, setSearchParams] = useSearchParams();
-    const storedVideo = useGetVideo(apiPath, id);
+    const storedVideo = useGetVideo(apiPath, parseInt(id ?? '0'));
     const queryClient = useQueryClient();
-
-    const exitVideo = () => {
-        setSearchParams((searchParams) => {
-            searchParams.delete('id');
-            return searchParams;
-        });
-    };
 
     const saveVideo = useCallback(async (video: VideoWithId) => {
         try {
@@ -36,8 +30,8 @@ export const UpdateVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     return (
         <Dialog
             title="Video"
-            isOpen={id > 0}
-            onClose={exitVideo}
+            isOpen={storedVideo.id > 0}
+            onClose={() => navigate(-1)}
             canEscapeKeyClose={false}
             className='update-video'
         >

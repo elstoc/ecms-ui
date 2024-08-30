@@ -1,4 +1,4 @@
-import React, { forwardRef, ReactElement, useCallback } from 'react';
+import React, { forwardRef, ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { VideoSummaryAndPrimaryMedium } from '../api';
@@ -6,6 +6,7 @@ import { useGetLookup } from '../hooks/useVideoDbQueries';
 
 import './VideoListItem.scss';
 import { Card } from '@blueprintjs/core';
+import { Link } from 'react-router-dom';
 
 type VideoDbProps = {
     apiPath: string;
@@ -13,17 +14,10 @@ type VideoDbProps = {
 }
 
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
-    const [, setSearchParams] = useSearchParams();
+    const [searchParams] = useSearchParams();
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
-
-    const addIdToParams = useCallback((id: string): void => {
-        setSearchParams((params) => {
-            params.set('id', id);
-            return params;
-        });
-    }, [setSearchParams]);
 
     const category = categoryLookup[video.category];
     const watchedStatus = watchedStatusLookup[video.watched];
@@ -32,7 +26,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
 
     return (
         <Card ref={ref} className='video-list-item'>
-            <div className='video-name'onClick={() => addIdToParams(video.id)}>{ video.title }</div>
+            <Link className='video-name' to={`./${video.id}?${searchParams.toString()}`}>{ video.title }</Link>
             <div className='sub-info'>
                 {video.length_mins && <span> {video.length_mins} mins | </span>}
                 <span className='category'>{category}</span>
