@@ -27,7 +27,7 @@ export const VideoDbContent: FC = (): ReactElement => {
 
     return (
         <>
-            <Suspense fallback='Loading...'>
+            <Suspense>
                 <Routes>
                     <Route path=":id" element={<UpdateVideo />} />
                 </Routes>
