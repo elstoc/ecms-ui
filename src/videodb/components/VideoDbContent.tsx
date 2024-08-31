@@ -7,6 +7,7 @@ import { useTitle } from '../../common/hooks';
 import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
 import { ContentWithSidebar } from '../../common/components/layout';
 import { Route, Routes } from 'react-router-dom';
+import { AddVideo } from './AddVideo';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const { state: { title } } = useContext(VideoDbContext);
@@ -29,6 +30,7 @@ export const VideoDbContent: FC = (): ReactElement => {
         <>
             <Suspense>
                 <Routes>
+                    <Route path="add" element={<AddVideo />} />
                     <Route path=":id" element={<UpdateVideo />} />
                 </Routes>
             </Suspense>

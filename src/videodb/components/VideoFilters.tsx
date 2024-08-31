@@ -6,6 +6,7 @@ import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
 import './VideoFilters.scss';
+import { Link } from 'react-router-dom';
 
 export const VideoFilters: FC = (): ReactElement => {
     const { state: { apiPath, filters: { titleContains, maxLength, categories } }, stateReducer } = useContext(VideoDbContext);
@@ -34,6 +35,7 @@ export const VideoFilters: FC = (): ReactElement => {
             />
             <Button onClick={clearSearchParams}>Clear All</Button>
             <Button onClick={setSearchParamsFromState}>Submit</Button>
+            <Button><Link to='./add'>Add</Link></Button>
         </Card>
     );
 };
