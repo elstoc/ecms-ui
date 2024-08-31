@@ -16,27 +16,33 @@ export const VideoFilters: FC = (): ReactElement => {
     const clearSearchParams = useClearSearchParams();
 
     return (
-        <Card className='video-filters'>
-            <NullableIntInput
-                value={maxLength}
-                label='Shorter Than' 
-                onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
-            />
-            <NullableStringInput
-                value={titleContains}
-                label='Title Contains'
-                placeholder='Use % as wildcard'
-                onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
-            />
-            <MultiSelectKeyValue
-                allItems={categoryLookup}
-                selectedKeys={categories ?? []}
-                label='Categories'
-                onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
-            />
-            <Button onClick={clearSearchParams}>Clear All</Button>
-            <Button onClick={setSearchParamsFromState}>Submit</Button>
-            <Button><Link to={`./add?${searchParams.toString()}`}>Add</Link></Button>
-        </Card>
+        <>
+            <Card className='video-filters'>
+                <NullableIntInput
+                    value={maxLength}
+                    label='Shorter Than' 
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
+                />
+                <NullableStringInput
+                    value={titleContains}
+                    label='Title Contains'
+                    placeholder='Use % as wildcard'
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
+                />
+                <MultiSelectKeyValue
+                    allItems={categoryLookup}
+                    selectedKeys={categories ?? []}
+                    label='Categories'
+                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
+                />
+                <div>
+                    <Button onClick={clearSearchParams}>Clear All</Button>
+                    <Button onClick={setSearchParamsFromState}>Submit</Button>
+                </div>
+            </Card>
+            <div className='add-video-button'>
+                <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
+            </div>
+        </>
     );
 };
