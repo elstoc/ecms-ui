@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, Suspense, useCallback, useContext } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -11,7 +11,6 @@ import { AppToaster } from '../../common/components/toaster';
 
 export const UpdateVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
     const { id } = useParams();
     const { state: { apiPath } } = useContext(VideoDbContext);
     const storedVideo = useGetVideo(apiPath, parseInt(id ?? '0'));
@@ -20,13 +19,14 @@ export const UpdateVideo: FC = (): ReactElement => {
     const saveVideo = useCallback(async (video: VideoWithId) => {
         try {
             await putVideoDbVideo(apiPath, video);
+            (await AppToaster).show({ message: 'saved', timeout: 2000 });
+            navigate(-1);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
-            (await AppToaster).show({ message: 'saved', timeout: 2000 });
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [apiPath, queryClient]);
+    }, [apiPath, queryClient, navigate]);
 
     const deleteVideo = useCallback(async (id: number) => {
         try {
@@ -44,7 +44,7 @@ export const UpdateVideo: FC = (): ReactElement => {
         <Dialog
             title="Video"
             isOpen={storedVideo.id > 0}
-            onClose={() => navigate(`..?${searchParams.toString()}`, { replace: true })}
+            onClose={() => navigate(-1)}
             canEscapeKeyClose={false}
             className='update-video'
         >

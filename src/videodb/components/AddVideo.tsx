@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, Suspense, useCallback, useContext } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -10,7 +10,6 @@ import { AppToaster } from '../../common/components/toaster';
 
 export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const [searchParams] = useSearchParams();
     const { state: { apiPath } } = useContext(VideoDbContext);
     const initialVideo = {
         id: 0, title: '', category: '',
@@ -26,15 +25,14 @@ export const AddVideo: FC = (): ReactElement => {
     const saveVideo = useCallback(async (video: VideoWithId) => {
         try {
             const videoWithoutId = { ...video, id: undefined } as Video;
-            const id = await postVideoDbVideo(apiPath, videoWithoutId);
+            await postVideoDbVideo(apiPath, videoWithoutId);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            console.log(`saved id ${id}`);
             (await AppToaster).show({ message: 'saved', timeout: 2000 });
-            navigate(`../${id}?${searchParams.toString()}`);
+            navigate(-1);
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [apiPath, queryClient, navigate, searchParams]);
+    }, [apiPath, queryClient, navigate]);
 
     return (
         <Dialog
