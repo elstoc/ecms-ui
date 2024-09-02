@@ -57,16 +57,6 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     className='category'
                 />
             </ControlGroup>
-            <TagInput
-                tags={videoState.tags ?? []}
-                onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
-                label='Tags'
-            />
-            <NullableStringInput
-                label='Director'
-                value={videoState.director}
-                onValueChange={(value) => videoStateReducer({ key: 'director', value })}
-            />
             <Card className='media'>
                 <ControlGroup>
                     <NullableSelectLookup
@@ -114,6 +104,16 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />
             </Card>
+            <TagInput
+                tags={videoState.tags ?? []}
+                onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
+                label='Tags'
+            />
+            <NullableStringInput
+                label='Director'
+                value={videoState.director}
+                onValueChange={(value) => videoStateReducer({ key: 'director', value })}
+            />
             <div className='form-buttons'>
                 {onSave &&
                     <Button className='save-button' onClick={saveVideo}>

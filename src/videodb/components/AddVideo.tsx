@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, Suspense, useCallback, useContext } from 'react';
+import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useQueryClient } from '@tanstack/react-query';
@@ -43,9 +43,7 @@ export const AddVideo: FC = (): ReactElement => {
             className='update-video'
         >
             <DialogBody>
-                <Suspense fallback='Loading'>
-                    <EditVideoForm initialVideoState={initialVideo} onSave={saveVideo} />
-                </Suspense>
+                <EditVideoForm initialVideoState={initialVideo} onSave={saveVideo} />
             </DialogBody>
         </Dialog>
     );

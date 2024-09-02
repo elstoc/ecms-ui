@@ -4,28 +4,54 @@
     }
     
     .edit-video-form {
+        .watched-status {
+            width: 7em;
+            button {
+                width: 6em;
+                justify-content: space-between;
+            }
+        }
+
         .category {
-            width: 17em;
+            width: 14em;
+            button {
+                width: 13em;
+                justify-content: space-between;
+            }
         }
 
         .length {
             width: 7em;
-            margin-right: 2em !important;
+            input {
+                width: 6em;
+            }
         }
 
         .media {
             padding: .7em;
+            margin-bottom: 1em;
 
             .media-type {
-                width: 11.5em;
+                width: 12em;
+                button {
+                    width: 11em;
+                    justify-content: space-between;
+                }
             }
             .media-location {
                 width: 13em;
+                button {
+                    width: 12em;
+                    justify-content: space-between;
+                }
             }
-        }
-
-        .watched-status {
-            width: 7em;
+            .watched-status {
+                width: 7em;
+                button {
+                    width: 6em;
+                    justify-content: space-between;
+                }
+            }
         }
 
         .form-buttons {
