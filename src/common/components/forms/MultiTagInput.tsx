@@ -91,6 +91,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 itemPredicate={filterTag}
                 query={queryString}
                 onQueryChange={setQueryString}
+                placeholder=''
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
                 popoverProps={{minimal: true}}
             />

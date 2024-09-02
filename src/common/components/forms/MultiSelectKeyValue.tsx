@@ -66,6 +66,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 selectedItems={selectedItems}
                 tagRenderer={tagRenderer}
                 popoverProps={{minimal: true}}
+                placeholder=''
             />
         </FormGroup>
     );
