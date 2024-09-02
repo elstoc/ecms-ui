@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { EditVideoForm } from './EditVideoForm';
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
-import { putVideoDbVideo, VideoWithId } from '../api';
+import { deleteVideoDbVideo, putVideoDbVideo, VideoWithId } from '../api';
 import { AppToaster } from '../../common/components/toaster';
 
 export const UpdateVideo: FC = (): ReactElement => {
@@ -28,6 +28,18 @@ export const UpdateVideo: FC = (): ReactElement => {
         }
     }, [apiPath, queryClient]);
 
+    const deleteVideo = useCallback(async (id: number) => {
+        try {
+            await deleteVideoDbVideo(apiPath, id);
+            (await AppToaster).show({ message: 'deleted', timeout: 2000 });
+            navigate(-1);
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
+        } catch(error: unknown) {
+            alert('error ' + error);
+        }
+    }, [apiPath, queryClient, navigate]);
+
     return (
         <Dialog
             title="Video"
@@ -38,7 +50,7 @@ export const UpdateVideo: FC = (): ReactElement => {
         >
             <DialogBody>
                 <Suspense fallback='Loading'>
-                    <EditVideoForm initialVideoState={storedVideo} onSave={saveVideo} />
+                    <EditVideoForm initialVideoState={storedVideo} onSave={saveVideo} onDelete={deleteVideo} />
                 </Suspense>
             </DialogBody>
         </Dialog>

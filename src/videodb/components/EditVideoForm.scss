@@ -28,8 +28,10 @@
             width: 7em;
         }
 
-        .save-button {
+        .form-buttons {
             margin-top: 1em;
+            display: flex;
+            justify-content: space-between;
         }
 
         .notes {

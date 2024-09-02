@@ -13,15 +13,20 @@ import './EditVideoForm.scss';
 
 type EditVideoFormProps = {
     initialVideoState: VideoWithId;
-    onSave: (video: VideoWithId) => Promise<void>;
+    onSave?: (video: VideoWithId) => Promise<void>;
+    onDelete?: (id: number) => Promise<void>;
 }
 
-export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSave }): ReactElement => {
+export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSave, onDelete }): ReactElement => {
     const [videoState, videoStateReducer] = useReducer(videoReducer, initialVideoState);
 
     const saveVideo = useCallback(async () => {
-        onSave(videoState);
+        onSave?.(videoState);
     }, [onSave, videoState]);
+
+    const deleteVideo = useCallback(async () => {
+        onDelete?.(videoState.id);
+    }, [onDelete, videoState]);
 
     return (
         <div className='edit-video-form'>
@@ -109,9 +114,18 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />
             </Card>
-            <Button className='save-button' onClick={saveVideo}>
-                Save Changes
-            </Button>
+            <div className='form-buttons'>
+                {onSave &&
+                    <Button className='save-button' onClick={saveVideo}>
+                        Save Changes
+                    </Button>
+                }
+                {onDelete &&
+                    <Button className='delete-button' onClick={deleteVideo}>
+                        Delete Video
+                    </Button>
+                }
+            </div>
         </div>
     );
 };
