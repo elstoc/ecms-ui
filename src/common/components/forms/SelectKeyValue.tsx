@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 import { Button, FormGroup, MenuItem } from '@blueprintjs/core';
-import { ItemRenderer, Select } from '@blueprintjs/select';
+import { ItemPredicate, ItemRenderer, Select } from '@blueprintjs/select';
 
 export type KeyValue = {
     key: string;
@@ -23,7 +23,14 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
         onSelectionChange?.(kv.key);
     };
 
+    const filterValue: ItemPredicate<KeyValue> = (query, item) => {
+        return query.length === 0 || item.value.toLowerCase().includes(query.toLowerCase());
+    };
+
     const itemRenderer: ItemRenderer<KeyValue> = (keyValue: KeyValue, { handleClick, handleFocus, modifiers }) => {
+        if (!modifiers.matchesPredicate) {
+            return null;
+        }
         return (
             <MenuItem
                 text={keyValue.value}
@@ -43,9 +50,10 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
             <Select<KeyValue>
                 items={allItemsArray.sort((a, b) => a.value.localeCompare(b.value))}
                 itemRenderer={itemRenderer}
+                itemPredicate={filterValue}
                 onItemSelect={changeSelection}
-                filterable={false}
                 popoverProps={{minimal: true}}
+                resetOnSelect={true}
                 className={className}
             >
                 <Button text={allItems[selectedKey]} small={small} rightIcon='caret-down' />
