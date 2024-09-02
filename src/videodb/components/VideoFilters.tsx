@@ -20,17 +20,20 @@ export const VideoFilters: FC = (): ReactElement => {
             <Card className='video-filters'>
                 <NullableIntInput
                     value={maxLength}
+                    inline={true}
                     label='Shorter Than' 
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
                 <NullableStringInput
                     value={titleContains}
+                    inline={true}
                     label='Title Contains'
                     placeholder='Use % as wildcard'
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
                 />
                 <MultiSelectKeyValue
                     allItems={categoryLookup}
+                    inline={true}
                     selectedKeys={categories ?? []}
                     label='Categories'
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}

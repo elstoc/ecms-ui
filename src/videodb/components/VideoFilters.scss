@@ -2,6 +2,12 @@
     padding-bottom: 2em;
     margin-bottom: 2em;
     font-size: .95em;
+    label {
+        width: 10em;
+    }
+    .bp5-form-content, .bp5-form-content .bp5-input-group {
+        width: 100%;
+    }
 }
 
 .add-video-button {
