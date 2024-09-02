@@ -27,9 +27,21 @@
             }
         }
 
+        .director {
+            margin-top: 1em;
+        }
+
+        .title * {
+            width: 100%;
+            margin-bottom: 1em;
+            font-size: 1.2em;
+            height: 1.5em;
+        }
+
         .media {
             padding: .7em;
             margin-bottom: 1em;
+            margin-top: 1em;
 
             .media-type {
                 width: 12em;
@@ -62,6 +74,15 @@
 
         .notes {
             margin-bottom: 0;
+        }
+
+        .bp5-inline {
+            label {
+                width: 7em;
+            }
+            .bp5-form-content, .bp5-form-content .bp5-input-group {
+                width: 100%;
+            }
         }
     }
 }

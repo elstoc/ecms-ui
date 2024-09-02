@@ -13,9 +13,10 @@ type MultiTagInputParams = {
     onSelectionChange?: (selectedKeys: string[]) => void;
     label: string;
     inline?: boolean;
+    className?: string;
 };
 
-export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, onSelectionChange, label, inline }): ReactElement => {
+export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, onSelectionChange, label, inline, className }): ReactElement => {
     const [queryString, setQueryString] = useState('');
     const allTags = Array.from(new Set([...selectableTags, ...tags]))
         .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
@@ -76,7 +77,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
     };
 
     return (
-        <FormGroup label={label} inline={inline}>
+        <FormGroup label={label} inline={inline} className={className}>
             <MultiSelect<string>
                 items={allTags}
                 selectedItems={tags}

@@ -9,9 +9,10 @@ type TagInputParams = {
     onSelectionChange?: (selectedKeys: string[]) => void;
     label: string;
     inline?: boolean;
+    className?: string;
 };
 
-export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline }): ReactElement => {
+export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
     const tagLookup = useGetTags(apiPath);
     return (
@@ -21,6 +22,7 @@ export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, i
             onSelectionChange={onSelectionChange}
             label={label}
             inline={inline}
+            className={className}
         />
     );
 };

@@ -16,7 +16,6 @@ export const NullableIntInput: FC<NullableIntInputParams> = ({ value, onValueCha
         <FormGroup label={label} inline={inline} className={className}>
             <NumericInput
                 value={value == null ? NumericInput.VALUE_EMPTY : value}
-                fill={true}
                 buttonPosition='none'
                 placeholder={placeholder}
                 onValueChange={(num, str) => onValueChange?.(str === NumericInput.VALUE_EMPTY ? null : parseInt(str))}

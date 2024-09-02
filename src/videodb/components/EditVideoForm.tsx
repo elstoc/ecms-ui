@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useCallback, useReducer } from 'react';
-import { Button, Card, ControlGroup } from '@blueprintjs/core';
+import { Button, Card, ControlGroup, Divider } from '@blueprintjs/core';
 
 import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 
@@ -31,11 +31,13 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
     return (
         <div className='edit-video-form'>
             <StringInput
-                label='Title'
+                label=''
+                inline={true}
                 value={videoState.title}
                 onValueChange={(value) => videoStateReducer({ key: 'title', value })}
+                className='title'
             />
-            <ControlGroup>
+            <ControlGroup className='init-group'>
                 <NullableIntInput
                     label='Length (mins)'
                     value={videoState.length_mins}
@@ -106,13 +108,44 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
             </Card>
             <TagInput
                 tags={videoState.tags ?? []}
+                inline={true}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
+                className='tags'
+            />
+            <NullableIntInput
+                label='Priority'
+                className='priority'
+                inline={true}
+                value={videoState.to_watch_priority}
+                onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value})}
             />
             <NullableStringInput
+                label='Progress'
+                className='progress'
+                inline={true}
+                value={videoState.progress}
+                onValueChange={(value) => videoStateReducer({ key: 'progress', value })}
+            />
+            <Divider />
+            <NullableStringInput
                 label='Director'
+                className='director'
+                inline={true}
                 value={videoState.director}
                 onValueChange={(value) => videoStateReducer({ key: 'director', value })}
+            />
+            <NullableStringInput
+                label='Actors'
+                inline={true}
+                value={videoState.actors}
+                onValueChange={(value) => videoStateReducer({ key: 'actors', value })}
+            />
+            <NullableStringInput
+                label='Plot'
+                inline={true}
+                value={videoState.plot}
+                onValueChange={(value) => videoStateReducer({ key: 'plot', value })}
             />
             <div className='form-buttons'>
                 {onSave &&
