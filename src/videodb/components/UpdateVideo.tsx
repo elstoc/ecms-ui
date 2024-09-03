@@ -48,7 +48,7 @@ export const UpdateVideo: FC = (): ReactElement => {
             canEscapeKeyClose={false}
             className='update-video'
         >
-            <DialogBody>
+            <DialogBody useOverflowScrollContainer={false}>
                 <EditVideoForm initialVideoState={storedVideo} onSave={saveVideo} onDelete={deleteVideo} />
             </DialogBody>
         </Dialog>

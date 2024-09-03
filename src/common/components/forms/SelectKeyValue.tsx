@@ -56,7 +56,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 resetOnSelect={true}
                 className={className}
             >
-                <Button text={allItems[selectedKey]} small={small} rightIcon='caret-down' />
+                <Button text={allItems[selectedKey] ?? ' '} small={small} rightIcon='caret-down' />
             </Select>
         </FormGroup>
     );
