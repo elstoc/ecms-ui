@@ -16,8 +16,8 @@ export const VideoFilters: FC = (): ReactElement => {
     const clearSearchParams = useClearSearchParams();
 
     return (
-        <>
-            <Card className='video-filters'>
+        <div className='video-filters'>
+            <Card className='card'>
                 <NullableIntInput
                     value={maxLength}
                     inline={true}
@@ -38,14 +38,14 @@ export const VideoFilters: FC = (): ReactElement => {
                     label='Categories'
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
-                <div>
+                <div className='action-buttons'>
                     <Button onClick={clearSearchParams}>Clear All</Button>
                     <Button onClick={setSearchParamsFromState}>Submit</Button>
                 </div>
             </Card>
-            <div className='add-video-button'>
+            <div className='action-buttons'>
                 <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
             </div>
-        </>
+        </div>
     );
 };
