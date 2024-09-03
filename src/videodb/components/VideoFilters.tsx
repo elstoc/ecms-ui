@@ -28,7 +28,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     value={titleContains}
                     inline={true}
                     label='Title Contains'
-                    placeholder='Use % as wildcard'
+                    placeholder=''
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
                 />
                 <MultiSelectKeyValue
