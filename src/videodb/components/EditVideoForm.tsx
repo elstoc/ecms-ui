@@ -148,14 +148,14 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 onValueChange={(value) => videoStateReducer({ key: 'plot', value })}
             />
             <div className='form-buttons'>
-                {onSave &&
-                    <Button className='save-button' onClick={saveVideo}>
-                        Save Changes
-                    </Button>
-                }
                 {onDelete &&
                     <Button className='delete-button' onClick={deleteVideo}>
                         Delete Video
+                    </Button>
+                }
+                {onSave &&
+                    <Button className='save-button' onClick={saveVideo}>
+                        Save Changes
                     </Button>
                 }
             </div>
