@@ -8,9 +8,14 @@ const BATCH_SIZE = 100;
 type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value: number | null; }
 type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value: string | null; }
 type SetCategories = { action: 'setFilter'; key: 'categories'; value: string[] | null}
+type SetTags = { action: 'setFilter'; key: 'tags'; value: string[] | null}
+type SetWatchedStatuses = { action: 'setFilter'; key: 'watchedStatuses'; value: string[] | null}
+type SetPmWatchedStatuses = { action: 'setFilter'; key: 'pmWatchedStatuses'; value: string[] | null}
+type SetPrimaryMediaTypes = { action: 'setFilter'; key: 'primaryMediaTypes'; value: string[] | null}
+
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
-type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit;
+type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | SetTags | SetWatchedStatuses | SetPmWatchedStatuses | SetPrimaryMediaTypes;
 
 type VideoFilters = {
     limit: number;
@@ -18,6 +23,9 @@ type VideoFilters = {
     categories: string[] | null;
     tags: string[] | null;
     titleContains: string | null;
+    watchedStatuses: string[] | null;
+    pmWatchedStatuses: string[] | null;
+    primaryMediaTypes: string[] | null;
 }
 
 type VideoDbState = {
@@ -31,7 +39,10 @@ const initialFilters = {
     maxLength: null,
     categories: null,
     tags: null,
-    titleContains: null
+    titleContains: null,
+    watchedStatuses: null,
+    pmWatchedStatuses: null,
+    primaryMediaTypes: null
 };
 
 type VideoDbStateContextProps = {
@@ -58,8 +69,8 @@ const useGetFilterSearchParams = () => {
     const [searchParams] = useSearchParams();
 
     return useCallback(() => {
-        const { maxLength, titleContains, categories } = Object.fromEntries(searchParams.entries());
-        return { maxLength, titleContains, categories };
+        const { maxLength, titleContains, categories, tags, watchedStatuses, pmWatchedStatuses, primaryMediaTypes } = Object.fromEntries(searchParams.entries());
+        return { maxLength, titleContains, categories, tags, watchedStatuses, pmWatchedStatuses, primaryMediaTypes };
     }, [searchParams]);
 };
 
@@ -76,7 +87,10 @@ const useUpdateStateOnSearchParamChange = () => {
                     maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
                     titleContains: searchParams.get('titleContains'),
                     categories: searchParams.get('categories')?.split('|') ?? null,
-                    tags: null
+                    tags: searchParams.get('tags')?.split('|') ?? null,
+                    watchedStatuses: searchParams.get('watchedStatuses')?.split('|') ?? null,
+                    pmWatchedStatuses: searchParams.get('pmWatchedStatuses')?.split('|') ?? null,
+                    primaryMediaTypes: searchParams.get('primaryMediaTypes')?.split('|') ?? null
                 }
             });
         }
@@ -88,7 +102,7 @@ const useSetSearchParamsFromFilterState = () => {
     const { state: { filters } } = useContext(VideoDbContext);
 
     return useCallback(() => {
-        const { categories, maxLength, titleContains } = filters;
+        const { categories, maxLength, titleContains, tags, watchedStatuses, pmWatchedStatuses, primaryMediaTypes } = filters;
         setSearchParams((params) => {
             categories?.length
                 ? params.set('categories', categories.join('|'))
@@ -99,6 +113,18 @@ const useSetSearchParamsFromFilterState = () => {
             titleContains
                 ? params.set('titleContains', titleContains)
                 : params.delete('titleContains');
+            tags?.length
+                ? params.set('tags', tags.join('|'))
+                : params.delete('tags');
+            watchedStatuses?.length
+                ? params.set('watchedStatuses', watchedStatuses.join('|'))
+                : params.delete('watchedStatuses');
+            pmWatchedStatuses?.length
+                ? params.set('pmWatchedStatuses', pmWatchedStatuses.join('|'))
+                : params.delete('pmWatchedStatuses');
+            primaryMediaTypes?.length
+                ? params.set('primaryMediaTypes', primaryMediaTypes.join('|'))
+                : params.delete('primaryMediaTypes');
             return params;
         });
     // eslint-disable-next-line react-hooks/exhaustive-deps

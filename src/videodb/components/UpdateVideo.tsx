@@ -23,6 +23,7 @@ export const UpdateVideo: FC = (): ReactElement => {
             navigate(-1);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
         } catch (error: unknown) {
             alert('error ' + error);
         }
@@ -35,6 +36,7 @@ export const UpdateVideo: FC = (): ReactElement => {
             navigate(-1);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
         } catch(error: unknown) {
             alert('error ' + error);
         }

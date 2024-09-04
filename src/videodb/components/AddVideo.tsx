@@ -27,6 +27,7 @@ export const AddVideo: FC = (): ReactElement => {
             const videoWithoutId = { ...video, id: undefined } as Video;
             await postVideoDbVideo(apiPath, videoWithoutId);
             queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
+            queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
             (await AppToaster).show({ message: 'saved', timeout: 2000 });
             navigate(-1);
         } catch (error: unknown) {
