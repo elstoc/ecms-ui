@@ -38,7 +38,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                 <span><Icon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /> </span>
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
                 <span> {pMediaType} </span>
-                {video.tags && <span> <Icon icon='minus' size={20} /> {video.tags}</span>}
+                {video.tags && <span> <Icon icon='minus' size={20} /> {video.tags.replace(',', ', ')}</span>}
             </div>
         </Card>
     );
