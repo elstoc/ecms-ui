@@ -5,7 +5,7 @@ import { VideoSummaryAndPrimaryMedium } from '../api';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 
 import './VideoListItem.scss';
-import { Card } from '@blueprintjs/core';
+import { Card, Icon } from '@blueprintjs/core';
 import { Link } from 'react-router-dom';
 
 type VideoDbProps = {
@@ -16,25 +16,29 @@ type VideoDbProps = {
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
     const [searchParams] = useSearchParams();
     const categoryLookup = useGetLookup(apiPath, 'categories');
-    const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
 
+    const watchedColorLookup = {
+        'Y': 'green',
+        'N': 'crimson',
+        'P': 'orange',
+        ' ': 'white'
+    } as { [key: string]: string };
+
     const category = categoryLookup[video.category];
-    const watchedStatus = watchedStatusLookup[video.watched];
-    const pmWatchedStatus = video.primary_media_watched && watchedStatusLookup[video.primary_media_watched];
     const pMediaType = video.primary_media_type && mediaTypeLookup[video.primary_media_type];
 
     return (
         <Card ref={ref} className='video-list-item'>
             <Link className='video-name' to={`./${video.id}?${searchParams.toString()}`}>{ video.title }</Link>
             <div className='sub-info'>
-                {video.length_mins && <span> {video.length_mins} mins | </span>}
                 <span className='category'>{category}</span>
-                {video.watched && <span> | watched: {watchedStatus}</span>}
+                {video.length_mins && <span> ({video.length_mins} mins) </span>}
+                <span> <Icon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
+                <span><Icon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /> </span>
                 {video.to_watch_priority && <span> | to Watch Priority: {video.to_watch_priority}</span>}
-                <span> | {pMediaType} ({pmWatchedStatus})</span>
-
-                {video.tags && <span> | {video.tags}</span>}
+                <span> {pMediaType} </span>
+                {video.tags && <span> <Icon icon='minus' size={20} /> {video.tags}</span>}
             </div>
         </Card>
     );
