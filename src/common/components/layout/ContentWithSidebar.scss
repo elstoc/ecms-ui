@@ -9,6 +9,9 @@
 
 .content-container.sidebar-top {
     flex-direction: column;
+    .sidebar-container {
+        margin-bottom: 2em;
+    }
 }
 
 .sidebar-container {
