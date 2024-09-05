@@ -60,8 +60,9 @@
         }
     }
 
-    .priority * {
-        margin-bottom: 1em;
+    .bp5-control.bp5-switch input:checked:hover ~ .bp5-control-indicator,
+    .bp5-control.bp5-switch input:checked ~ .bp5-control-indicator {
+        background: firebrick;
     }
 
     .notes {
