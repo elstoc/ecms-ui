@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useCallback, useReducer } from 'react';
 import { Button, Card, ControlGroup, Divider } from '@blueprintjs/core';
 
-import { CheckBox, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
+import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 
 import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
@@ -106,7 +106,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />
             </Card>
-            <CheckBox
+            <Switch
                 label='Priority'
                 inline={true}
                 value={(videoState.to_watch_priority ?? 0) > 0}

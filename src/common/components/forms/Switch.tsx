@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
-import { Checkbox, FormGroup } from '@blueprintjs/core';
+import { FormGroup, Switch as BlueprintSwitch } from '@blueprintjs/core';
 
-type CheckBoxParams = {
+type SwitchParams = {
     label?: string;
     value: boolean;
     inline?: boolean;
@@ -9,10 +9,10 @@ type CheckBoxParams = {
     className?: string;
 }
 
-export const CheckBox: FC<CheckBoxParams> = ({ value, onValueChange, label, inline, className }): ReactElement => {
+export const Switch: FC<SwitchParams> = ({ value, onValueChange, label, inline, className }): ReactElement => {
     return (
         <FormGroup label={label} inline={inline} className={className}>
-            <Checkbox
+            <BlueprintSwitch
                 checked={value}
                 onChange={(ev) => onValueChange?.(ev.target.checked)}
             />
