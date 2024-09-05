@@ -5,3 +5,4 @@ export { StringInput } from './StringInput';
 export { SelectKeyValue } from './SelectKeyValue';
 export { NullableSelectKeyValue } from './NullableSelectKeyValue';
 export { MultiTagInput } from './MultiTagInput';
+export { CheckBox } from './CheckBox';

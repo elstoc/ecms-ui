@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useCallback, useReducer } from 'react';
 import { Button, Card, ControlGroup, Divider } from '@blueprintjs/core';
 
-import { NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
+import { CheckBox, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 
 import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
@@ -106,19 +106,19 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     onValueChange={(value) => videoStateReducer({ key: 'media_notes', value })}
                 />
             </Card>
+            <CheckBox
+                label='Priority'
+                inline={true}
+                value={(videoState.to_watch_priority ?? 0) > 0}
+                onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value: value ? 1 : 0 })}
+                className='priority-flag'
+            />
             <TagInput
                 tags={videoState.tags ?? []}
                 inline={true}
                 onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
                 className='tags'
-            />
-            <NullableIntInput
-                label='Priority'
-                className='priority'
-                inline={true}
-                value={videoState.to_watch_priority}
-                onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value})}
             />
             <NullableStringInput
                 label='Progress'
