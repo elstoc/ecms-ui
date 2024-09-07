@@ -1,15 +1,17 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
-import { VideoListItem } from './VideoListItem';
+import { useNthElementIsVisible } from '../../common/hooks';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useGetFilterSearchParams } from '../hooks/useVideoDbState';
-import { useNthElementIsVisible } from '../../common/hooks';
+
+import { VideoListItem } from './VideoListItem';
 
 import './VideoList.scss';
 
 export const VideoList: FC = (): ReactElement => {
-    const { state: { apiPath, filters: { limit } }, stateReducer } = useContext(VideoDbContext);
     const getFilterSearchParams = useGetFilterSearchParams();
+    const { state: { apiPath, filters: { limit } }, stateReducer } = useContext(VideoDbContext);
+
     const videos = useGetVideos(apiPath, { ...getFilterSearchParams(), limit: limit?.toString() } );
     const currentlyLoadedCount = videos.length;
 
