@@ -14,15 +14,26 @@ import { TagInput } from './TagInput';
 import './VideoFilters.scss';
 
 export const VideoFilters: FC = (): ReactElement => {
+    const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
-    const { state: { apiPath, pendingFlagUpdates, filters: { titleContains, maxLength, categories, watchedStatuses, pmWatchedStatuses, primaryMediaTypes, tags } }, stateReducer } = useContext(VideoDbContext);
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
+    const clearSearchParams = useClearSearchParams();
+    const {
+        state: {
+            apiPath, pendingFlagUpdates,
+            filters: {
+                titleContains, maxLength, categories, watchedStatuses,
+                pmWatchedStatuses, primaryMediaTypes, tags,
+            },
+        },
+        stateReducer,
+    } = useContext(VideoDbContext);
+
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
-    const clearSearchParams = useClearSearchParams();
+
     const flagUpdateCount = Object.keys(pendingFlagUpdates).length;
-    const queryClient = useQueryClient();
 
     const postFlagUpdates = useCallback(async () => {
         try {
@@ -31,9 +42,9 @@ export const VideoFilters: FC = (): ReactElement => {
                 videoUpdates.push({ id: parseInt(id), to_watch_priority });
             }
             await patchVideoDbVideos(apiPath, videoUpdates);
+            (await AppToaster).show({ message: 'flags updated', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             stateReducer({ action: 'resetFlagUpdates' });
-            (await AppToaster).show({ message: 'flags updated', timeout: 2000 });
         } catch (error: unknown) {
             alert('error ' + error);
         }
@@ -43,52 +54,52 @@ export const VideoFilters: FC = (): ReactElement => {
         <div className='video-filters'>
             <Card className='card'>
                 <NullableIntInput
-                    value={maxLength}
-                    inline={true}
                     label='Shorter Than' 
+                    inline={true}
+                    value={maxLength}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
                 <NullableStringInput
-                    value={titleContains}
-                    inline={true}
                     label='Title Contains'
+                    inline={true}
+                    value={titleContains}
                     placeholder=''
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
                 />
                 <MultiSelectKeyValue
-                    allItems={categoryLookup}
-                    inline={true}
-                    selectedKeys={categories ?? []}
                     label='Categories'
+                    inline={true}
+                    allItems={categoryLookup}
+                    selectedKeys={categories ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
                 <MultiSelectKeyValue
-                    allItems={watchedStatusLookup}
-                    inline={true}
-                    selectedKeys={watchedStatuses ?? []}
                     label='Watched'
+                    inline={true}
+                    allItems={watchedStatusLookup}
+                    selectedKeys={watchedStatuses ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'watchedStatuses', value })}
                 />
                 <MultiSelectKeyValue
-                    allItems={mediaTypeLookup}
-                    inline={true}
-                    selectedKeys={primaryMediaTypes ?? []}
                     label='Media Type'
+                    inline={true}
+                    allItems={mediaTypeLookup}
+                    selectedKeys={primaryMediaTypes ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'primaryMediaTypes', value })}
                 />
                 <MultiSelectKeyValue
-                    allItems={watchedStatusLookup}
-                    inline={true}
-                    selectedKeys={pmWatchedStatuses ?? []}
                     label='Media Watched'
+                    inline={true}
+                    allItems={watchedStatusLookup}
+                    selectedKeys={pmWatchedStatuses ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'pmWatchedStatuses', value })}
                 />
                 <TagInput
-                    tags={tags ?? []}
-                    inline={true}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
                     label='Tags'
                     className='tags'
+                    inline={true}
+                    tags={tags ?? []}
+                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
                 />
                 <div className='filter-action-buttons'>
                     <Button onClick={clearSearchParams}>Clear All</Button>
@@ -96,8 +107,12 @@ export const VideoFilters: FC = (): ReactElement => {
                 </div>
             </Card>
             <div className='video-action-buttons'>
-                {flagUpdateCount > 0 && <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>}
-                {flagUpdateCount > 0 && <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset Flags</Button>}
+                {flagUpdateCount > 0 &&
+                    <>
+                        <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
+                        <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset Flags</Button>
+                    </>
+                }
                 <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
             </div>
         </div>
