@@ -8,7 +8,7 @@ export const WelcomeUser: FC<{ user: string }> = ({ user }): ReactElement => {
 
     const handleLogout = useCallback(async () => {
         await logout();
-        queryClient.invalidateQueries();
+        await queryClient.invalidateQueries();
     }, [queryClient]);
 
     return (

@@ -32,9 +32,9 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     const saveMd = useCallback(async () => {
         try {
             await putMarkdownPage(mdFullPath, editedMarkdown);
-            queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
-            queryClient.invalidateQueries({ queryKey: ['markdownTree']});
             (await AppToaster).show({ message: 'page saved', timeout: 2000 });
+            await queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
+            await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
             unsetEditMode();
         } catch (error: unknown) {
             alert('error ' + error);
@@ -46,9 +46,9 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             // eslint-disable-next-line no-restricted-globals
             if (confirm('Are you sure you want to delete this page')) {
                 await deleteMarkdownPage(mdFullPath);
-                queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
-                queryClient.invalidateQueries({ queryKey: ['markdownTree']});
                 (await AppToaster).show({ message: 'page deleted', timeout: 2000 });
+                await queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
+                await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
                 unsetEditMode();
             }
         } catch (error: unknown) {

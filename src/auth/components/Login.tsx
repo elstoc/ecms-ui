@@ -20,7 +20,7 @@ export const Login: FC = (): ReactElement => {
         try {
             await login(userId, password);
             setLoginFailed(false);
-            queryClient.invalidateQueries();
+            await queryClient.invalidateQueries();
             navigate('/auth/user', { replace: true });
         } catch {
             setLoginFailed(true);
