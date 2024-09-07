@@ -36,7 +36,7 @@ export const VideoActionButtons: FC = (): ReactElement => {
             {flagUpdateCount > 0 &&
                 <>
                     <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
-                    <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset Flags</Button>
+                    <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset {flagUpdateCount} Flags</Button>
                 </>
             }
             <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
