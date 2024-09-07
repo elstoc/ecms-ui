@@ -6,3 +6,4 @@ export { SelectKeyValue } from './SelectKeyValue';
 export { NullableSelectKeyValue } from './NullableSelectKeyValue';
 export { MultiTagInput } from './MultiTagInput';
 export { Switch } from './Switch';
+export { Flag } from './Flag';

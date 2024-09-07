@@ -1,7 +1,34 @@
 .video-list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     margin-top: .4em;
     margin-bottom: .4em;
     padding: 10px !important;
+
+    &:hover {
+        background-color: whitesmoke;
+    }
+
+    &:not(:hover) .priority.unchecked {
+        visibility: hidden;
+    }
+
+    .priority {
+        cursor: pointer;
+    }
+
+    .right {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .bp5-form-group,
+    .bp5-control.bp5-switch {
+        margin: 0;
+        padding: 0;
+    }
 
     .video-name {
         cursor: pointer;

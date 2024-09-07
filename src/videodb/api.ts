@@ -29,7 +29,7 @@ type VideoIdOnly = {
 type VideoWithId = Video & VideoIdOnly;
 
 type VideoSummary = {
-    id: string;
+    id: number;
     title: string;
     category: string;
     director: string | null;
@@ -55,10 +55,20 @@ type PrimaryMedium = {
 
 type VideoSummaryAndPrimaryMedium = VideoSummary & PrimaryMedium;
 
+type VideoUpdate = {
+    id: number;
+    to_watch_priority: 0 | 1;
+}
+
 const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoSummaryAndPrimaryMedium[]> => {
     const url = 'videodb/videos';
     const { data } = await axiosSecureClient.get<VideoSummaryAndPrimaryMedium[]>(url, { params: { path, ...filters }});
     return data;
+};
+
+const patchVideoDbVideos = async (path: string, videoUpdates: VideoUpdate[]): Promise<void> => {
+    const url = 'videodb/videos';
+    await axiosSecureClient.patch(url, { path, videos: videoUpdates });
 };
 
 const getVideoDbVideo = async (path: string, id: number): Promise<VideoWithId> => {
@@ -100,7 +110,9 @@ export {
     Video,
     VideoWithId,
     VideoSummaryAndPrimaryMedium,
+    VideoUpdate,
     getVideoDbVideos,
+    patchVideoDbVideos,
     getVideoDbVideo,
     putVideoDbVideo,
     postVideoDbVideo,

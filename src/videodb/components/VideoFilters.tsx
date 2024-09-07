@@ -1,22 +1,43 @@
-import React, { FC, ReactElement, useContext } from 'react';
+import React, { FC, ReactElement, useCallback, useContext } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Button, Card } from '@blueprintjs/core';
+import { useQueryClient } from '@tanstack/react-query';
 
-import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../../common/components/forms';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
+import { patchVideoDbVideos, VideoUpdate } from '../api';
+
+import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../../common/components/forms';
+import { AppToaster } from '../../common/components/toaster';
+import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
-import { Link, useSearchParams } from 'react-router-dom';
-import { TagInput } from './TagInput';
 
 export const VideoFilters: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { state: { apiPath, filters: { titleContains, maxLength, categories, watchedStatuses, pmWatchedStatuses, primaryMediaTypes, tags } }, stateReducer } = useContext(VideoDbContext);
+    const { state: { apiPath, pendingFlagUpdates, filters: { titleContains, maxLength, categories, watchedStatuses, pmWatchedStatuses, primaryMediaTypes, tags } }, stateReducer } = useContext(VideoDbContext);
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
     const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
     const clearSearchParams = useClearSearchParams();
+    const flagUpdateCount = Object.keys(pendingFlagUpdates).length;
+    const queryClient = useQueryClient();
+
+    const postFlagUpdates = useCallback(async () => {
+        try {
+            const videoUpdates: VideoUpdate[] = [];
+            for (const [id, to_watch_priority] of Object.entries(pendingFlagUpdates)) {
+                videoUpdates.push({ id: parseInt(id), to_watch_priority });
+            }
+            await patchVideoDbVideos(apiPath, videoUpdates);
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
+            stateReducer({ action: 'resetFlagUpdates' });
+            (await AppToaster).show({ message: 'flags updated', timeout: 2000 });
+        } catch (error: unknown) {
+            alert('error ' + error);
+        }
+    }, [apiPath, pendingFlagUpdates, queryClient, stateReducer]);
 
     return (
         <div className='video-filters'>
@@ -69,12 +90,14 @@ export const VideoFilters: FC = (): ReactElement => {
                     label='Tags'
                     className='tags'
                 />
-                <div className='action-buttons'>
+                <div className='filter-action-buttons'>
                     <Button onClick={clearSearchParams}>Clear All</Button>
                     <Button onClick={setSearchParamsFromState}>Submit</Button>
                 </div>
             </Card>
-            <div className='action-buttons'>
+            <div className='video-action-buttons'>
+                {flagUpdateCount > 0 && <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>}
+                {flagUpdateCount > 0 && <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset Flags</Button>}
                 <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
             </div>
         </div>

@@ -15,7 +15,11 @@ type SetPrimaryMediaTypes = { action: 'setFilter'; key: 'primaryMediaTypes'; val
 
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
-type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | SetTags | SetWatchedStatuses | SetPmWatchedStatuses | SetPrimaryMediaTypes;
+type SetUpdatedFlag = { action: 'setUpdatedFlag', videoId: number,  currValue: number | null, newValue: 0 | 1 };
+type ResetFlagUPdates = { action: 'resetFlagUpdates' };
+
+type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | SetTags
+    | SetWatchedStatuses | SetPmWatchedStatuses | SetPrimaryMediaTypes | SetUpdatedFlag | ResetFlagUPdates;
 
 type VideoFilters = {
     limit: number;
@@ -28,10 +32,13 @@ type VideoFilters = {
     primaryMediaTypes: string[] | null;
 }
 
+type FlagUpdates = { [videoId: number]: 0 | 1 }
+
 type VideoDbState = {
     apiPath: string;
     title: string;
     filters: VideoFilters;
+    pendingFlagUpdates: FlagUpdates;
 };
 
 const initialFilters = {
@@ -61,6 +68,16 @@ const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => 
         return { ...state, filters: operation.value };
     } else if (operation.action === 'increaseLimit' && operation.currentlyLoaded + BATCH_SIZE >= state.filters.limit + BATCH_SIZE) {
         return { ...state, filters: { ...filters, limit: state.filters.limit + BATCH_SIZE } };
+    } else if (operation.action === 'setUpdatedFlag') {
+        const { pendingFlagUpdates } = state;
+        if (Boolean(operation.currValue) === Boolean(operation.newValue)) {
+            delete pendingFlagUpdates[operation.videoId];
+        } else {
+            pendingFlagUpdates[operation.videoId] = operation.newValue;
+        }
+        return { ...state, pendingFlagUpdates };
+    } else if (operation.action === 'resetFlagUpdates') {
+        return { ...state, pendingFlagUpdates: {} };
     }
     return state;
 };
@@ -144,4 +161,13 @@ const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps 
     return { state, stateReducer };
 };
 
-export { initialFilters, VideoDbContext, useVideoDbState, useGetFilterSearchParams, useSetSearchParamsFromFilterState, useClearSearchParams, useUpdateStateOnSearchParamChange };
+export {
+    initialFilters,
+    VideoDbContext,
+    useVideoDbState,
+    useGetFilterSearchParams,
+    useSetSearchParamsFromFilterState,
+    useClearSearchParams,
+    useUpdateStateOnSearchParamChange,
+    FlagUpdates
+};

@@ -107,7 +107,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 />
             </Card>
             <Switch
-                label='Priority'
+                label='Flag'
                 inline={true}
                 value={(videoState.to_watch_priority ?? 0) > 0}
                 onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value: value ? 1 : 0 })}

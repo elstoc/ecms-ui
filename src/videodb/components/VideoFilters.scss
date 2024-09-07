@@ -14,9 +14,19 @@
         }
     }
 
-    .action-buttons {
+    .filter-action-buttons {
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+    }
+
+    .video-action-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .video-action-buttons>a:only-child {
+        margin-left: auto;
     }
 }
