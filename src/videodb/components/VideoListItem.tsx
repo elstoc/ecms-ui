@@ -15,21 +15,22 @@ type VideoDbProps = {
     video: VideoSummaryAndPrimaryMedium;
 }
 
+const watchedColorLookup = {
+    'Y': 'green',
+    'N': 'crimson',
+    'P': 'orange',
+    ' ': 'white'
+} as { [key: string]: string };
+
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
     const { state: { pendingFlagUpdates }, stateReducer } = useContext(VideoDbContext);
     const [searchParams] = useSearchParams();
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
 
-    const watchedColorLookup = {
-        'Y': 'green',
-        'N': 'crimson',
-        'P': 'orange',
-        ' ': 'white'
-    } as { [key: string]: string };
-
     const category = categoryLookup[video.category];
-    const pMediaType = video.primary_media_type && mediaTypeLookup[video.primary_media_type];
+    const pMediaType = mediaTypeLookup[video.primary_media_type ?? ''];
+
     let prioritySwitchChecked = (video.to_watch_priority ?? 0) > 0;
     if (video.id in pendingFlagUpdates) {
         prioritySwitchChecked = pendingFlagUpdates[video.id] === 1;
