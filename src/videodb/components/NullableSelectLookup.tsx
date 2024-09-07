@@ -1,7 +1,8 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
-import { VideoDbContext } from '../hooks/useVideoDbState';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
+import { VideoDbContext } from '../hooks/useVideoDbState';
+
 import { NullableSelectKeyValue } from '../../common/components/forms';
 
 type NullableSelectLookupParams = {
@@ -13,9 +14,11 @@ type NullableSelectLookupParams = {
     className?: string;
 };
 
-export const NullableSelectLookup: FC<NullableSelectLookupParams> = ({ lookupTable, selectedKey, onSelectionChange, label, small, className }): ReactElement => {
+export const NullableSelectLookup: FC<NullableSelectLookupParams> = (props): ReactElement => {
+    const { lookupTable, selectedKey, onSelectionChange, label, small, className } = props;
     const { state: { apiPath } } = useContext(VideoDbContext);
     const lookupKeyValues = useGetLookup(apiPath, lookupTable);
+
     return (
         <NullableSelectKeyValue
             label={label}
