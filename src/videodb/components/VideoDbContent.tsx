@@ -9,19 +9,21 @@ import { VideoList } from './VideoList';
 import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';
 import { AddVideo } from './AddVideo';
+import { VideoActionButtons } from './VideoActionButtons';
 
 export const VideoDbContent: FC = (): ReactElement => {
     useUpdateStateOnSearchParamChange();
     const { state: { title } } = useContext(VideoDbContext);
     useTitle(title);
 
-    const videoFiltersElement = (
+    const videoFilters = (
         <Suspense fallback='Loading...'>
             <VideoFilters />
+            <VideoActionButtons />
         </Suspense>
     );
 
-    const videoListElement = (
+    const videoList = (
         <Suspense fallback='Loading...'>
             <VideoList />
         </Suspense>
@@ -37,8 +39,8 @@ export const VideoDbContent: FC = (): ReactElement => {
                 </Routes>
             </Suspense>
             <ContentWithSidebar
-                mainPageElement={videoListElement}
-                sidebarElement={videoFiltersElement}
+                mainPageElement={videoList}
+                sidebarElement={videoFilters}
                 mobileSidebarAtTop={true}
             />
         </>
