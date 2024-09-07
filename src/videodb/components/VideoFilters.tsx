@@ -4,7 +4,7 @@ import { Button, Card } from '@blueprintjs/core';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
-import { NullableIntInput, NullableStringInput, MultiSelectKeyValue } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, MultiSelectKeyValue, Switch } from '../../common/components/forms';
 import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
@@ -17,7 +17,7 @@ export const VideoFilters: FC = (): ReactElement => {
             apiPath,
             filters: {
                 titleContains, maxLength, categories, watchedStatuses,
-                pmWatchedStatuses, primaryMediaTypes, tags,
+                pmWatchedStatuses, primaryMediaTypes, tags, sortPriorityFirst
             },
         },
         stateReducer,
@@ -77,6 +77,12 @@ export const VideoFilters: FC = (): ReactElement => {
                     inline={true}
                     tags={tags ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
+                />
+                <Switch
+                    label='Priority First'
+                    inline={true}
+                    value={sortPriorityFirst === 1}
+                    onValueChange={(value) => stateReducer({action: 'setFilter', key: 'sortPriorityFirst', value: value ? 1 : 0})}
                 />
                 <div className='filter-action-buttons'>
                     <Button onClick={clearSearchParams}>Clear All</Button>
