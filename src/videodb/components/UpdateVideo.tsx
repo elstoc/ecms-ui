@@ -46,7 +46,7 @@ export const UpdateVideo: FC = (): ReactElement => {
 
     return (
         <Dialog
-            title="Video"
+            title="Update Video"
             isOpen={true}
             onClose={() => navigate(-1)}
             canEscapeKeyClose={false}

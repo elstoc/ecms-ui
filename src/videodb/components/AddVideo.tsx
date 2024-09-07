@@ -40,7 +40,7 @@ export const AddVideo: FC = (): ReactElement => {
 
     return (
         <Dialog
-            title="Video"
+            title="Add new Video"
             isOpen={true}
             onClose={() => navigate(-1)}
             canEscapeKeyClose={false}
