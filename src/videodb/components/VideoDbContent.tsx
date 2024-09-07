@@ -1,17 +1,18 @@
 import React, { FC, ReactElement, Suspense, useContext } from 'react';
+import { Route, Routes } from 'react-router-dom';
 
+import { useTitle } from '../../common/hooks';
+import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
+
+import { ContentWithSidebar } from '../../common/components/layout';
 import { VideoList } from './VideoList';
 import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';
-import { useTitle } from '../../common/hooks';
-import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
-import { ContentWithSidebar } from '../../common/components/layout';
-import { Route, Routes } from 'react-router-dom';
 import { AddVideo } from './AddVideo';
 
 export const VideoDbContent: FC = (): ReactElement => {
-    const { state: { title } } = useContext(VideoDbContext);
     useUpdateStateOnSearchParamChange();
+    const { state: { title } } = useContext(VideoDbContext);
     useTitle(title);
 
     const videoFiltersElement = (
@@ -26,6 +27,7 @@ export const VideoDbContent: FC = (): ReactElement => {
         </Suspense>
     );
 
+    // suspense is wrapped around routes and page elements separately to stop screen flashing
     return (
         <>
             <Suspense>
