@@ -1,6 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { FormGroup, Icon } from '@blueprintjs/core';
 
+import './Flag.scss';
+
 type FlagParams = {
     label?: string;
     value: boolean;
@@ -12,14 +14,14 @@ type FlagParams = {
 
 export const Flag: FC<FlagParams> = ({ value, onValueChange, label, inline, className, color }): ReactElement => {
     return (
-        <FormGroup
-            label={label}
-            inline={inline}
-            className={className}
-        >
-            <div onClick={() => onValueChange?.(!value)}>
-                <Icon icon='flag' color={`${value ? (color || 'firebrick') : 'lightgrey'}`} />
-            </div>
-        </FormGroup>
+        <div onClick={() => onValueChange?.(!value)}>
+            <FormGroup
+                label={label}
+                inline={inline}
+                className={`flag-component ${className}`}
+            >
+                <Icon icon='flag' size={18} color={`${value ? (color || 'firebrick') : 'lightgrey'}`} />
+            </FormGroup>
+        </div>
     );
 };
