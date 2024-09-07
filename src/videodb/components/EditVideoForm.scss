@@ -1,8 +1,6 @@
 .edit-video-form {
     .bp5-inline {
-        label {
-            width: 7em;
-        }
+        label { width: 7em; }
 
         .bp5-form-content,
         .bp5-form-content .bp5-input-group {
@@ -13,14 +11,10 @@
 
     .title {
         margin-bottom: 1.5em;
-        * {
-            width: 100%;
-        }
+        * { width: 100%; }
     }
 
-    .init-group * {
-        margin-bottom: 0;
-    }
+    .init-group * { margin-bottom: 0; }
     
     .watched-status {
         width: 6em;
@@ -40,9 +34,7 @@
 
     .length {
         width: 7em;
-        input {
-            width: 6em;
-        }
+        input { width: 6em; }
     }
 
     .media {
@@ -53,6 +45,7 @@
         .media-type,
         .media-location {
             width: 10em;
+
             button {
                 width: 9em;
                 justify-content: space-between;
@@ -65,13 +58,9 @@
         background: dimgray;
     }
 
-    .notes {
-        margin-bottom: 0;
-    }
+    .notes { margin-bottom: 0; }
 
-    .director {
-        margin-top: 1em;
-    }
+    .director { margin-top: 1em; }
 
     .form-buttons {
         margin-top: 1em;
@@ -81,35 +70,25 @@
 }
 
 @media screen and (min-width: 600px) {
-    .update-video {
-        min-width: 550px;
-    }
+    .update-video { min-width: 550px; }
     
     .edit-video-form {
-        .title * {
-            font-size: 1.1em;
-        }
+        .title * { font-size: 1.1em; }
 
         .watched-status {
             width: 7em;
-            button {
-                width: 6em;
-            }
+            button { width: 6em; }
         }
 
         .media {
             .media-type {
                 width: 12em;
-                button {
-                    width: 11em;
-                }
+                button { width: 11em; }
             }
 
             .media-location {
                 width: 14em;
-                button {
-                    width: 13em;
-                }
+                button { width: 13em; }
             }
         }
     }

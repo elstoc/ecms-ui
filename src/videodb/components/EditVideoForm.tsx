@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useCallback, useReducer } from 'react';
 import { Button, Card, ControlGroup, Divider } from '@blueprintjs/core';
 
-import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
-
 import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
+
+import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
 import { SelectLookup } from './SelectLookup';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
@@ -32,71 +32,71 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
         <div className='edit-video-form'>
             <StringInput
                 label=''
+                className='title'
                 inline={true}
                 value={videoState.title}
                 onValueChange={(value) => videoStateReducer({ key: 'title', value })}
-                className='title'
             />
             <ControlGroup className='init-group'>
                 <SelectLookup
                     label='Watched'
-                    lookupTable='watched_status'
-                    selectedKey={videoState.watched}
-                    onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
                     className='watched-status'
+                    selectedKey={videoState.watched}
+                    lookupTable='watched_status'
+                    onSelectionChange={(value) => videoStateReducer({ key: 'watched', value})}
                 />
                 <SelectLookup
                     label='Category'
+                    className='category'
                     lookupTable='categories'
                     selectedKey={videoState.category}
                     onSelectionChange={(value) => videoStateReducer({ key: 'category', value})}
-                    className='category'
                 />
                 <NullableIntInput
                     label='Length (mins)'
+                    className='length'
                     value={videoState.length_mins}
                     onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}
-                    className='length'
                 />
             </ControlGroup>
             <Card className='media'>
                 <ControlGroup>
                     <NullableSelectLookup
                         label='Media'
+                        className='media-type'
                         lookupTable='media_types'
                         selectedKey={videoState.primary_media_type}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_type', value})}
-                        className='media-type'
                     />
                     <NullableSelectLookup
                         label='Location'
+                        className='media-location'
                         lookupTable='media_locations'
                         selectedKey={videoState.primary_media_location}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_location', value})}
-                        className='media-location'
                     />
                     <NullableSelectLookup
                         label='Watched'
+                        className='watched-status'
                         lookupTable='watched_status'
                         selectedKey={videoState.primary_media_watched}
                         onSelectionChange={(value) => videoStateReducer({ key: 'primary_media_watched', value})}
-                        className='watched-status'
                     />
                 </ControlGroup>
                 <ControlGroup>
                     <NullableSelectLookup
                         label=''
+                        className='media-type'
                         lookupTable='media_types'
                         selectedKey={videoState.other_media_type}
                         onSelectionChange={(value) => videoStateReducer({ key: 'other_media_type', value})}
-                        className='media-type'
                     />
                     <NullableSelectLookup
                         label=''
+                        className='media-location'
                         lookupTable='media_locations'
                         selectedKey={videoState.other_media_location}
                         onSelectionChange={(value) => videoStateReducer({ key: 'other_media_location', value})}
-                        className='media-location'
                     />
                 </ControlGroup>
                 <NullableStringInput
@@ -108,17 +108,17 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
             </Card>
             <Switch
                 label='Flag'
+                className='priority-flag'
                 inline={true}
                 value={(videoState.to_watch_priority ?? 0) > 0}
                 onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value: value ? 1 : 0 })}
-                className='priority-flag'
             />
             <TagInput
-                tags={videoState.tags ?? []}
-                inline={true}
-                onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
                 label='Tags'
                 className='tags'
+                inline={true}
+                tags={videoState.tags ?? []}
+                onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
             />
             <NullableStringInput
                 label='Progress'
