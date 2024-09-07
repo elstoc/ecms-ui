@@ -6,7 +6,7 @@ import { GalleryThumb } from './GalleryThumb';
 import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
 
-import './JustifiedGallery.css';
+import './JustifiedGallery.scss';
 
 export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, marginPx, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
@@ -26,6 +26,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
             thumbSrcUrl={image.thumbSrcUrl}
             widthPx={Math.trunc(image.thumbDimensions.width * resizeRatios[index])}
             heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
+            marginPx={2 * marginPx}
         />
     ));
 
