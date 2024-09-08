@@ -14,7 +14,7 @@ export const Components: FC = (): ReactElement => {
             {siteComponents.map((metadata) => (
                 <Route
                     key={metadata.apiPath}
-                    path={`${metadata.uiPath}/*`}
+                    path={`${metadata.defaultComponent ? '/' : metadata.apiPath}/*`}
                     element={<Component metadata={metadata} />}
                 />
             ))}

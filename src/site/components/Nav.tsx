@@ -11,7 +11,7 @@ export const Nav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponent
     return (
         <div className='sitenav'>
             {siteComponents.map((props) =>
-                <NavLink className={className} to={props.uiPath} key={props.apiPath}>{props.title}</NavLink>
+                <NavLink className={className} to={props.defaultComponent ? '' : props.apiPath} key={props.apiPath}>{props.title}</NavLink>
             )}
         </div>
     );

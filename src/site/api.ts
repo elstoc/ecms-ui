@@ -13,7 +13,6 @@ enum ComponentTypes {
 
 type ComponentMetadataCommon = {
     apiPath: string;
-    uiPath: string;
     title: string;
     weight?: number;
     restrict?: string;
@@ -23,15 +22,18 @@ type GalleryComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
     marginPx: number;
     batchSize: number;
+    defaultComponent?: boolean;
 }
 
 type MarkdownComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.markdown;
     includeNav: boolean;
+    defaultComponent?: boolean;
 }
 
 type VideoDbComponentMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.videodb;
+    defaultComponent?: boolean;
 }
 
 type ComponentMetadata = GalleryComponentMetadata | MarkdownComponentMetadata | VideoDbComponentMetadata;

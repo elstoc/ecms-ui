@@ -3,7 +3,6 @@ import { axiosSecureClient } from '../common/api';
 export type MarkdownTree = {
     apiPath: string;
     title?: string;
-    uiPath?: string;
     weight?: number;
     restrict?: string;
     allowWrite?: string;
