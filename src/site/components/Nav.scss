@@ -1,23 +1,13 @@
-.sitenav {
-    height: 100%;
-    width: 90%;
-    border: 0;
-    padding: 0;
-    
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    flex-wrap: wrap;
+.sitenav,
+.sub-menu {
+    background-color: #EEEE;
+    font-size: 1rem;
+    font-weight: normal;
 
     a {
         display: block;
         padding-left: 1.3em;
         padding-right: 1.3em;
-        border-right: 1px solid gray;
-    }
-
-    a:first-child {
-        border-left: 1px solid gray;
     }
 
     a:visited,
@@ -32,6 +22,30 @@
         font-weight: 600;
     }
 
+    a:focus {
+        outline: none; // remove BlueprintJS outline
+    }
+}
+
+.sitenav {
+    height: 100%;
+    width: 90%;
+    border: 0;
+    padding: 0;
+    
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-wrap: wrap;
+
+    a {
+        border-right: 1px solid gray;
+    }
+
+    >a:first-child {
+        border-left: 1px solid gray;
+    }
+
     a.single-component {
         font-size: 1.2rem;
         font-weight: 600;
@@ -39,8 +53,11 @@
         border-left: none;
         padding-left: 0;
     }
+}
 
-    a:focus {
-        outline: none; // remove BlueprintJS outline
+.sub-menu {
+    a {
+        padding-top: .5em;
+        padding-bottom: .5em;
     }
 }

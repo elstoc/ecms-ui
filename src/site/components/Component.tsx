@@ -10,6 +10,9 @@ export const Component: FC<{ metadata: ComponentMetadata }> = ({ metadata }): Re
         return <Gallery {...metadata} />;
     } else if (metadata.type === ComponentTypes.markdown) {
         return <Markdown {...metadata} />;
+    } else if (metadata.type === ComponentTypes.videodb) {
+        return <VideoDb {...metadata} />;
     }
-    return <VideoDb {...metadata} />;
+
+    return <div>Component Type Not Supported</div>;
 };

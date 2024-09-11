@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, Suspense} from 'react';
 
-import { VideoDbComponentMetadata } from '../../site/api';
+import { VideoDbMetadata } from '../../site/api';
 import { VideoDbContext, initialFilters, useVideoDbState } from '../hooks/useVideoDbState';
 
 import { VideoDbContent } from './VideoDbContent';
 
-export const VideoDb: FC<VideoDbComponentMetadata> = ({ title, apiPath }): ReactElement => {
+export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement => {
     const initialState = { title, apiPath, filters: initialFilters, pendingFlagUpdates: [] };
 
     return (

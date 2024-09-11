@@ -1,12 +1,12 @@
 import React, { FC, ReactElement, Suspense, createContext } from 'react';
 
 import { GalleryContent } from './GalleryContent';
-import { GalleryComponentMetadata } from '../../site/api';
+import { GalleryMetadata } from '../../site/api';
 import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '../hooks/useGalleryStateReducer';
 
 const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
-const Gallery: FC<GalleryComponentMetadata> = (props): ReactElement => {
+const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
     const { batchSize, marginPx, apiPath, title } = props;
     const initialState: GalleryState = {
         maxImages: batchSize,
