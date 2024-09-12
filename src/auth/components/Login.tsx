@@ -2,7 +2,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 
 import { login } from '../api';
-import { useTitle } from '../../common/hooks';
 
 import './Login.scss';
 import { Button } from '@blueprintjs/core';
@@ -13,8 +12,6 @@ export const Login: FC = (): ReactElement => {
     const [userId, setUserId] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
-    useTitle('Login');
-    
     const handleLogin = useCallback(async () => {
         try {
             await login(userId, password);
