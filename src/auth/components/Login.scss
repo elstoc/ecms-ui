@@ -1,12 +1,13 @@
 .login {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 
     .login-form {
         display: grid;
         grid-template-columns: max-content max-content;
         grid-gap: 10px;
+        margin: 2em;
 
         label {
             text-align:right;

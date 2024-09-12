@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 
 import { Nav } from './Nav';
-import { ToolBox } from './ToolBox';
+import { UserInfo } from '../../auth';
 import { useSiteComponents } from '../hooks/useSiteQueries';
 
 import './Header.css';
@@ -15,7 +15,7 @@ export const Header: FC = (): ReactElement => {
                     <Nav siteComponents={siteComponents}/>
                 </div>
                 <div className='header-toolbox'>
-                    <ToolBox />
+                    <UserInfo />
                 </div>
             </div>
         </Suspense>

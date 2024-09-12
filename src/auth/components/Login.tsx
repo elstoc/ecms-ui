@@ -1,14 +1,13 @@
 import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
-import { useNavigate } from 'react-router';
 
 import { login } from '../api';
 import { useTitle } from '../../common/hooks';
 
 import './Login.scss';
+import { Button } from '@blueprintjs/core';
 
 export const Login: FC = (): ReactElement => {
-    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [loginFailed, setLoginFailed] = useState(false);
     const [userId, setUserId] = useState<string>('');
@@ -21,12 +20,11 @@ export const Login: FC = (): ReactElement => {
             await login(userId, password);
             setLoginFailed(false);
             await queryClient.invalidateQueries();
-            navigate('/auth/user', { replace: true });
         } catch {
             setLoginFailed(true);
             setPassword('');
         }
-    }, [userId, password, queryClient, navigate]);
+    }, [userId, password, queryClient]);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.key === 'Enter') {
@@ -36,6 +34,7 @@ export const Login: FC = (): ReactElement => {
 
     return(
         <div className='login'>
+            <div>You are currently viewing this site as a guest</div>
             <div className='login-form'>
                 <label>UserId</label>
                 <input
@@ -54,7 +53,7 @@ export const Login: FC = (): ReactElement => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </div>
-            <button onClick={handleLogin}>Log In</button>
+            <Button onClick={handleLogin}>Log In</Button>
             <div>
                 {loginFailed && 'Invalid UserId or password'}
             </div>
