@@ -31,24 +31,22 @@ export const JustifiedGallery: FC = (): ReactElement => {
         return getResizeRatios(thumbWidths, galleryDivWidth ?? 0);
     }, [images, galleryDivWidth]);
 
-    const galleryThumbs = images.map((image, index) => {
-        let ref = index === activeImageIndex ? refActiveImage : null;
-        if (index === images.length - 1) ref = refLastImage;
-        return (
-            <GalleryThumb
-                key={image.fileName}
-                fileName={image.fileName}
-                description={image.description}
-                url={image.thumbSrcUrl}
-                ref={ref}
-                heightPx={image.thumbDimensions.height * resizeRatios[index]}
-            />
-        );
-    });
-
     return (
         <div ref={widthRef} className="justified-gallery">
-            {galleryThumbs}
+            {images.map((image, index) => {
+                let ref = index === activeImageIndex ? refActiveImage : null;
+                if (index === images.length - 1) ref = refLastImage;
+                return (
+                    <GalleryThumb
+                        key={image.fileName}
+                        fileName={image.fileName}
+                        description={image.description}
+                        url={image.thumbSrcUrl}
+                        ref={ref}
+                        heightPx={image.thumbDimensions.height * resizeRatios[index]}
+                    />
+                );
+            })}
         </div>
     );
 };
