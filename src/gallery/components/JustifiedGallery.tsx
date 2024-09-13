@@ -8,15 +8,17 @@ import { useGalleryContent } from '../hooks/useGalleryQueries';
 
 import './JustifiedGallery.scss';
 
+const MARGIN_PX = 3; // Also needs to be set in GalleryThumb.scss
+
 export const JustifiedGallery: FC = (): ReactElement => {
-    const { galleryState: { apiPath, maxImages, marginPx, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
-        return getResizeRatios(thumbWidths, galleryDivWidth ?? 0, marginPx);
-    }, [images, galleryDivWidth, marginPx]);
+        return getResizeRatios(thumbWidths, galleryDivWidth ?? 0);
+    }, [images, galleryDivWidth]);
 
     const galleryThumbs = images.map((image, index) => (
         <GalleryThumb
@@ -24,9 +26,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
             fileName={image.fileName}
             description={image.description}
             thumbSrcUrl={image.thumbSrcUrl}
-            widthPx={Math.trunc(image.thumbDimensions.width * resizeRatios[index])}
-            heightPx={Math.trunc(image.thumbDimensions.height * resizeRatios[index])}
-            marginPx={2 * marginPx}
+            heightPx={image.thumbDimensions.height * resizeRatios[index]}
         />
     ));
 
@@ -44,7 +44,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
     );
 };
 
-const getResizeRatios = (thumbWidths: number[], divWidth: number, marginPx: number): number[] => {
+const getResizeRatios = (thumbWidths: number[], divWidth: number): number[] => {
     let nextRowWidthOfThumbs = 0,
         nextRowImageCount = 0;
     const resizeRatios: number[] = [];
@@ -52,7 +52,7 @@ const getResizeRatios = (thumbWidths: number[], divWidth: number, marginPx: numb
     thumbWidths.forEach((thumbWidth) => {
         nextRowImageCount++;
         nextRowWidthOfThumbs += thumbWidth;
-        const widthAvailableForThumbs = divWidth - (2 * marginPx * nextRowImageCount);
+        const widthAvailableForThumbs = divWidth - (2 * MARGIN_PX * nextRowImageCount);
 
         if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
             const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;

@@ -2,6 +2,10 @@
     background-color:#BBBBBB;
     width: 100%;
     min-height: 100%;
-    padding: 20px;
+    padding: 5px;
     font-family: sans-serif;
+
+    @media screen and (min-width: 600px) {
+        padding: 20px;
+    }
 }

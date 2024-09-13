@@ -7,18 +7,12 @@ type GalleryThumbProps = {
     fileName: string;
     description: string;
     thumbSrcUrl: string;
-    widthPx: number;
     heightPx: number;
-    marginPx: number;
     ref?: React.RefObject<HTMLAnchorElement> | null;
 }
 
-export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, widthPx, heightPx, marginPx }, ref) => {
-    const style = {
-        width: `${widthPx}px`,
-        height: `${heightPx}px`,
-        marginRight: `${marginPx}px`
-    };
+export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, heightPx }, ref) => {
+    const style = { height: `${heightPx}px` };
 
     return (
         <Link
