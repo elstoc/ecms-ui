@@ -1,7 +1,7 @@
 .gallery-thumb {
     margin: 0;
     position: relative;
-    margin: 7px 3px; /* 3px also needs to be set as MARGIN_PX in JustifiedGallery.tsx */
+    margin: 3px; /* also needs to be set as MARGIN_PX in JustifiedGallery.tsx */
     width: auto;
 
     img {
