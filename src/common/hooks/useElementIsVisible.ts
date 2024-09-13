@@ -4,18 +4,20 @@ export const useElementIsVisible = (ref: RefObject<HTMLElement | null>, cb: () =
     const prevRef = useRef<HTMLElement | null>(null);
 
     useEffect((): void => {
-        const element = ref?.current || null;
-        if (element && prevRef?.current !== element) {
-            prevRef.current = element;
-            const observer = new IntersectionObserver(
-                ([entry]) => {
-                    if (entry.isIntersecting) {
-                        cb();
-                        observer.unobserve(element);
+        setTimeout(() => {
+            const element = ref?.current;
+            if (element && prevRef?.current !== element) {
+                prevRef.current = element;
+                const observer = new IntersectionObserver(
+                    ([entry]) => {
+                        if (entry.isIntersecting) {
+                            cb();
+                            observer.unobserve(element);
+                        }
                     }
-                }
-            );
-            observer.observe(element);
-        }
+                );
+                observer.observe(element);
+            }
+        }, 100);
     } ,[ref, cb]);
 };
