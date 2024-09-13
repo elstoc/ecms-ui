@@ -57,7 +57,7 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     }, [mdFullPath, queryClient, unsetEditMode]);
 
     return (
-        <Suspense fallback='Loading...'>
+        <Suspense>
             <div className='markdown-toolbox'>
                 <Icon name='cancel' onClick={cancelEdit} tooltipContent='cancel edit'/>
                 <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>

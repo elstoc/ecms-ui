@@ -17,7 +17,7 @@ const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
 
     return (
         <GalleryStateContext.Provider value={{galleryState, galleryStateReducer}}>
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense>
                 <GalleryContent />
             </Suspense>
         </GalleryStateContext.Provider>

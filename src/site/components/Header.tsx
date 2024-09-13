@@ -9,7 +9,7 @@ import './Header.css';
 export const Header: FC = (): ReactElement => {
     const siteComponents = useSiteComponents();
     return (
-        <Suspense fallback='Loading...' >
+        <Suspense>
             <div className='header'>
                 <div className='header-sitenav'>
                     <Nav siteComponents={siteComponents}/>

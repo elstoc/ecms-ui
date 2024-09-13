@@ -17,14 +17,14 @@ export const VideoDbContent: FC = (): ReactElement => {
     useTitle(title);
 
     const videoFilters = (
-        <Suspense fallback='Loading...'>
+        <Suspense>
             <VideoFilters />
             <VideoActionButtons />
         </Suspense>
     );
 
     const videoList = (
-        <Suspense fallback='Loading...'>
+        <Suspense>
             <VideoList />
         </Suspense>
     );

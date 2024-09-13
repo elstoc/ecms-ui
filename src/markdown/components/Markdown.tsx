@@ -10,13 +10,13 @@ import { useTitle } from '../../common/hooks';
 export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): ReactElement => {
     useTitle(title);
     const navContainerElement = (
-        <Suspense fallback='Loading...'>
+        <Suspense>
             {includeNav && <MarkdownNav rootApiPath={apiPath} />}
         </Suspense>
     );
 
     const pageContainerElement = (
-        <Suspense fallback='Loading...'>
+        <Suspense>
             <Routes>
                 <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
             </Routes>

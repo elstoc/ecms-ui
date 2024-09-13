@@ -10,7 +10,7 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
 
     return (
         <VideoDbContext.Provider value={useVideoDbState(initialState)} >
-            <Suspense fallback='Loading...'>
+            <Suspense>
                 <VideoDbContent />
             </Suspense>
         </VideoDbContext.Provider>
