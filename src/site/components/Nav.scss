@@ -34,17 +34,10 @@
     padding: 0;
     
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: left;
     justify-content: left;
     flex-wrap: wrap;
-
-    a {
-        border-right: 1px solid gray;
-    }
-
-    >a:first-child {
-        border-left: 1px solid gray;
-    }
 
     a.single-component {
         font-size: 1.2rem;
@@ -59,5 +52,21 @@
     a {
         padding-top: .5em;
         padding-bottom: .5em;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .sitenav {
+        flex-direction: row;
+        align-items: center;
+
+        a {
+            border-right: 1px solid gray;
+        }
+
+        >a:first-child {
+            border-left: 1px solid gray;
+        }
+
     }
 }
