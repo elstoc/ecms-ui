@@ -6,12 +6,12 @@ import './GalleryThumb.scss';
 type GalleryThumbProps = {
     fileName: string;
     description: string;
-    thumbSrcUrl: string;
+    url: string;
     heightPx: number;
     ref?: React.RefObject<HTMLAnchorElement> | null;
 }
 
-export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, thumbSrcUrl, heightPx }, ref) => {
+export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ fileName, description, url, heightPx }, ref) => {
     const style = { height: `${heightPx}px` };
 
     return (
@@ -23,7 +23,7 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
             ref={ref}
         >
             <img
-                src={thumbSrcUrl}
+                src={url}
                 alt={fileName}
             />
             <div className='overlay'>{description}</div>

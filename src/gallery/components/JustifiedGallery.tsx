@@ -25,7 +25,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
             key={image.fileName}
             fileName={image.fileName}
             description={image.description}
-            thumbSrcUrl={image.thumbSrcUrl}
+            url={image.thumbSrcUrl}
             heightPx={image.thumbDimensions.height * resizeRatios[index]}
         />
     ));
