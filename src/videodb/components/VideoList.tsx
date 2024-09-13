@@ -1,6 +1,6 @@
-import React, { FC, ReactElement, useContext } from 'react';
+import React, { createRef, FC, ReactElement, useContext } from 'react';
 
-import { useNthElementIsVisible } from '../../common/hooks';
+import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useGetFilterSearchParams } from '../hooks/useVideoDbState';
 
@@ -15,8 +15,17 @@ export const VideoList: FC = (): ReactElement => {
     const videos = useGetVideos(apiPath, { ...getFilterSearchParams(), limit: limit?.toString() } );
     const currentlyLoadedCount = videos.length;
 
-    const videoElements = videos.map((video) => <VideoListItem key={video.id} video={video} apiPath={apiPath} />);
-    useNthElementIsVisible(videoElements, limit - 1, () => stateReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
+    const refLoadMore = createRef<HTMLDivElement>();
+    useElementIsVisible(refLoadMore, () => stateReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
+
+    const videoElements = videos.map((video, index) => (
+        <VideoListItem
+            key={video.id}
+            video={video}
+            apiPath={apiPath}
+            ref={index === limit - 1 ? refLoadMore : null }
+        />
+    ));
 
     return (
         <div className='videodb-list'>
