@@ -1,13 +1,13 @@
-import React, { createRef, FC, ReactElement, useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { createRef, FC, ReactElement, useCallback, useContext, useMemo } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { GalleryThumb } from './GalleryThumb';
 import { GalleryStateContext } from './Gallery';
-
 import { useGalleryContent } from '../hooks/useGalleryQueries';
-import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
 
 import './JustifiedGallery.scss';
+import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
+import { useScrollIntoView } from '../../common/hooks';
 
 const MARGIN_PX = 3; // Also needs to be set in GalleryThumb.scss
 
@@ -15,18 +15,16 @@ export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
-    const refLastImage = createRef<HTMLAnchorElement>();
-    const refActiveImage = createRef<HTMLAnchorElement>();
 
     const loadMoreImages = useCallback(() => (
         galleryStateReducer({ action: 'incrementMaxImages', maximum: allImageFiles.length })
     ), [allImageFiles, galleryStateReducer]);
 
+    const refLastImage = createRef<HTMLAnchorElement>();
     useElementIsVisible(refLastImage, loadMoreImages);
 
-    useEffect(() => {
-        refActiveImage?.current?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    });
+    const refActiveImage = createRef<HTMLAnchorElement>();
+    useScrollIntoView(refActiveImage);
 
     const resizeRatios = useMemo(() => {
         const thumbWidths = images.map((image) => image.thumbDimensions.width);
