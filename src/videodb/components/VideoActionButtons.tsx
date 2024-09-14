@@ -9,6 +9,7 @@ import { AppToaster } from '../../common/components/toaster';
 
 import './VideoActionButtons.scss';
 import { downloadVideoCSV } from '../utils/downloadVideoCSV';
+import { Icon } from '../../common/components/icon';
 
 export const VideoActionButtons: FC = (): ReactElement => {
     const queryClient = useQueryClient();
@@ -44,7 +45,7 @@ export const VideoActionButtons: FC = (): ReactElement => {
             </div>
             {flagUpdateCount > 0 &&
                 <div>
-                    <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset {flagUpdateCount} Flags</Button>
+                    <Icon name='cancel' onClick={() => stateReducer({ action: 'resetFlagUpdates' })} />
                     <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
                 </div>
             }

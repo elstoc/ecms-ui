@@ -9,7 +9,8 @@
         justify-content: flex-end;
         
         >* {
-            margin: 1em;
+            margin-left: 1em;
+            margin-bottom: 1em;
         }
 
         a:visited,
@@ -22,6 +23,10 @@
 
         a:focus {
             outline: none; // remove BlueprintJS outline
+        }
+
+        .icon {
+            cursor: pointer;
         }
     }
 }
