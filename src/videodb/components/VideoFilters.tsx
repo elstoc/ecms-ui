@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button, Card } from '@blueprintjs/core';
+import { Button, Card, Divider } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
@@ -30,18 +30,18 @@ export const VideoFilters: FC = (): ReactElement => {
     return (
         <div className='video-filters'>
             <Card className='card'>
-                <NullableIntInput
-                    label='Shorter Than' 
-                    inline={true}
-                    value={maxLength}
-                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
-                />
                 <NullableStringInput
                     label='Title Contains'
                     inline={true}
                     value={titleContains}
                     placeholder=''
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
+                />
+                <NullableIntInput
+                    label='Shorter Than' 
+                    inline={true}
+                    value={maxLength}
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
                 <MultiSelectKeyValue
                     label='Categories'
@@ -50,8 +50,17 @@ export const VideoFilters: FC = (): ReactElement => {
                     selectedKeys={categories ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
+                <TagInput
+                    label='Tags'
+                    className='tags'
+                    inline={true}
+                    tags={tags ?? []}
+                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
+                />
+                <Divider />
                 <MultiSelectKeyValue
                     label='Watched'
+                    className='watched'
                     inline={true}
                     allItems={watchedStatusLookup}
                     selectedKeys={watchedStatuses ?? []}
@@ -70,13 +79,6 @@ export const VideoFilters: FC = (): ReactElement => {
                     allItems={watchedStatusLookup}
                     selectedKeys={pmWatchedStatuses ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'pmWatchedStatuses', value })}
-                />
-                <TagInput
-                    label='Tags'
-                    className='tags'
-                    inline={true}
-                    tags={tags ?? []}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
                 />
                 <Switch
                     label='Priority First'
