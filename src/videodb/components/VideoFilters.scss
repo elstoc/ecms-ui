@@ -1,7 +1,7 @@
 .video-filters {
     .card {
-        padding-bottom: 2em;
-        margin-bottom: 2em;
+        padding-bottom: 1em;
+        margin-bottom: 1em;
         font-size: .95em;
 
         label { width: 12em; }
@@ -19,5 +19,9 @@
         display: flex;
         flex-direction: row;
         justify-content: flex-end;
+        
+        >* {
+            margin-left: 1em;
+        }
     }
 }

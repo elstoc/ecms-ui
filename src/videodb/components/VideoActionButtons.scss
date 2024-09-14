@@ -1,9 +1,27 @@
 .video-action-buttons {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 
-    &>a:only-child {
-        margin-left: auto;
+    div {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        
+        >* {
+            margin: 1em;
+        }
+
+        a:visited,
+        a:hover,
+        a:active,
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+
+        a:focus {
+            outline: none; // remove BlueprintJS outline
+        }
     }
 }

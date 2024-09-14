@@ -8,6 +8,7 @@ import { VideoDbContext } from '../hooks/useVideoDbState';
 import { AppToaster } from '../../common/components/toaster';
 
 import './VideoActionButtons.scss';
+import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 
 export const VideoActionButtons: FC = (): ReactElement => {
     const queryClient = useQueryClient();
@@ -31,15 +32,22 @@ export const VideoActionButtons: FC = (): ReactElement => {
         }
     }, [apiPath, pendingFlagUpdates, queryClient, stateReducer]);
 
+    const downloadCSV = useCallback(async () => {
+        await downloadVideoCSV(apiPath);
+    }, [apiPath]);
+
     return (
         <div className='video-action-buttons'>
+            <div>
+                <Button onClick={downloadCSV}>Download all videos as CSV</Button>
+                <Button><Link to={`./add?${searchParams.toString()}`}>Add New Video</Link></Button>
+            </div>
             {flagUpdateCount > 0 &&
-                <>
-                    <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
+                <div>
                     <Button onClick={() => stateReducer({ action: 'resetFlagUpdates' })}>Reset {flagUpdateCount} Flags</Button>
-                </>
+                    <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
+                </div>
             }
-            <Link to={`./add?${searchParams.toString()}`}><Button>Add New Video</Button></Link>
         </div>
     );
 };
