@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from 'react';
 import { FormGroup, MenuItem } from '@blueprintjs/core';
 import { ItemRenderer, MultiSelect } from '@blueprintjs/select';
 
+import './MultiSelectKeyValue.scss';
+
 export type KeyValue = {
     key: string;
     value: string;
@@ -48,6 +50,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 disabled={modifiers.disabled}
                 onFocus={handleFocus}
                 onClick={handleClick}
+                className='multi-select-menuitem'
             />
         );
     };

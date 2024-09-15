@@ -1,8 +1,8 @@
 .sitenav,
 .sub-menu {
     background-color: #EEEE;
-    font-size: 1rem;
-    font-weight: normal;
+    font-size: 1.15rem;
+    font-family: 'Raleway', sans-serif;
 
     a {
         display: block;
@@ -19,7 +19,7 @@
     }
 
     a.active {
-        font-weight: 600;
+        font-weight: 500;
     }
 
     a:focus {

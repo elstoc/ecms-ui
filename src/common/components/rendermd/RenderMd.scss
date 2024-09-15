@@ -1,12 +1,11 @@
-@import url('//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack-subset.css');
 
 .rendered-md {
     text-align: justify;
 
     * {
-        line-height: 1.7rem;
-        font-size: 1.03rem;
-        font-weight: 400;
+        line-height: 1.75rem;
+        font-size: 1.15rem;
+        font-weight: 300;
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -14,6 +13,7 @@
         padding: 0;
         font-weight: 600;
         text-align: left;
+        font-family: 'Raleway', sans-serif;
     }
     
     h1 + h2,
@@ -81,13 +81,12 @@
     code * {
         padding: 0;
         font-family: 'hack', Courier, monospace;
-        font-size: 1rem;
     }
 
     pre code,
     pre code * {
         line-height: 1.4rem;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     pre code {

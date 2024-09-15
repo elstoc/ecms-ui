@@ -39,7 +39,6 @@
         top: 20%;
         height: 60%;
         width: 15%;
-        font-weight: bold;
         text-decoration: none;
         user-select: none;
         z-index: 0;
@@ -69,8 +68,6 @@
         top: 10px;
         right: 10px;
         padding: 0 10px;
-        font-size: 40px;
-        font-weight: bold;
         text-decoration: none;
         z-index: 1;
     }
@@ -87,7 +84,7 @@
     .image-info {
         position: absolute;
         text-align: center;
-        font-size: 17px;
+        font-size: 1.1rem;
         padding: 9px;
         bottom: 0%;
         width: 100%;

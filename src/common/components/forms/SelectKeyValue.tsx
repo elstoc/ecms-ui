@@ -2,6 +2,8 @@ import React, { FC, ReactElement } from 'react';
 import { Button, FormGroup, MenuItem } from '@blueprintjs/core';
 import { ItemPredicate, ItemRenderer, Select } from '@blueprintjs/select';
 
+import './SelectKeyValue.scss';
+
 export type KeyValue = {
     key: string;
     value: string;
@@ -41,6 +43,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 onFocus={handleFocus}
                 onClick={handleClick}
                 selected={keyValue.key === selectedKey}
+                className='select-menuitem'
             />
         );
     };

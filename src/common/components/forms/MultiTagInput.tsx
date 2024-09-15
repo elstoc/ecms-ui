@@ -2,6 +2,8 @@ import React, { FC, ReactElement, useState } from 'react';
 import { FormGroup, MenuItem } from '@blueprintjs/core';
 import { ItemPredicate, ItemRenderer, MultiSelect } from '@blueprintjs/select';
 
+import './MultiTagInput.scss';
+
 export type KeyValue = {
     key: string;
     value: string;
@@ -47,6 +49,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 disabled={modifiers.disabled}
                 onFocus={handleFocus}
                 onClick={handleClick}
+                className='tag-menuitem'
             />
         );
     };
