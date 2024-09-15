@@ -45,8 +45,8 @@ export const VideoActionButtons: FC = (): ReactElement => {
             </div>
             {flagUpdateCount > 0 &&
                 <div>
-                    <Icon name='cancel' onClick={() => stateReducer({ action: 'resetFlagUpdates' })} />
                     <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
+                    <Icon name='cancel' onClick={() => stateReducer({ action: 'resetFlagUpdates' })} />
                 </div>
             }
         </div>
