@@ -18,6 +18,7 @@ export const EditMd: FC<EditMdProps> = ({ markdown, setMarkdown }): ReactElement
                 height='100%'
                 value={markdown}
                 onChange={(value: string) => setMarkdown(value)}
+                basicSetup={{ lineNumbers: false, highlightActiveLine: false, foldGutter: false}}
                 extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
             />
         </div>
