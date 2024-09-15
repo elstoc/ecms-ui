@@ -1,6 +1,4 @@
 .edit-video-form {
-    font-size: 0.95rem;
-
     button {
         font-size: 0.95rem;
     }
@@ -79,6 +77,8 @@
     .update-video { min-width: 550px; }
     
     .edit-video-form {
+        font-size: 0.95rem;
+
         .title * { font-size: 1.1em; }
 
         .watched-status {
