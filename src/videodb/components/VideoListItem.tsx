@@ -46,7 +46,6 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                     <span> <Icon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
                     <span><Icon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /> </span>
                     <span> {pMediaType} </span>
-                    {video.tags && <span> <Icon icon='minus' size={20} /> {video.tags.replace(',', ', ')}</span>}
                 </div>
             </div>
             <div className='right'>
