@@ -4,16 +4,18 @@ import './ContentWithSidebar.scss';
 
 type ContentWithSideBarProps = {
     mainPageElement: ReactElement;
-    sidebarElement: ReactElement;
+    sidebarElement: ReactElement | null;
     mobileSidebarAtTop?: boolean;
 }
 
 export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ mainPageElement, sidebarElement, mobileSidebarAtTop }): ReactElement => {
     return (
         <div className={`content-container ${mobileSidebarAtTop ? 'sidebar-top' : ''}`}>
-            <div className='sidebar-container'>
-                {sidebarElement}
-            </div>
+            {sidebarElement &&
+                <div className='sidebar-container'>
+                    {sidebarElement}
+                </div>
+            }
             <div className='mainpage-container'>
                 {mainPageElement}
             </div>

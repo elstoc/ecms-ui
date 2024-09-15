@@ -9,12 +9,6 @@ import { useTitle } from '../../common/hooks';
 
 export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): ReactElement => {
     useTitle(title);
-    const navContainerElement = (
-        <Suspense>
-            {includeNav && <MarkdownNav rootApiPath={apiPath} />}
-        </Suspense>
-    );
-
     const pageContainerElement = (
         <Suspense>
             <Routes>
@@ -23,10 +17,16 @@ export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): 
         </Suspense>
     );
 
+    const navContainerElement = (
+        <Suspense>
+            <MarkdownNav rootApiPath={apiPath} />
+        </Suspense>
+    );
+
     return (
         <ContentWithSidebar
             mainPageElement={pageContainerElement}
-            sidebarElement={navContainerElement}
+            sidebarElement={includeNav ? navContainerElement : null}
         />
     );
 };
