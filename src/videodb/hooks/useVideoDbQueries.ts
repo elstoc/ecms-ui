@@ -19,6 +19,8 @@ const useGetLookup = (path: string, lookupTable: string) => {
     return useCustomQuery({
         queryKey: ['videoDb', 'lookup', path, lookupTable],
         queryFn: () => getVideoDbLookup(path, lookupTable),
+        staleTime: 60 * 60 * 1000,
+        refetchInterval: 60 * 60 * 1000
     });
 };
 
