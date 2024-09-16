@@ -3,19 +3,13 @@
 }
 
 .markdown-render-page {
-    padding: 2rem;
+    padding: 1.5rem;
     min-height: 100%;
     background-color: #FFFF;
 }
 
 @media screen and (min-width: 600px) {
     .markdown-render-page {
-        padding: 2rem;
-    }
-}
-
-@media screen and (min-width: 900px) {
-    .markdown-render-page {
-        padding: 4rem 3.7rem 1rem 3.7rem;
+        padding: 2.5rem;
     }
 }
