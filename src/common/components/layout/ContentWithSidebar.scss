@@ -24,23 +24,23 @@
     width: 100%;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
     .content-container,
     .content-container.sidebar-top {
         flex-direction: row;
     }
 
     .sidebar-container {
-        width: 30%;
+        width: 34%;
     }
     .mainpage-container {
-        width: 60%;
+        width: 64%;
     }
 }
 
 @media screen and (min-width: 1600px) {
     .sidebar-container {
-        width: 500px;
+        width: 450px;
     }
     .mainpage-container {
         width: 1000px;

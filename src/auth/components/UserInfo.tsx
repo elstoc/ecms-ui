@@ -31,9 +31,10 @@ export const UserInfo: FC = (): ReactElement => {
                 onClick={() => setAuthDialogOpen(true)}
             />
             <Dialog
-                title={loggedIn ? `Welcome ${userName}` : 'Log in'}
+                title={loggedIn ? 'Welcome' : 'Log in'}
                 isOpen={authDialogOpen}
                 onClose={() => setAuthDialogOpen(false)}
+                className='auth-dialog'
             >
                 <DialogBody>
                     <Suspense>

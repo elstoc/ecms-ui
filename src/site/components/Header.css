@@ -8,10 +8,9 @@
     border-bottom: 1px solid lightgray;
 }
 
-.header-sitenav,
-.header-toolbox {
-    height: 100%;
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: auto;
+.header-sitenav {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
 }
