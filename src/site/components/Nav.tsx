@@ -24,7 +24,7 @@ export const ComponentNav: FC<{ component: ComponentMetadata, singleComponent?: 
                     popoverClassName={Classes.POPOVER_DISMISS}
                     interactionKind='click'
                     minimal={true}
-                    modifiers={{ offset: { enabled: true, options: { offset: [0, 12]} }}}
+                    modifiers={{ offset: { enabled: true, options: { offset: [-20, 12]} }}}
                 >
                     <NavLink to={component.apiPath}>
                         <div onClick={(e) => e.preventDefault()}>
