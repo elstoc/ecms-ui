@@ -4,8 +4,11 @@
     font-size: 1.1rem;
     font-family: 'Raleway', sans-serif;
 
-    a {
-        display: block;
+    .nav-link {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         padding-left: 1.3em;
         padding-right: 1.3em;
     }
@@ -49,7 +52,8 @@
 }
 
 .sub-menu {
-    a {
+    .nav-link {
+        justify-content: left;
         padding-top: .3em;
         padding-bottom: .3em;
     }
@@ -60,11 +64,11 @@
         flex-direction: row;
         align-items: center;
 
-        a {
+        .nav-link {
             border-right: 1px solid gray;
         }
 
-        >a:first-child {
+        >.nav-link:first-child {
             border-left: 1px solid gray;
         }
 

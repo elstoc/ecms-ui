@@ -17,27 +17,27 @@ export const ComponentNav: FC<{ component: ComponentMetadata, singleComponent?: 
         );
 
         return (
-            <Popover
-                content={menuElement}
-                placement='bottom-start'
-                popoverClassName={Classes.POPOVER_DISMISS}
-                interactionKind='click'
-                minimal={true}
-                modifiers={{ offset: { enabled: true, options: { offset: [0, 12]} }}}
-            >
-                <div className='navLink'>
+            <div className='nav-link'>
+                <Popover
+                    content={menuElement}
+                    placement='bottom-start'
+                    popoverClassName={Classes.POPOVER_DISMISS}
+                    interactionKind='click'
+                    minimal={true}
+                    modifiers={{ offset: { enabled: true, options: { offset: [0, 12]} }}}
+                >
                     <NavLink to={component.apiPath}>
                         <div onClick={(e) => e.preventDefault()}>
                             {component.title}
                         </div>
                     </NavLink>
-                </div>
-            </Popover>
+                </Popover>
+            </div>
         );
     }
 
     return (
-        <div className='navLink'>
+        <div className='nav-link'>
             <NavLink
                 className={singleComponent ? 'single-component' : ''}
                 to={component.defaultComponent ? '' : component.apiPath}
