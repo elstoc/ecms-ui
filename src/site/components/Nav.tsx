@@ -25,22 +25,26 @@ export const ComponentNav: FC<{ component: ComponentMetadata, singleComponent?: 
                 minimal={true}
                 modifiers={{ offset: { enabled: true, options: { offset: [0, 12]} }}}
             >
-                <NavLink to={component.apiPath}>
-                    <div onClick={(e) => e.preventDefault()}>
-                        {component.title}
-                    </div>
-                </NavLink>
+                <div className='navLink'>
+                    <NavLink to={component.apiPath}>
+                        <div onClick={(e) => e.preventDefault()}>
+                            {component.title}
+                        </div>
+                    </NavLink>
+                </div>
             </Popover>
         );
     }
 
     return (
-        <NavLink
-            className={singleComponent ? 'single-component' : ''}
-            to={component.defaultComponent ? '' : component.apiPath}
-        >
-            {component.title}
-        </NavLink>
+        <div className='navLink'>
+            <NavLink
+                className={singleComponent ? 'single-component' : ''}
+                to={component.defaultComponent ? '' : component.apiPath}
+            >
+                {component.title}
+            </NavLink>
+        </div>
     );
 };
 
