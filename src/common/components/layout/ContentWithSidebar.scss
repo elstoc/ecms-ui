@@ -10,7 +10,6 @@
     }
 
     .sidebar-container {
-        margin-right: 1em;
         width: 100%;
     }
     
@@ -23,24 +22,16 @@
     }
 
     @media screen and (min-width: 900px) {
-        flex-direction: row;
+        flex-direction: row !important;
         justify-content: center;
 
         .content-container {
             width: 64%;
-
-            &.no-sidebar {
-                width: 90%;
-                max-width: 1000px;
-            }
         }
 
         .sidebar-container {
             width: 34%;
-        }
-
-        &.sidebar-top {
-            flex-direction: row;
+            margin-right: 1em;
         }
     }
     

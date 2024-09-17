@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { ContentWithSidebar } from '../../common/components/layout';
+import { ContentOnly, ContentWithSidebar } from '../../common/components/layout';
 import { MarkdownMetadata } from '../../site/api';
 import { MarkdownContent } from './MarkdownContent';
 import { MarkdownNav } from './MarkdownNav';
@@ -9,7 +9,7 @@ import { useTitle } from '../../common/hooks';
 
 export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): ReactElement => {
     useTitle(title);
-    const pageContainerElement = (
+    const contentElement = (
         <Suspense>
             <Routes>
                 <Route path="*" element={<MarkdownContent apiPath={apiPath} />} />
@@ -17,7 +17,11 @@ export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): 
         </Suspense>
     );
 
-    const navContainerElement = (
+    if (!includeNav) {
+        return <ContentOnly contentElement={contentElement} />;
+    }
+
+    const sidebarElement = (
         <Suspense>
             <MarkdownNav rootApiPath={apiPath} />
         </Suspense>
@@ -25,8 +29,8 @@ export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, includeNav }): 
 
     return (
         <ContentWithSidebar
-            mainPageElement={pageContainerElement}
-            sidebarElement={includeNav ? navContainerElement : null}
+            contentElement={contentElement}
+            sidebarElement={sidebarElement}
         />
     );
 };

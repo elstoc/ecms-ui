@@ -39,7 +39,7 @@ export const VideoDbContent: FC = (): ReactElement => {
                 </Routes>
             </Suspense>
             <ContentWithSidebar
-                mainPageElement={videoList}
+                contentElement={videoList}
                 sidebarElement={videoFilters}
                 mobileSidebarAtTop={true}
             />
