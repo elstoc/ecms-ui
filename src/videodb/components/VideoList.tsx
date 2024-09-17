@@ -15,15 +15,15 @@ export const VideoList: FC = (): ReactElement => {
     const videos = useGetVideos(apiPath, { ...getFilterSearchParams(), limit: limit?.toString() } );
     const currentlyLoadedCount = videos.length;
 
-    const refLoadMore = createRef<HTMLDivElement>();
-    useElementIsVisible(refLoadMore, () => stateReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
+    const refLastVideo = createRef<HTMLDivElement>();
+    useElementIsVisible(refLastVideo, () => stateReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
 
     const videoElements = videos.map((video, index) => (
         <VideoListItem
             key={video.id}
             video={video}
             apiPath={apiPath}
-            ref={index === limit - 1 ? refLoadMore : null }
+            ref={index === limit - 1 ? refLastVideo : null }
         />
     ));
 
