@@ -12,13 +12,13 @@ FocusStyleManager.onlyShowFocusOnTabs();
 export const App = (): ReactElement => {
     return (
         <div className='app'>
-            <div className='header-container'>
+            <div className='app-header'>
                 <Header />
             </div>
-            <div className='component-container'>
+            <div className='app-component'>
                 <Components />
             </div>
-            <div className='footer-container'>
+            <div className='app-footer'>
                 <Footer />
             </div>
         </div>
