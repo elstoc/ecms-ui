@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Component } from './Component';
+import { SiteComponent } from './SiteComponent';
 import { useSiteComponents } from '../hooks/useSiteQueries';
 import { ComponentMetadata, ComponentTypes } from '../api';
 
@@ -15,7 +15,7 @@ const listComponentRoutes = (components: ComponentMetadata[]): ReactElement[] =>
                 <Route
                     key={metadata.apiPath}
                     path={`${metadata.defaultComponent ? '/' : metadata.apiPath}/*`}
-                    element={<Component metadata={metadata} />}
+                    element={<SiteComponent metadata={metadata} />}
                 />
             ));
         }
@@ -23,7 +23,7 @@ const listComponentRoutes = (components: ComponentMetadata[]): ReactElement[] =>
     return routes;
 };
 
-export const Components: FC = (): ReactElement => {
+export const SiteRoutes: FC = (): ReactElement => {
     const siteComponents = useSiteComponents();
 
     return (

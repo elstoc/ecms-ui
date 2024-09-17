@@ -1,11 +1,11 @@
 import React, { ReactElement } from 'react';
 
-import { Components, Header, Footer } from './site';
+import { SiteRoutes, Header, Footer } from './site';
 import { FocusStyleManager } from '@blueprintjs/core';
 
-import './app.scss';
 import 'modern-normalize';
 import '@blueprintjs/core/lib/css/blueprint.css';
+import './app.scss';
 
 FocusStyleManager.onlyShowFocusOnTabs();
 
@@ -16,7 +16,7 @@ export const App = (): ReactElement => {
                 <Header />
             </div>
             <div className='app-component'>
-                <Components />
+                <SiteRoutes />
             </div>
             <div className='app-footer'>
                 <Footer />
