@@ -10,13 +10,13 @@ type ContentWithSideBarProps = {
 
 export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ mainPageElement, sidebarElement, mobileSidebarAtTop }): ReactElement => {
     return (
-        <div className={`content-container ${mobileSidebarAtTop ? 'sidebar-top' : ''}`}>
+        <div className={`content-with-sidebar ${mobileSidebarAtTop ? 'sidebar-top' : ''}`}>
             {sidebarElement &&
                 <div className='sidebar-container'>
                     {sidebarElement}
                 </div>
             }
-            <div className='mainpage-container'>
+            <div className={`content-container ${sidebarElement ? '' : 'no-sidebar'}`}>
                 {mainPageElement}
             </div>
         </div>
