@@ -150,7 +150,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
             />
             <div className='form-buttons'>
                 {onDelete &&
-                    <Button className='delete-button' onClick={deleteVideo}>
+                    <Button tabIndex={-1} className='delete-button' onClick={deleteVideo}>
                         Delete Video
                     </Button>
                 }
