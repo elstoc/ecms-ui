@@ -36,6 +36,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 inline={true}
                 value={videoState.title}
                 onValueChange={(value) => videoStateReducer({ key: 'title', value })}
+                autoFocus={true}
             />
             <ControlGroup className='init-group'>
                 <SelectLookup
