@@ -4,19 +4,15 @@ import { Nav } from './Nav';
 import { UserInfo } from '../../auth';
 import { useSiteComponents } from '../hooks/useSiteQueries';
 
-import './Header.css';
+import './Header.scss';
 
 export const Header: FC = (): ReactElement => {
     const siteComponents = useSiteComponents();
     return (
         <Suspense>
             <div className='header'>
-                <div className='header-sitenav'>
-                    <Nav siteComponents={siteComponents}/>
-                </div>
-                <div className='header-toolbox'>
-                    <UserInfo />
-                </div>
+                <Nav siteComponents={siteComponents}/>
+                <UserInfo />
             </div>
         </Suspense>
     );
