@@ -28,7 +28,7 @@ export const VideoList: FC = (): ReactElement => {
     ));
 
     return (
-        <div className='videodb-list'>
+        <div className='video-list'>
             {videoElements}
         </div>
     );
