@@ -4,7 +4,8 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { login } from '../api';
 
 import './Login.scss';
-import { Button } from '@blueprintjs/core';
+import { Button, Card } from '@blueprintjs/core';
+import { PasswordInput, StringInput } from '../../common/components/forms';
 
 export const Login: FC = (): ReactElement => {
     const queryClient = useQueryClient();
@@ -23,35 +24,26 @@ export const Login: FC = (): ReactElement => {
         }
     }, [userId, password, queryClient]);
 
-    const handleKeyDown = (event: React.KeyboardEvent) => {
-        if (event.key === 'Enter') {
-            handleLogin();
-        }
-    };
-
     return(
         <div className='login'>
-            <div>You are currently viewing this site as a guest</div>
-            <div className='login-form'>
-                <label>UserId</label>
-                <input
-                    id='userId'
-                    type='text'
+            <Card className='login-form'>
+                <StringInput
+                    label='User ID'
                     value={userId}
+                    onValueChange={(value) => setUserId(value)}
                     autoFocus={true}
-                    onChange={(e) => setUserId(e.target.value)}
+                    inline={true}
                 />
-                <label>Password</label>
-                <input
-                    id='password'
-                    type='password'
+                <PasswordInput
+                    label='Password'
                     value={password}
-                    onKeyDown={handleKeyDown}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onValueChange={(value) => setPassword(value)}
+                    onPressEnter={handleLogin}
+                    inline={true}
                 />
-            </div>
-            <Button onClick={handleLogin}>Log In</Button>
-            <div>
+                <Button onClick={handleLogin}>Log In</Button>
+            </Card>
+            <div className='error'>
                 {loginFailed && 'Invalid UserId or password'}
             </div>
         </div>
