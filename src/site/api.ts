@@ -21,7 +21,6 @@ type ComponentMetadataCommon = {
 
 type GalleryMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
-    marginPx: number;
     batchSize: number;
     defaultComponent?: boolean;
 }

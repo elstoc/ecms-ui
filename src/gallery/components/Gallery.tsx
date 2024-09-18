@@ -7,11 +7,11 @@ import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '
 const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
 const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
-    const { batchSize, marginPx, apiPath, title } = props;
+    const { batchSize, apiPath, title } = props;
     const initialState: GalleryState = {
         maxImages: batchSize,
         activeImageIndex: -1,
-        marginPx, batchSize, apiPath, title
+        batchSize, apiPath, title
     };
     const { galleryState, galleryStateReducer } = useGalleryStateReducer(initialState);
 

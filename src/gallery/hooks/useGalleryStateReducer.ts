@@ -2,7 +2,6 @@ import { useReducer } from 'react';
 
 export type GalleryState = {
     maxImages: number;
-    marginPx: number;
     batchSize: number;
     title: string;
     apiPath: string;
