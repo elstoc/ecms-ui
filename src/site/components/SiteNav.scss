@@ -7,7 +7,6 @@
     .nav-title {
         font-size: 1.1rem;
         font-family: 'Raleway', sans-serif;
-        padding: 0 0.5em;
 
         &.single-component {
             font-size: 1.4rem;
@@ -46,10 +45,10 @@
 
         .nav-title {
             border-right: 1px solid gray;
-            padding: 0 1.3em;
+            padding: 0 1.2em;
         }
 
-        >.nav-title:first-child {
+        >a:first-child .nav-title {
             border-left: 1px solid gray;
         }
     }
