@@ -6,12 +6,13 @@ $icon-text-color: black;
     padding: 3px;
     height: 2rem;
     width: 2rem;
-}
 
-.icon.disabled {
-    color: darkgrey;
-}
+    &.clickable {
+        cursor: pointer;
+    }
 
-.icon.disabled:hover {
-    cursor: not-allowed;
+    &.disabled {
+        color: darkgrey;
+        cursor: not-allowed;
+    }
 }

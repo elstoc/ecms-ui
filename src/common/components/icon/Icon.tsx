@@ -32,9 +32,9 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosi
     if (!IconComponent) return <></>;
 
     const iconOnClick = disabled ? undefined : onClick;
-    const iconClass = `icon ${disabled ? 'disabled' : ''}`;
+    const iconClass = `icon ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''}`;
 
-    const iconElement = <IconComponent className={iconClass}  onClick={iconOnClick} />;
+    const iconElement = <IconComponent className={iconClass} onClick={iconOnClick} />;
 
     if (tooltipContent) {
         return (
