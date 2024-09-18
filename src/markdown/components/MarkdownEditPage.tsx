@@ -59,9 +59,9 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
     return (
         <Suspense>
             <div className='markdown-toolbox'>
-                <Icon name='cancel' onClick={cancelEdit} tooltipContent='cancel edit'/>
-                <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page'/>
-                <Icon name='delete' disabled={!mdPage?.canDelete} onClick={deleteMd} tooltipContent='delete page'/>
+                <Icon name='cancel' onClick={cancelEdit} tooltipContent='cancel edit' tooltipPosition='top-right' />
+                <Icon name='save' onClick={saveMd} disabled={!mdPage?.canWrite} tooltipContent='save edited page' tooltipPosition='top-right' />
+                <Icon name='delete' disabled={!mdPage?.canDelete} onClick={deleteMd} tooltipContent='delete page' tooltipPosition='top-right' />
             </div>
             <div className='markdown-edit-source'>
                 <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />

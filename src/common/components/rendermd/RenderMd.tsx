@@ -16,7 +16,7 @@ export type RenderMdProps = {
 
 export const RenderMd: FC<RenderMdProps> = ({ pageTitle, markdown }): ReactElement => {
     return (
-        <span className='rendered-md'>
+        <div className='rendered-md'>
             {pageTitle && <h1 className='title'>{pageTitle}</h1>}
             <ReactMarkdown
                 remarkPlugins={[
@@ -32,6 +32,6 @@ export const RenderMd: FC<RenderMdProps> = ({ pageTitle, markdown }): ReactEleme
             >
                 {markdown}
             </ReactMarkdown>
-        </span>
+        </div>
     );
 };

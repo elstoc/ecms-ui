@@ -30,7 +30,7 @@ export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdPage, pageTitle 
     return (
         <Suspense>
             <div className='markdown-toolbox'>
-                {mdPage.pageExists && <Icon name='edit' disabled={!mdPage.pathValid} onClick={setEditMode} tooltipContent='view/edit page source' />}
+                {mdPage.pageExists && <Icon name='edit' disabled={!mdPage.pathValid} onClick={setEditMode} tooltipContent='view/edit page source' tooltipPosition='top-right'/>}
             </div>
             {mdPage.pageExists &&
                 <div className='markdown-render-page'>

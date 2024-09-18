@@ -16,9 +16,10 @@ export const EditMd: FC<EditMdProps> = ({ markdown, setMarkdown }): ReactElement
         <div className='edit-markdown'>
             <CodeMirror
                 height='100%'
+                autoFocus={true}
                 value={markdown}
                 onChange={(value: string) => setMarkdown(value)}
-                basicSetup={{ lineNumbers: false, highlightActiveLine: false, foldGutter: false}}
+                basicSetup={{ lineNumbers: true, highlightActiveLine: true, foldGutter: false}}
                 extensions={[codeMirrorMarkdown({ base: markdownLanguage, codeLanguages: languages }), EditorView.lineWrapping]}
             />
         </div>

@@ -1,17 +1,15 @@
 .markdown-content {
+    display: flex;
+    flex-direction: column;
     height: 100%;
-    width: 100%;
-    position: relative;
 
     .markdown-toolbox {
         display: flex;
-        flex-direction: column;
-        row-gap: 10px;
+        flex-direction: row-reverse;
+        column-gap: 10px;
+        padding: 5px;
         z-index: 1000000;
 
-        position: absolute;
-        top: 5px;
-        right: 10px;
         cursor: pointer;
     }
 }
