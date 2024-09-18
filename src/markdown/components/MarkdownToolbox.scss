@@ -1,0 +1,13 @@
+.markdown-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .markdown-toolbox {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        column-gap: 10px;
+        padding: 5px;
+    }
+}
