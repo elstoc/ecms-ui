@@ -1,43 +1,59 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import YAML from 'yaml';
 import React, { FC, ReactElement, Suspense } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { Icon } from '../../common/components/icon';
 import { splitFrontMatter } from '../../utils';
-import { MarkdownPage } from '../api';
 
 import './MarkdownViewPage.scss';
+import { useMarkdownPage } from '../hooks/useMarkdownQueries';
+import { useTitle } from '../../common/hooks';
 
 const RenderMd = React.lazy(() => import('../../common/components/rendermd/RenderMdAsDefault'));
 
-type MarkdownViewPageProps = {
-    mdFullPath: string;
-    mdPage?: MarkdownPage;
-    pageTitle: string;
+const basename = (path: string): string => {
+    return path.split('/').reverse()[0];
 };
 
-export const MarkdownViewPage: FC<MarkdownViewPageProps> = ({ mdPage, pageTitle }): ReactElement => {
+export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): ReactElement => {
     const [, setSearchParams] = useSearchParams();
+    const mdPage = useMarkdownPage(mdFullPath);
+    const { pathValid, pageExists } = mdPage;
 
-    if (!mdPage) return <></>;
-    const [, markdown] = splitFrontMatter(mdPage?.content ?? '');
+    const setEditMode = () => setSearchParams({ mode: 'edit' });
 
-    const setEditMode = () => {
-        setSearchParams({ mode: 'edit' });
-        return false;
-    };
+    const [yaml, markdown] = splitFrontMatter(mdPage?.content ?? '');
+    const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
+    useTitle(pageTitle);
+
+    if (!pageExists) {
+        if (pathValid) {
+            return (
+                <h2 className='notExist'>
+                    This page does not exist yet but you can
+                    click <a href='#' onClick={setEditMode}>here</a> to create it
+                </h2>
+            );
+        } else {
+            return <h2 className='notExist'>This is not a valid markdown path</h2>;
+        }
+    }
 
     return (
         <Suspense>
             <div className='markdown-toolbox'>
-                {mdPage.pageExists && <Icon name='edit' disabled={!mdPage.pathValid} onClick={setEditMode} tooltipContent='view/edit page source' tooltipPosition='top-right'/>}
+                <Icon
+                    name='edit'
+                    disabled={!pageExists || !pathValid}
+                    onClick={setEditMode}
+                    tooltipContent='view/edit page source'
+                    tooltipPosition='top-right'
+                />
             </div>
-            {mdPage.pageExists &&
-                <div className='markdown-render-page'>
-                    <RenderMd pageTitle={pageTitle} markdown={markdown} />
-                </div>}
-            {!mdPage.pageExists && mdPage.pathValid && <h2 className='notExist'>This page does not exist yet but you can click <a href='#' onClick={setEditMode}>here</a> to create it</h2>}
-            {!mdPage.pageExists && !mdPage.pathValid && <h2 className='notExist'>This is not a valid markdown path</h2>}
+            <div className='markdown-render-page'>
+                <RenderMd pageTitle={pageTitle} markdown={markdown} />
+            </div>
         </Suspense>
     );
 };

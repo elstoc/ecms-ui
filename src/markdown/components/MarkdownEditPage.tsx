@@ -1,33 +1,29 @@
+/* eslint-disable no-restricted-globals */
 import React, { FC, ReactElement, Suspense, useCallback, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
+import { useMarkdownPage } from '../hooks/useMarkdownQueries';
+import { deleteMarkdownPage, putMarkdownPage } from '../api';
+
 import { Icon } from '../../common/components/icon';
-import { MarkdownPage, deleteMarkdownPage, putMarkdownPage } from '../api';
 import { AppToaster } from '../../common/components/toaster';
 
 import './MarkdownEditPage.scss';
 
 const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
 
-type MarkdownEditPageProps = {
-    mdFullPath: string;
-    mdPage?: MarkdownPage;
-};
-
-export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage }): ReactElement => {
+export const MarkdownEditPage: FC<{ mdFullPath: string}> = ({ mdFullPath }): ReactElement => {
     const queryClient = useQueryClient();
-    const [editedMarkdown, setEditedMarkdown] = useState(mdPage?.content ?? '');
+    const mdPage = useMarkdownPage(mdFullPath);
+    const [editedMarkdown, setEditedMarkdown] = useState(mdPage.content ?? '');
     const [, setSearchParams] = useSearchParams();
 
-    const unsetEditMode = useCallback(() => setSearchParams(), [setSearchParams]);
-    
     const cancelEdit = useCallback(() => {
-        // eslint-disable-next-line no-restricted-globals
         if (editedMarkdown === mdPage?.content || confirm('You have unsaved changes. Are you sure you wish to leave?')) {
-            unsetEditMode();
+            setSearchParams();
         }
-    }, [editedMarkdown, mdPage, unsetEditMode]);
+    }, [editedMarkdown, mdPage, setSearchParams]);
 
     const saveMd = useCallback(async () => {
         try {
@@ -35,26 +31,25 @@ export const MarkdownEditPage: FC<MarkdownEditPageProps> = ({ mdFullPath, mdPage
             (await AppToaster).show({ message: 'page saved', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
             await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-            unsetEditMode();
+            setSearchParams();
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [editedMarkdown, mdFullPath, queryClient, unsetEditMode]);
+    }, [editedMarkdown, mdFullPath, queryClient, setSearchParams]);
 
     const deleteMd = useCallback(async () => {
         try {
-            // eslint-disable-next-line no-restricted-globals
             if (confirm('Are you sure you want to delete this page')) {
                 await deleteMarkdownPage(mdFullPath);
                 (await AppToaster).show({ message: 'page deleted', timeout: 2000 });
                 await queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
                 await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                unsetEditMode();
+                setSearchParams();
             }
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [mdFullPath, queryClient, unsetEditMode]);
+    }, [mdFullPath, queryClient, setSearchParams]);
 
     return (
         <Suspense>
