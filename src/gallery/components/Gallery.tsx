@@ -1,8 +1,9 @@
 import React, { FC, ReactElement, Suspense, createContext } from 'react';
 
-import { GalleryContent } from './GalleryContent';
 import { GalleryMetadata } from '../../site/api';
 import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '../hooks/useGalleryStateReducer';
+
+import { GalleryContent } from './GalleryContent';
 
 const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
