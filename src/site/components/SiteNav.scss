@@ -1,16 +1,16 @@
-.sitenav,
+.site-nav,
 .sub-menu {
     display: flex;
     flex-direction: column;
     background-color: #EEEE;
-    font-size: 1.1rem;
-    font-family: 'Raleway', sans-serif;
-
-    .nav-link {
+    
+    .nav-title {
+        font-size: 1.1rem;
+        font-family: 'Raleway', sans-serif;
         padding: 0 0.5em;
 
         &.single-component {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             font-weight: 600;
             border: none !important;
             padding-left: 0;
@@ -31,12 +31,12 @@
     }
 }
 
-.sub-menu .nav-link {
+.sub-menu .nav-title {
     justify-content: left;
     padding: 0.2em 0.4em;
 }
 
-.sitenav {
+.site-nav {
     align-items: left;
     flex-wrap: wrap;
 
@@ -44,12 +44,12 @@
         flex-direction: row;
         align-items: center;
 
-        .nav-link {
+        .nav-title {
             border-right: 1px solid gray;
             padding: 0 1.3em;
         }
 
-        >.nav-link:first-child {
+        >.nav-title:first-child {
             border-left: 1px solid gray;
         }
     }

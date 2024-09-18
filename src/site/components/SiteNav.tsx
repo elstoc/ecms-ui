@@ -4,11 +4,11 @@ import { Classes, Popover } from '@blueprintjs/core';
 
 import { ComponentMetadata, ComponentTypes } from '../api';
 
-import './Nav.scss';
+import './SiteNav.scss';
 
-export const Nav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
+export const SiteNav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
     return (
-        <div className='sitenav'>
+        <div className='site-nav'>
             {siteComponents.map((component) =>
                 <ComponentNavItem
                     key={component.apiPath}
@@ -23,11 +23,11 @@ export const Nav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponent
 const ComponentNavItem: FC<{ component: ComponentMetadata, singleComponent?: boolean }> = ({ component, singleComponent }) => {
     if (component?.type !== ComponentTypes.componentgroup) {
         return (
-            <div className={`nav-link ${singleComponent ? 'single-component' : ''}`}>
-                <NavLink to={component.defaultComponent ? '' : component.apiPath}>
+            <NavLink to={component.defaultComponent ? '' : component.apiPath}>
+                <div className={`nav-title ${singleComponent ? 'single-component' : ''}`}>
                     {component.title}
-                </NavLink>
-            </div>
+                </div>
+            </NavLink>
         );
     }
 
@@ -40,21 +40,22 @@ const ComponentNavItem: FC<{ component: ComponentMetadata, singleComponent?: boo
     );
 
     return (
-        <div className='nav-link'>
-            <Popover
-                content={subMenuElement}
-                placement='bottom-start'
-                popoverClassName={Classes.POPOVER_DISMISS}
-                interactionKind='click'
-                minimal={true}
-                modifiers={{ offset: { enabled: true, options: { offset: [-21, 12]} }}}
-            >
-                <NavLink to={component.apiPath}>
-                    <div onClick={(e) => e.preventDefault()}>
-                        {component.title}
-                    </div>
-                </NavLink>
-            </Popover>
-        </div>
+        <Popover
+            content={subMenuElement}
+            placement='bottom-start'
+            popoverClassName={Classes.POPOVER_DISMISS}
+            interactionKind='click'
+            minimal={true}
+            modifiers={{ offset: { enabled: true, options: { offset: [0, 14]} }}}
+        >
+            <NavLink to={component.apiPath}>
+                <div
+                    className='nav-title'
+                    onClick={(e) => e.preventDefault()} // NavLink styling without functionality
+                >
+                    {component.title}
+                </div>
+            </NavLink>
+        </Popover>
     );
 };
