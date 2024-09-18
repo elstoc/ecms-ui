@@ -22,10 +22,7 @@ export const GalleryThumb = forwardRef<HTMLAnchorElement, GalleryThumbProps>(({ 
             style={style}
             ref={ref}
         >
-            <img
-                src={url}
-                alt={fileName}
-            />
+            <img src={url} alt={fileName} />
             <div className='overlay'>{description}</div>
         </Link>
     );
