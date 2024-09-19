@@ -4,13 +4,12 @@
     * {
         line-height: 1.75rem;
         font-size: 1.1rem;
-        font-weight: 300;
     }
 
     h1, h2, h3, h4, h5, h6 {
         margin: 1.7rem 0px 1.2rem 0px;
         padding: 0;
-        font-weight: 600;
+        font-weight: 700;
         text-align: left;
         font-family: 'Raleway', sans-serif;
     }
@@ -25,13 +24,13 @@
 
     h1 { font-size: 1.6rem; }
     h2 { font-size: 1.3rem; }
-    h3 { font-size: 1.1rem; }
-    h4, h5, h6 { font-size: 1rem; }
+    h3 { font-size: 1.2rem; }
+    h4, h5, h6 { font-size: 1.1rem; }
     h5 { font-style: italic; }
     h6 { color: red; text-decoration: line-through; }
 
     h1.title {
-        font-size: 2rem;
+        font-size: 1.9rem;
         margin-top: 0;
         margin-bottom: 2.7rem;
     }
@@ -63,7 +62,8 @@
     }
 
     dt {
-        font-weight: 600;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
         margin-top: 0.5rem;
         margin-bottom: 0.2rem;
     }
@@ -93,6 +93,6 @@
     }
 
     strong {
-        font-weight: 500;
+        font-weight: 600;
     }
 }
