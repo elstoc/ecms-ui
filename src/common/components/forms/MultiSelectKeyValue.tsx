@@ -1,6 +1,6 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useState } from 'react';
 import { FormGroup, MenuItem } from '@blueprintjs/core';
-import { ItemRenderer, MultiSelect } from '@blueprintjs/select';
+import { ItemPredicate, ItemRenderer, MultiSelect } from '@blueprintjs/select';
 
 import './MultiSelectKeyValue.scss';
 
@@ -19,6 +19,7 @@ type MultiSelectKeyValueParams = {
 };
 
 export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, selectedKeys, onSelectionChange, label, inline, className }): ReactElement => {
+    const [queryString, setQueryString] = useState('');
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
     const selectedItems = selectedKeys.map((key) => ({ key, value: allItems[key] ?? '' }));
 
@@ -57,20 +58,31 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
 
     const tagRenderer = (keyValue: KeyValue) => keyValue.value;
 
+    const filterItems: ItemPredicate<KeyValue> = (query: string, item: KeyValue) => {
+        if (!query || item.value.toLowerCase().includes(query.toLowerCase())) {
+            return true;
+        }
+        return false;
+    };
+
     return (
         <FormGroup label={label} inline={inline} className={className}>
             <MultiSelect<KeyValue>
-                fill={false}
-                itemRenderer={itemRenderer}
                 items={allItemsArray}
+                selectedItems={selectedItems}
+                tagRenderer={tagRenderer}
+                itemRenderer={itemRenderer}
                 itemsEqual={areTheyEqual}
                 onItemSelect={toggleItem}
                 onRemove={toggleItem}
                 onClear={clearItems}
-                selectedItems={selectedItems}
-                tagRenderer={tagRenderer}
+                itemPredicate={filterItems}
+                query={queryString}
+                onQueryChange={setQueryString}
+                resetOnSelect={true}
                 popoverProps={{minimal: true}}
                 placeholder=''
+                fill={false}
             />
         </FormGroup>
     );
