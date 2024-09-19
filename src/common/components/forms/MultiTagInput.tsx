@@ -29,12 +29,6 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
         } else {
             onSelectionChange?.(tags.filter((tagToRemove) => tag !== tagToRemove));
         }
-        setQueryString('');
-    };
-
-    const clearTags = () => {
-        onSelectionChange?.([]);
-        setQueryString('');
     };
 
     const itemRenderer: ItemRenderer<string> = (tag, { handleClick, handleFocus, modifiers }) => {
@@ -90,10 +84,11 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 createNewItemRenderer={createItemRenderer}
                 onItemSelect={toggleTag}
                 onRemove={toggleTag}
-                onClear={clearTags}
+                onClear={() => onSelectionChange?.([])}
                 itemPredicate={filterTag}
                 query={queryString}
                 onQueryChange={setQueryString}
+                resetOnSelect={true}
                 placeholder=''
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
                 popoverProps={{minimal: true}}
