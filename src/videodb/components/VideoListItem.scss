@@ -11,7 +11,7 @@
     }
 
     &:not(:hover) .priority.unchecked {
-        visibility: hidden;
+        opacity: 0.3;
     }
 
     .priority {
