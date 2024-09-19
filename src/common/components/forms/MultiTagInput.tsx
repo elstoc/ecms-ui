@@ -73,7 +73,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
     };
 
     const filterTag: ItemPredicate<string> = (query: string, tag: string) => {
-        if (!query || tag.includes(query)) {
+        if (!query || tag.toLowerCase().includes(query.toLowerCase())) {
             return true;
         }
         return false;
