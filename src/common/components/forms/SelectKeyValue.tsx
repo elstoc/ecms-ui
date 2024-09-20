@@ -21,6 +21,8 @@ type SelectKeyValueParams = {
 export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label, small, className = '' }): ReactElement => {
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
 
+    const popoverClassName = className ? `${className}-popover` : '';
+
     const changeSelection = (kv: KeyValue) => {
         onSelectionChange?.(kv.key);
     };
@@ -55,7 +57,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 itemPredicate={filterValue}
                 onItemSelect={changeSelection}
                 popoverProps={{minimal: true}}
-                popoverContentProps={{className: 'select-key-value-popover'}}
+                popoverContentProps={{className: `${popoverClassName} select-key-value-popover`}}
                 resetOnSelect={true}
             >
                 <Button text={allItems[selectedKey] ?? ' '} small={small} rightIcon='caret-down' />

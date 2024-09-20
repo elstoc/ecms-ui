@@ -23,6 +23,8 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
     const allTags = Array.from(new Set([...selectableTags, ...tags]))
         .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
 
+    const popoverClassName = className ? `${className}-popover` : '';
+
     const toggleTag = (tag: string) => {
         if (!tags.includes(tag)) {
             onSelectionChange?.([...(tags), tag]);
@@ -91,7 +93,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 placeholder=''
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
                 popoverProps={{minimal: true}}
-                popoverContentProps={{className: 'multi-tag-input-popover'}}
+                popoverContentProps={{className: `${popoverClassName} multi-tag-input-popover`}}
             />
         </FormGroup>
     );

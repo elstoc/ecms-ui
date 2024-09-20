@@ -23,6 +23,8 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
     const selectedItems = selectedKeys.map((key) => ({ key, value: allItems[key] ?? '' }));
 
+    const popoverClassName = className ? `${className}-popover` : '';
+
     const toggleItem = (item: KeyValue) => {
         if (!selectedKeys.includes(item.key)) {
             onSelectionChange?.([...(selectedKeys), item.key]);
@@ -82,7 +84,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 popoverProps={{minimal: true}}
                 placeholder=''
                 fill={false}
-                popoverContentProps={{className: 'multi-select-key-value-popover'}}
+                popoverContentProps={{className: `${popoverClassName} multi-select-key-value-popover`}}
             />
         </FormGroup>
     );
