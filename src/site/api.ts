@@ -3,6 +3,7 @@ import { axiosSecureClient } from '../common/api';
 type SiteConfig = {
     authEnabled: boolean;
     footerText: string;
+    siteTitle?: string;
 };
 
 enum ComponentTypes {

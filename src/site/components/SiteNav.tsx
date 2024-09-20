@@ -7,24 +7,27 @@ import { ComponentMetadata, ComponentTypes } from '../api';
 import './SiteNav.scss';
 
 export const SiteNav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteComponents }): ReactElement => {
+    if (siteComponents.length === 1) {
+        return <></>;
+    }
+
     return (
         <div className='site-nav'>
             {siteComponents.map((component) =>
                 <ComponentNavItem
                     key={component.apiPath}
                     component={component}
-                    singleComponent={siteComponents.length === 1}
                 />
             )}
         </div>
     );
 };
 
-const ComponentNavItem: FC<{ component: ComponentMetadata, singleComponent?: boolean }> = ({ component, singleComponent }) => {
+const ComponentNavItem: FC<{ component: ComponentMetadata }> = ({ component }) => {
     if (component?.type !== ComponentTypes.componentgroup) {
         return (
             <NavLink to={component.defaultComponent ? '' : component.apiPath}>
-                <div className={`nav-title ${singleComponent ? 'single-component' : ''}`}>
+                <div className='nav-title'>
                     {component.title}
                 </div>
             </NavLink>

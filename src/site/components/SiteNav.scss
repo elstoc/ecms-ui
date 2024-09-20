@@ -7,13 +7,6 @@
     .nav-title {
         font-size: 1.1rem;
         font-family: 'Raleway', sans-serif;
-
-        &.single-component {
-            font-size: 1.4rem;
-            font-weight: 600;
-            border: none !important;
-            padding-left: 0;
-        }
     }
 
     a:visited, a:hover, a:active, a:link {
@@ -32,7 +25,11 @@
 
 .sub-menu .nav-title {
     justify-content: left;
-    padding: 0.2em 0.4em;
+    padding: 0.2em 0.9em;
+}
+
+.sub-menu {
+    padding: 0.4em 0;
 }
 
 .site-nav {
@@ -44,12 +41,7 @@
         align-items: center;
 
         .nav-title {
-            border-right: 1px solid gray;
-            padding: 0 1.2em;
-        }
-
-        >a:first-child .nav-title {
-            border-left: 1px solid gray;
+            padding: 0 0.9em;
         }
     }
 }
