@@ -11,7 +11,7 @@ type SwitchParams = {
     className?: string;
 }
 
-export const Switch: FC<SwitchParams> = ({ value, onValueChange, label, inline, className }): ReactElement => {
+export const Switch: FC<SwitchParams> = ({ value, onValueChange, label, inline, className = '' }): ReactElement => {
     return (
         <FormGroup label={label} inline={inline} className={`${className} switch-component`}>
             <BlueprintSwitch

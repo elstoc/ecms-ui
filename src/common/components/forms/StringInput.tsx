@@ -14,9 +14,9 @@ type StringInputParams = {
     autoFocus?: boolean;
 };
 
-export const StringInput: FC<StringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className, autoFocus }): ReactElement => {
+export const StringInput: FC<StringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className = '', autoFocus }): ReactElement => {
     return (
-        <FormGroup label={label} inline={inline} className={`string-input ${className ?? ''}`}>
+        <FormGroup label={label} inline={inline} className={`string-input ${className}`}>
             <InputGroup
                 value={value}
                 onValueChange={(value) => onValueChange?.(value)}

@@ -12,13 +12,13 @@ type FlagParams = {
     color?: string;
 }
 
-export const Flag: FC<FlagParams> = ({ value, onValueChange, label, inline, className, color }): ReactElement => {
+export const Flag: FC<FlagParams> = ({ value, onValueChange, label, inline, className = '', color }): ReactElement => {
     return (
         <div onClick={() => onValueChange?.(!value)}>
             <FormGroup
                 label={label}
                 inline={inline}
-                className={`flag-component ${className ?? ''}`}
+                className={`flag-component ${className}`}
             >
                 <Icon icon='flag' size={18} color={`${value ? (color || 'firebrick') : 'lightgrey'}`} />
             </FormGroup>

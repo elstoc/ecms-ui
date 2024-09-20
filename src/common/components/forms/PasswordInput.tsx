@@ -14,7 +14,7 @@ type PasswordInputParams = {
     onPressEnter?: () => void;
 };
 
-export const PasswordInput: FC<PasswordInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className, onPressEnter }): ReactElement => {
+export const PasswordInput: FC<PasswordInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className = '', onPressEnter }): ReactElement => {
     const [showPassword, setShowPassword] = useState(false);
 
     const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -35,7 +35,7 @@ export const PasswordInput: FC<PasswordInputParams> = ({ value, onValueChange, p
     );
 
     return (
-        <FormGroup label={label} inline={inline}  className={`password-input ${className ?? ''}`}>
+        <FormGroup label={label} inline={inline}  className={`password-input ${className}`}>
             <InputGroup
                 value={value}
                 onValueChange={(value) => onValueChange?.(value)}

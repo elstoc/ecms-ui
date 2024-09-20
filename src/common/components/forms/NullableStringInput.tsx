@@ -13,9 +13,9 @@ type NullableStringInputParams = {
     className?: string;
 };
 
-export const NullableStringInput: FC<NullableStringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className }): ReactElement => {
+export const NullableStringInput: FC<NullableStringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className = '' }): ReactElement => {
     return (
-        <FormGroup label={label} inline={inline} className={`nullable-string-input ${className ?? ''}`}>
+        <FormGroup label={label} inline={inline} className={`nullable-string-input ${className}`}>
             <InputGroup
                 value={value || ''}
                 onValueChange={(value) => onValueChange?.(value === '' ? null : value)}

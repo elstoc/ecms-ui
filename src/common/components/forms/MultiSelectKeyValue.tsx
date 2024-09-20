@@ -18,7 +18,7 @@ type MultiSelectKeyValueParams = {
     className?: string;
 };
 
-export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, selectedKeys, onSelectionChange, label, inline, className }): ReactElement => {
+export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, selectedKeys, onSelectionChange, label, inline, className = '' }): ReactElement => {
     const [queryString, setQueryString] = useState('');
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
     const selectedItems = selectedKeys.map((key) => ({ key, value: allItems[key] ?? '' }));
@@ -65,7 +65,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
     };
 
     return (
-        <FormGroup label={label} inline={inline} className={`${className ?? ''} multi-select-key-value`}>
+        <FormGroup label={label} inline={inline} className={`${className} multi-select-key-value`}>
             <MultiSelect<KeyValue>
                 items={allItemsArray}
                 selectedItems={selectedItems}

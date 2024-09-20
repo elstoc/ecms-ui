@@ -18,7 +18,7 @@ type SelectKeyValueParams = {
     className?: string;
 };
 
-export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label, small, className }): ReactElement => {
+export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey, onSelectionChange, label, small, className = '' }): ReactElement => {
     const allItemsArray = Object.entries(allItems).map(([key, value]) => ({ key, value }));
 
     const changeSelection = (kv: KeyValue) => {
@@ -48,7 +48,7 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
     };
 
     return (
-        <FormGroup label={label} inline={false} className={`${className ?? ''} select-key-value`}>
+        <FormGroup label={label} inline={false} className={`${className} select-key-value`}>
             <Select<KeyValue>
                 items={allItemsArray.sort((a, b) => a.value.localeCompare(b.value))}
                 itemRenderer={itemRenderer}
