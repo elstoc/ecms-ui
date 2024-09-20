@@ -1,3 +1,18 @@
-.tag-menuitem {
+.multi-tag-input {
+    label {
+        font-size: 0.95rem;
+    }
+
+    button {
+        font-size: 0.95rem;
+        justify-content: space-between;
+    }
+}
+
+.multi-tag-input-popover {
     font-size: 0.95rem;
+
+    input {
+        font-size: 0.95rem;
+    }
 }

@@ -43,21 +43,20 @@ export const SelectKeyValue: FC<SelectKeyValueParams> = ({ allItems, selectedKey
                 onFocus={handleFocus}
                 onClick={handleClick}
                 selected={keyValue.key === selectedKey}
-                className='select-menuitem'
             />
         );
     };
 
     return (
-        <FormGroup label={label} inline={false}>
+        <FormGroup label={label} inline={false} className={`${className ?? ''} select-key-value`}>
             <Select<KeyValue>
                 items={allItemsArray.sort((a, b) => a.value.localeCompare(b.value))}
                 itemRenderer={itemRenderer}
                 itemPredicate={filterValue}
                 onItemSelect={changeSelection}
                 popoverProps={{minimal: true}}
+                popoverContentProps={{className: 'select-key-value-popover'}}
                 resetOnSelect={true}
-                className={className}
             >
                 <Button text={allItems[selectedKey] ?? ' '} small={small} rightIcon='caret-down' />
             </Select>

@@ -18,7 +18,7 @@ export const Flag: FC<FlagParams> = ({ value, onValueChange, label, inline, clas
             <FormGroup
                 label={label}
                 inline={inline}
-                className={`flag-component ${className}`}
+                className={`flag-component ${className ?? ''}`}
             >
                 <Icon icon='flag' size={18} color={`${value ? (color || 'firebrick') : 'lightgrey'}`} />
             </FormGroup>

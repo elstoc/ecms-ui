@@ -43,7 +43,6 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 disabled={modifiers.disabled}
                 onFocus={handleFocus}
                 onClick={handleClick}
-                className='tag-menuitem'
             />
         );
     };
@@ -74,7 +73,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
     };
 
     return (
-        <FormGroup label={label} inline={inline} className={className}>
+        <FormGroup label={label} inline={inline} className={`${className ?? ''} multi-tag-input`}>
             <MultiSelect<string>
                 items={allTags}
                 selectedItems={tags}
@@ -92,6 +91,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 placeholder=''
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
                 popoverProps={{minimal: true}}
+                popoverContentProps={{className: 'multi-tag-input-popover'}}
             />
         </FormGroup>
     );

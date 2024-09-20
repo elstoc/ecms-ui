@@ -1,6 +1,8 @@
 import React, { FC, ReactElement, useState } from 'react';
 import { Button, FormGroup, InputGroup, Intent, Tooltip } from '@blueprintjs/core';
 
+import './PasswordInput.scss';
+
 type PasswordInputParams = {
     value: string;
     onValueChange?: (value: string) => void;
@@ -33,7 +35,7 @@ export const PasswordInput: FC<PasswordInputParams> = ({ value, onValueChange, p
     );
 
     return (
-        <FormGroup label={label} inline={inline} className={className}>
+        <FormGroup label={label} inline={inline}  className={`password-input ${className ?? ''}`}>
             <InputGroup
                 value={value}
                 onValueChange={(value) => onValueChange?.(value)}

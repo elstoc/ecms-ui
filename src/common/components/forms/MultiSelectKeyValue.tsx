@@ -51,7 +51,6 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 disabled={modifiers.disabled}
                 onFocus={handleFocus}
                 onClick={handleClick}
-                className='multi-select-menuitem'
             />
         );
     };
@@ -66,7 +65,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
     };
 
     return (
-        <FormGroup label={label} inline={inline} className={className}>
+        <FormGroup label={label} inline={inline} className={`${className ?? ''} multi-select-key-value`}>
             <MultiSelect<KeyValue>
                 items={allItemsArray}
                 selectedItems={selectedItems}
@@ -83,6 +82,7 @@ export const MultiSelectKeyValue: FC<MultiSelectKeyValueParams> = ({ allItems, s
                 popoverProps={{minimal: true}}
                 placeholder=''
                 fill={false}
+                popoverContentProps={{className: 'multi-select-key-value-popover'}}
             />
         </FormGroup>
     );
