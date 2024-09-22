@@ -1,56 +1,95 @@
 .video-list-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    margin: 0;
+    padding: 0 !important;
     margin-bottom: .4em;
-    padding: 5px 10px !important;
-    font-size: 0.85rem;
+    cursor: default;
 
     &:hover {
         background-color: whitesmoke;
+    }
+    
+    &.expanded {
+        box-shadow: 0 0 0 2px #333333;
     }
 
     &:not(:hover) .priority.unchecked {
         opacity: 0.3;
     }
-
-    .priority {
-        cursor: pointer;
-        width: 35px;
-        height: 35px;
-    }
-
-    .right {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-    }
-
-    .bp5-form-group,
-    .bp5-control.bp5-switch {
-        margin: 0;
-        padding: 0;
-    }
-
-    .video-name {
-        cursor: pointer;
-        font-size: 1.25rem;
-        letter-spacing: 0.2px;
-    }
     
-    .sub-info {
-        margin-top: .3em;
+    .priority.icon {
+        opacity: .5;
     }
 
-    a:visited,
-    a:hover,
-    a:active,
-    a:link {
-        color: black;
-        text-decoration: none;
+    .primary-info, .secondary-info {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        box-sizing: content-box;
+        padding: 5px 10px !important;
+        font-size: 0.85rem;
+
+        .left {
+            flex-grow: 1;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .icon {
+            height: 25px;
+            width: 25px;
+            padding: 0;
+            cursor: pointer;
+        }
     }
 
-    svg {
-        opacity: 0.8;
+    .primary-info {
+        .priority {
+            cursor: pointer;
+            width: 35px;
+            height: 35px;
+        }
+    
+        .bp5-form-group,
+        .bp5-control.bp5-switch {
+            margin: 0;
+            padding: 0;
+        }
+    
+        .video-name {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+
+            font-size: 1.25rem;
+            letter-spacing: 0.2px;
+
+        }
+        
+        .sub-info {
+            margin-top: .3em;
+        }
+    
+        a:visited,
+        a:hover,
+        a:active,
+        a:link {
+            color: black;
+            text-decoration: none;
+        }
+    
+        svg {
+            opacity: 0.8;
+        }
+    }
+
+    .secondary-info {
+        padding-top: 0.5em !important;
+        .left {
+            padding-bottom: 0.6em !important;
+        }
     }
 }
