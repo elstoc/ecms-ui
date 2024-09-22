@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button, Card, Divider } from '@blueprintjs/core';
+import { Button, Card, Divider, Radio, RadioGroup } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
@@ -17,7 +17,7 @@ export const VideoFilters: FC = (): ReactElement => {
             apiPath,
             filters: {
                 titleContains, maxLength, categories, watchedStatuses,
-                pmWatchedStatuses, primaryMediaTypes, tags, sortPriorityFirst
+                pmWatchedStatuses, minResolution, tags, sortPriorityFirst
             },
         },
         stateReducer,
@@ -25,7 +25,6 @@ export const VideoFilters: FC = (): ReactElement => {
 
     const categoryLookup = useGetLookup(apiPath, 'categories');
     const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
-    const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
 
     return (
         <div className='video-filters'>
@@ -43,6 +42,16 @@ export const VideoFilters: FC = (): ReactElement => {
                     value={maxLength}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
+                <RadioGroup
+                    label='Minimum Resolution'
+                    inline={true}
+                    selectedValue={minResolution || 'SD'}
+                    onChange={(event) => stateReducer({ action: 'setFilter', key: 'minResolution', value: event.currentTarget.value })}
+                >
+                    <Radio label='SD' value='SD' />
+                    <Radio label='HD' value='HD' />
+                    <Radio label='UHD' value='UHD' />
+                </RadioGroup>
                 <MultiSelectKeyValue
                     label='Categories'
                     inline={true}
@@ -65,13 +74,6 @@ export const VideoFilters: FC = (): ReactElement => {
                     allItems={watchedStatusLookup}
                     selectedKeys={watchedStatuses ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'watchedStatuses', value })}
-                />
-                <MultiSelectKeyValue
-                    label='Media Type'
-                    inline={true}
-                    allItems={mediaTypeLookup}
-                    selectedKeys={primaryMediaTypes ?? []}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'primaryMediaTypes', value })}
                 />
                 <MultiSelectKeyValue
                     label='Media Watched'
