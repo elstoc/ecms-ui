@@ -9,6 +9,7 @@ import { VideoDbContext } from '../hooks/useVideoDbState';
 import { Flag } from '../../common/components/forms';
 
 import './VideoListItem.scss';
+import { Icon } from '../../common/components/icon';
 
 type VideoDbProps = {
     apiPath: string;
@@ -78,11 +79,10 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         {video.tags && <div><strong>Tags:</strong> {video.tags.replace(',', ', ')}</div>}
                     </div>
                     <div className='right' onClick={(e) => e.stopPropagation()}>
-                        <BPIcon
-                            icon='edit'
+                        <Icon
+                            name='edit'
                             className='icon'
                             color='black'
-                            size={18}
                             onClick={() => navigate(`./${video.id}?${searchParams.toString()}`)}
                         />
                     </div>

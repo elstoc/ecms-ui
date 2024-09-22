@@ -16,16 +16,12 @@
         opacity: 0.3;
     }
     
-    .priority.icon {
-        opacity: .5;
-    }
-
     .primary-info, .secondary-info {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         box-sizing: content-box;
-        padding: 5px 10px !important;
+        padding: 7px 10px !important;
         font-size: 0.85rem;
 
         .left {
@@ -39,20 +35,13 @@
         }
 
         .icon {
-            height: 25px;
-            width: 25px;
+            height: 20px;
+            width: 20px;
             padding: 0;
-            cursor: pointer;
         }
     }
 
     .primary-info {
-        .priority {
-            cursor: pointer;
-            width: 35px;
-            height: 35px;
-        }
-    
         .bp5-form-group,
         .bp5-control.bp5-switch {
             margin: 0;
@@ -66,7 +55,6 @@
 
             font-size: 1.25rem;
             letter-spacing: 0.2px;
-
         }
         
         .sub-info {

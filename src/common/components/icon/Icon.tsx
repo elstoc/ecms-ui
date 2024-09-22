@@ -1,6 +1,6 @@
 // See https://react-icons.github.io/react-icons for summary of available icons
 import React, { FC, ReactElement } from 'react';
-import { FiChevronLeft, FiChevronRight, FiEdit, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { PopoverPosition, Tooltip } from '@blueprintjs/core';
 
@@ -15,7 +15,8 @@ const icons: { [key: string]: IconType} = {
     save: FiSave,
     next: FiChevronRight,
     previous: FiChevronLeft,
-    close: FiX
+    close: FiX,
+    flag: FiFlag
 };
 
 type IconProps = {
@@ -24,17 +25,19 @@ type IconProps = {
     onClick?: () => void;
     tooltipContent?: string;
     tooltipPosition?: PopoverPosition;
+    className?: string;
+    color?: string;
 };
 
-export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosition, disabled = false }): ReactElement => {
+export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosition, disabled = false, className = '', color }): ReactElement => {
     const IconComponent = icons[name];
 
     if (!IconComponent) return <></>;
 
     const iconOnClick = disabled ? undefined : onClick;
-    const iconClass = `icon ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''}`;
+    const iconClass = `icon ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''} ${className}`;
 
-    const iconElement = <IconComponent className={iconClass} onClick={iconOnClick} />;
+    const iconElement = <IconComponent className={iconClass} onClick={iconOnClick} color={color} />;
 
     if (tooltipContent) {
         return (
