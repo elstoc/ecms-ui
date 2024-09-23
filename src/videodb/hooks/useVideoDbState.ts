@@ -110,7 +110,7 @@ const useUpdateStateOnSearchParamChange = () => {
                     tags: searchParams.get('tags')?.split('|') ?? null,
                     watchedStatuses: searchParams.get('watchedStatuses')?.split('|') ?? null,
                     pmWatchedStatuses: searchParams.get('pmWatchedStatuses')?.split('|') ?? null,
-                    minResolution: searchParams.get('minResolution'),
+                    minResolution: searchParams.get('minResolution') ?? 'SD',
                     sortPriorityFirst: (toIntOrUndefined(searchParams.get('sortPriorityFirst')) as null | 0 | 1) ?? null
                 }
             });
