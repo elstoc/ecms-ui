@@ -2,7 +2,7 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { Button, Card, Divider, Radio, RadioGroup } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
-import { VideoDbContext, useClearSearchParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
+import { VideoDbContext, useClearFilterParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
 import { NullableIntInput, NullableStringInput, MultiSelectKeyValue, Switch } from '../../common/components/forms';
 import { TagInput } from './TagInput';
@@ -11,7 +11,7 @@ import './VideoFilters.scss';
 
 export const VideoFilters: FC = (): ReactElement => {
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
-    const clearSearchParams = useClearSearchParams();
+    const clearFilterParams = useClearFilterParams();
     const {
         state: {
             apiPath,
@@ -89,7 +89,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     onValueChange={(value) => stateReducer({action: 'setFilter', key: 'sortPriorityFirst', value: value ? 1 : 0})}
                 />
                 <div className='filter-action-buttons'>
-                    <Button onClick={clearSearchParams}>Clear All</Button>
+                    <Button onClick={clearFilterParams}>Clear All</Button>
                     <Button onClick={setSearchParamsFromState}>Submit</Button>
                 </div>
             </Card>

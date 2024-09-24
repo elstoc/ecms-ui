@@ -155,12 +155,14 @@ const useSetSearchParamsFromFilterState = () => {
     }, [setSearchParams, JSON.stringify(filters)]);
 };
 
-const useClearSearchParams = () => {
+const useClearFilterParams = () => {
     const [, setSearchParams] = useSearchParams();
+    const { stateReducer } = useContext(VideoDbContext);
 
     return useCallback(() => {
-        setSearchParams({});
-    }, [setSearchParams]);
+        stateReducer({ action: 'setAllFilters', value: initialFilters });
+        setSearchParams();
+    }, [setSearchParams, stateReducer]);
 };
 
 const useVideoDbState: (initialState: VideoDbState) => VideoDbStateContextProps = (initialState) => {
@@ -174,7 +176,7 @@ export {
     useVideoDbState,
     useGetFilterSearchParams,
     useSetSearchParamsFromFilterState,
-    useClearSearchParams,
+    useClearFilterParams,
     useUpdateStateOnSearchParamChange,
     FlagUpdates
 };
