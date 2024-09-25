@@ -1,13 +1,19 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button, Card, Divider, Radio, RadioGroup } from '@blueprintjs/core';
+import { Button, Card, Divider } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearFilterParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
-import { NullableIntInput, NullableStringInput, MultiSelectKeyValue, Switch } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, MultiSelectKeyValue, Switch, SegmentedControlInput } from '../../common/components/forms';
 import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
+
+const minResolutionOptions = [
+    { label: 'SD', value: 'SD' },
+    { label: 'HD', value: 'HD' },
+    { label: 'UHD', value: 'UHD' }
+];
 
 export const VideoFilters: FC = (): ReactElement => {
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
@@ -42,16 +48,13 @@ export const VideoFilters: FC = (): ReactElement => {
                     value={maxLength}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
-                <RadioGroup
-                    label='Minimum Resolution'
+                <SegmentedControlInput
+                    label='Min Resolution'
                     inline={true}
-                    selectedValue={minResolution || 'SD'}
-                    onChange={(event) => stateReducer({ action: 'setFilter', key: 'minResolution', value: event.currentTarget.value })}
-                >
-                    <Radio label='SD' value='SD' />
-                    <Radio label='HD' value='HD' />
-                    <Radio label='UHD' value='UHD' />
-                </RadioGroup>
+                    options={minResolutionOptions}
+                    value={minResolution || 'SD'}
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'minResolution', value })}
+                />
                 <MultiSelectKeyValue
                     label='Categories'
                     inline={true}
