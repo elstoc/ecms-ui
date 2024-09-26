@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { Button, Card, Divider } from '@blueprintjs/core';
+import { Button, Card } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearFilterParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
@@ -15,6 +15,12 @@ const minResolutionOptions = [
     { label: 'UHD', value: 'UHD' }
 ];
 
+const watchedStatusOptions = [
+    { label: 'Any', value: 'Any' },
+    { label: 'Y', value: 'Y' },
+    { label: 'N', value: 'N' }
+];
+
 export const VideoFilters: FC = (): ReactElement => {
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
     const clearFilterParams = useClearFilterParams();
@@ -22,28 +28,28 @@ export const VideoFilters: FC = (): ReactElement => {
         state: {
             apiPath,
             filters: {
-                titleContains, maxLength, categories, watchedStatuses,
-                pmWatchedStatuses, minResolution, tags, sortPriorityFirst
+                titleContains, maxLength, categories, watched, mediaWatched,
+                minResolution, tags, sortPriorityFirst
             },
         },
         stateReducer,
     } = useContext(VideoDbContext);
 
     const categoryLookup = useGetLookup(apiPath, 'categories');
-    const watchedStatusLookup = useGetLookup(apiPath, 'watched_status');
 
     return (
         <div className='video-filters'>
             <Card className='card'>
-                <NullableStringInput
-                    label='Title Contains'
+                <MultiSelectKeyValue
+                    label='Categories'
                     inline={true}
-                    value={titleContains}
-                    placeholder=''
-                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
+                    allItems={categoryLookup}
+                    selectedKeys={categories ?? []}
+                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
                 <NullableIntInput
-                    label='Shorter Than' 
+                    label='Max Length' 
+                    className='max-length'
                     inline={true}
                     value={maxLength}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
@@ -55,12 +61,19 @@ export const VideoFilters: FC = (): ReactElement => {
                     value={minResolution || 'SD'}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'minResolution', value })}
                 />
-                <MultiSelectKeyValue
-                    label='Categories'
+                <SegmentedControlInput
+                    label='Watched'
                     inline={true}
-                    allItems={categoryLookup}
-                    selectedKeys={categories ?? []}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
+                    options={watchedStatusOptions}
+                    value={watched ?? 'Any'}
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'watched', value })}
+                />
+                <SegmentedControlInput
+                    label='Media Watched'
+                    inline={true}
+                    options={watchedStatusOptions}
+                    value={mediaWatched ?? 'Any'}
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'mediaWatched', value })}
                 />
                 <TagInput
                     label='Tags'
@@ -69,21 +82,12 @@ export const VideoFilters: FC = (): ReactElement => {
                     tags={tags ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
                 />
-                <Divider />
-                <MultiSelectKeyValue
-                    label='Watched'
-                    className='watched'
+                <NullableStringInput
+                    label='Title Search'
                     inline={true}
-                    allItems={watchedStatusLookup}
-                    selectedKeys={watchedStatuses ?? []}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'watchedStatuses', value })}
-                />
-                <MultiSelectKeyValue
-                    label='Media Watched'
-                    inline={true}
-                    allItems={watchedStatusLookup}
-                    selectedKeys={pmWatchedStatuses ?? []}
-                    onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'pmWatchedStatuses', value })}
+                    value={titleContains}
+                    placeholder=''
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'titleContains', value })}
                 />
                 <Switch
                     label='Priority First'
