@@ -47,13 +47,6 @@ export const VideoFilters: FC = (): ReactElement => {
                     selectedKeys={categories ?? []}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
-                <NullableIntInput
-                    label='Max Length' 
-                    className='max-length'
-                    inline={true}
-                    value={maxLength}
-                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
-                />
                 <SegmentedControlInput
                     label='Min Resolution'
                     inline={true}
@@ -74,6 +67,13 @@ export const VideoFilters: FC = (): ReactElement => {
                     options={watchedStatusOptions}
                     value={mediaWatched ?? 'Any'}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'mediaWatched', value })}
+                />
+                <NullableIntInput
+                    label='Max Length' 
+                    className='max-length'
+                    inline={true}
+                    value={maxLength}
+                    onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'maxLength', value })}
                 />
                 <TagInput
                     label='Tags'
