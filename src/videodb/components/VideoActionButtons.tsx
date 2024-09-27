@@ -21,8 +21,8 @@ export const VideoActionButtons: FC = (): ReactElement => {
     const postFlagUpdates = useCallback(async () => {
         try {
             const videoUpdates: VideoUpdate[] = [];
-            for (const [id, to_watch_priority] of Object.entries(pendingFlagUpdates)) {
-                videoUpdates.push({ id: parseInt(id), to_watch_priority });
+            for (const [id, priority_flag] of Object.entries(pendingFlagUpdates)) {
+                videoUpdates.push({ id: parseInt(id), priority_flag });
             }
             await patchVideoDbVideos(apiPath, videoUpdates);
             (await AppToaster).show({ message: 'flags updated', timeout: 2000 });

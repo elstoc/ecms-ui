@@ -4,7 +4,7 @@ import { getVideoDbVideos, VideoWithId } from '../api';
 
 const videoColumnParams: ColumnParam<VideoWithId>[] = [
     { title: 'Id', getField: (video) => video.id },
-    { title: 'Flag', getField: (video) => video.to_watch_priority || null },
+    { title: 'Flag', getField: (video) => video.priority_flag || null },
     { title: 'Title', getField: (video) => video.title },
     { title: 'Category', getField: (video) => video.category },
     { title: 'Length', getField: (video) => video.length_mins },

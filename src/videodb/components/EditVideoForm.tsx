@@ -111,8 +111,8 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 label='Flag'
                 className='priority-flag'
                 inline={true}
-                value={(videoState.to_watch_priority ?? 0) > 0}
-                onValueChange={(value) => videoStateReducer({ key: 'to_watch_priority', value: value ? 1 : 0 })}
+                value={(videoState.priority_flag ?? 0) > 0}
+                onValueChange={(value) => videoStateReducer({ key: 'priority_flag', value: value ? 1 : 0 })}
             />
             <TagInput
                 label='Tags'

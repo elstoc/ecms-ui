@@ -6,7 +6,7 @@ type Video = {
     director: string | null;
     length_mins: number | null;
     watched: string;
-    to_watch_priority: number | null;
+    priority_flag: number | null;
     progress: string | null;
     year: number | null;
     imdb_id: string | null;
@@ -26,7 +26,7 @@ type VideoWithId = Video & { id: number; };
 
 type VideoUpdate = {
     id: number;
-    to_watch_priority: 0 | 1;
+    priority_flag: 0 | 1;
 }
 
 const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoWithId[]> => {

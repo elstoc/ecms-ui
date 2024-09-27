@@ -37,7 +37,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
     const category = categoryLookup[video.category];
     const pMediaType = mediaTypeLookup[video.primary_media_type ?? ''];
 
-    let prioritySwitchChecked = (video.to_watch_priority ?? 0) > 0;
+    let prioritySwitchChecked = (video.priority_flag ?? 0) > 0;
     if (video.id in pendingFlagUpdates) {
         prioritySwitchChecked = pendingFlagUpdates[video.id] === 1;
     }
@@ -66,7 +66,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         value={prioritySwitchChecked}
                         color='green'
                         className={`priority ${prioritySwitchChecked ? '' : 'unchecked'}`}
-                        onValueChange={(checked) => stateReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.to_watch_priority, newValue: checked ? 1 : 0 })}
+                        onValueChange={(checked) => stateReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 })}
                     />
                 </div>
             </div>
