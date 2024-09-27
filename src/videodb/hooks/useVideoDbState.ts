@@ -7,7 +7,7 @@ const BATCH_SIZE = 100;
 
 type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value: number | null; }
 type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value: string | null; }
-type SetCategories = { action: 'setFilter'; key: 'categories'; value: string[] | null; }
+type SetCategories = { action: 'setFilter'; key: 'categories'; value: string | null; }
 type SetTags = { action: 'setFilter'; key: 'tags'; value: string | null; }
 type SetWatched = { action: 'setFilter'; key: 'watched'; value: string | null; }
 type SetMediaWatched = { action: 'setFilter'; key: 'mediaWatched'; value: string | null; }
@@ -25,7 +25,7 @@ type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll 
 type VideoFilters = {
     limit: number;
     maxLength: number | null;
-    categories: string[] | null;
+    categories: string | null;
     tags: string | null;
     titleContains: string | null;
     watched: string | null;
@@ -106,7 +106,7 @@ const useUpdateStateOnSearchParamChange = () => {
                     limit: BATCH_SIZE,
                     maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
                     titleContains: searchParams.get('titleContains'),
-                    categories: searchParams.get('categories')?.split('|') ?? null,
+                    categories: searchParams.get('categories') ?? null,
                     tags: searchParams.get('tags') ?? null,
                     watched: searchParams.get('watched') ?? 'Any',
                     mediaWatched: searchParams.get('mediaWatched') ?? 'Any',
@@ -126,7 +126,7 @@ const useSetSearchParamsFromFilterState = () => {
         const { categories, maxLength, titleContains, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = filters;
         setSearchParams((params) => {
             categories?.length
-                ? params.set('categories', categories.join('|'))
+                ? params.set('categories', categories)
                 : params.delete('categories');
             maxLength
                 ? params.set('maxLength', maxLength.toString())

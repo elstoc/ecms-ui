@@ -1,10 +1,10 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Button, Card } from '@blueprintjs/core';
 
-import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext, useClearFilterParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
 
-import { NullableIntInput, NullableStringInput, MultiSelectKeyValue, Switch, SegmentedControlInput } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../common/components/forms';
+import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
@@ -26,7 +26,6 @@ export const VideoFilters: FC = (): ReactElement => {
     const clearFilterParams = useClearFilterParams();
     const {
         state: {
-            apiPath,
             filters: {
                 titleContains, maxLength, categories, watched, mediaWatched,
                 minResolution, tags, sortPriorityFirst
@@ -35,16 +34,15 @@ export const VideoFilters: FC = (): ReactElement => {
         stateReducer,
     } = useContext(VideoDbContext);
 
-    const categoryLookup = useGetLookup(apiPath, 'categories');
-
     return (
         <div className='video-filters'>
             <Card className='card'>
-                <MultiSelectKeyValue
-                    label='Categories'
+                <NullableSelectLookup
+                    label='Category'
+                    className='category'
+                    lookupTable='categories'
                     inline={true}
-                    allItems={categoryLookup}
-                    selectedKeys={categories ?? []}
+                    selectedKey={categories}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                 />
                 <SegmentedControlInput

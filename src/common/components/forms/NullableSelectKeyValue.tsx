@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+
 import { SelectKeyValue } from './SelectKeyValue';
 
 type NullableSelectKeyValueParams = {
@@ -8,11 +9,13 @@ type NullableSelectKeyValueParams = {
     label: string;
     small?: boolean;
     className?: string;
+    inline?: boolean;
 };
 
 export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params): ReactElement => {
     const allItems = { ...params.allItems };
-    allItems[''] = ' - ';
+    const { selectedKey, label, small, className, inline } = params;
+    allItems[''] = ' — ';
 
     const changeSelection = (selectedKey: string) => {
         params.onSelectionChange?.(selectedKey || null);
@@ -21,11 +24,12 @@ export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params)
     return (
         <SelectKeyValue
             allItems={allItems}
-            selectedKey={params.selectedKey ?? ''}
+            selectedKey={selectedKey ?? ''}
             onSelectionChange={changeSelection}
-            label={params.label}
-            small={params.small}
-            className={params.className}
+            label={label}
+            small={small}
+            className={className}
+            inline={inline}
         />
     );
 };
