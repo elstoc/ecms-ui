@@ -92,7 +92,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 resetOnSelect={true}
                 placeholder=''
                 noResults={<MenuItem disabled={true} text="No results." roleStructure="listoption" />}
-                popoverProps={{minimal: true}}
+                popoverProps={{minimal: true, matchTargetWidth: true}}
                 popoverContentProps={{className: `${popoverClassName} multi-tag-input-popover`}}
             />
         </FormGroup>
