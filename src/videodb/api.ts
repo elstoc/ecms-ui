@@ -8,9 +8,9 @@ type Video = {
     watched: string;
     to_watch_priority: number | null;
     progress: string | null;
+    year: number | null;
     imdb_id: string | null;
     image_url: string | null;
-    year: number | null;
     actors: string | null;
     plot: string | null;
     tags: string | null;
@@ -22,47 +22,16 @@ type Video = {
     media_notes: string | null;
 }
 
-type VideoIdOnly = {
-    id: number;
-}
-
-type VideoWithId = Video & VideoIdOnly;
-
-type VideoSummary = {
-    id: number;
-    title: string;
-    category: string;
-    director: string | null;
-    length_mins: number | null;
-    watched: string;
-    to_watch_priority: number | null;
-    progress: string | null;
-    year: number | null;
-    actors: string | null;
-    tags: string | null;
-    primary_media_type: string | null;
-    primary_media_location: string | null;
-    primary_media_watched: string | null;
-    other_media_type: string | null;
-    other_media_location: string | null;
-    media_notes: string | null;
-}
-
-type PrimaryMedium = {
-    pm_media_type: string | null;
-    pm_watched: string | null;
-}
-
-type VideoSummaryAndPrimaryMedium = VideoSummary & PrimaryMedium;
+type VideoWithId = Video & { id: number; };
 
 type VideoUpdate = {
     id: number;
     to_watch_priority: 0 | 1;
 }
 
-const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoSummaryAndPrimaryMedium[]> => {
+const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoWithId[]> => {
     const url = 'videodb/videos';
-    const { data } = await axiosSecureClient.get<VideoSummaryAndPrimaryMedium[]>(url, { params: { path, ...filters }});
+    const { data } = await axiosSecureClient.get<VideoWithId[]>(url, { params: { path, ...filters }});
     return data;
 };
 
@@ -109,7 +78,6 @@ const getVideoDbLookup = async (path: string, lookupTable: string): Promise<{ [k
 export {
     Video,
     VideoWithId,
-    VideoSummaryAndPrimaryMedium,
     VideoUpdate,
     getVideoDbVideos,
     patchVideoDbVideos,

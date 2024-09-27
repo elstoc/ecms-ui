@@ -1,8 +1,8 @@
 import { downloadBlob } from '../../utils';
 import { ColumnParam, createCSV } from '../../utils/createCSV';
-import { getVideoDbVideos, VideoSummaryAndPrimaryMedium } from '../api';
+import { getVideoDbVideos, VideoWithId } from '../api';
 
-const videoColumnParams: ColumnParam<VideoSummaryAndPrimaryMedium>[] = [
+const videoColumnParams: ColumnParam<VideoWithId>[] = [
     { title: 'Id', getField: (video) => video.id },
     { title: 'Flag', getField: (video) => video.to_watch_priority || null },
     { title: 'Title', getField: (video) => video.title },

@@ -2,18 +2,18 @@ import React, { forwardRef, ReactElement, useContext, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Card, Collapse, Icon as BPIcon } from '@blueprintjs/core';
 
-import { VideoSummaryAndPrimaryMedium } from '../api';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoWithId } from '../api';
 
 import { Flag } from '../../common/components/forms';
+import { Icon } from '../../common/components/icon';
 
 import './VideoListItem.scss';
-import { Icon } from '../../common/components/icon';
 
 type VideoDbProps = {
     apiPath: string;
-    video: VideoSummaryAndPrimaryMedium;
+    video: VideoWithId;
 }
 
 const watchedColorLookup = {
