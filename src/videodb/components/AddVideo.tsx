@@ -13,7 +13,7 @@ const initialVideo = {
     id: 0, title: '', category: '',
     director: null, length_mins: null, watched: '', to_watch_priority: null,
     progress: null, imdb_id: null, image_url: null, year: null,
-    actors: null, plot: null, tags: [],
+    actors: null, plot: null, tags: null,
     primary_media_type: null, primary_media_location: null,
     primary_media_watched: null, other_media_type: null,
     other_media_location: null, media_notes: null,

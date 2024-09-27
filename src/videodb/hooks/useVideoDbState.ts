@@ -8,7 +8,7 @@ const BATCH_SIZE = 100;
 type SetMaxLength = { action: 'setFilter'; key: 'maxLength'; value: number | null; }
 type SetTitleContains = { action: 'setFilter'; key: 'titleContains'; value: string | null; }
 type SetCategories = { action: 'setFilter'; key: 'categories'; value: string[] | null; }
-type SetTags = { action: 'setFilter'; key: 'tags'; value: string[] | null; }
+type SetTags = { action: 'setFilter'; key: 'tags'; value: string | null; }
 type SetWatched = { action: 'setFilter'; key: 'watched'; value: string | null; }
 type SetMediaWatched = { action: 'setFilter'; key: 'mediaWatched'; value: string | null; }
 type SetMinResolution = { action: 'setFilter'; key: 'minResolution'; value: string | null; }
@@ -26,7 +26,7 @@ type VideoFilters = {
     limit: number;
     maxLength: number | null;
     categories: string[] | null;
-    tags: string[] | null;
+    tags: string | null;
     titleContains: string | null;
     watched: string | null;
     mediaWatched: string | null;
@@ -107,7 +107,7 @@ const useUpdateStateOnSearchParamChange = () => {
                     maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
                     titleContains: searchParams.get('titleContains'),
                     categories: searchParams.get('categories')?.split('|') ?? null,
-                    tags: searchParams.get('tags')?.split('|') ?? null,
+                    tags: searchParams.get('tags') ?? null,
                     watched: searchParams.get('watched') ?? 'Any',
                     mediaWatched: searchParams.get('mediaWatched') ?? 'Any',
                     minResolution: searchParams.get('minResolution') ?? 'SD',
@@ -134,8 +134,8 @@ const useSetSearchParamsFromFilterState = () => {
             titleContains
                 ? params.set('titleContains', titleContains)
                 : params.delete('titleContains');
-            tags?.length
-                ? params.set('tags', tags.join('|'))
+            tags
+                ? params.set('tags', tags)
                 : params.delete('tags');
             watched && ['Y', 'N'].includes(watched)
                 ? params.set('watched', watched)

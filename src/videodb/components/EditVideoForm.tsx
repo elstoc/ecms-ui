@@ -116,10 +116,9 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
             />
             <TagInput
                 label='Tags'
-                className='tags'
                 inline={true}
-                tags={videoState.tags ?? []}
-                onSelectionChange={(value: string[]) => videoStateReducer({key: 'tags', value})}
+                tags={videoState.tags}
+                onSelectionChange={(value) => videoStateReducer({ key: 'tags', value })}
             />
             <NullableStringInput
                 label='Progress'

@@ -13,7 +13,7 @@ type Video = {
     year: number | null;
     actors: string | null;
     plot: string | null;
-    tags?: string[];
+    tags: string | null;
     primary_media_type: string | null;
     primary_media_location: string | null;
     primary_media_watched: string | null;

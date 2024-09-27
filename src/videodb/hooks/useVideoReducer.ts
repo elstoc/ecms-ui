@@ -1,7 +1,7 @@
 import { VideoWithId } from '../api';
 
 type SetStringField = {
-    key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot'
+    key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot' | 'tags'
        | 'primary_media_type' | 'primary_media_location' | 'primary_media_watched' | 'other_media_type' | 'other_media_location' | 'media_notes';
     value: string | null;
 };
@@ -11,12 +11,7 @@ type SetNumericField = {
     value: number | null;
 };
 
-type SetStringArrayField = {
-    key: 'tags';
-    value: string[]
-};
-
-type SetFieldActions = SetStringField | SetNumericField | SetStringArrayField;
+type SetFieldActions = SetStringField | SetNumericField;
 
 export const videoReducer: (state: VideoWithId, action: SetFieldActions) => VideoWithId = (state, action) => {
     return { ...state, [action.key]: action.value };

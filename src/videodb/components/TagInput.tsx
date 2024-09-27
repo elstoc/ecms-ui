@@ -6,8 +6,8 @@ import { VideoDbContext } from '../hooks/useVideoDbState';
 import { MultiTagInput } from '../../common/components/forms';
 
 type TagInputParams = {
-    tags: string[];
-    onSelectionChange?: (selectedKeys: string[]) => void;
+    tags: string | null;
+    onSelectionChange?: (selectedTags: string) => void;
     label: string;
     inline?: boolean;
     className?: string;
@@ -15,13 +15,14 @@ type TagInputParams = {
 
 export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className }): ReactElement => {
     const { state: { apiPath } } = useContext(VideoDbContext);
+    const tagsArray = tags ? tags.split('|') : [];
     const tagLookup = useGetTags(apiPath);
 
     return (
         <MultiTagInput
             selectableTags={tagLookup}
-            tags={tags}
-            onSelectionChange={onSelectionChange}
+            tags={tagsArray}
+            onSelectionChange={(selectedTags) => onSelectionChange?.(selectedTags.join('|'))}
             label={label}
             inline={inline}
             className={className}

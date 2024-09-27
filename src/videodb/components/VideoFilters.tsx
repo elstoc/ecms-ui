@@ -79,7 +79,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     label='Tags'
                     className='tags'
                     inline={true}
-                    tags={tags ?? []}
+                    tags={tags}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'tags', value })}
                 />
                 <NullableStringInput

@@ -76,7 +76,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         <div><strong>Location:</strong> {locationLookup[video.primary_media_location ?? '']}</div>
                         {video.other_media_location && <div><strong>Other Media: </strong> {mediaTypeLookup[video.other_media_type ?? '']} ({locationLookup[video.other_media_location ?? '']})</div>}
                         {video.media_notes && <div><strong>Notes:</strong> {video.media_notes}</div>}
-                        {video.tags && <div><strong>Tags:</strong> {video.tags.replaceAll(',', ', ')}</div>}
+                        {video.tags && <div><strong>Tags:</strong> {video.tags.replaceAll('|', ', ')}</div>}
                     </div>
                     <div className='right' onClick={(e) => e.stopPropagation()}>
                         <Icon
