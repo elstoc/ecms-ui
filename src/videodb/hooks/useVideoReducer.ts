@@ -7,7 +7,7 @@ type SetStringField = {
 };
 
 type SetNumericField = {
-    key: 'length_mins' | 'priority_flag' | 'year';
+    key: 'num_episodes' | 'length_mins' | 'priority_flag' | 'year';
     value: number | null;
 };
 

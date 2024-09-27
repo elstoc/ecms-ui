@@ -11,7 +11,7 @@ import { AppToaster } from '../../common/components/toaster';
 
 const initialVideo = {
     id: 0, title: '', category: '',
-    director: null, length_mins: null, watched: '', priority_flag: null,
+    director: null, num_episodes: null, length_mins: null, watched: '', priority_flag: null,
     progress: null, imdb_id: null, image_url: null, year: null,
     actors: null, plot: null, tags: null,
     primary_media_type: null, primary_media_location: null,

@@ -14,7 +14,7 @@
         * { width: 100%; }
     }
 
-    .init-group * { margin-bottom: 0; }
+    .second-group * { margin-bottom: 0; }
     
     .watched-status {
         width: 6em;
@@ -30,9 +30,9 @@
         }
     }
 
-    .length {
-        width: 7em;
-        input { width: 6em; }
+    .length, .num-episodes {
+        width: 6em;
+        input { width: 5em; }
     }
 
     .media {

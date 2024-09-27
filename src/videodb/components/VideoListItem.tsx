@@ -42,6 +42,16 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
         prioritySwitchChecked = pendingFlagUpdates[video.id] === 1;
     }
 
+    let lengthText = '';
+
+    if (video.num_episodes && video.length_mins) {
+        lengthText = `(${video.num_episodes} x ${video.length_mins} mins)`;
+    } else if (video.length_mins) {
+        lengthText = `(${video.length_mins} mins)`;
+    } else if (video.num_episodes) {
+        lengthText = `(${video.num_episodes} episodes)`;
+    }
+
     return (
         <Card
             ref={ref}
@@ -55,7 +65,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                     </div>
                     <div className='sub-info'>
                         <span className='category'>{category}</span>
-                        {video.length_mins && <span> ({video.length_mins} mins) </span>}
+                        {lengthText && <span> {lengthText} </span>}
                         <span> <BPIcon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
                         <span><BPIcon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /></span>
                         <span> {pMediaType}</span>

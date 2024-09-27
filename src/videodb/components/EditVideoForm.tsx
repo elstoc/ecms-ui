@@ -38,7 +38,7 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 onValueChange={(value) => videoStateReducer({ key: 'title', value })}
                 autoFocus={true}
             />
-            <ControlGroup className='init-group'>
+            <ControlGroup className='first-group'>
                 <SelectLookup
                     label='Watched'
                     className='watched-status'
@@ -53,8 +53,16 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                     selectedKey={videoState.category}
                     onSelectionChange={(value) => videoStateReducer({ key: 'category', value})}
                 />
+            </ControlGroup>
+            <ControlGroup className='second-group'>
                 <NullableIntInput
-                    label='Length (mins)'
+                    label='Episodes'
+                    className='num-episodes'
+                    value={videoState.num_episodes}
+                    onValueChange={(value) => videoStateReducer({ key: 'num_episodes', value})}
+                />
+                <NullableIntInput
+                    label='Length'
                     className='length'
                     value={videoState.length_mins}
                     onValueChange={(value) => videoStateReducer({ key: 'length_mins', value})}

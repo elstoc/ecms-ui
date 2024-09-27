@@ -4,6 +4,7 @@ type Video = {
     title: string;
     category: string;
     director: string | null;
+    num_episodes: number | null;
     length_mins: number | null;
     watched: string;
     priority_flag: number | null;

@@ -7,6 +7,7 @@ const videoColumnParams: ColumnParam<VideoWithId>[] = [
     { title: 'Flag', getField: (video) => video.priority_flag || null },
     { title: 'Title', getField: (video) => video.title },
     { title: 'Category', getField: (video) => video.category },
+    { title: 'NumEpisodes', getField: (video) => video.num_episodes },
     { title: 'Length', getField: (video) => video.length_mins },
     { title: 'Watched', getField: (video) => video.watched },
     { title: 'Tags', getField: (video) => video.tags },
