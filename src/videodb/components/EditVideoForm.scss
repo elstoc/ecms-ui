@@ -45,6 +45,8 @@
             width: 8rem;
             button { width: 7rem; }
         }
+    
+        .notes { margin-bottom: 0; }
     }
 
     .bp5-control.bp5-switch input:checked:hover ~ .bp5-control-indicator,
@@ -52,7 +54,7 @@
         background: dimgray;
     }
 
-    .notes { margin-bottom: 0; }
+    .collapser { width: 100%; }
 
     .director { margin-top: 1rem; }
 
@@ -86,14 +88,10 @@
         }
 
         .media {
-            .media-type {
+            .media-type,
+            .media-location {
                 width: 11rem;
                 button { width: 10rem; }
-            }
-
-            .media-location {
-                width: 10rem;
-                button { width: 9rem; }
             }
         }
     }

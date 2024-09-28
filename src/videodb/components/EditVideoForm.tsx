@@ -1,5 +1,5 @@
-import React, { FC, ReactElement, useCallback, useReducer } from 'react';
-import { Button, Card, ControlGroup, Divider } from '@blueprintjs/core';
+import React, { FC, ReactElement, useCallback, useReducer, useState } from 'react';
+import { Button, Card, Collapse, ControlGroup, Divider } from '@blueprintjs/core';
 
 import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
@@ -19,6 +19,7 @@ type EditVideoFormProps = {
 
 export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSave, onDelete }): ReactElement => {
     const [videoState, videoStateReducer] = useReducer(videoReducer, initialVideoState);
+    const [collapseIsOpen, setCollapseIsOpen] = useState(false);
 
     const saveVideo = useCallback(async () => {
         onSave?.(videoState);
@@ -135,26 +136,28 @@ export const EditVideoForm: FC<EditVideoFormProps> = ({ initialVideoState, onSav
                 value={videoState.progress}
                 onValueChange={(value) => videoStateReducer({ key: 'progress', value })}
             />
-            <Divider />
-            <NullableStringInput
-                label='Director'
-                className='director'
-                inline={true}
-                value={videoState.director}
-                onValueChange={(value) => videoStateReducer({ key: 'director', value })}
-            />
-            <NullableStringInput
-                label='Actors'
-                inline={true}
-                value={videoState.actors}
-                onValueChange={(value) => videoStateReducer({ key: 'actors', value })}
-            />
-            <NullableStringInput
-                label='Plot'
-                inline={true}
-                value={videoState.plot}
-                onValueChange={(value) => videoStateReducer({ key: 'plot', value })}
-            />
+            <Button className='collapser' onClick={() => setCollapseIsOpen((open) => !open)} icon={collapseIsOpen ? 'caret-up' : 'caret-down'} />
+            <Collapse isOpen={collapseIsOpen}>
+                <NullableStringInput
+                    label='Director'
+                    className='director'
+                    inline={true}
+                    value={videoState.director}
+                    onValueChange={(value) => videoStateReducer({ key: 'director', value })}
+                />
+                <NullableStringInput
+                    label='Actors'
+                    inline={true}
+                    value={videoState.actors}
+                    onValueChange={(value) => videoStateReducer({ key: 'actors', value })}
+                />
+                <NullableStringInput
+                    label='Plot'
+                    inline={true}
+                    value={videoState.plot}
+                    onValueChange={(value) => videoStateReducer({ key: 'plot', value })}
+                />
+            </Collapse>
             <div className='form-buttons'>
                 {onDelete &&
                     <Button tabIndex={-1} className='delete-button' onClick={deleteVideo}>
