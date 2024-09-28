@@ -16,7 +16,7 @@ const minResolutionOptions = [
 ];
 
 const watchedStatusOptions = [
-    { label: 'Any', value: 'Any' },
+    { label: 'All', value: 'All' },
     { label: 'Y', value: 'Y' },
     { label: 'N', value: 'N' }
 ];
@@ -44,6 +44,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     inline={true}
                     selectedKey={categories}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
+                    nullValueRepr='All'
                 />
                 <SegmentedControlInput
                     label='Min Resolution'
@@ -56,14 +57,14 @@ export const VideoFilters: FC = (): ReactElement => {
                     label='Watched'
                     inline={true}
                     options={watchedStatusOptions}
-                    value={watched ?? 'Any'}
+                    value={watched ?? 'All'}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'watched', value })}
                 />
                 <SegmentedControlInput
                     label='Media Watched'
                     inline={true}
                     options={watchedStatusOptions}
-                    value={mediaWatched ?? 'Any'}
+                    value={mediaWatched ?? 'All'}
                     onValueChange={(value) => stateReducer({ action: 'setFilter', key: 'mediaWatched', value })}
                 />
                 <NullableIntInput

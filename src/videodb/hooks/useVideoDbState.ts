@@ -49,8 +49,8 @@ const initialFilters = {
     categories: null,
     tags: null,
     titleContains: null,
-    watched: 'Any',
-    mediaWatched: 'Any',
+    watched: 'All',
+    mediaWatched: 'All',
     minResolution: 'SD',
     sortPriorityFirst: null
 };
@@ -108,8 +108,8 @@ const useUpdateStateOnSearchParamChange = () => {
                     titleContains: searchParams.get('titleContains'),
                     categories: searchParams.get('categories') ?? null,
                     tags: searchParams.get('tags') ?? null,
-                    watched: searchParams.get('watched') ?? 'Any',
-                    mediaWatched: searchParams.get('mediaWatched') ?? 'Any',
+                    watched: searchParams.get('watched') ?? 'All',
+                    mediaWatched: searchParams.get('mediaWatched') ?? 'All',
                     minResolution: searchParams.get('minResolution') ?? 'SD',
                     sortPriorityFirst: (toIntOrUndefined(searchParams.get('sortPriorityFirst')) as null | 0 | 1) ?? null
                 }
