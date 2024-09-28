@@ -1,5 +1,6 @@
 import { getUserInfo } from '../api';
 import { useCustomQuery } from '../../common/hooks';
+import { useSiteConfig } from '../../site';
 
 export const useUserInfo = () => {
     return useCustomQuery({
@@ -10,5 +11,6 @@ export const useUserInfo = () => {
 
 export const useUserIsAdmin = () => {
     const user = useUserInfo();
-    return user.roles?.includes('admin');
+    const { authEnabled } = useSiteConfig();
+    return !authEnabled || (user.roles ?? []).includes('admin');
 };
