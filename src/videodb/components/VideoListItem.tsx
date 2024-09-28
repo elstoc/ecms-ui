@@ -3,6 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Card, Collapse, Icon as BPIcon } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
+import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { VideoWithId } from '../api';
 
@@ -26,6 +27,7 @@ const watchedColorLookup = {
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
     const { state: { pendingFlagUpdates }, stateReducer } = useContext(VideoDbContext);
     const navigate = useNavigate();
+    const userIsAdmin = useUserIsAdmin();
     const [expandedView, setExpandedView] = useState(false);
     const expandedClass = expandedView ? 'expanded' : '';
 
@@ -76,7 +78,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         value={prioritySwitchChecked}
                         color='green'
                         className={`priority ${prioritySwitchChecked ? '' : 'unchecked'}`}
-                        onValueChange={(checked) => stateReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 })}
+                        onValueChange={!userIsAdmin ? undefined : ((checked) => stateReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 }))}
                     />
                 </div>
             </div>
@@ -89,12 +91,14 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         {video.tags && <div><strong>Tags:</strong> {video.tags.replaceAll('|', ', ')}</div>}
                     </div>
                     <div className='right' onClick={(e) => e.stopPropagation()}>
-                        <Icon
-                            name='edit'
-                            className='icon'
-                            color='black'
-                            onClick={() => navigate(`./${video.id}?${searchParams.toString()}`)}
-                        />
+                        {userIsAdmin &&
+                            <Icon
+                                name='edit'
+                                className='icon'
+                                color='black'
+                                onClick={() => navigate(`./${video.id}?${searchParams.toString()}`)}
+                            />
+                        }
                     </div>
                 </div>
             </Collapse>

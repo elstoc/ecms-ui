@@ -7,3 +7,8 @@ export const useUserInfo = () => {
         queryFn: getUserInfo,
     });
 };
+
+export const useUserIsAdmin = () => {
+    const user = useUserInfo();
+    return user.roles?.includes('admin');
+};

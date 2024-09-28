@@ -15,7 +15,7 @@ type FlagParams = {
 export const Flag: FC<FlagParams> = ({ value, onValueChange, label, inline, className = '', color }): ReactElement => {
     return (
         <Icon
-            onClick={() => onValueChange?.(!value)}
+            onClick={onValueChange && (() => onValueChange(!value))}
             className={`flag-component ${className}`}
             name='flag'
             color={`${value ? (color || 'firebrick') : 'lightgrey'}`}
