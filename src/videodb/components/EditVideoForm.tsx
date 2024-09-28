@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useCallback, useReducer, useState } from 'react';
-import { Button, Card, Collapse, ControlGroup, Divider } from '@blueprintjs/core';
+import { Button, Card, Collapse, ControlGroup } from '@blueprintjs/core';
 
 import { videoReducer } from '../hooks/useVideoReducer';
 import { VideoWithId } from '../api';
