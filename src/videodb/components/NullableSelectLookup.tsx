@@ -14,10 +14,11 @@ type NullableSelectLookupParams = {
     className?: string;
     inline?: boolean;
     nullValueRepr?: string;
+    filterable?: boolean;
 };
 
 export const NullableSelectLookup: FC<NullableSelectLookupParams> = (props): ReactElement => {
-    const { lookupTable, selectedKey, onSelectionChange, label, small, className, inline, nullValueRepr } = props;
+    const { lookupTable, selectedKey, onSelectionChange, label, small, className, inline, nullValueRepr, filterable } = props;
     const { state: { apiPath } } = useContext(VideoDbContext);
     const lookupKeyValues = useGetLookup(apiPath, lookupTable);
 
@@ -31,6 +32,7 @@ export const NullableSelectLookup: FC<NullableSelectLookupParams> = (props): Rea
             className={className}
             inline={inline}
             nullValueRepr={nullValueRepr}
+            filterable={filterable}
         />
     );
 };

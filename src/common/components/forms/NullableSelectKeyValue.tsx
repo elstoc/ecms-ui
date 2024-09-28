@@ -11,11 +11,12 @@ type NullableSelectKeyValueParams = {
     className?: string;
     inline?: boolean;
     nullValueRepr?: string;
+    filterable?: boolean;
 };
 
 export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params): ReactElement => {
     const allItems = { ...params.allItems };
-    const { selectedKey, label, small, className, inline, nullValueRepr } = params;
+    const { selectedKey, label, small, className, inline, nullValueRepr, filterable } = params;
     allItems[''] = nullValueRepr || ' — ';
 
     const changeSelection = (selectedKey: string) => {
@@ -31,6 +32,7 @@ export const NullableSelectKeyValue: FC<NullableSelectKeyValueParams> = (params)
             small={small}
             className={className}
             inline={inline}
+            filterable={filterable}
         />
     );
 };

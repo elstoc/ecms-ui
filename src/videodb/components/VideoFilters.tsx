@@ -45,6 +45,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     selectedKey={categories}
                     onSelectionChange={(value) => stateReducer({ action: 'setFilter', key: 'categories', value })}
                     nullValueRepr='All'
+                    filterable={false}
                 />
                 <SegmentedControlInput
                     label='Min Resolution'
