@@ -93,6 +93,7 @@ export const VideoFilters: FC = (): ReactElement => {
                 />
                 <Switch
                     label='Priority First'
+                    className='priority'
                     inline={true}
                     value={sortPriorityFirst === 1}
                     onValueChange={(value) => stateReducer({action: 'setFilter', key: 'sortPriorityFirst', value: value ? 1 : 0})}
