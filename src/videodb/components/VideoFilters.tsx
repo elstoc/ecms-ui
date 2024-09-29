@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useContext } from 'react';
+import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { Button, Card } from '@blueprintjs/core';
 
 import { VideoDbContext, useClearFilterParams, useSetSearchParamsFromFilterState } from '../hooks/useVideoDbState';
@@ -24,15 +24,17 @@ const watchedStatusOptions = [
 export const VideoFilters: FC = (): ReactElement => {
     const setSearchParamsFromState = useSetSearchParamsFromFilterState();
     const clearFilterParams = useClearFilterParams();
-    const {
-        state: {
-            filters: {
-                titleContains, maxLength, categories, watched, mediaWatched,
-                minResolution, tags, sortPriorityFirst
-            },
-        },
-        stateReducer,
-    } = useContext(VideoDbContext);
+    const { state: { filters }, stateReducer } = useContext(VideoDbContext);
+    const { titleContains, maxLength, categories, watched, mediaWatched, minResolution, tags, sortPriorityFirst } = filters;
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            stateReducer({ action: 'resetLimit' });
+            setSearchParamsFromState();
+        }, 1000);
+
+        return () => clearTimeout(handler);
+    }, [stateReducer, setSearchParamsFromState, filters]);
 
     return (
         <div className='video-filters'>
@@ -96,8 +98,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     onValueChange={(value) => stateReducer({action: 'setFilter', key: 'sortPriorityFirst', value: value ? 1 : 0})}
                 />
                 <div className='filter-action-buttons'>
-                    <Button onClick={clearFilterParams}>Clear All</Button>
-                    <Button onClick={setSearchParamsFromState}>Submit</Button>
+                    <Button onClick={clearFilterParams}>Reset Filters</Button>
                 </div>
             </Card>
         </div>

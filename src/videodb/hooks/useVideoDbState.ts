@@ -16,10 +16,11 @@ type SetSortPriorityFirst = { action: 'setFilter'; key: 'sortPriorityFirst'; val
 
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
+type ResetLimit = { action: 'resetLimit' };
 type SetUpdatedFlag = { action: 'setUpdatedFlag', videoId: number,  currValue: number | null, newValue: 0 | 1 };
 type ResetFlagUPdates = { action: 'resetFlagUpdates' };
 
-type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | SetTags
+type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | ResetLimit | SetTags
     | SetWatched | SetMediaWatched | SetMinResolution | SetSortPriorityFirst | SetUpdatedFlag | ResetFlagUPdates;
 
 type VideoFilters = {
