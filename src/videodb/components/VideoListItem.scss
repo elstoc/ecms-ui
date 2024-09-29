@@ -21,7 +21,6 @@
         flex-direction: row;
         justify-content: space-between;
         box-sizing: content-box;
-        padding: 7px 10px !important;
         font-size: 0.85rem;
 
         .left {
@@ -42,6 +41,7 @@
     }
 
     .primary-info {
+        padding: 7px 10px !important;
         .bp5-form-group,
         .bp5-control.bp5-switch {
             margin: 0;
@@ -75,9 +75,25 @@
     }
 
     .secondary-info {
-        padding-top: 0.5em !important;
-        .left {
-            padding-bottom: 0.6em !important;
+        padding: 5px 10px 7px 10px !important;
+
+        .category-and-tags {
+            margin-bottom: 0.6rem;
+
+            >span {
+                margin-right: 0.5rem;
+                padding: 1px 5px;
+            }
+        }
+
+        .other-stuff div {
+            margin-top: 3px;
+        }
+
+        .right {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
         }
     }
 }

@@ -1,6 +1,6 @@
 import React, { forwardRef, ReactElement, useContext, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Card, Collapse, Icon as BPIcon } from '@blueprintjs/core';
+import { Card, Collapse, Icon as BPIcon, Tag } from '@blueprintjs/core';
 
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
@@ -66,11 +66,10 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         <div>{video.title} </div>
                     </div>
                     <div className='sub-info'>
-                        <span className='category'>{category}</span>
-                        {lengthText && <span> {lengthText} </span>}
-                        <span> <BPIcon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
+                        <span><BPIcon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
                         <span><BPIcon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /></span>
                         <span> {pMediaType}</span>
+                        {lengthText && <span> {lengthText} </span>}
                     </div>
                 </div>
                 <div className='right' onClick={(e) => e.stopPropagation()}>
@@ -85,10 +84,17 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
             <Collapse isOpen={expandedView}>
                 <div className='secondary-info'>
                     <div className='left'>
-                        <div><strong>Location:</strong> {locationLookup[video.primary_media_location ?? '']}</div>
-                        {video.other_media_location && <div><strong>Other Media: </strong> {mediaTypeLookup[video.other_media_type ?? '']} ({locationLookup[video.other_media_location ?? '']})</div>}
-                        {video.media_notes && <div><strong>Notes:</strong> {video.media_notes}</div>}
-                        {video.tags && <div><strong>Tags:</strong> {video.tags.replaceAll('|', ', ')}</div>}
+                        <div className='category-and-tags'>
+                            <Tag>{category}</Tag>
+                            {video.tags && video.tags.split('|').map((tag) => (
+                                <Tag minimal={true}>{tag}</Tag>
+                            ))}
+                        </div>
+                        <div className='other-stuff'>
+                            <div><strong>Location:</strong> {locationLookup[video.primary_media_location ?? '']}</div>
+                            {video.other_media_location && <div><strong>Other Media: </strong> {mediaTypeLookup[video.other_media_type ?? '']} ({locationLookup[video.other_media_location ?? '']})</div>}
+                            {video.media_notes && <div><strong>Notes:</strong> {video.media_notes}</div>}
+                        </div>
                     </div>
                     <div className='right' onClick={(e) => e.stopPropagation()}>
                         {userIsAdmin &&
