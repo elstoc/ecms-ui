@@ -14,22 +14,17 @@ export const SiteNav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteCompo
     return (
         <div className='site-nav'>
             {siteComponents.map((component) =>
-                <ComponentNavItem
-                    key={component.apiPath}
-                    component={component}
-                />
+                <ComponentNavItem key={component.apiPath} component={component} />
             )}
         </div>
     );
 };
 
 const ComponentNavItem: FC<{ component: ComponentMetadata }> = ({ component }) => {
-    if (component?.type !== ComponentTypes.componentgroup) {
+    if (component.type !== ComponentTypes.componentgroup) {
         return (
             <NavLink to={component.defaultComponent ? '' : component.apiPath}>
-                <div className='nav-title'>
-                    {component.title}
-                </div>
+                <div className='nav-title'>{component.title}</div>
             </NavLink>
         );
     }
