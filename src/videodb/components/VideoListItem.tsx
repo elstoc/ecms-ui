@@ -85,9 +85,9 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                 <div className='secondary-info'>
                     <div className='left'>
                         <div className='category-and-tags'>
-                            <Tag>{category}</Tag>
+                            <Tag key='category'>{category}</Tag>
                             {video.tags && video.tags.split('|').map((tag) => (
-                                <Tag minimal={true}>{tag}</Tag>
+                                <Tag key={tag} minimal={true}>{tag}</Tag>
                             ))}
                         </div>
                         <div className='other-stuff'>
