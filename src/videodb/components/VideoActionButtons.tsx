@@ -4,17 +4,18 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@blueprintjs/core';
 
 import { patchVideoDbVideos, VideoUpdate } from '../api';
+import { downloadVideoCSV } from '../utils/downloadVideoCSV';
+
+import { Icon } from '../../common/components/icon';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { AppToaster } from '../../common/components/toaster';
 
 import './VideoActionButtons.scss';
-import { downloadVideoCSV } from '../utils/downloadVideoCSV';
-import { Icon } from '../../common/components/icon';
 
 export const VideoActionButtons: FC = (): ReactElement => {
     const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
-    const { state: { apiPath, pendingFlagUpdates, }, stateReducer } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath, pendingFlagUpdates, }, videoDbReducer } = useContext(VideoDbContext);
 
     const flagUpdateCount = Object.keys(pendingFlagUpdates).length;
 
@@ -27,11 +28,11 @@ export const VideoActionButtons: FC = (): ReactElement => {
             await patchVideoDbVideos(apiPath, videoUpdates);
             (await AppToaster).show({ message: 'flags updated', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            stateReducer({ action: 'resetFlagUpdates' });
+            videoDbReducer({ action: 'resetFlagUpdates' });
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [apiPath, pendingFlagUpdates, queryClient, stateReducer]);
+    }, [apiPath, pendingFlagUpdates, queryClient, videoDbReducer]);
 
     const downloadCSV = useCallback(async () => {
         await downloadVideoCSV(apiPath);
@@ -46,7 +47,7 @@ export const VideoActionButtons: FC = (): ReactElement => {
             {flagUpdateCount > 0 &&
                 <div>
                     <Button onClick={postFlagUpdates}>Update {flagUpdateCount} Flags</Button>
-                    <Icon name='cancel' onClick={() => stateReducer({ action: 'resetFlagUpdates' })} />
+                    <Icon name='cancel' onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })} />
                 </div>
             }
         </div>

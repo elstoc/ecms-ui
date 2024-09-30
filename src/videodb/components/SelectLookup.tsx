@@ -16,7 +16,7 @@ type SelectLookupParams = {
 
 export const SelectLookup: FC<SelectLookupParams> = (props): ReactElement => {
     const { lookupTable, selectedKey, onSelectionChange, label, small, className } = props;
-    const { state: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
     const lookupKeyValues = useGetLookup(apiPath, lookupTable);
 
     return (

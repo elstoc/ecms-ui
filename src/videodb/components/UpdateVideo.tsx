@@ -15,7 +15,7 @@ export const UpdateVideo: FC = (): ReactElement => {
     const queryClient = useQueryClient();
 
     const { id } = useParams();
-    const { state: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
     const storedVideo = useGetVideo(apiPath, parseInt(id ?? '0'));
 
     const updateVideo = useCallback(async (video: VideoWithId) => {

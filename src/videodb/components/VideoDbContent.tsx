@@ -15,7 +15,7 @@ import { VideoActionButtons } from './VideoActionButtons';
 export const VideoDbContent: FC = (): ReactElement => {
     const userIsAdmin = useUserIsAdmin();
 
-    const { state: { title } } = useContext(VideoDbContext);
+    const { videoDbState: { title } } = useContext(VideoDbContext);
     useTitle(title);
 
     const videoFilters = (

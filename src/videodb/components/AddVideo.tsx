@@ -23,7 +23,7 @@ export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { state: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
 
     const addVideo = useCallback(async (video: VideoWithId) => {
         try {

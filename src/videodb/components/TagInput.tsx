@@ -14,7 +14,7 @@ type TagInputParams = {
 };
 
 export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className }): ReactElement => {
-    const { state: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
     const tagsArray = tags ? tags.split('|') : [];
     const tagLookup = useGetTags(apiPath);
 

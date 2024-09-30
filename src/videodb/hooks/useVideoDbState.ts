@@ -19,8 +19,8 @@ type VideoDbState = {
 };
 
 type VideoDbStateContextProps = {
-    state: VideoDbState;
-    stateReducer: React.Dispatch<StateOperations>;
+    videoDbState: VideoDbState;
+    videoDbReducer: React.Dispatch<StateOperations>;
 };
 
 const videoDbQueryReducer: (state: VideoDbState, operation: StateOperations) => VideoDbState = (state, operation) => {
@@ -46,6 +46,6 @@ export const VideoDbContext = createContext({} as VideoDbStateContextProps);
 
 export const useVideoDbState: (title: string, apiPath: string) => VideoDbStateContextProps = (title, apiPath) => {
     const initialState = { title, apiPath, limit: BATCH_SIZE, pendingFlagUpdates: [] };
-    const [state, stateReducer] = useReducer(videoDbQueryReducer, initialState);
-    return { state, stateReducer };
+    const [videoDbState, videoDbReducer] = useReducer(videoDbQueryReducer, initialState);
+    return { videoDbState, videoDbReducer };
 };

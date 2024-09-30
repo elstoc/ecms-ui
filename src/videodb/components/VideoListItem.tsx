@@ -25,7 +25,7 @@ const watchedColorLookup = {
 } as { [key: string]: string };
 
 export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
-    const { state: { pendingFlagUpdates }, stateReducer } = useContext(VideoDbContext);
+    const { videoDbState: { pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbContext);
     const navigate = useNavigate();
     const userIsAdmin = useUserIsAdmin();
     const [expandedView, setExpandedView] = useState(false);
@@ -77,7 +77,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
                         value={prioritySwitchChecked}
                         color='green'
                         className={`priority ${prioritySwitchChecked ? '' : 'unchecked'}`}
-                        onValueChange={!userIsAdmin ? undefined : ((checked) => stateReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 }))}
+                        onValueChange={!userIsAdmin ? undefined : ((checked) => videoDbReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 }))}
                     />
                 </div>
             </div>

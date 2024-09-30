@@ -83,7 +83,7 @@ const getSearchParamsFromState: (params: URLSearchParams, state: FilterState) =>
 
 export const useVideoDbFilterState = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const { stateReducer: videoStateReducer } = useContext(VideoDbContext);
+    const { videoDbReducer } = useContext(VideoDbContext);
     const [state, stateReducer] = useReducer(filterReducer, initialFilters);
     const [syncState, setSyncState] = useState(false);
 
@@ -112,7 +112,7 @@ export const useVideoDbFilterState = () => {
     useEffect(() => {
         if (syncState) {
             setSyncState(false);
-            videoStateReducer({ action: 'resetLimit' });
+            videoDbReducer({ action: 'resetLimit' });
             setSearchParams((params) => getSearchParamsFromState(params, state));
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps

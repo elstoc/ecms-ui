@@ -11,7 +11,7 @@ import './VideoList.scss';
 
 export const VideoList: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { state: { apiPath,  limit }, stateReducer } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath,  limit }, videoDbReducer } = useContext(VideoDbContext);
 
     const {
         maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst
@@ -26,7 +26,7 @@ export const VideoList: FC = (): ReactElement => {
     const currentlyLoadedCount = videos.length;
 
     const refLastVideo = createRef<HTMLDivElement>();
-    useElementIsVisible(refLastVideo, () => stateReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
+    useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: currentlyLoadedCount }));
 
     return (
         <div className='video-list'>
