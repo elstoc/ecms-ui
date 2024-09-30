@@ -14,11 +14,13 @@ export const VideoList: FC = (): ReactElement => {
     const { videoDbState: { apiPath,  limit }, videoDbReducer } = useContext(VideoDbContext);
 
     const {
-        maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst
+        maxLength, titleContains, categories, tags,
+        watched, mediaWatched, minResolution, sortPriorityFirst
     } = Object.fromEntries(searchParams.entries());
 
     const filterSearchParams = {
-        maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst,
+        maxLength, titleContains, categories, tags,
+        watched, mediaWatched, minResolution, sortPriorityFirst,
         limit: limit?.toString()
     };
 
