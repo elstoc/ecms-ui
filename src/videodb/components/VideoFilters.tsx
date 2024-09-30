@@ -1,12 +1,13 @@
 import React, { FC, ReactElement } from 'react';
 import { Button, Card } from '@blueprintjs/core';
 
+import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
+
 import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../common/components/forms';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
-import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
 
 const minResolutionOptions = [
     { label: 'SD', value: 'SD' },
