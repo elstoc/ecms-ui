@@ -1,13 +1,12 @@
-import React, { FC, ReactElement, useCallback, useContext, useRef } from 'react';
+import React, { FC, ReactElement } from 'react';
 import { Button, Card } from '@blueprintjs/core';
-
-import { SetFilterOperations, VideoDbContext, useClearFilterParams, useSearchParamsReducer } from '../hooks/useVideoDbState';
 
 import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../common/components/forms';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
 
 import './VideoFilters.scss';
+import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
 
 const minResolutionOptions = [
     { label: 'SD', value: 'SD' },
@@ -22,26 +21,8 @@ const watchedStatusOptions = [
 ];
 
 export const VideoFilters: FC = (): ReactElement => {
-    const searchParamsReducer = useSearchParamsReducer();
-    const handlerRef = useRef<NodeJS.Timeout | null>(null);
-    const clearFilterParams = useClearFilterParams();
-    const { state: { filters }, stateReducer } = useContext(VideoDbContext);
-    const { titleContains, maxLength, categories, watched, mediaWatched, minResolution, tags, sortPriorityFirst } = filters;
-
-    const updateState = useCallback((operation: SetFilterOperations) => {
-        stateReducer(operation);
-
-        if (handlerRef.current) {
-            clearTimeout(handlerRef.current);
-            handlerRef.current = null;
-        }
-
-        const timeout = ['titleContains', 'maxLength'].includes(operation.key) ? 1000 : 10;
-
-        handlerRef.current = setTimeout(() => {
-            searchParamsReducer(operation);
-        }, timeout);
-    }, [searchParamsReducer, stateReducer]);
+    const { state, updateState, clearAllFilters } = useVideoDbFilterState();
+    const { titleContains, maxLength, categories, watched, mediaWatched, minResolution, tags, sortPriorityFirst } = state;
 
     return (
         <div className='video-filters'>
@@ -106,7 +87,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     onValueChange={(value) => updateState({action: 'setFilter', key: 'sortPriorityFirst', value: value ? 1 : 0})}
                 />
                 <div className='filter-action-buttons'>
-                    <Button onClick={clearFilterParams}>Reset Filters</Button>
+                    <Button onClick={clearAllFilters}>Reset Filters</Button>
                 </div>
             </Card>
         </div>
