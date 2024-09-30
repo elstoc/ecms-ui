@@ -91,7 +91,6 @@ export const useVideoDbFilterState = () => {
 
     // set state from search params on initial load
     useEffect(() => {
-        console.log('start');
         stateReducer({
             action: 'setAllFilters',
             value: {
