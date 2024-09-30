@@ -19,7 +19,7 @@ const queryDefaults = {
 
 const queryClient = new QueryClient(queryDefaults);
 const appContainer = document.getElementById('app-root')!;
-const portalContainer = document.getElementById('app-portal')!;
+const portalContainer = document.getElementById('portal-container')!;
 const root = createRoot(appContainer);
 
 root.render(
