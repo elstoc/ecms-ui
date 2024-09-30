@@ -95,28 +95,27 @@ const useGetFilterSearchParams = () => {
     }, [searchParams]);
 };
 
-const useUpdateStateOnSearchParamChange = () => {
+const useSetInitialState = () => {
     const [searchParams] = useSearchParams();
     const { stateReducer } = useContext(VideoDbContext);
 
     useEffect(() => {
-        if (!searchParams.get('id')) {
-            stateReducer({
-                action: 'setAllFilters',
-                value: {
-                    limit: BATCH_SIZE,
-                    maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
-                    titleContains: searchParams.get('titleContains'),
-                    categories: searchParams.get('categories') ?? null,
-                    tags: searchParams.get('tags') ?? null,
-                    watched: searchParams.get('watched') ?? 'All',
-                    mediaWatched: searchParams.get('mediaWatched') ?? 'All',
-                    minResolution: searchParams.get('minResolution') ?? 'SD',
-                    sortPriorityFirst: (toIntOrUndefined(searchParams.get('sortPriorityFirst')) as null | 0 | 1) ?? null
-                }
-            });
-        }
-    }, [searchParams, stateReducer]);
+        stateReducer({
+            action: 'setAllFilters',
+            value: {
+                limit: BATCH_SIZE,
+                maxLength: toIntOrUndefined(searchParams.get('maxLength')) ?? null,
+                titleContains: searchParams.get('titleContains'),
+                categories: searchParams.get('categories') ?? null,
+                tags: searchParams.get('tags') ?? null,
+                watched: searchParams.get('watched') ?? 'All',
+                mediaWatched: searchParams.get('mediaWatched') ?? 'All',
+                minResolution: searchParams.get('minResolution') ?? 'SD',
+                sortPriorityFirst: (toIntOrUndefined(searchParams.get('sortPriorityFirst')) as null | 0 | 1) ?? null
+            }
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 };
 
 const useSetSearchParamsFromFilterState = () => {
@@ -178,6 +177,6 @@ export {
     useGetFilterSearchParams,
     useSetSearchParamsFromFilterState,
     useClearFilterParams,
-    useUpdateStateOnSearchParamChange,
+    useSetInitialState,
     FlagUpdates
 };

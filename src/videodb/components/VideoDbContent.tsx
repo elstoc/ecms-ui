@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { useTitle } from '../../common/hooks';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
-import { VideoDbContext, useUpdateStateOnSearchParamChange } from '../hooks/useVideoDbState';
+import { VideoDbContext, useSetInitialState } from '../hooks/useVideoDbState';
 
 import { ContentWithSidebar } from '../../common/components/layout';
 import { VideoList } from './VideoList';
@@ -13,7 +13,7 @@ import { AddVideo } from './AddVideo';
 import { VideoActionButtons } from './VideoActionButtons';
 
 export const VideoDbContent: FC = (): ReactElement => {
-    useUpdateStateOnSearchParamChange();
+    useSetInitialState();
     const userIsAdmin = useUserIsAdmin();
 
     const { state: { title } } = useContext(VideoDbContext);
