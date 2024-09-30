@@ -1,3 +1,4 @@
+import { useReducer } from 'react';
 import { VideoWithId } from '../api';
 
 type SetStringField = {
@@ -13,6 +14,8 @@ type SetNumericField = {
 
 type SetFieldActions = SetStringField | SetNumericField;
 
-export const videoReducer: (state: VideoWithId, action: SetFieldActions) => VideoWithId = (state, action) => {
+const videoReducer: (state: VideoWithId, action: SetFieldActions) => VideoWithId = (state, action) => {
     return { ...state, [action.key]: action.value };
 };
+
+export const useEditVideoReducer = (initialState: VideoWithId) => useReducer(videoReducer, initialState);
