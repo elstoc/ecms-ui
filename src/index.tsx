@@ -18,13 +18,14 @@ const queryDefaults = {
 };
 
 const queryClient = new QueryClient(queryDefaults);
-const container = document.getElementById('app-container')!;
-const root = createRoot(container);
+const appContainer = document.getElementById('app-root')!;
+const portalContainer = document.getElementById('app-portal')!;
+const root = createRoot(appContainer);
 
 root.render(
     <QueryClientProvider client={queryClient}>
         <BrowserRouter>
-            <BlueprintProvider>
+            <BlueprintProvider portalContainer={portalContainer}>
                 <ErrorBoundary FallbackComponent={ErrorFallback}>
                     <Suspense fallback='Loading...'>
                         <App />

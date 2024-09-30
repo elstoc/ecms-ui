@@ -10,7 +10,7 @@
 
     background-color: #EEEEEE;
 
-    .app {
+    #app {
         display: flex;
         flex-direction: column;
         width: 95%;
@@ -30,22 +30,17 @@
             flex-grow: 1;
             flex-shrink: 1;
         }
-    }
-    
-}
 
-@for $i from 6 through 16 {
-    @media screen and (min-width: #{$i * 75}px) {
-        #app-container .app {
-            width: #{$i * 75 - 20}px;
+        @for $i from 6 through 16 {
+            @media screen and (min-width: #{$i * 75}px) {
+                width: #{$i * 75 - 20}px;
+            }
         }
-    }
-}
-
-@for $i from 9 through 13 {
-    @media screen and (min-width: #{$i * 150}px) {
-        #app-container .app {
-            width: #{$i * 150 - 50}px;
+        
+        @for $i from 9 through 13 {
+            @media screen and (min-width: #{$i * 150}px) {
+                width: #{$i * 150 - 50}px;
+            }
         }
     }
 }
