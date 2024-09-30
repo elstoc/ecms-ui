@@ -14,14 +14,15 @@ type SetMediaWatched = { action: 'setFilter'; key: 'mediaWatched'; value: string
 type SetMinResolution = { action: 'setFilter'; key: 'minResolution'; value: string | null; }
 type SetSortPriorityFirst = { action: 'setFilter'; key: 'sortPriorityFirst'; value: 0 | 1 | null; };
 
+type SetFilterOperations = SetMaxLength | SetTitleContains | SetCategories | SetTags | SetWatched | SetMediaWatched | SetMinResolution | SetSortPriorityFirst;
+
 type SetAll = { action: 'setAllFilters'; value: VideoFilters }
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
 type ResetLimit = { action: 'resetLimit' };
 type SetUpdatedFlag = { action: 'setUpdatedFlag', videoId: number,  currValue: number | null, newValue: 0 | 1 };
 type ResetFlagUPdates = { action: 'resetFlagUpdates' };
 
-type QueryOperations = SetMaxLength | SetTitleContains | SetCategories | SetAll | IncreaseLimit | ResetLimit | SetTags
-    | SetWatched | SetMediaWatched | SetMinResolution | SetSortPriorityFirst | SetUpdatedFlag | ResetFlagUPdates;
+type QueryOperations = SetFilterOperations | SetAll | IncreaseLimit | ResetLimit | SetUpdatedFlag | ResetFlagUPdates;
 
 type VideoFilters = {
     limit: number;
@@ -63,38 +64,6 @@ type VideoDbStateContextProps = {
 
 const VideoDbContext = createContext({} as VideoDbStateContextProps);
 
-const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => VideoDbState = (state, operation) => {
-    const { filters } = state;
-
-    if (operation.action === 'setFilter') {
-        return { ...state, filters: { ...filters, [operation.key]: operation.value } };
-    } else if (operation.action === 'setAllFilters') {
-        return { ...state, filters: operation.value };
-    } else if (operation.action === 'increaseLimit' && operation.currentlyLoaded + BATCH_SIZE >= state.filters.limit + BATCH_SIZE) {
-        return { ...state, filters: { ...filters, limit: state.filters.limit + BATCH_SIZE } };
-    } else if (operation.action === 'setUpdatedFlag') {
-        const { pendingFlagUpdates } = state;
-        if (Boolean(operation.currValue) === Boolean(operation.newValue)) {
-            delete pendingFlagUpdates[operation.videoId];
-        } else {
-            pendingFlagUpdates[operation.videoId] = operation.newValue;
-        }
-        return { ...state, pendingFlagUpdates };
-    } else if (operation.action === 'resetFlagUpdates') {
-        return { ...state, pendingFlagUpdates: {} };
-    }
-    return state;
-};
-
-const useGetFilterSearchParams = () => {
-    const [searchParams] = useSearchParams();
-
-    return useCallback(() => {
-        const { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = Object.fromEntries(searchParams.entries());
-        return { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst };
-    }, [searchParams]);
-};
-
 const useSetInitialState = () => {
     const [searchParams] = useSearchParams();
     const { stateReducer } = useContext(VideoDbContext);
@@ -118,41 +87,69 @@ const useSetInitialState = () => {
     }, []);
 };
 
-const useSetSearchParamsFromFilterState = () => {
-    const [, setSearchParams] = useSearchParams();
-    const { state: { filters } } = useContext(VideoDbContext);
+const videoDbQueryReducer: (state: VideoDbState, operation: QueryOperations) => VideoDbState = (state, operation) => {
+    const { filters } = state;
 
-    return useCallback(() => {
-        const { categories, maxLength, titleContains, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = filters;
+    if (operation.action === 'setFilter') {
+        return { ...state, filters: { ...filters, [operation.key]: operation.value } };
+    } else if (operation.action === 'setAllFilters') {
+        return { ...state, filters: operation.value };
+    } else if (operation.action === 'increaseLimit' && operation.currentlyLoaded + BATCH_SIZE >= state.filters.limit + BATCH_SIZE) {
+        return { ...state, filters: { ...filters, limit: state.filters.limit + BATCH_SIZE } };
+    } else if (operation.action === 'setUpdatedFlag') {
+        const { pendingFlagUpdates } = state;
+        if (Boolean(operation.currValue) === Boolean(operation.newValue)) {
+            delete pendingFlagUpdates[operation.videoId];
+        } else {
+            pendingFlagUpdates[operation.videoId] = operation.newValue;
+        }
+        return { ...state, pendingFlagUpdates };
+    } else if (operation.action === 'resetFlagUpdates') {
+        return { ...state, pendingFlagUpdates: {} };
+    }
+    return state;
+};
+
+const useSearchParamsReducer = () => {
+    const [, setSearchParams] = useSearchParams();
+
+    return useCallback((operation: SetFilterOperations) => {
+        const { key, value } = operation;
+        let newParamValue: string | null = null;
+
         setSearchParams((params) => {
-            categories?.length
-                ? params.set('categories', categories)
-                : params.delete('categories');
-            maxLength
-                ? params.set('maxLength', maxLength.toString())
-                : params.delete('maxLength');
-            titleContains
-                ? params.set('titleContains', titleContains)
-                : params.delete('titleContains');
-            tags
-                ? params.set('tags', tags)
-                : params.delete('tags');
-            watched && ['Y', 'N'].includes(watched)
-                ? params.set('watched', watched)
-                : params.delete('watched');
-            mediaWatched && ['Y', 'N'].includes(mediaWatched)
-                ? params.set('mediaWatched', mediaWatched)
-                : params.delete('mediaWatched');
-            minResolution && ['HD','UHD'].includes(minResolution)
-                ? params.set('minResolution', minResolution)
-                : params.delete('minResolution');
-            sortPriorityFirst
-                ? params.set('sortPriorityFirst', sortPriorityFirst ? '1' : '0')
-                : params.delete('sortPriorityFirst');
+            if (value !== null) {
+                if (key === 'watched' || key === 'mediaWatched') {
+                    if (['Y', 'N'].includes(value)) {
+                        newParamValue = value;
+                    }
+                } else if (key === 'minResolution') {
+                    if (['HD', 'UHD'].includes(value)) {
+                        newParamValue = value;
+                    }
+                } else if (key === 'sortPriorityFirst') {
+                    newParamValue = value ? '1' : null;
+                } else if (key === 'tags') {
+                    newParamValue = value || null;
+                } else {
+                    newParamValue = value.toString();
+                }
+            }
+            newParamValue === null
+                ? params.delete(key)
+                : params.set(key, newParamValue);
             return params;
         });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [setSearchParams, JSON.stringify(filters)]);
+    }, [setSearchParams]);
+};
+
+const useGetFilterSearchParams = () => {
+    const [searchParams] = useSearchParams();
+
+    return useCallback(() => {
+        const { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = Object.fromEntries(searchParams.entries());
+        return { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst };
+    }, [searchParams]);
 };
 
 const useClearFilterParams = () => {
@@ -174,8 +171,9 @@ export {
     initialFilters,
     VideoDbContext,
     useVideoDbState,
+    useSearchParamsReducer,
+    SetFilterOperations,
     useGetFilterSearchParams,
-    useSetSearchParamsFromFilterState,
     useClearFilterParams,
     useSetInitialState,
     FlagUpdates
