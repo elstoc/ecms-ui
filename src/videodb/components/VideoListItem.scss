@@ -1,6 +1,6 @@
-.video-list-item {
+#app .video-list-item {
     margin: 0;
-    padding: 0 !important;
+    padding: 0;
     margin-bottom: .4em;
     cursor: default;
 
@@ -41,7 +41,7 @@
     }
 
     .primary-info {
-        padding: 7px 10px !important;
+        padding: 7px 10px;
         .bp5-form-group,
         .bp5-control.bp5-switch {
             margin: 0;
@@ -75,7 +75,7 @@
     }
 
     .secondary-info {
-        padding: 5px 10px 7px 10px !important;
+        padding: 5px 10px 7px 10px;
 
         .category-and-tags {
             margin-bottom: 0.6rem;
