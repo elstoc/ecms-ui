@@ -7,7 +7,7 @@ import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { VideoWithId } from '../api';
 
-import { WatchedIcons } from './WatchedIcons';
+import { WatchedIcon } from './WatchedIcon';
 import { Flag } from '../../common/components/forms';
 import { Icon } from '../../common/components/icon';
 
@@ -60,7 +60,8 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
                 <div className='left'>
                     <div className='video-title'>{video.title}</div>
                     <div>
-                        <WatchedIcons watchedStatus={video.watched} mediaWatchedStatus={video.primary_media_watched} mediaDesc={primaryMediaType}/>
+                        <WatchedIcon watchedStatus={video.watched} />
+                        <WatchedIcon watchedStatus={video.primary_media_watched} />
                         <span> {primaryMediaType} {lengthText}</span>
                     </div>
                 </div>
