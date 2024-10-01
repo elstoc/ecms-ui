@@ -28,7 +28,6 @@ export const VideoList: FC = (): ReactElement => {
                 <VideoListItem
                     key={video.id}
                     video={video}
-                    apiPath={apiPath}
                     ref={index === limit - 1 ? refLastVideo : null}
                 />
             ))}

@@ -1,51 +1,38 @@
 import React, { forwardRef, ReactElement, useContext, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Card, Collapse, Icon as BPIcon, Tag } from '@blueprintjs/core';
+import { Card, Collapse, Tag } from '@blueprintjs/core';
 
-import { useGetLookup } from '../hooks/useVideoDbQueries';
+import { useLookupValue } from '../hooks/useVideoDbQueries';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbContext } from '../hooks/useVideoDbState';
 import { VideoWithId } from '../api';
 
+import { WatchedIcon } from './WatchedIcon';
 import { Flag } from '../../common/components/forms';
 import { Icon } from '../../common/components/icon';
 
 import './VideoListItem.scss';
 
-type VideoDbProps = {
-    apiPath: string;
-    video: VideoWithId;
-}
-
-const watchedColorLookup = {
-    'Y': 'green',
-    'N': 'crimson',
-    'P': 'orange',
-    ' ': 'white'
-} as { [key: string]: string };
-
-export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath, video }, ref): ReactElement => {
-    const { videoDbState: { pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbContext);
+export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(({ video }, ref): ReactElement => {
     const navigate = useNavigate();
-    const userIsAdmin = useUserIsAdmin();
-    const [expandedView, setExpandedView] = useState(false);
-    const expandedClass = expandedView ? 'expanded' : '';
-
     const [searchParams] = useSearchParams();
-    const categoryLookup = useGetLookup(apiPath, 'categories');
-    const mediaTypeLookup = useGetLookup(apiPath, 'media_types');
-    const locationLookup = useGetLookup(apiPath, 'media_locations');
+    const userIsAdmin = useUserIsAdmin();
+    const [viewExpanded, setViewExpanded] = useState(false);
+    const { videoDbState: { apiPath, pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbContext);
 
-    const category = categoryLookup[video.category];
-    const pMediaType = mediaTypeLookup[video.primary_media_type ?? ''];
+    const videoCategory = useLookupValue(apiPath, 'categories', video.category);
+    const primaryMediaType = useLookupValue(apiPath, 'media_types', video.primary_media_type);
+    const otherMediaType = useLookupValue(apiPath, 'media_types', video.other_media_type);
+    const primaryMediaLocation = useLookupValue(apiPath, 'media_locations', video.primary_media_location);
+    const otherMediaLocation = useLookupValue(apiPath, 'media_locations', video.other_media_location);
+    const tagArray = video.tags?.split('|') || [];
 
-    let prioritySwitchChecked = (video.priority_flag ?? 0) > 0;
+    let priorityFlagChecked = (video.priority_flag ?? 0) > 0;
     if (video.id in pendingFlagUpdates) {
-        prioritySwitchChecked = pendingFlagUpdates[video.id] === 1;
+        priorityFlagChecked = pendingFlagUpdates[video.id] === 1;
     }
 
     let lengthText = '';
-
     if (video.num_episodes && video.length_mins) {
         lengthText = `(${video.num_episodes} x ${video.length_mins} mins)`;
     } else if (video.length_mins) {
@@ -54,57 +41,59 @@ export const VideoListItem = forwardRef<HTMLDivElement, VideoDbProps>(({ apiPath
         lengthText = `(${video.num_episodes} episodes)`;
     }
 
+    const preventCardClick = (e: React.MouseEvent) => e.stopPropagation();
+    const openVideo = () => navigate(`./${video.id}?${searchParams.toString()}`);
+    const togglePriorityFlag = (checked: boolean) => videoDbReducer({
+        action: 'setUpdatedFlag',
+        videoId: video.id,
+        currValue: video.priority_flag,
+        newValue: checked ? 1 : 0
+    });
+
     return (
         <Card
             ref={ref}
-            className={`video-list-item ${expandedClass}`}
-            onClick={() => setExpandedView((prev) => !prev)}
+            className={`video-list-item ${viewExpanded ? 'expanded' : ''}`}
+            onClick={() => setViewExpanded((prev) => !prev)}
         >
             <div className='primary-info'>
                 <div className='left'>
-                    <div className='video-name'>
-                        <div>{video.title} </div>
-                    </div>
-                    <div className='sub-info'>
-                        <span><BPIcon icon='record' size={20} color={watchedColorLookup[video.watched ?? ' ']} /></span>
-                        <span><BPIcon icon='record' size={20} color={watchedColorLookup[video.primary_media_watched ?? ' ']} /></span>
-                        <span> {pMediaType}</span>
-                        {lengthText && <span> {lengthText} </span>}
+                    <div className='video-title'>{video.title}</div>
+                    <div>
+                        <WatchedIcon watchedStatus={video.watched} />
+                        <WatchedIcon watchedStatus={video.primary_media_watched} />
+                        <span> {primaryMediaType} {lengthText}</span>
                     </div>
                 </div>
-                <div className='right' onClick={(e) => e.stopPropagation()}>
+                <div className='right' onClick={preventCardClick}>
                     <Flag
-                        value={prioritySwitchChecked}
+                        value={priorityFlagChecked}
+                        className='priority'
                         color='green'
-                        className={`priority ${prioritySwitchChecked ? '' : 'unchecked'}`}
-                        onValueChange={!userIsAdmin ? undefined : ((checked) => videoDbReducer({ action: 'setUpdatedFlag', videoId: video.id, currValue: video.priority_flag, newValue: checked ? 1 : 0 }))}
+                        onValueChange={!userIsAdmin ? undefined : togglePriorityFlag}
                     />
                 </div>
             </div>
-            <Collapse isOpen={expandedView}>
+            <Collapse isOpen={viewExpanded}>
                 <div className='secondary-info'>
                     <div className='left'>
-                        <div className='category-and-tags'>
-                            <Tag key='category'>{category}</Tag>
-                            {video.tags && video.tags.split('|').map((tag) => (
-                                <Tag key={tag} minimal={true}>{tag}</Tag>
+                        <div className='tags'>
+                            <Tag key='category'>{videoCategory}</Tag>
+                            {tagArray.map((tagName) => (
+                                <Tag key={tagName} minimal={true}>{tagName}</Tag>
                             ))}
                         </div>
-                        <div className='other-stuff'>
-                            <div><strong>Location:</strong> {locationLookup[video.primary_media_location ?? '']}</div>
-                            {video.other_media_location && <div><strong>Other Media: </strong> {mediaTypeLookup[video.other_media_type ?? '']} ({locationLookup[video.other_media_location ?? '']})</div>}
-                            {video.media_notes && <div><strong>Notes:</strong> {video.media_notes}</div>}
+                        <div className='media'>
+                            <div><strong>Location:</strong> {primaryMediaLocation}</div>
+                            {otherMediaType &&
+                                <div><strong>Other Media: </strong>{otherMediaType} ({otherMediaLocation})</div>}
+                            {video.media_notes &&
+                                <div><strong>Notes:</strong> {video.media_notes}</div>}
                         </div>
                     </div>
-                    <div className='right' onClick={(e) => e.stopPropagation()}>
+                    <div className='right' onClick={preventCardClick}>
                         {userIsAdmin &&
-                            <Icon
-                                name='edit'
-                                className='icon'
-                                color='black'
-                                onClick={() => navigate(`./${video.id}?${searchParams.toString()}`)}
-                            />
-                        }
+                            <Icon name='edit' color='black' onClick={openVideo} />}
                     </div>
                 </div>
             </Collapse>

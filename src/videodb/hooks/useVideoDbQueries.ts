@@ -24,6 +24,11 @@ const useGetLookup = (path: string, lookupTable: string) => {
     });
 };
 
+export const useLookupValue = (path: string, lookupTable: string, value?: string | null) => {
+    const lookup = useGetLookup(path, lookupTable);
+    return lookup[value ?? ''];
+};
+
 const useGetTags = (path: string) => {
     return useCustomQuery({
         queryKey: ['videoDb', 'tags', path],
