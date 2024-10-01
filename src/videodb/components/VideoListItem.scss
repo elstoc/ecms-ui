@@ -83,7 +83,9 @@
 
             >span {
                 margin-right: 0.5rem;
-                padding: 1px 5px;
+                padding: 2px 5px;
+                min-width: 10px;
+                min-height: 10px;
             }
         }
 
