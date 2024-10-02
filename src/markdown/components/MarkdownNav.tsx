@@ -18,11 +18,12 @@ export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): React
 
 const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootApiPath: string }> = ({ children, rootApiPath }): ReactElement => {
     const removeRootPathRx = new RegExp(`^${rootApiPath}/`, 'g');
+    const removeRootPathRx2 = new RegExp(`^${rootApiPath}`, 'g');
 
     return (
         <ol>
             {children.map((child) => {
-                const linkPath = child.apiPath.replace(removeRootPathRx, './');
+                const linkPath = child.apiPath.replace(removeRootPathRx, './').replace(removeRootPathRx2, '');
                 return (
                     <React.Fragment key = {child.apiPath}>
                         <li><NavLink to={linkPath} end>{child?.title}</NavLink></li>
