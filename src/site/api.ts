@@ -15,6 +15,7 @@ enum ComponentTypes {
 
 type ComponentMetadataCommon = {
     apiPath: string;
+    uiPath: string;
     title: string;
     weight?: number;
     restrict?: string;

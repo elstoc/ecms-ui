@@ -23,7 +23,7 @@ export const SiteNav: FC<{ siteComponents: ComponentMetadata[] }> = ({ siteCompo
 const ComponentNavItem: FC<{ component: ComponentMetadata }> = ({ component }) => {
     if (component.type !== ComponentTypes.componentgroup) {
         return (
-            <NavLink to={component.defaultComponent ? '' : component.apiPath}>
+            <NavLink to={component.uiPath}>
                 <div className='nav-title'>{component.title}</div>
             </NavLink>
         );

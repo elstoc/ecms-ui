@@ -14,7 +14,7 @@ const listComponentRoutes = (components: ComponentMetadata[]): ReactElement[] =>
             routes.push((
                 <Route
                     key={metadata.apiPath}
-                    path={`${metadata.defaultComponent ? '' : metadata.apiPath}/*`}
+                    path={metadata.uiPath + '/*'}
                     element={<SiteComponent metadata={metadata} />}
                 />
             ));
