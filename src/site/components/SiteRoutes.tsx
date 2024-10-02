@@ -1,5 +1,5 @@
 import React, { FC, ReactElement } from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import { SiteComponent } from './SiteComponent';
 import { useSiteComponents } from '../hooks/useSiteQueries';
@@ -29,7 +29,6 @@ export const SiteRoutes: FC = (): ReactElement => {
     return (
         <Routes>
             {listComponentRoutes(siteComponents)}
-            <Route path='*' element={<Navigate to='/' />} />
         </Routes>
     );
 };
