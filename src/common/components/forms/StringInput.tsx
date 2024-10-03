@@ -12,9 +12,16 @@ type StringInputParams = {
     small?: boolean;
     className?: string;
     autoFocus?: boolean;
+    onPressEnter?: () => void;
 };
 
-export const StringInput: FC<StringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className = '', autoFocus }): ReactElement => {
+export const StringInput: FC<StringInputParams> = ({ value, onValueChange, placeholder, label, inline, small, className = '', autoFocus, onPressEnter }): ReactElement => {
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            onPressEnter?.();
+        }
+    };
+
     return (
         <FormGroup label={label} inline={inline} className={`string-input ${className}`}>
             <InputGroup
@@ -23,6 +30,7 @@ export const StringInput: FC<StringInputParams> = ({ value, onValueChange, place
                 placeholder={placeholder}
                 small={small}
                 autoFocus={autoFocus}
+                onKeyDown={handleKeyDown}
             />
         </FormGroup>
     );
