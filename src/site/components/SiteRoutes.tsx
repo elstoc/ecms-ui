@@ -1,9 +1,10 @@
 import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { SiteComponent } from './SiteComponent';
 import { useSiteComponents } from '../hooks/useSiteQueries';
 import { ComponentMetadata, ComponentTypes } from '../api';
+
+import { SiteComponent } from './SiteComponent';
 
 const listComponentRoutes = (components: ComponentMetadata[]): ReactElement[] => {
     const routes: ReactElement[] = [];

@@ -22,7 +22,7 @@ const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootApiPath: string }> 
             {children.map((child) => {
                 return (
                     <React.Fragment key = {child.apiPath}>
-                        <li><NavLink to={'/' + child.uiPath} end>{child?.title}</NavLink></li>
+                        <li><NavLink to={child.uiPath} end>{child?.title}</NavLink></li>
                         {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} />}
                     </React.Fragment>
                 );

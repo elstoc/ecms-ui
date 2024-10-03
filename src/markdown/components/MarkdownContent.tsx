@@ -1,5 +1,4 @@
 import React, { FC, ReactElement } from 'react';
-import { useParams } from 'react-router';
 import { useSearchParams } from 'react-router-dom';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
@@ -9,13 +8,7 @@ export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     const [ searchParams ] = useSearchParams();
     const mode = searchParams.get('mode');
 
-    const { '*': mdRelPath } = useParams();
-    let mdFullPath = apiPath;
-    if (mdRelPath) {
-        mdFullPath += `/${mdRelPath}`;
-    }
-
     return mode === 'edit'
-        ? <MarkdownEditPage mdFullPath={mdFullPath} />
-        : <MarkdownViewPage mdFullPath={mdFullPath} />;
+        ? <MarkdownEditPage mdFullPath={apiPath} />
+        : <MarkdownViewPage mdFullPath={apiPath} />;
 };
