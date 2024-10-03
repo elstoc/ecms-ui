@@ -1,6 +1,6 @@
 // See https://react-icons.github.io/react-icons for summary of available icons
 import React, { FC, ReactElement } from 'react';
-import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX, FiPlusSquare } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { PopoverPosition, Tooltip } from '@blueprintjs/core';
 
@@ -16,7 +16,8 @@ const icons: { [key: string]: IconType} = {
     next: FiChevronRight,
     previous: FiChevronLeft,
     close: FiX,
-    flag: FiFlag
+    flag: FiFlag,
+    add: FiPlusSquare
 };
 
 type IconProps = {
