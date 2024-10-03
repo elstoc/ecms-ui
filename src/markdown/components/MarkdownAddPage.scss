@@ -1,0 +1,23 @@
+.markdown-add-page {
+    .add-page-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .bp5-inline {
+        label { width: 7em; }
+        
+        .bp5-form-content,
+        .bp5-form-content .bp5-input-group {
+            width: 100%;
+            margin-bottom: 0;
+        }
+    }
+
+    .error {
+        margin-top: 1em;
+        text-align: center;
+        color: red;
+        height: 1em;
+    }
+}

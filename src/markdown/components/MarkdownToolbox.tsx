@@ -1,11 +1,13 @@
 /* eslint-disable no-restricted-globals */
 import React, { FC, ReactElement, ReactNode, useCallback } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { useMarkdownPage } from '../hooks/useMarkdownQueries';
-import { Icon } from '../../common/components/icon';
-import { deleteMarkdownPage, putMarkdownPage } from '../api';
-import { AppToaster } from '../../common/components/toaster';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+
+import { useMarkdownPage } from '../hooks/useMarkdownQueries';
+import { deleteMarkdownPage, putMarkdownPage } from '../api';
+
+import { Icon } from '../../common/components/icon';
+import { AppToaster } from '../../common/components/toaster';
 
 import './MarkdownToolbox.scss';
 
@@ -17,6 +19,7 @@ type MarkdownToolboxProps = {
 
 export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, mdFullPath, editedMarkdown }): ReactElement => {
     const queryClient = useQueryClient();
+    const navigate = useNavigate();
 
     const [searchParams, setSearchParams] = useSearchParams();
     const mode = searchParams.get('mode');
@@ -57,15 +60,23 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, mdFullPath
             if (confirm('Are you sure you want to delete this page')) {
                 await deleteMarkdownPage(mdFullPath);
                 await invalidateAndToast('page deleted');
+                navigate('..', { relative: 'path' });
             }
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [invalidateAndToast, mdFullPath]);
+    }, [invalidateAndToast, mdFullPath, navigate]);
 
     return (
         <div className='markdown-content'>
             <div className='markdown-toolbox'>
+                <Icon
+                    name='add'
+                    disabled={!mdPage.canWrite || mode === 'edit'}
+                    onClick={() => setSearchParams({ mode: 'add' })}
+                    tooltipContent='add new child page'
+                    tooltipPosition='top-right'
+                />
                 <Icon
                     name='delete'
                     disabled={!mdPage?.canDelete}
