@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import YAML from 'yaml';
 import React, { FC, ReactElement, ReactNode, Suspense } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import { splitFrontMatter } from '../../utils';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
@@ -19,11 +19,7 @@ const basename = (path: string): string => {
 
 export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): ReactElement => {
     const location = useLocation();
-    const [, setSearchParams] = useSearchParams();
     const mdPage = useMarkdownPage(mdFullPath);
-    const { pathValid, pageExists } = mdPage;
-
-    const setEditMode = () => setSearchParams({ mode: 'edit' });
 
     const [yaml, markdown] = splitFrontMatter(mdPage?.content ?? '');
     const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
@@ -35,15 +31,6 @@ export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): Re
         const url = new URL(href, basePath);
         return <Link to={url.href.replace(/\/$/, '')}>{children}</Link>;
     };
-
-    if (!pageExists) {
-        if (pathValid) return (
-            <h2 className='notExist'>
-                This page does not exist yet but you can click <a href='#' onClick={setEditMode}>here</a> to create it
-            </h2>
-        );
-        return <h2 className='notExist'>This is not a valid markdown path</h2>;
-    }
 
     return (
         <Suspense>
