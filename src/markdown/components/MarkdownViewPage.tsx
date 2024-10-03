@@ -33,7 +33,7 @@ export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): Re
         let basePath = window.origin + location.pathname;
         basePath += basePath.endsWith('/') ? '' : '/';
         const url = new URL(href, basePath);
-        return <Link to={url.pathname.replace(/\/$/, '')}>{children}</Link>;
+        return <Link to={url.href.replace(/\/$/, '')}>{children}</Link>;
     };
 
     if (!pageExists) {
