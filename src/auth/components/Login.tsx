@@ -30,14 +30,14 @@ export const Login: FC = (): ReactElement => {
                 <StringInput
                     label='User ID'
                     value={userId}
-                    onValueChange={(value) => setUserId(value)}
+                    onValueChange={setUserId}
                     autoFocus={true}
                     inline={true}
                 />
                 <PasswordInput
                     label='Password'
                     value={password}
-                    onValueChange={(value) => setPassword(value)}
+                    onValueChange={setPassword}
                     onPressEnter={handleLogin}
                     inline={true}
                 />
