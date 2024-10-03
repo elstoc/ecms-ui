@@ -10,8 +10,8 @@ import { PasswordInput, StringInput } from '../../common/components/forms';
 export const Login: FC = (): ReactElement => {
     const queryClient = useQueryClient();
     const [loginFailed, setLoginFailed] = useState(false);
-    const [userId, setUserId] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
+    const [userId, setUserId] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleLogin = useCallback(async () => {
         try {
