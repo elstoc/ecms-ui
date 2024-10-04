@@ -42,7 +42,13 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosi
 
     if (tooltipContent) {
         return (
-            <Tooltip className='icon-tooltip' content={tooltipContent} position={tooltipPosition ?? 'left'}>
+            <Tooltip
+                className='icon-tooltip'
+                hoverOpenDelay={500}
+                disabled={disabled}
+                content={tooltipContent}
+                position={tooltipPosition ?? 'left'}
+            >
                 {iconElement}
             </Tooltip>
         );
