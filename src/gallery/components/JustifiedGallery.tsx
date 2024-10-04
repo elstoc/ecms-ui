@@ -1,13 +1,14 @@
 import React, { createRef, FC, ReactElement, startTransition, useCallback, useContext, useMemo } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
-import { GalleryThumb } from './GalleryThumb';
 import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
-
-import './JustifiedGallery.scss';
 import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
 import { useScrollIntoView } from '../../common/hooks';
+
+import { GalleryThumb } from './GalleryThumb';
+
+import './JustifiedGallery.scss';
 
 const MARGIN_PX = 3; // Also needs to be set in GalleryThumb.scss
 
