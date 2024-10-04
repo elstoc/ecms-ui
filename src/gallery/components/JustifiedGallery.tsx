@@ -1,4 +1,4 @@
-import React, { createRef, FC, ReactElement, useCallback, useContext, useMemo } from 'react';
+import React, { createRef, FC, ReactElement, startTransition, useCallback, useContext, useMemo } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
 import { GalleryThumb } from './GalleryThumb';
@@ -17,7 +17,9 @@ export const JustifiedGallery: FC = (): ReactElement => {
     const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => (
-        galleryStateReducer({ action: 'incrementMaxImages', maximum: allImageFiles.length })
+        startTransition(() => {
+            galleryStateReducer({ action: 'incrementMaxImages', maximum: allImageFiles.length });
+        })
     ), [allImageFiles, galleryStateReducer]);
 
     const refLastImage = createRef<HTMLAnchorElement>();
