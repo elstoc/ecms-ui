@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import YAML from 'yaml';
-import React, { FC, ReactElement, ReactNode, Suspense } from 'react';
+import React, { FC, ReactElement, ReactNode, Suspense, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
 import { splitFrontMatter } from '../../utils';
-import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { useTitle } from '../../common/hooks';
+import { useMarkdownPage } from '../hooks/useMarkdownQueries';
+import { MarkdownStateContext } from './MarkdownContent';
 
 import { MarkdownToolbox } from './MarkdownToolbox';
 
@@ -17,12 +18,13 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0];
 };
 
-export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): ReactElement => {
+export const MarkdownViewPage: FC = (): ReactElement => {
+    const { apiPath } = useContext(MarkdownStateContext);
     const location = useLocation();
-    const mdPage = useMarkdownPage(mdFullPath);
+    const mdPage = useMarkdownPage(apiPath);
 
     const [yaml, markdown] = splitFrontMatter(mdPage?.content ?? '');
-    const pageTitle = YAML.parse(yaml)?.title || basename(mdFullPath) || 'Home';
+    const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
     useTitle(pageTitle);
 
     const renderLink = (href: string, children: ReactNode & ReactNode[]) => {
@@ -34,7 +36,7 @@ export const MarkdownViewPage: FC<{ mdFullPath: string }> = ({ mdFullPath }): Re
 
     return (
         <Suspense>
-            <MarkdownToolbox mdFullPath={mdFullPath}>
+            <MarkdownToolbox>
                 <div className='markdown-render-page'>
                     <RenderMd pageTitle={pageTitle} markdown={markdown} renderLink={renderLink} />
                 </div>

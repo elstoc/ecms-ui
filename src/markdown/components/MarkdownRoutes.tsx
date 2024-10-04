@@ -8,30 +8,30 @@ import { MarkdownContent } from './MarkdownContent';
 
 import './MarkdownNav.scss';
 
-export const MarkdownRoutes: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
+export const MarkdownRoutes: FC<{ rootApiPath: string, singlePage: boolean }> = ({ rootApiPath, singlePage }): ReactElement => {
     const markdownTree = useMarkdownTree(rootApiPath);
 
     if (!markdownTree.children) return <></>;
 
     return (
         <Routes>
-            {listMarkdownRoutes(markdownTree.children)}
+            {listMarkdownRoutes(markdownTree.children, singlePage)}
         </Routes>
     );
 };
 
-const listMarkdownRoutes = (children: MarkdownTree[]): ReactElement[] => {
+const listMarkdownRoutes = (children: MarkdownTree[], singlePage: boolean): ReactElement[] => {
     const routes: ReactElement[] = [];
     children.forEach((child) => {
         routes.push((
             <Route
                 key={child.apiPath}
                 path={child.uiPath}
-                element={<MarkdownContent apiPath={child.apiPath} />}
+                element={<MarkdownContent apiPath={child.apiPath} singlePage={singlePage} />}
             />
         ));
-        if (child.children) {
-            routes.push(...listMarkdownRoutes(child.children));
+        if (!singlePage && child.children) {
+            routes.push(...listMarkdownRoutes(child.children, false));
         }
     });
     return routes;

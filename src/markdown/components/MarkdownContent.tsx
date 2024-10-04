@@ -1,20 +1,27 @@
-import React, { FC, ReactElement } from 'react';
+import React, { createContext, FC, ReactElement } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { MarkdownViewPage } from './MarkdownViewPage';
 import { MarkdownEditPage } from './MarkdownEditPage';
 import { MarkdownAddPage } from './MarkdownAddPage';
 
-export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+type MarkdownContextProps = {
+    apiPath: string,
+    singlePage: boolean
+};
+
+export const MarkdownStateContext = createContext<MarkdownContextProps>({} as MarkdownContextProps);
+
+export const MarkdownContent: FC<{ apiPath: string, singlePage: boolean }> = ({ apiPath, singlePage }): ReactElement => {
     const [ searchParams ] = useSearchParams();
     const mode = searchParams.get('mode');
 
     return (
-        <>
+        <MarkdownStateContext.Provider value={{ apiPath, singlePage }}>
             {mode === 'edit'
-                ? <MarkdownEditPage mdFullPath={apiPath} />
-                : <MarkdownViewPage mdFullPath={apiPath} />}
-            {mode === 'add' && <MarkdownAddPage mdFullPath={apiPath} />}
-        </>
+                ? <MarkdownEditPage />
+                : <MarkdownViewPage />}
+            {mode === 'add' && <MarkdownAddPage />}
+        </MarkdownStateContext.Provider>
     );
 };

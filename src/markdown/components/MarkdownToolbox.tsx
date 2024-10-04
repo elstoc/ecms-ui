@@ -1,10 +1,11 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, ReactNode, useCallback } from 'react';
+import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
+import { MarkdownStateContext } from './MarkdownContent';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
@@ -13,18 +14,18 @@ import './MarkdownToolbox.scss';
 
 type MarkdownToolboxProps = {
     children: ReactNode;
-    mdFullPath: string;
     editedMarkdown?: string;
 }
 
-export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, mdFullPath, editedMarkdown }): ReactElement => {
+export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMarkdown }): ReactElement => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
+    const { apiPath, singlePage } = useContext(MarkdownStateContext);
     const [searchParams, setSearchParams] = useSearchParams();
     const mode = searchParams.get('mode');
 
-    const mdPage = useMarkdownPage(mdFullPath);
+    const mdPage = useMarkdownPage(apiPath);
     const { pathValid, pageExists } = mdPage;
 
     const toggleEditMode = useCallback(() => {
@@ -41,38 +42,38 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, mdFullPath
 
     const invalidateAndToast = useCallback(async (message: string) => {
         (await AppToaster).show({ message, timeout: 2000 });
-        await queryClient.invalidateQueries({ queryKey: ['markdownFile', mdFullPath]});
+        await queryClient.invalidateQueries({ queryKey: ['markdownFile', apiPath]});
         await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
         setSearchParams();
-    }, [mdFullPath, queryClient, setSearchParams]);
+    }, [apiPath, queryClient, setSearchParams]);
 
     const savePage = useCallback(async () => {
         try {
-            await putMarkdownPage(mdFullPath, editedMarkdown ?? '');
+            await putMarkdownPage(apiPath, editedMarkdown ?? '');
             await invalidateAndToast('page saved');
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [editedMarkdown, invalidateAndToast, mdFullPath]);
+    }, [editedMarkdown, invalidateAndToast, apiPath]);
 
     const deletePage = useCallback(async () => {
         try {
             if (confirm('Are you sure you want to delete this page')) {
-                await deleteMarkdownPage(mdFullPath);
+                await deleteMarkdownPage(apiPath);
                 await invalidateAndToast('page deleted');
                 navigate('..', { relative: 'path' });
             }
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [invalidateAndToast, mdFullPath, navigate]);
+    }, [invalidateAndToast, apiPath, navigate]);
 
     return (
         <div className='markdown-content'>
             <div className='markdown-toolbox'>
                 <Icon
                     name='add'
-                    disabled={!mdPage.canWrite || mode === 'edit'}
+                    disabled={singlePage || !mdPage.canWrite || mode === 'edit'}
                     onClick={() => setSearchParams({ mode: 'add' })}
                     tooltipContent='add new child page'
                     tooltipPosition='top-right'

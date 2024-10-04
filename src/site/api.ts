@@ -29,7 +29,7 @@ type GalleryMetadata = ComponentMetadataCommon & {
 
 type MarkdownMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.markdown;
-    includeNav: boolean;
+    singlePage: boolean;
     defaultComponent?: boolean;
 }
 
