@@ -80,7 +80,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
                 />
                 <Icon
                     name='delete'
-                    disabled={!mdPage?.canDelete}
+                    disabled={singlePage || !mdPage?.canDelete || mode === 'edit'}
                     onClick={deletePage}
                     tooltipContent='delete page'
                     tooltipPosition='top-right'
