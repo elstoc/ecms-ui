@@ -12,7 +12,7 @@ $icon-text-color: black;
     }
 
     &.disabled {
-        color: darkgrey;
+        opacity: 0.2;
         cursor: default;
     }
 }
