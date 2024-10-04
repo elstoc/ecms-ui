@@ -11,9 +11,10 @@ type TagInputParams = {
     label: string;
     inline?: boolean;
     className?: string;
+    allowCreation?: boolean;
 };
 
-export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className }): ReactElement => {
+export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className, allowCreation = true }): ReactElement => {
     const { videoDbState: { apiPath } } = useContext(VideoDbContext);
     const tagsArray = tags ? tags.split('|') : [];
     const tagLookup = useGetTags(apiPath);
@@ -26,6 +27,7 @@ export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, i
             label={label}
             inline={inline}
             className={className}
+            allowCreation={allowCreation}
         />
     );
 };

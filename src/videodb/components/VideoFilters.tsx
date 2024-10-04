@@ -71,6 +71,7 @@ export const VideoFilters: FC = (): ReactElement => {
                     className='tags'
                     inline={true}
                     tags={tags}
+                    allowCreation={false}
                     onSelectionChange={(value) => updateState({ action: 'setFilter', key: 'tags', value })}
                 />
                 <NullableStringInput

@@ -16,9 +16,10 @@ type MultiTagInputParams = {
     label: string;
     inline?: boolean;
     className?: string;
+    allowCreation?: boolean;
 };
 
-export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, onSelectionChange, label, inline, className = '' }): ReactElement => {
+export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, onSelectionChange, label, inline, className = '', allowCreation = true }): ReactElement => {
     const [queryString, setQueryString] = useState('');
     const allTags = Array.from(new Set([...selectableTags, ...tags]))
         .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
@@ -67,6 +68,8 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
         );
     };
 
+    const optionalCreateItemRenderer = allowCreation ? createItemRenderer : undefined;
+
     const filterTag: ItemPredicate<string> = (query: string, tag: string) => {
         if (!query || tag.toLowerCase().includes(query.toLowerCase())) {
             return true;
@@ -82,7 +85,7 @@ export const MultiTagInput: FC<MultiTagInputParams> = ({ selectableTags, tags, o
                 tagRenderer={(tag) => tag}
                 itemRenderer={itemRenderer}
                 createNewItemFromQuery={(tag) => tag}
-                createNewItemRenderer={createItemRenderer}
+                createNewItemRenderer={optionalCreateItemRenderer}
                 onItemSelect={toggleTag}
                 onRemove={toggleTag}
                 onClear={() => onSelectionChange?.([])}
