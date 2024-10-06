@@ -1,5 +1,4 @@
 import React, { createRef, FC, ReactElement, startTransition, useCallback, useContext, useMemo } from 'react';
-import { useResizeDetector } from 'react-resize-detector';
 
 import { GalleryStateContext } from './Gallery';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
@@ -7,15 +6,13 @@ import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
 import { useScrollIntoView } from '../../common/hooks';
 
 import { GalleryThumb } from './GalleryThumb';
+import { Tesselate } from './Tesselate';
 
-import './JustifiedGallery.scss';
-
-const MARGIN_PX = 3; // Also needs to be set in GalleryThumb.scss
+const MARGIN_PX = 3;
 
 export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
-    const { width: galleryDivWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
 
     const loadMoreImages = useCallback(() => (
         startTransition(() => {
@@ -29,51 +26,27 @@ export const JustifiedGallery: FC = (): ReactElement => {
     const refActiveImage = createRef<HTMLAnchorElement>();
     useScrollIntoView(refActiveImage);
 
-    const resizeRatios = useMemo(() => {
-        const thumbWidths = images.map((image) => image.thumbDimensions.width);
-        return getResizeRatios(thumbWidths, galleryDivWidth ?? 0);
-    }, [images, galleryDivWidth]);
+    const imageTiles = useMemo(() => images.map((image, index) => {
+        let ref = index === activeImageIndex ? refActiveImage : null;
+        if (index === images.length - 1) ref = refLastImage;
 
-    return (
-        <div ref={widthRef} className="justified-gallery">
-            {images.map((image, index) => {
-                let ref = index === activeImageIndex ? refActiveImage : null;
-                if (index === images.length - 1) ref = refLastImage;
-                return (
-                    <GalleryThumb
-                        key={image.fileName}
-                        fileName={image.fileName}
-                        description={image.description}
-                        url={image.thumbSrcUrl}
-                        ref={ref}
-                        heightPx={image.thumbDimensions.height * resizeRatios[index]}
-                    />
-                );
-            })}
-        </div>
-    );
-};
+        const element = (
+            <GalleryThumb
+                key={image.fileName}
+                fileName={image.fileName}
+                description={image.description}
+                url={image.thumbSrcUrl}
+                ref={ref}
+            />
+        );
 
-const getResizeRatios = (thumbWidths: number[], divWidth: number): number[] => {
-    let nextRowWidthOfThumbs = 0,
-        nextRowImageCount = 0;
-    const resizeRatios: number[] = [];
+        return {
+            element,
+            key: image.fileName,
+            maxHeight: image.thumbDimensions.height,
+            maxWidth: image.thumbDimensions.width
+        };
+    }), [activeImageIndex, images, refActiveImage, refLastImage]);
 
-    thumbWidths.forEach((thumbWidth) => {
-        nextRowImageCount++;
-        nextRowWidthOfThumbs += thumbWidth;
-        const widthAvailableForThumbs = divWidth - (2 * MARGIN_PX * nextRowImageCount);
-
-        if (nextRowWidthOfThumbs >= widthAvailableForThumbs) {
-            const resizeRatio = widthAvailableForThumbs / nextRowWidthOfThumbs;
-            resizeRatios.push(...Array(nextRowImageCount).fill(resizeRatio));
-            nextRowWidthOfThumbs = nextRowImageCount = 0;
-        }
-    });
-
-    if (thumbWidths.length > resizeRatios.length) {
-        resizeRatios.push(...Array(nextRowImageCount).fill(1));
-    }
-
-    return resizeRatios;
+    return <Tesselate tiles={imageTiles} marginPx={MARGIN_PX} />;
 };
