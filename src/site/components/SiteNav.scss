@@ -5,7 +5,6 @@
     background-color: #EEEE;
     
     .nav-title {
-        font-size: 1.05rem;
         font-family: 'Raleway', sans-serif;
     }
 
@@ -23,18 +22,13 @@
     }
 }
 
-.sub-menu .nav-title {
-    justify-content: left;
-    padding: 0.2em 0.9em;
-}
-
-.sub-menu {
-    padding: 0.4em 0;
-}
-
 .site-nav {
     align-items: left;
     flex-wrap: wrap;
+
+    .nav-title {
+        font-size: 1.05rem;
+    }
 
     @media screen and (min-width: 600px) {
         flex-direction: row;
@@ -43,5 +37,15 @@
         .nav-title {
             padding: 0 0.9rem;
         }
+    }
+}
+
+.sub-menu {
+    padding: 0.3em 0;
+
+    .nav-title {
+        font-size: 1rem;
+        justify-content: left;
+        padding: 0.1rem 0.9rem;
     }
 }

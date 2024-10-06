@@ -44,7 +44,7 @@ const ComponentNavItem: FC<{ component: ComponentMetadata }> = ({ component }) =
             popoverClassName={Classes.POPOVER_DISMISS}
             interactionKind='click'
             minimal={true}
-            modifiers={{ offset: { enabled: true, options: { offset: [0, 10]} }}}
+            modifiers={{ offset: { enabled: true, options: { offset: [0, 11]} }}}
         >
             <NavLink to={component.apiPath}>
                 <div
