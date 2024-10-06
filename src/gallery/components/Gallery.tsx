@@ -1,20 +1,13 @@
-import React, { FC, ReactElement, Suspense, createContext } from 'react';
+import React, { FC, ReactElement, Suspense } from 'react';
 
 import { GalleryMetadata } from '../../site/api';
-import { GalleryStateContextProps, GalleryState, useGalleryStateReducer } from '../hooks/useGalleryStateReducer';
+import { GalleryStateContext, useGalleryStateReducer, getInitialState } from '../hooks/useGalleryState';
 
 import { GalleryContent } from './GalleryContent';
 
-const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
-
-const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
-    const { batchSize, apiPath, title } = props;
-    const initialState: GalleryState = {
-        maxImages: batchSize,
-        activeImageIndex: -1,
-        batchSize, apiPath, title
-    };
-    const { galleryState, galleryStateReducer } = useGalleryStateReducer(initialState);
+export const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
+    const { apiPath, title } = props;
+    const { galleryState, galleryStateReducer } = useGalleryStateReducer(getInitialState(apiPath, title));
 
     return (
         <GalleryStateContext.Provider value={{galleryState, galleryStateReducer}}>
@@ -24,5 +17,3 @@ const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
         </GalleryStateContext.Provider>
     );
 };
-
-export { GalleryStateContext, Gallery };

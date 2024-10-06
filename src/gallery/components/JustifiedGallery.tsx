@@ -1,17 +1,14 @@
 import React, { createRef, FC, ReactElement, startTransition, useCallback, useContext, useMemo } from 'react';
 
-import { GalleryStateContext } from './Gallery';
+import { useElementIsVisible, useScrollIntoView } from '../../common/hooks';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
-import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
-import { useScrollIntoView } from '../../common/hooks';
+import { GalleryStateContext } from '../hooks/useGalleryState';
 
 import { GalleryThumb } from './GalleryThumb';
 import { Tesselate } from './Tesselate';
 
-const MARGIN_PX = 3;
-
 export const JustifiedGallery: FC = (): ReactElement => {
-    const { galleryState: { apiPath, maxImages, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, activeImageIndex, marginPx }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
 
     const loadMoreImages = useCallback(() => (
@@ -48,5 +45,5 @@ export const JustifiedGallery: FC = (): ReactElement => {
         };
     }), [activeImageIndex, images, refActiveImage, refLastImage]);
 
-    return <Tesselate tiles={imageTiles} marginPx={MARGIN_PX} />;
+    return <Tesselate tiles={imageTiles} marginPx={marginPx} />;
 };

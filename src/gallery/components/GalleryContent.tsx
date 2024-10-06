@@ -3,8 +3,8 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { useTitle } from '../../common/hooks';
 
 import { JustifiedGallery } from './JustifiedGallery';
-import { GalleryStateContext } from './Gallery';
 import { GalleryLightBox } from './GalleryLightBox';
+import { GalleryStateContext } from '../hooks/useGalleryState';
 
 import './GalleryContent.scss';
 
