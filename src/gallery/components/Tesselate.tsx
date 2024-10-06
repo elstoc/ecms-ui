@@ -25,6 +25,8 @@ type TesselateProps = {
 
 export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement => {
     const { width: containerWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
+    const tileStyle = { margin: `0 ${marginPx}px` };
+    const rowStyle = { margin: `${marginPx}px 0` };
 
     const tiledRows: ReactElement[] = [];
 
@@ -34,7 +36,7 @@ export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement
 
         tiles.forEach((tile, index) => {
             const isLastRow = index === tiles.length - 1;
-            rowContents.push(<div key={tile.key}>{tile.element}</div>);
+            rowContents.push(<div key={tile.key} style={tileStyle}>{tile.element}</div>);
 
             cumulativeRowWidth += tile.maxWidth;
             const availableWidth = containerWidth - (2 * marginPx * rowContents.length);
@@ -47,7 +49,7 @@ export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement
                     <div
                         className='row'
                         key={rowContents[0].key}
-                        style={{ height: `${tile.maxHeight * fillRatio}px` }}
+                        style={{ height: `${tile.maxHeight * fillRatio}px`, ...rowStyle }}
                     >
                         {rowContents}
                     </div>

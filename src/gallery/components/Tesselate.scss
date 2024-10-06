@@ -8,11 +8,9 @@
         justify-content: left;
         border: 0;
         padding: 0;
-        margin: 3px 0;
     
         >div {
             height: 100%;
-            margin: 3px; /* also needs to be set as MARGIN_PX in JustifiedGallery.tsx */
             width: auto;
         }
     }
