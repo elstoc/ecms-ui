@@ -23,7 +23,6 @@ type ComponentMetadataCommon = {
 
 type GalleryMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
-    batchSize: number;
     defaultComponent?: boolean;
 }
 
