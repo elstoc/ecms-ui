@@ -4,8 +4,8 @@ import { useElementIsVisible, useScrollIntoView } from '../../common/hooks';
 import { useGalleryContent } from '../hooks/useGalleryQueries';
 import { GalleryStateContext } from '../hooks/useGalleryState';
 
+import { Tesselate } from '../../common/components/layout';
 import { GalleryThumb } from './GalleryThumb';
-import { Tesselate } from './Tesselate';
 
 export const JustifiedGallery: FC = (): ReactElement => {
     const { galleryState: { apiPath, maxImages, activeImageIndex, marginPx }, galleryStateReducer } = useContext(GalleryStateContext);
