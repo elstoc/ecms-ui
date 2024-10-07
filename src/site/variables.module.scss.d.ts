@@ -1,5 +1,5 @@
 type I_globalScss = {
-    mobileWidth: string;
+    minDualPanelWidth: string;
 }
 
 export const variables: I_globalScss;

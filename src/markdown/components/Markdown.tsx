@@ -26,5 +26,5 @@ export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): 
         </Suspense>
     );
 
-    return <ContentWithSidebar contentElement={contentElement} sidebarElement={sidebarElement} />;
+    return <ContentWithSidebar contentElement={contentElement} sidebarElement={sidebarElement} mobileSidebarAtTop={true} />;
 };
