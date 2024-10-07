@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
-import { MarkdownStateContext } from './MarkdownContent';
+import { MarkdownPageContext } from './MarkdownPage';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
@@ -21,7 +21,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { apiPath, singlePage } = useContext(MarkdownStateContext);
+    const { apiPath, singlePage } = useContext(MarkdownPageContext);
     const [searchParams, setSearchParams] = useSearchParams();
     const mode = searchParams.get('mode');
 

@@ -1,1 +1,1 @@
-export { Markdown } from './components/Markdown';
+export { MarkdownPages } from './components/MarkdownPages';

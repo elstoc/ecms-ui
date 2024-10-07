@@ -4,9 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
 
-import { MarkdownContent } from './MarkdownContent';
-
-import './MarkdownNav.scss';
+import { MarkdownPage } from './MarkdownPage';
 
 export const MarkdownRoutes: FC<{ rootApiPath: string, singlePage: boolean }> = ({ rootApiPath, singlePage }): ReactElement => {
     const markdownTree = useMarkdownTree(rootApiPath);
@@ -27,7 +25,7 @@ const listMarkdownRoutes = (children: MarkdownTree[], singlePage: boolean): Reac
             <Route
                 key={child.apiPath}
                 path={child.uiPath}
-                element={<MarkdownContent apiPath={child.apiPath} singlePage={singlePage} />}
+                element={<MarkdownPage apiPath={child.apiPath} singlePage={singlePage} />}
             />
         ));
         if (!singlePage && child.children) {

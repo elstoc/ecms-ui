@@ -2,7 +2,7 @@
 import React, { FC, ReactElement, Suspense, useContext, useState } from 'react';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
-import { MarkdownStateContext } from './MarkdownContent';
+import { MarkdownPageContext } from './MarkdownPage';
 
 import { MarkdownToolbox } from './MarkdownToolbox';
 
@@ -11,7 +11,7 @@ import './MarkdownEditPage.scss';
 const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
 
 export const MarkdownEditPage: FC = (): ReactElement => {
-    const { apiPath } = useContext(MarkdownStateContext);
+    const { apiPath } = useContext(MarkdownPageContext);
     const mdPage = useMarkdownPage(apiPath);
     const [editedMarkdown, setEditedMarkdown] = useState(mdPage.content ?? '');
 

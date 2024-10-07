@@ -7,7 +7,7 @@ import { ContentOnly, ContentWithSidebar } from '../../common/components/layout'
 import { MarkdownNav } from './MarkdownNav';
 import { MarkdownRoutes } from './MarkdownRoutes';
 
-export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): ReactElement => {
+export const MarkdownPages: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): ReactElement => {
     useTitle(title);
 
     const contentElement = (

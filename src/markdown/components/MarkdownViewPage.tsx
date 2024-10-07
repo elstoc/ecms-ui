@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import { splitFrontMatter } from '../../utils';
 import { useTitle } from '../../common/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
-import { MarkdownStateContext } from './MarkdownContent';
+import { MarkdownPageContext } from './MarkdownPage';
 
 import { MarkdownToolbox } from './MarkdownToolbox';
 
@@ -19,7 +19,7 @@ const basename = (path: string): string => {
 };
 
 export const MarkdownViewPage: FC = (): ReactElement => {
-    const { apiPath } = useContext(MarkdownStateContext);
+    const { apiPath } = useContext(MarkdownPageContext);
     const mdPage = useMarkdownPage(apiPath);
 
     const [yaml, markdown] = splitFrontMatter(mdPage?.content ?? '');
