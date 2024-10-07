@@ -1,0 +1,17 @@
+$maxMobileWidth: 600px;
+$minDualPanelWidth: 950px;
+$maxContentWidth: 900px;
+$maxSidebarWidth: 450px;
+$maxContentPlusSidebarWidth: 1500px;
+
+$appBgColor: #EEEEEE;
+$lighterAppBgColor: whitesmoke;
+$contentBgColor: white;
+$galleryBgColor: #BBBBBB;
+
+$fixedWidthFont: 'hack', Courier, monospace;
+$headingFont: 'Raleway', sans-serif;
+
+:export {
+    mobileWidth: $maxMobileWidth
+}

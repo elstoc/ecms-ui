@@ -1,3 +1,5 @@
+@import '../../../site/variables.module.scss';
+
 .rendered-md {
     text-align: justify;
 
@@ -14,7 +16,7 @@
         padding: 0;
         font-weight: 700;
         text-align: left;
-        font-family: 'Raleway', sans-serif;
+        font-family: $headingFont;
     }
     
     h1 + h2,
@@ -73,7 +75,7 @@
     }
 
     dt {
-        font-family: 'Raleway', sans-serif;
+        font-family: $headingFont;
         font-weight: 700;
         margin-top: 0.7rem;
         margin-bottom: 0.4rem;
@@ -90,7 +92,7 @@
     code,
     code * {
         padding: 0;
-        font-family: 'hack', Courier, monospace;
+        font-family: $fixedWidthFont;
     }
 
     pre code,

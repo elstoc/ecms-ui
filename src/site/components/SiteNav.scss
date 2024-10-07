@@ -1,11 +1,13 @@
+@import '../variables.module.scss';
+
 .site-nav,
 .sub-menu {
     display: flex;
     flex-direction: column;
-    background-color: #EEEE;
+    background-color: $appBgColor;
     
     .nav-title {
-        font-family: 'Raleway', sans-serif;
+        font-family: $headingFont;
     }
 
     a:visited, a:hover, a:active, a:link {
@@ -30,7 +32,7 @@
         font-size: 1.05rem;
     }
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: $maxMobileWidth) {
         flex-direction: row;
         align-items: center;
 

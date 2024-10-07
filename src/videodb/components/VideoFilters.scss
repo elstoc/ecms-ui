@@ -1,8 +1,10 @@
+@import '../../site/variables.module.scss';
+
 .video-filters {
     .card {
         padding-bottom: 1em;
         margin-bottom: 1em;
-        background-color: whitesmoke;
+        background-color: $lighterAppBgColor;
 
         label { width: 12em; }
 

@@ -1,3 +1,5 @@
+@import '../../../site/variables.module.scss';
+
 .edit-markdown {
     height: 100%;
     border: 1px solid grey;
@@ -7,7 +9,7 @@
     }
 
     div.cm-line {
-        font-family: 'hack', Courier, monospace;
+        font-family: $fixedWidthFont;
         font-size: 0.95rem;
         line-height: 1.5;
     }

@@ -1,4 +1,6 @@
+@import '../../site/variables.module.scss';
+
 .video-list {
-    background-color: #EEEE;
+    background-color: $appBgColor;
     height: 100%;
 }

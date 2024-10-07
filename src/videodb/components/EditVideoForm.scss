@@ -1,3 +1,5 @@
+@import '../../site/variables.module.scss';
+
 .edit-video-form {
     .bp5-inline {
         label { width: 6rem; }
@@ -69,9 +71,7 @@
     }
 }
 
-@media screen and (min-width: 600px) {
-    .update-video { min-width: 500px; }
-    
+@media screen and (min-width: $maxMobileWidth) {
     .edit-video-form {
         font-size: 0.95rem;
 

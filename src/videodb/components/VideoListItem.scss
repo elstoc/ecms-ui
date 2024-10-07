@@ -1,3 +1,5 @@
+@import '../../site/variables.module.scss';
+
 #app .video-list-item {
     margin: 0;
     padding: 0;
@@ -5,7 +7,7 @@
     cursor: default;
 
     &:hover {
-        background-color: whitesmoke;
+        background-color: $lighterAppBgColor;
     }
     
     &.expanded {

@@ -1,3 +1,5 @@
+@import '../../site/variables.module.scss';
+
 .notExist {
     text-align: center;
 }
@@ -5,9 +7,9 @@
 .markdown-render-page {
     padding: 0 1.5rem 0 1.5rem;
     height: 100%;
-    background-color: #FFFF;
+    background-color: $contentBgColor;
 
-    @media screen and (min-width: 600px) {
+    @media screen and (min-width: $maxMobileWidth) {
         padding: 0 3.5rem 2rem 3.5rem;
     }
 }
