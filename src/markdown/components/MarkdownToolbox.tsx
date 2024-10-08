@@ -2,15 +2,20 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { useMediaQuery } from 'react-responsive';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownPageContext } from './MarkdownPage';
+import { MarkdownPagesContext } from './MarkdownPages';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
 
 import './MarkdownToolbox.scss';
+
+import variables from '../../site/variables.module.scss';
+const { minDualPanelWidth } = variables;
 
 type MarkdownToolboxProps = {
     children: ReactNode;
@@ -21,9 +26,11 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
+    const { setNavOpen } = useContext(MarkdownPagesContext);
     const { apiPath, singlePage } = useContext(MarkdownPageContext);
     const [searchParams, setSearchParams] = useSearchParams();
     const mode = searchParams.get('mode');
+    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${minDualPanelWidth})` });
 
     const mdPage = useMarkdownPage(apiPath);
     const { pathValid, pageExists } = mdPage;
@@ -71,6 +78,15 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
     return (
         <div className='markdown-content'>
             <div className='markdown-toolbox'>
+                {!singlePage && !isDualPanel &&
+                    <div className='navmenu'>
+                        <Icon
+                            name='menu'
+                            className='navMenu'
+                            onClick={() => setNavOpen(true)}
+                        />
+                    </div>
+                }
                 <Icon
                     name='add'
                     disabled={singlePage || !mdPage.canWrite || mode === 'edit'}

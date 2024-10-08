@@ -1,10 +1,11 @@
-import React, { FC, ReactElement, useState } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
-import { Button, Drawer } from '@blueprintjs/core';
+import { Drawer } from '@blueprintjs/core';
 
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
+import { MarkdownPagesContext } from './MarkdownPages';
 
 import './MarkdownNav.scss';
 
@@ -13,10 +14,9 @@ const { minDualPanelWidth } = variables;
 
 export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
     const markdownTree = useMarkdownTree(rootApiPath);
-    const [navOpen, setNavOpen] = useState(false);
+    const { navOpen, setNavOpen } = useContext(MarkdownPagesContext);
     const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${minDualPanelWidth})` });
     const handleClose = () => setNavOpen(false);
-    const handleOpen = () => setNavOpen(true);
 
     const navContent = (
         <span className='markdown-nav'>
@@ -29,17 +29,14 @@ export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): React
     }
 
     return (
-        <>
-            <Button onClick={handleOpen} icon='menu' large={true} />
-            <Drawer
-                isOpen={navOpen}
-                onClose={handleClose}
-                size='80%'
-                position='left'
-            >
-                {navContent}
-            </Drawer>
-        </>
+        <Drawer
+            isOpen={navOpen}
+            onClose={handleClose}
+            size='80%'
+            position='left'
+        >
+            {navContent}
+        </Drawer>
     );
 };
 
