@@ -4,7 +4,7 @@ import { Card, Collapse, Tag } from '@blueprintjs/core';
 
 import { useLookupValue } from '../hooks/useVideoDbQueries';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoWithId } from '../api';
 
 import { WatchedIcon } from './WatchedIcon';
@@ -18,7 +18,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
     const [searchParams] = useSearchParams();
     const userIsAdmin = useUserIsAdmin();
     const [viewExpanded, setViewExpanded] = useState(false);
-    const { videoDbState: { apiPath, pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath, pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbStateContext);
 
     const videoCategory = useLookupValue(apiPath, 'categories', video.category);
     const primaryMediaType = useLookupValue(apiPath, 'media_types', video.primary_media_type);

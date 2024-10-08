@@ -4,7 +4,7 @@ import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { postVideoDbVideo, Video, VideoWithId } from '../api';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { EditVideoForm } from './EditVideoForm';
 import { AppToaster } from '../../common/components/toaster';
@@ -23,7 +23,7 @@ export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
 
     const addVideo = useCallback(async (video: VideoWithId) => {
         try {

@@ -7,7 +7,7 @@ import { patchVideoDbVideos, VideoUpdate } from '../api';
 import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 
 import { Icon } from '../../common/components/icon';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { AppToaster } from '../../common/components/toaster';
 
 import './VideoActionButtons.scss';
@@ -15,7 +15,7 @@ import './VideoActionButtons.scss';
 export const VideoActionButtons: FC = (): ReactElement => {
     const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
-    const { videoDbState: { apiPath, pendingFlagUpdates, }, videoDbReducer } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath, pendingFlagUpdates, }, videoDbReducer } = useContext(VideoDbStateContext);
 
     const flagUpdateCount = Object.keys(pendingFlagUpdates).length;
 

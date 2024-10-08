@@ -23,7 +23,7 @@ type VideoDbStateContextProps = {
     videoDbReducer: React.Dispatch<StateOperations>;
 };
 
-const videoDbQueryReducer: (state: VideoDbState, operation: StateOperations) => VideoDbState = (state, operation) => {
+const videoDbStateReducer: (state: VideoDbState, operation: StateOperations) => VideoDbState = (state, operation) => {
     if (operation.action === 'increaseLimit' && operation.currentlyLoaded + BATCH_SIZE >= state.limit + BATCH_SIZE) {
         return { ...state, limit: state.limit + BATCH_SIZE };
     } else if (operation.action === 'resetLimit') {
@@ -42,10 +42,10 @@ const videoDbQueryReducer: (state: VideoDbState, operation: StateOperations) => 
     return state;
 };
 
-export const VideoDbContext = createContext({} as VideoDbStateContextProps);
+export const VideoDbStateContext = createContext({} as VideoDbStateContextProps);
 
 export const useVideoDbState: (title: string, apiPath: string) => VideoDbStateContextProps = (title, apiPath) => {
     const initialState = { title, apiPath, limit: BATCH_SIZE, pendingFlagUpdates: [] };
-    const [videoDbState, videoDbReducer] = useReducer(videoDbQueryReducer, initialState);
+    const [videoDbState, videoDbReducer] = useReducer(videoDbStateReducer, initialState);
     return { videoDbState, videoDbReducer };
 };

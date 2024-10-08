@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 
 import { useGetTags } from '../hooks/useVideoDbQueries';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { MultiTagInput } from '../../common/components/forms';
 
@@ -15,7 +15,7 @@ type TagInputParams = {
 };
 
 export const TagInput: FC<TagInputParams> = ({ tags, onSelectionChange, label, inline, className, allowCreation = true }): ReactElement => {
-    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
     const tagsArray = tags ? tags.split('|') : [];
     const tagLookup = useGetTags(apiPath);
 

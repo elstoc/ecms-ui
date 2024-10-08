@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { VideoListItem } from './VideoListItem';
 
@@ -11,7 +11,7 @@ import './VideoList.scss';
 
 export const VideoList: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { videoDbState: { apiPath,  limit }, videoDbReducer } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath,  limit }, videoDbReducer } = useContext(VideoDbStateContext);
     const { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = Object.fromEntries(searchParams.entries());
 
     const videos = useGetVideos(apiPath, {

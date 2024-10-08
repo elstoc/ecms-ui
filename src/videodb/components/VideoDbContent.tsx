@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { useTitle } from '../../common/hooks';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { ContentWithSidebar } from '../../common/components/layout';
 import { VideoList } from './VideoList';
@@ -15,7 +15,7 @@ import { VideoActionButtons } from './VideoActionButtons';
 export const VideoDbContent: FC = (): ReactElement => {
     const userIsAdmin = useUserIsAdmin();
 
-    const { videoDbState: { title } } = useContext(VideoDbContext);
+    const { videoDbState: { title } } = useContext(VideoDbStateContext);
     useTitle(title);
 
     const videoFilters = (

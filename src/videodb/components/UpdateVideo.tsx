@@ -5,7 +5,7 @@ import { useQueryClient } from '@tanstack/react-query';
 
 import { deleteVideoDbVideo, putVideoDbVideo, VideoWithId } from '../api';
 import { useGetVideo } from '../hooks/useVideoDbQueries';
-import { VideoDbContext } from '../hooks/useVideoDbState';
+import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { AppToaster } from '../../common/components/toaster';
 import { EditVideoForm } from './EditVideoForm';
@@ -15,7 +15,7 @@ export const UpdateVideo: FC = (): ReactElement => {
     const queryClient = useQueryClient();
 
     const { id } = useParams();
-    const { videoDbState: { apiPath } } = useContext(VideoDbContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
     const storedVideo = useGetVideo(apiPath, parseInt(id ?? '0'));
 
     const updateVideo = useCallback(async (video: VideoWithId) => {
