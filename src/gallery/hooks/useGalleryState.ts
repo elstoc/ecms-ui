@@ -19,22 +19,10 @@ type GalleryStateContextProps = {
 
 const GalleryStateContext = createContext<GalleryStateContextProps>({} as GalleryStateContextProps);
 
-type IncrementMaxImagesAction = {
-    action: 'incrementMaxImages',
-    maximum: number,
-};
-
-type SetMaxImagesAction = {
-    action: 'setMaxImages',
+type GalleryReducerActions = {
+    action: 'setMaxImages' | 'setActiveImageIndex' | 'incrementMaxImages',
     value: number
 };
-
-type SetLightboxImageAction = {
-    action: 'setActiveImageIndex',
-    value: number
-};
-
-type GalleryReducerActions = IncrementMaxImagesAction | SetMaxImagesAction | SetLightboxImageAction;
 
 const getInitialState = (apiPath: string, title: string) => ({
     apiPath, title,
@@ -46,7 +34,7 @@ const getInitialState = (apiPath: string, title: string) => ({
 
 const stateReducer: (state: GalleryState, actions: GalleryReducerActions) => GalleryState = (state, actions) => {
     if (actions.action === 'incrementMaxImages') {
-        return { ...state, maxImages: Math.min(state.maxImages + state.batchSize, actions.maximum)};
+        return { ...state, maxImages: Math.min(state.maxImages + state.batchSize, actions.value)};
     } else if (actions.action === 'setMaxImages') {
         return { ...state, maxImages: actions.value };
     } else if (actions.action === 'setActiveImageIndex') {

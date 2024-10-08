@@ -13,7 +13,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
 
     const loadMoreImages = useCallback(() => (
         startTransition(() => {
-            galleryStateReducer({ action: 'incrementMaxImages', maximum: allImageFiles.length });
+            galleryStateReducer({ action: 'incrementMaxImages', value: allImageFiles.length });
         })
     ), [allImageFiles, galleryStateReducer]);
 
