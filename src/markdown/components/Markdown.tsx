@@ -7,14 +7,14 @@ import { ContentOnly, ContentWithSidebar } from '../../common/components/layout'
 import { MarkdownNav } from './MarkdownNav';
 import { MarkdownRoutes } from './MarkdownRoutes';
 
-type MarkdownPagesProps = {
+type MarkdownProps = {
     navOpen: boolean;
     setNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const MarkdownPagesContext = createContext<MarkdownPagesProps>({} as MarkdownPagesProps);
+export const MarkdownContext = createContext<MarkdownProps>({} as MarkdownProps);
 
-export const MarkdownPages: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): ReactElement => {
+export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): ReactElement => {
     const [navOpen, setNavOpen] = useState(false);
     useTitle(title);
 
@@ -26,9 +26,9 @@ export const MarkdownPages: FC<MarkdownMetadata> = ({ apiPath, title, singlePage
 
     if (singlePage) {
         return (
-            <MarkdownPagesContext.Provider value={{navOpen, setNavOpen}}>
+            <MarkdownContext.Provider value={{navOpen, setNavOpen}}>
                 <ContentOnly contentElement={contentElement} />
-            </MarkdownPagesContext.Provider>
+            </MarkdownContext.Provider>
         );
     }
 
@@ -39,8 +39,8 @@ export const MarkdownPages: FC<MarkdownMetadata> = ({ apiPath, title, singlePage
     );
 
     return (
-        <MarkdownPagesContext.Provider value={{navOpen, setNavOpen}}>
+        <MarkdownContext.Provider value={{navOpen, setNavOpen}}>
             <ContentWithSidebar contentElement={contentElement} sidebarElement={sidebarElement} mobileSidebarAtTop={true} />
-        </MarkdownPagesContext.Provider>
+        </MarkdownContext.Provider>
     );
 };

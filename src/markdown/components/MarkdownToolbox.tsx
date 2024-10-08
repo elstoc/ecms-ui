@@ -7,7 +7,7 @@ import { useMediaQuery } from 'react-responsive';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownPageContext } from './MarkdownPage';
-import { MarkdownPagesContext } from './MarkdownPages';
+import { MarkdownContext } from './Markdown';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
@@ -26,7 +26,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { setNavOpen } = useContext(MarkdownPagesContext);
+    const { setNavOpen } = useContext(MarkdownContext);
     const { apiPath, singlePage } = useContext(MarkdownPageContext);
     const [searchParams, setSearchParams] = useSearchParams();
     const mode = searchParams.get('mode');
