@@ -6,38 +6,35 @@ import { useMediaQuery } from 'react-responsive';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
-import { MarkdownPageContext } from './MarkdownPage';
-import { MarkdownContext } from './Markdown';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
 
 import './MarkdownToolbox.scss';
-
 import variables from '../../site/variables.module.scss';
+
 const { minDualPanelWidth } = variables;
 
 type MarkdownToolboxProps = {
+    apiPath: string;
     children: ReactNode;
-    editedMarkdown?: string;
 }
 
-export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMarkdown }): ReactElement => {
+export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children }): ReactElement => {
+    const [searchParams, setSearchParams] = useSearchParams();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { setNavOpen } = useContext(MarkdownContext);
-    const { apiPath, singlePage } = useContext(MarkdownPageContext);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const mode = searchParams.get('mode');
+    const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
     const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${minDualPanelWidth})` });
+    const mode = searchParams.get('mode');
 
-    const mdPage = useMarkdownPage(apiPath);
-    const { pathValid, pageExists } = mdPage;
+    const { content, canWrite, canDelete, pathValid, pageExists } = useMarkdownPage(apiPath);
 
     const toggleEditMode = useCallback(() => {
         if (mode === 'edit') {
-            if (editedMarkdown === mdPage?.content
+            if (editedMarkdown === content
                 || confirm('You have unsaved changes. Are you sure you wish to leave?')
             ) {
                 setSearchParams();
@@ -45,7 +42,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
         } else {
             setSearchParams({ mode: 'edit' });
         }
-    }, [editedMarkdown, mdPage?.content, mode, setSearchParams]);
+    }, [editedMarkdown, content, mode, setSearchParams]);
 
     const invalidateAndToast = useCallback(async (message: string) => {
         (await AppToaster).show({ message, timeout: 2000 });
@@ -83,20 +80,20 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
                         <Icon
                             name='menu'
                             className='navMenu'
-                            onClick={() => setNavOpen(true)}
+                            onClick={() => markdownReducer({key: 'navOpen', value: true })}
                         />
                     </div>
                 }
                 <Icon
                     name='add'
-                    disabled={singlePage || !mdPage.canWrite || mode === 'edit'}
+                    disabled={singlePage || !canWrite || mode === 'edit'}
                     onClick={() => setSearchParams({ mode: 'add' })}
                     tooltipContent='add new child page'
                     tooltipPosition='top-right'
                 />
                 <Icon
                     name='delete'
-                    disabled={singlePage || !mdPage?.canDelete || mode === 'edit'}
+                    disabled={singlePage || !canDelete || mode === 'edit'}
                     onClick={deletePage}
                     tooltipContent='delete page'
                     tooltipPosition='top-right'
@@ -104,7 +101,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ children, editedMark
                 <Icon
                     name='save'
                     onClick={savePage}
-                    disabled={mode !== 'edit' || !mdPage?.canWrite || mdPage.content === editedMarkdown}
+                    disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
                     tooltipContent='save edited page'
                     tooltipPosition='top-right'
                 />

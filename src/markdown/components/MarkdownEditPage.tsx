@@ -1,27 +1,27 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, Suspense, useContext, useState } from 'react';
+import React, { FC, ReactElement, Suspense, useContext, useEffect } from 'react';
 
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
-import { MarkdownPageContext } from './MarkdownPage';
-
-import { MarkdownToolbox } from './MarkdownToolbox';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import './MarkdownEditPage.scss';
 
 const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
 
-export const MarkdownEditPage: FC = (): ReactElement => {
-    const { apiPath } = useContext(MarkdownPageContext);
+export const MarkdownEditPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+    const { markdownState: { editedMarkdown }, markdownReducer} = useContext(MarkdownStateContext);
     const mdPage = useMarkdownPage(apiPath);
-    const [editedMarkdown, setEditedMarkdown] = useState(mdPage.content ?? '');
+
+    const setEditedMarkdown = (value: string) => markdownReducer({ key: 'editedMarkdown', value });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => setEditedMarkdown(mdPage.content), []);
 
     return (
         <Suspense>
-            <MarkdownToolbox editedMarkdown={editedMarkdown}>
-                <div className='markdown-edit-source'>
-                    <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
-                </div>
-            </MarkdownToolbox>
+            <div className='markdown-edit-source'>
+                <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
+            </div>
         </Suspense>
     );
 };

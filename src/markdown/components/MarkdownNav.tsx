@@ -5,18 +5,19 @@ import { Drawer } from '@blueprintjs/core';
 
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
-import { MarkdownContext } from './Markdown';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import './MarkdownNav.scss';
-
 import variables from '../../site/variables.module.scss';
+
 const { minDualPanelWidth } = variables;
 
-export const MarkdownNav: FC<{ rootApiPath: string }> = ({ rootApiPath }): ReactElement => {
+export const MarkdownNav: FC = (): ReactElement => {
+    const { markdownState: { rootApiPath, navOpen }, markdownReducer } = useContext(MarkdownStateContext);
     const markdownTree = useMarkdownTree(rootApiPath);
-    const { navOpen, setNavOpen } = useContext(MarkdownContext);
     const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${minDualPanelWidth})` });
-    const handleClose = () => setNavOpen(false);
+
+    const handleClose = () => markdownReducer({ key: 'navOpen', value: false });
 
     const navContent = (
         <span className='markdown-nav'>

@@ -1,19 +1,17 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, useCallback, useContext, useState } from 'react';
+import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
 
 import { getMarkdownPage, putMarkdownPage } from '../api';
-import { MarkdownPageContext } from './MarkdownPage';
 
 import { AppToaster } from '../../common/components/toaster';
 import { StringInput } from '../../common/components/forms';
 
 import './MarkdownAddPage.scss';
 
-export const MarkdownAddPage: FC = (): ReactElement => {
-    const { apiPath } = useContext(MarkdownPageContext);
+export const MarkdownAddPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [, setSearchParams] = useSearchParams();

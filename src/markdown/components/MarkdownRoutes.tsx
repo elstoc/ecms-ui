@@ -1,12 +1,14 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
+import { useMarkdownTree } from '../hooks/useMarkdownQueries';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { MarkdownPage } from './MarkdownPage';
 
-export const MarkdownRoutes: FC<{ rootApiPath: string, singlePage: boolean }> = ({ rootApiPath, singlePage }): ReactElement => {
+export const MarkdownRoutes: FC = (): ReactElement => {
+    const { markdownState: { rootApiPath, singlePage } } = useContext(MarkdownStateContext);
     const markdownTree = useMarkdownTree(rootApiPath);
 
     if (!markdownTree.children) return <></>;
@@ -20,17 +22,19 @@ export const MarkdownRoutes: FC<{ rootApiPath: string, singlePage: boolean }> = 
 
 const listMarkdownRoutes = (children: MarkdownTree[], singlePage: boolean): ReactElement[] => {
     const routes: ReactElement[] = [];
+
     children.forEach((child) => {
         routes.push((
             <Route
                 key={child.apiPath}
                 path={child.uiPath}
-                element={<MarkdownPage apiPath={child.apiPath} singlePage={singlePage} />}
+                element={<MarkdownPage apiPath={child.apiPath} />}
             />
         ));
         if (!singlePage && child.children) {
             routes.push(...listMarkdownRoutes(child.children, false));
         }
     });
+
     return routes;
 };
