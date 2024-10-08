@@ -7,11 +7,11 @@ import { VideoDb } from '../../videodb';
 
 export const SiteComponent: FC<{ metadata: ComponentMetadata }> = ({ metadata }): ReactElement => {
     if (metadata.type === ComponentTypes.gallery) {
-        return <Gallery {...metadata} />;
+        return <Gallery key={metadata.apiPath} {...metadata} />;
     } else if (metadata.type === ComponentTypes.markdown) {
-        return <Markdown {...metadata} />;
+        return <Markdown key={metadata.apiPath} {...metadata} />;
     } else if (metadata.type === ComponentTypes.videodb) {
-        return <VideoDb {...metadata} />;
+        return <VideoDb key={metadata.apiPath} {...metadata} />;
     }
 
     return <div>Component Type Not Supported</div>;
