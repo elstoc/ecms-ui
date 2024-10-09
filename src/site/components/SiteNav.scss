@@ -3,7 +3,6 @@
 .site-nav,
 .sub-menu {
     display: flex;
-    flex-direction: column;
     background-color: $appBgColor;
     
     .nav-title {
@@ -25,29 +24,27 @@
 }
 
 .site-nav {
+    flex-direction: row;
     align-items: left;
     flex-wrap: wrap;
 
     .nav-title {
         font-size: 1.05rem;
+        padding: 0 0.9rem;
     }
 
     @media screen and (min-width: $maxMobileWidth) {
-        flex-direction: row;
         align-items: center;
 
-        .nav-title {
-            padding: 0 0.9rem;
-        }
     }
 }
 
 .sub-menu {
-    padding: 0.3em 0;
+    flex-direction: column;
 
     .nav-title {
         font-size: 1rem;
         justify-content: left;
-        padding: 0.1rem 0.9rem;
+        padding: 0.35rem 0.9rem;
     }
 }
