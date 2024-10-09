@@ -2,15 +2,14 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useMediaQuery } from 'react-responsive';
 
+import { useIsDualPanel } from '../../common/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
-import variables from '../../site/variables.module.scss';
 
 import './MarkdownToolbox.scss';
 
@@ -25,7 +24,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     const navigate = useNavigate();
 
     const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
-    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${variables.minDualPanelWidth})` });
+    const isDualPanel = useIsDualPanel();
     const mode = searchParams.get('mode');
 
     const { content, canWrite, canDelete, pathValid, pageExists } = useMarkdownPage(apiPath);

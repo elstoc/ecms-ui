@@ -1,18 +1,17 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { useMediaQuery } from 'react-responsive';
 
 import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { patchVideoDbVideos, VideoUpdate } from '../api';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
+import { useIsDualPanel } from '../../common/hooks';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
 
 import './VideoToolbox.scss';
-import variables from '../../site/variables.module.scss';
 
 type VideoToolboxProps = {
     children: ReactNode
@@ -24,7 +23,7 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
     const { videoDbState: { apiPath, pendingFlagUpdates, }, videoDbReducer } = useContext(VideoDbStateContext);
-    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${variables.minDualPanelWidth})` });
+    const isDualPanel = useIsDualPanel();
 
     const flagUpdateCount = Object.keys(pendingFlagUpdates).length;
 

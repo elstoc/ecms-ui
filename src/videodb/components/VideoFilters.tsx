@@ -1,14 +1,13 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Button, Card, Drawer } from '@blueprintjs/core';
-import { useMediaQuery } from 'react-responsive';
 
+import { useIsDualPanel } from '../../common/hooks';
 import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../common/components/forms';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
-import variables from '../../site/variables.module.scss';
 
 import './VideoFilters.scss';
 
@@ -28,7 +27,7 @@ export const VideoFilters: FC = (): ReactElement => {
     const { state, updateState, clearAllFilters } = useVideoDbFilterState();
     const { videoDbState: { navOpen }, videoDbReducer } = useContext(VideoDbStateContext);
     const { titleContains, maxLength, categories, watched, mediaWatched, minResolution, tags, sortPriorityFirst } = state;
-    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${variables.minDualPanelWidth})` });
+    const isDualPanel = useIsDualPanel();
 
     const filtersElement = (
         <div className='video-filters'>
