@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { useGetTags } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { MultiTagInput } from '../../common/components/forms';
+import { MultiTagInput } from '../../shared/components/forms';
 
 type TagInputParams = {
     tags: string | null;

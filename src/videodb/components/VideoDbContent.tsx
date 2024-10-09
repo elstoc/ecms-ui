@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, Suspense, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { useTitle } from '../../common/hooks';
+import { useTitle } from '../../shared/hooks';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { ContentWithSidebar } from '../../common/components/layout';
+import { ContentWithSidebar } from '../../shared/components/layout';
 import { VideoList } from './VideoList';
 import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';

@@ -1,4 +1,4 @@
-import { axiosSecureClient } from '../common/api';
+import { axiosSecureClient } from '../shared/api';
 
 export type MarkdownTree = {
     apiPath: string;

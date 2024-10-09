@@ -1,4 +1,4 @@
-import { useCustomQuery } from '../../common/hooks';
+import { useCustomQuery } from '../../shared/hooks';
 import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags } from '../api';
 
 const useGetVideos = (path: string, params?: { [key: string]: string }) => {

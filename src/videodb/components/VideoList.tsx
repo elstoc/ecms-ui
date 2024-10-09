@@ -1,7 +1,7 @@
 import React, { createRef, FC, ReactElement, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { useElementIsVisible } from '../../common/hooks/useElementIsVisible';
+import { useElementIsVisible } from '../../shared/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 

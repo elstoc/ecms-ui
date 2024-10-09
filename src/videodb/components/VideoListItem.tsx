@@ -8,8 +8,8 @@ import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoWithId } from '../api';
 
 import { WatchedIcon } from './WatchedIcon';
-import { Flag } from '../../common/components/forms';
-import { Icon } from '../../common/components/icon';
+import { Flag } from '../../shared/components/forms';
+import { Icon } from '../../shared/components/icon';
 
 import './VideoListItem.scss';
 

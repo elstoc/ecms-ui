@@ -6,8 +6,8 @@ import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
 
 import { getMarkdownPage, putMarkdownPage } from '../api';
 
-import { AppToaster } from '../../common/components/toaster';
-import { StringInput } from '../../common/components/forms';
+import { AppToaster } from '../../shared/components/toaster';
+import { StringInput } from '../../shared/components/forms';
 
 import './MarkdownAddPage.scss';
 

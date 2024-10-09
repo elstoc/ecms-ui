@@ -7,7 +7,7 @@ import { deleteVideoDbVideo, putVideoDbVideo, VideoWithId } from '../api';
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { AppToaster } from '../../common/components/toaster';
+import { AppToaster } from '../../shared/components/toaster';
 import { EditVideoForm } from './EditVideoForm';
 
 export const UpdateVideo: FC = (): ReactElement => {

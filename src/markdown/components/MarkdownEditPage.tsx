@@ -6,7 +6,7 @@ import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import './MarkdownEditPage.scss';
 
-const EditMd = React.lazy(() => import('../../common/components/editmd/EditMdAsDefault'));
+const EditMd = React.lazy(() => import('../../shared/components/editmd/EditMdAsDefault'));
 
 export const MarkdownEditPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const { markdownState: { editedMarkdown }, markdownReducer} = useContext(MarkdownStateContext);

@@ -4,7 +4,7 @@ import { Dialog, DialogBody } from '@blueprintjs/core';
 import { useSiteConfig } from '../../site';
 import { useUserInfo } from '..';
 
-import { Icon } from '../../common/components/icon';
+import { Icon } from '../../shared/components/icon';
 import { Login } from './Login';
 import { Welcome } from './Welcome';
 

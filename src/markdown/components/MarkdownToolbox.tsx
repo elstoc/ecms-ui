@@ -3,13 +3,13 @@ import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'rea
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useIsDualPanel } from '../../common/hooks';
+import { useIsDualPanel } from '../../shared/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { Icon } from '../../common/components/icon';
-import { AppToaster } from '../../common/components/toaster';
+import { Icon } from '../../shared/components/icon';
+import { AppToaster } from '../../shared/components/toaster';
 
 import './MarkdownToolbox.scss';
 

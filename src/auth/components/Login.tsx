@@ -5,7 +5,7 @@ import { login } from '../api';
 
 import './Login.scss';
 import { Button, Card } from '@blueprintjs/core';
-import { PasswordInput, StringInput } from '../../common/components/forms';
+import { PasswordInput, StringInput } from '../../shared/components/forms';
 
 export const Login: FC = (): ReactElement => {
     const queryClient = useQueryClient();

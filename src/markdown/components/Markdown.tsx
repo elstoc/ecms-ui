@@ -1,6 +1,6 @@
 import React, { FC, ReactElement } from 'react';
 
-import { useTitle } from '../../common/hooks';
+import { useTitle } from '../../shared/hooks';
 import { MarkdownMetadata } from '../../site/api';
 
 import { MarkdownStateContext, useMarkdownState } from '../hooks/useMarkdownStateContext';

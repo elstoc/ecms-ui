@@ -4,12 +4,12 @@ import React, { FC, ReactElement, ReactNode, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 
 import { splitFrontMatter } from '../../utils';
-import { useTitle } from '../../common/hooks';
+import { useTitle } from '../../shared/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 
 import './MarkdownViewPage.scss';
 
-const RenderMd = React.lazy(() => import('../../common/components/rendermd/RenderMdAsDefault'));
+const RenderMd = React.lazy(() => import('../../shared/components/rendermd/RenderMdAsDefault'));
 
 const basename = (path: string): string => {
     return path.split('/').reverse()[0];

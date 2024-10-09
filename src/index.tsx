@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
 
 import { App } from './app';
-import { ErrorFallback } from './common/components/fallbacks';
+import { ErrorFallback } from './shared/components/fallbacks';
 import { BlueprintProvider } from '@blueprintjs/core';
 
 const queryDefaults = {

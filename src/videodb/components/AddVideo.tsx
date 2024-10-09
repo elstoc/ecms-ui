@@ -7,7 +7,7 @@ import { postVideoDbVideo, Video, VideoWithId } from '../api';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { EditVideoForm } from './EditVideoForm';
-import { AppToaster } from '../../common/components/toaster';
+import { AppToaster } from '../../shared/components/toaster';
 
 const initialVideo = {
     id: 0, title: '', category: '',

@@ -6,10 +6,10 @@ import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { patchVideoDbVideos, VideoUpdate } from '../api';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
-import { useIsDualPanel } from '../../common/hooks';
+import { useIsDualPanel } from '../../shared/hooks';
 
-import { Icon } from '../../common/components/icon';
-import { AppToaster } from '../../common/components/toaster';
+import { Icon } from '../../shared/components/icon';
+import { AppToaster } from '../../shared/components/toaster';
 
 import './VideoToolbox.scss';
 

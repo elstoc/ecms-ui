@@ -1,4 +1,4 @@
-import { axiosClient, axiosSecureClient } from '../common/api';
+import { axiosClient, axiosSecureClient } from '../shared/api';
 import { getStorage, setStorage } from '../utils';
 
 const TOKEN_KEY = 'access-token';

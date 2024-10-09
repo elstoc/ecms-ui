@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { Drawer } from '@blueprintjs/core';
 
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
-import { useIsDualPanel } from '../../common/hooks';
+import { useIsDualPanel } from '../../shared/hooks';
 import { MarkdownTree } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 

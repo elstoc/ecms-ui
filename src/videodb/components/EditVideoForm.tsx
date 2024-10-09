@@ -4,7 +4,7 @@ import { Button, Card, Collapse, ControlGroup } from '@blueprintjs/core';
 import { useEditVideoReducer } from '../hooks/useEditVideoReducer';
 import { VideoWithId } from '../api';
 
-import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../common/components/forms';
+import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../shared/components/forms';
 import { SelectLookup } from './SelectLookup';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';

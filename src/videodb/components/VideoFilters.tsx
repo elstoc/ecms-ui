@@ -1,11 +1,11 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { Button, Card, Drawer } from '@blueprintjs/core';
 
-import { useIsDualPanel } from '../../common/hooks';
+import { useIsDualPanel } from '../../shared/hooks';
 import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../common/components/forms';
+import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../shared/components/forms';
 import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
 

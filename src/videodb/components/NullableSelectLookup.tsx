@@ -3,7 +3,7 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { useGetLookup } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { NullableSelectKeyValue } from '../../common/components/forms';
+import { NullableSelectKeyValue } from '../../shared/components/forms';
 
 type NullableSelectLookupParams = {
     lookupTable: string;

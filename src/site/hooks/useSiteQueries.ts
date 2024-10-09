@@ -1,5 +1,5 @@
 import { getSiteConfig, getSiteComponents } from '../api';
-import { useCustomQuery } from '../../common/hooks';
+import { useCustomQuery } from '../../shared/hooks';
 
 const useSiteComponents = () => {
     return useCustomQuery({

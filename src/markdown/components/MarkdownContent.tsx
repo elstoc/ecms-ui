@@ -2,7 +2,7 @@ import React, { FC, ReactElement, Suspense, useContext } from 'react';
 
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { ContentOnly, ContentWithSidebar } from '../../common/components/layout';
+import { ContentOnly, ContentWithSidebar } from '../../shared/components/layout';
 import { MarkdownNav } from './MarkdownNav';
 import { MarkdownRoutes } from './MarkdownRoutes';
 

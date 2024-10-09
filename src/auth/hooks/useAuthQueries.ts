@@ -1,5 +1,5 @@
 import { getUserInfo } from '../api';
-import { useCustomQuery } from '../../common/hooks';
+import { useCustomQuery } from '../../shared/hooks';
 import { useSiteConfig } from '../../site';
 
 export const useUserInfo = () => {
