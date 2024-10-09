@@ -1,6 +1,6 @@
 // See https://react-icons.github.io/react-icons for summary of available icons
 import React, { FC, ReactElement } from 'react';
-import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX, FiPlusSquare, FiMenu } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX, FiPlusSquare, FiMenu, FiDownload, FiCheck } from 'react-icons/fi';
 import { IconType } from 'react-icons';
 import { PopoverPosition, Tooltip } from '@blueprintjs/core';
 
@@ -18,7 +18,9 @@ const icons: { [key: string]: IconType} = {
     close: FiX,
     flag: FiFlag,
     add: FiPlusSquare,
-    menu: FiMenu
+    menu: FiMenu,
+    download: FiDownload,
+    check: FiCheck
 };
 
 type IconProps = {
@@ -37,12 +39,12 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosi
     if (!IconComponent) return <></>;
 
     const iconOnClick = disabled ? undefined : onClick;
-    const iconClass = `icon ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''} ${className}`;
+    const divClass = `icon-div ${className} ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''}`;
 
-    const iconElement = <IconComponent className={iconClass} onClick={iconOnClick} color={color} />;
+    let iconElement = <IconComponent className='icon' color={color} />;
 
     if (tooltipContent) {
-        return (
+        iconElement = (
             <Tooltip
                 className='icon-tooltip'
                 hoverOpenDelay={500}
@@ -54,5 +56,10 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosi
             </Tooltip>
         );
     }
-    return iconElement;
+
+    return (
+        <div className={divClass} onClick={iconOnClick}>
+            {iconElement}
+        </div>
+    );
 };

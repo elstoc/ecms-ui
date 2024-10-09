@@ -1,7 +1,9 @@
-#app .nullable-string-input {
-    font-size: 0.95rem;
-
-    label {
+#app-container, #portal-container {
+    .nullable-string-input {
         font-size: 0.95rem;
+    
+        label {
+            font-size: 0.95rem;
+        }
     }
 }

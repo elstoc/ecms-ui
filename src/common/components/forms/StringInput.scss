@@ -1,7 +1,9 @@
-#app .string-input {
-    font-size: 0.95rem;
-
-    label {
+#app-container, #portal-container {
+    .string-input {
         font-size: 0.95rem;
+
+        label {
+            font-size: 0.95rem;
+        }
     }
 }

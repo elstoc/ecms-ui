@@ -33,7 +33,7 @@ export const MarkdownNav: FC = (): ReactElement => {
         <Drawer
             isOpen={navOpen}
             onClose={handleClose}
-            size='80%'
+            size='90%'
             position='left'
         >
             {navContent}

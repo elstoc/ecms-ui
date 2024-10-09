@@ -10,11 +10,9 @@ import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../common/components/icon';
 import { AppToaster } from '../../common/components/toaster';
-
-import './MarkdownToolbox.scss';
 import variables from '../../site/variables.module.scss';
 
-const { minDualPanelWidth } = variables;
+import './MarkdownToolbox.scss';
 
 type MarkdownToolboxProps = {
     apiPath: string;
@@ -27,7 +25,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     const navigate = useNavigate();
 
     const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
-    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${minDualPanelWidth})` });
+    const isDualPanel = useMediaQuery({ query: `screen and (min-width: ${variables.minDualPanelWidth})` });
     const mode = searchParams.get('mode');
 
     const { content, canWrite, canDelete, pathValid, pageExists } = useMarkdownPage(apiPath);

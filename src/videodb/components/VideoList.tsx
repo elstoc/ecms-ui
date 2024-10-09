@@ -8,6 +8,7 @@ import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoListItem } from './VideoListItem';
 
 import './VideoList.scss';
+import { VideoToolbox } from './VideoToolbox';
 
 export const VideoList: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
@@ -23,14 +24,16 @@ export const VideoList: FC = (): ReactElement => {
     useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length }));
 
     return (
-        <div className='video-list'>
-            {videos.map((video, index) => (
-                <VideoListItem
-                    key={video.id}
-                    video={video}
-                    ref={index === limit - 1 ? refLastVideo : null}
-                />
-            ))}
-        </div>
+        <VideoToolbox>
+            <div className='video-list'>
+                {videos.map((video, index) => (
+                    <VideoListItem
+                        key={video.id}
+                        video={video}
+                        ref={index === limit - 1 ? refLastVideo : null}
+                    />
+                ))}
+            </div>
+        </VideoToolbox>
     );
 };

@@ -10,7 +10,6 @@ import { VideoList } from './VideoList';
 import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';
 import { AddVideo } from './AddVideo';
-import { VideoActionButtons } from './VideoActionButtons';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const userIsAdmin = useUserIsAdmin();
@@ -21,7 +20,6 @@ export const VideoDbContent: FC = (): ReactElement => {
     const videoFilters = (
         <Suspense>
             <VideoFilters />
-            {userIsAdmin && <VideoActionButtons />}
         </Suspense>
     );
 

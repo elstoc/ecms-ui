@@ -1,12 +1,17 @@
 @import '../../site/variables.module.scss';
 
-.video-filters {
+#app-container .video-filters,
+#portal-container .video-filters {
+    background-color: $lighterAppBgColor;
+    height: 100%;
+
     .card {
         padding-bottom: 1em;
         margin-bottom: 1em;
         background-color: $lighterAppBgColor;
+        height: 100%;
 
-        label { width: 12em; }
+        label { width: 12rem; }
 
         .bp5-form-content,
         .bp5-form-content .bp5-input-group {
