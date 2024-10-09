@@ -1,7 +1,7 @@
 import { useMediaQuery } from 'react-responsive';
 
-import variables from '../../variables.module.scss';
+import { config } from '../../utils';
 
 export const useIsDualPanel = () => {
-    return useMediaQuery({ query: `screen and (min-width: ${variables.minDualPanelWidth})` });
+    return useMediaQuery({ query: `screen and (min-width: ${config.minDualPanelWidth})` });
 };
