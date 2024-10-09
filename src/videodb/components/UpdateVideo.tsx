@@ -21,11 +21,11 @@ export const UpdateVideo: FC = (): ReactElement => {
     const updateVideo = useCallback(async (video: VideoWithId) => {
         try {
             await putVideoDbVideo(apiPath, video);
+            navigate(-1);
             (await AppToaster).show({ message: 'saved', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
-            navigate(-1);
         } catch (error: unknown) {
             alert('error ' + error);
         }
@@ -34,11 +34,11 @@ export const UpdateVideo: FC = (): ReactElement => {
     const deleteVideo = useCallback(async (id: number) => {
         try {
             await deleteVideoDbVideo(apiPath, id);
+            navigate(-1);
             (await AppToaster).show({ message: 'deleted', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
-            navigate(-1);
         } catch(error: unknown) {
             alert('error ' + error);
         }
