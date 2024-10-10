@@ -1,6 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { useResizeDetector } from 'react-resize-detector';
 
+import { config } from '../../../utils';
+
 import './Tesselate.scss';
 
 type TileInfo = {
@@ -12,7 +14,6 @@ type TileInfo = {
 
 type TesselateProps = {
     tiles: TileInfo[];
-    marginPx: number;
 }
 
 /*
@@ -23,10 +24,9 @@ type TesselateProps = {
     as this component will wrap them in a bunch of divs
 */
 
-export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement => {
+export const Tesselate: FC<TesselateProps> = ({ tiles }): ReactElement => {
     const { width: containerWidth, ref: widthRef } = useResizeDetector({ handleHeight: false });
-    const tileStyle = { margin: `0 ${marginPx}px` };
-    const rowStyle = { margin: `${marginPx}px 0` };
+    const { tesselateMarginPx } = config;
 
     const tiledRows: ReactElement[] = [];
 
@@ -36,10 +36,10 @@ export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement
 
         tiles.forEach((tile, index) => {
             const isLastRow = index === tiles.length - 1;
-            rowContents.push(<div key={tile.key} style={tileStyle}>{tile.element}</div>);
+            rowContents.push(<div key={tile.key}>{tile.element}</div>);
 
             cumulativeRowWidth += tile.maxWidth;
-            const availableWidth = containerWidth - (2 * marginPx * rowContents.length);
+            const availableWidth = containerWidth - (2 * tesselateMarginPx * rowContents.length);
 
             let fillRatio = availableWidth / cumulativeRowWidth;
             if (isLastRow && fillRatio > 1) fillRatio = 1;
@@ -49,7 +49,7 @@ export const Tesselate: FC<TesselateProps> = ({ tiles, marginPx }): ReactElement
                     <div
                         className='row'
                         key={rowContents[0].key}
-                        style={{ height: `${tile.maxHeight * fillRatio}px`, ...rowStyle }}
+                        style={{ height: `${tile.maxHeight * fillRatio}px` }}
                     >
                         {rowContents}
                     </div>

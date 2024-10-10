@@ -1,3 +1,5 @@
+@import '../../../variables.scss';
+
 .tiled-container {
     display: flex;
     flex-direction: column;
@@ -8,10 +10,12 @@
         justify-content: left;
         border: 0;
         padding: 0;
+        margin: #{$tesselateMarginPx}px 0;
     
         >div {
             height: 100%;
             width: auto;
+            margin: 0 #{$tesselateMarginPx}px;
         }
     }
 }

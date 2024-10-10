@@ -8,7 +8,7 @@ import { Tesselate } from '../../shared/components/layout';
 import { GalleryThumb } from './GalleryThumb';
 
 export const JustifiedGallery: FC = (): ReactElement => {
-    const { galleryState: { apiPath, maxImages, activeImageIndex, marginPx }, galleryStateReducer } = useContext(GalleryStateContext);
+    const { galleryState: { apiPath, maxImages, activeImageIndex }, galleryStateReducer } = useContext(GalleryStateContext);
     const { images, allImageFiles } = useGalleryContent(apiPath, maxImages);
 
     const loadMoreImages = useCallback(() => (
@@ -45,5 +45,5 @@ export const JustifiedGallery: FC = (): ReactElement => {
         };
     }), [activeImageIndex, images, refActiveImage, refLastImage]);
 
-    return <Tesselate tiles={imageTiles} marginPx={marginPx} />;
+    return <Tesselate tiles={imageTiles} />;
 };

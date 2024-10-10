@@ -1,12 +1,10 @@
 import { createContext, useReducer } from 'react';
 
-const MARGIN_PX = 3;
 const BATCH_SIZE = 25;
 
 export type GalleryState = {
     maxImages: number;
     batchSize: number;
-    marginPx: number;
     title: string;
     apiPath: string;
     activeImageIndex: number;
@@ -28,7 +26,6 @@ const getInitialState = (apiPath: string, title: string) => ({
     apiPath, title,
     maxImages: BATCH_SIZE,
     batchSize: BATCH_SIZE,
-    marginPx: MARGIN_PX,
     activeImageIndex: -1,
 });
 

@@ -12,4 +12,5 @@ export const config = {
     apiUrl: getConfig('API_URL', ''),
     queryRefetchInterval: parseInt(getConfig('QUERY_REFETCH_INTERVAL', '10000')),
     minDualPanelWidth: scssVariables.minDualPanelWidth,
+    tesselateMarginPx: scssVariables.tesselateMarginPx,
 };
