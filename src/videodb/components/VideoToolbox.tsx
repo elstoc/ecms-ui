@@ -1,7 +1,6 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Card } from '@blueprintjs/core';
 
 import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
@@ -9,6 +8,7 @@ import { patchVideoDbVideos, VideoUpdate } from '../api';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { useIsDualPanel } from '../../shared/hooks';
 
+import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
@@ -47,65 +47,58 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
         await downloadVideoCSV(apiPath);
     }, [apiPath]);
 
-    let flagUpdateAdminIcons = <></>;
-    let otherUpdateIcons = <></>;
-
     if (!userIsAdmin && isDualPanel) {
         return <div className='video-content'>{children}</div>;
     }
-    if (userIsAdmin) {
-        otherUpdateIcons = (
-            <>
-                <Icon
-                    name='download'
-                    onClick={downloadCSV}
-                    tooltipContent='download all videos as CSV'
-                    tooltipPosition='top-right'
-                />
-                <Icon
-                    name='add'
-                    onClick={() => navigate(`./add?${searchParams.toString()}`)}
-                    tooltipContent='add new video'
-                    tooltipPosition='top-right'
-                />
-            </>
-        );
+    
+    const rightIcons = [(
+        <Icon
+            name='download'
+            onClick={downloadCSV}
+            tooltipContent='download all videos as CSV'
+            tooltipPosition='top-right'
+        />
+    ), (
+        <Icon
+            name='add'
+            onClick={() => navigate(`./add?${searchParams.toString()}`)}
+            tooltipContent='add new video'
+            tooltipPosition='top-right'
+        />
+    )];
 
-        if (flagUpdateCount > 0) {
-            flagUpdateAdminIcons = (
-                <>
-                    <Icon
-                        name='cancel'
-                        color='firebrick'
-                        onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
-                        tooltipContent={`cancel ${flagUpdateCount} flag updates`}
-                        tooltipPosition='top-right'
-                    />
-                    <Icon
-                        name='check'
-                        className='check'
-                        color='green'
-                        onClick={postFlagUpdates}
-                        tooltipContent={`update ${flagUpdateCount} flags`}
-                        tooltipPosition='top-right'
-                    />
-                </>
-            );
-        }
-    }
+    const flagIcons = [(
+        <Icon
+            name='cancel'
+            color='firebrick'
+            onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
+            tooltipContent={`cancel ${flagUpdateCount} flag updates`}
+            tooltipPosition='top-right'
+        />
+    ), (
+        <Icon
+            name='check'
+            className='check'
+            color='green'
+            onClick={postFlagUpdates}
+            tooltipContent={`update ${flagUpdateCount} flags`}
+            tooltipPosition='top-right'
+        />
+    )];
+
+    const navIcon = (
+        <Icon
+            name='menu'
+            onClick={() => videoDbReducer({ action: 'setNavOpen', value: true })}
+        />
+    );
+
     return (
         <div className='video-content'>
-            <Card className='video-toolbox'>
-                {!isDualPanel &&
-                    <div className='navmenu'>
-                        <Icon
-                            name='menu'
-                            onClick={() => videoDbReducer({ action: 'setNavOpen', value: true })}
-                        />
-                    </div>}
-                {flagUpdateAdminIcons}
-                {otherUpdateIcons}
-            </Card>
+            <Toolbar
+                left={isDualPanel ? null : [navIcon]}
+                middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
+                right={userIsAdmin ? rightIcons : null} />
             {children}
         </div>
     );

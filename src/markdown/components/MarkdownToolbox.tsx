@@ -2,13 +2,14 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Card } from '@blueprintjs/core';
 
 import { useIsDualPanel } from '../../shared/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
+import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 
+import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
@@ -23,6 +24,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     const [searchParams, setSearchParams] = useSearchParams();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
+    const userIsAdmin = useUserIsAdmin();
 
     const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
     const isDualPanel = useIsDualPanel();
@@ -70,47 +72,59 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
         }
     }, [invalidateAndToast, apiPath, navigate]);
 
+    if (!userIsAdmin && isDualPanel) {
+        return <div className='markdown-content'>{children}</div>;
+    }
+
+    const navIcon = (
+        <Icon
+            name='menu'
+            className='navMenu'
+            onClick={() => markdownReducer({ key: 'navOpen', value: true })}
+        />
+    );
+
+    const toolboxIcons = [(
+        <Icon
+            name='add'
+            disabled={singlePage || !canWrite || mode === 'edit'}
+            onClick={() => setSearchParams({ mode: 'add' })}
+            tooltipContent='add new child page'
+            tooltipPosition='top-right'
+        />
+    ), (
+        <Icon
+            name='delete'
+            disabled={singlePage || !canDelete || mode === 'edit'}
+            onClick={deletePage}
+            tooltipContent='delete page'
+            tooltipPosition='top-right'
+        />
+    ), (
+        <Icon
+            name='save'
+            onClick={savePage}
+            disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
+            tooltipContent='save edited page'
+            tooltipPosition='top-right'
+        />
+    ), (
+        <Icon
+            name={mode === 'edit' ? 'cancel' : 'edit'}
+            disabled={!pageExists || !pathValid}
+            onClick={toggleEditMode}
+            tooltipContent={mode === 'edit' ? 'cancel edit' : 'view/edit page source'}
+            tooltipPosition='top-right'
+        />
+    )];
+
     return (
         <div className='markdown-content'>
-            <Card className='markdown-toolbox'>
-                {!singlePage && !isDualPanel &&
-                    <div className='navmenu'>
-                        <Icon
-                            name='menu'
-                            className='navMenu'
-                            onClick={() => markdownReducer({key: 'navOpen', value: true })}
-                        />
-                    </div>
-                }
-                <Icon
-                    name='add'
-                    disabled={singlePage || !canWrite || mode === 'edit'}
-                    onClick={() => setSearchParams({ mode: 'add' })}
-                    tooltipContent='add new child page'
-                    tooltipPosition='top-right'
-                />
-                <Icon
-                    name='delete'
-                    disabled={singlePage || !canDelete || mode === 'edit'}
-                    onClick={deletePage}
-                    tooltipContent='delete page'
-                    tooltipPosition='top-right'
-                />
-                <Icon
-                    name='save'
-                    onClick={savePage}
-                    disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
-                    tooltipContent='save edited page'
-                    tooltipPosition='top-right'
-                />
-                <Icon
-                    name={ mode === 'edit' ? 'cancel' : 'edit' }
-                    disabled={!pageExists || !pathValid}
-                    onClick={toggleEditMode}
-                    tooltipContent={ mode === 'edit' ? 'cancel edit' : 'view/edit page source'}
-                    tooltipPosition='top-right'
-                />
-            </Card>
+            <Toolbar
+                left={isDualPanel ? null : [navIcon]}
+                middle={null}
+                right={userIsAdmin ? toolboxIcons : null}
+            />
             {children}
         </div>
     );

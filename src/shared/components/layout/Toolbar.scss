@@ -1,0 +1,23 @@
+@import '../../../variables.scss';
+
+.toolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: $appBgColor;
+
+    &>div{
+        display:flex;
+        flex-direction: row;
+        column-gap: 10px;
+        padding: 3px;
+        background-color: $contentBgColor;
+
+        &.empty {
+            padding: 0;
+            background-color: $appBgColor;
+        }
+    }
+}

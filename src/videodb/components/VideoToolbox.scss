@@ -5,23 +5,4 @@
     flex-direction: column;
     height: 100%;
     background-color: $appBgColor;
-
-    .video-toolbox {
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-        column-gap: 15px;
-        padding: 3px;
-        margin-bottom: 10px;
-        background-color: $contentBgColor;
-
-        .check {
-            margin-right: 2em;
-        }
-
-        .navmenu {
-            margin-right: auto;
-            padding: 0;
-        }
-    }
 }
