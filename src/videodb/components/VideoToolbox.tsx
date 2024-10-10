@@ -1,6 +1,7 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { Card } from '@blueprintjs/core';
 
 import { downloadVideoCSV } from '../utils/downloadVideoCSV';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
@@ -94,7 +95,7 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
     }
     return (
         <div className='video-content'>
-            <div className='video-toolbox'>
+            <Card className='video-toolbox'>
                 {!isDualPanel &&
                     <div className='navmenu'>
                         <Icon
@@ -104,7 +105,7 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
                     </div>}
                 {flagUpdateAdminIcons}
                 {otherUpdateIcons}
-            </div>
+            </Card>
             {children}
         </div>
     );

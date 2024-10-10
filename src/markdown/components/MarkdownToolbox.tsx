@@ -2,6 +2,7 @@
 import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import { Card } from '@blueprintjs/core';
 
 import { useIsDualPanel } from '../../shared/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
@@ -71,7 +72,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
 
     return (
         <div className='markdown-content'>
-            <div className='markdown-toolbox'>
+            <Card className='markdown-toolbox'>
                 {!singlePage && !isDualPanel &&
                     <div className='navmenu'>
                         <Icon
@@ -109,7 +110,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
                     tooltipContent={ mode === 'edit' ? 'cancel edit' : 'view/edit page source'}
                     tooltipPosition='top-right'
                 />
-            </div>
+            </Card>
             {children}
         </div>
     );
