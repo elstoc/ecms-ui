@@ -118,7 +118,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     return (
         <div className='markdown-content'>
             <Toolbar
-                left={isDualPanel ? null : navIcon}
+                left={isDualPanel || singlePage ? null : navIcon}
                 middle={null}
                 right={toolboxIcons}
             />

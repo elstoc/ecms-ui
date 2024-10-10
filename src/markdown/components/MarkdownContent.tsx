@@ -2,7 +2,7 @@ import React, { FC, ReactElement, Suspense, useContext } from 'react';
 
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { ContentOnly, ContentWithSidebar } from '../../shared/components/layout';
+import { ContentWithSidebar } from '../../shared/components/layout';
 import { MarkdownNav } from './MarkdownNav';
 import { MarkdownRoutes } from './MarkdownRoutes';
 
@@ -15,15 +15,17 @@ export const MarkdownContent: FC = (): ReactElement => {
         </Suspense>
     );
 
-    if (singlePage) {
-        return <ContentOnly contentElement={contentElement} />;
-    }
-
     const sidebarElement = (
         <Suspense>
             <MarkdownNav />
         </Suspense>
     );
 
-    return <ContentWithSidebar contentElement={contentElement} sidebarElement={sidebarElement} mobileSidebarAtTop={true} />;
+    return (
+        <ContentWithSidebar
+            contentElement={contentElement}
+            sidebarElement={singlePage ? null : sidebarElement}
+            mobileSidebarAtTop={true}
+        />
+    );
 };
