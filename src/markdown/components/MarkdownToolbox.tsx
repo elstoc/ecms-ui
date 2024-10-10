@@ -7,7 +7,6 @@ import { useIsDualPanel } from '../../shared/hooks';
 import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
-import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 
 import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
@@ -24,7 +23,6 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     const [searchParams, setSearchParams] = useSearchParams();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
-    const userIsAdmin = useUserIsAdmin();
 
     const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
     const isDualPanel = useIsDualPanel();
@@ -72,7 +70,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
         }
     }, [invalidateAndToast, apiPath, navigate]);
 
-    if (!userIsAdmin && isDualPanel) {
+    if (!(canWrite || canDelete) && isDualPanel) {
         return <div className='markdown-content'>{children}</div>;
     }
 
@@ -123,7 +121,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
             <Toolbar
                 left={isDualPanel ? null : [navIcon]}
                 middle={null}
-                right={userIsAdmin ? toolboxIcons : null}
+                right={toolboxIcons}
             />
             {children}
         </div>
