@@ -14,13 +14,14 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
     const mode = searchParams.get('mode');
 
     return (
-        <MarkdownToolbox apiPath={apiPath}>
+        <div className='markdown-page-content'>
+            <MarkdownToolbox apiPath={apiPath} />
             <Card className='markdown-page-content'>
                 {mode === 'edit'
                     ? <MarkdownEditPage apiPath={apiPath} />
                     : <MarkdownViewPage apiPath={apiPath} />}
                 {mode === 'add' && <MarkdownAddPage apiPath={apiPath} />}
             </Card>
-        </MarkdownToolbox>
+        </div>
     );
 };

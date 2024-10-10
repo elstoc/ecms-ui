@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
+import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -12,13 +12,7 @@ import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
-import './VideoToolbox.scss';
-
-type VideoToolboxProps = {
-    children: ReactNode
-}
-
-export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement => {
+export const VideoToolbox: FC = (): ReactElement => {
     const userIsAdmin = useUserIsAdmin();
     const queryClient = useQueryClient();
     const [searchParams] = useSearchParams();
@@ -48,7 +42,7 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
     }, [apiPath]);
 
     if (!userIsAdmin && isDualPanel) {
-        return <div className='video-content'>{children}</div>;
+        return <></>;
     }
     
     const rightIcons = (
@@ -96,12 +90,9 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
     );
 
     return (
-        <div className='video-content'>
-            <Toolbar
-                left={isDualPanel ? null : navIcon}
-                middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
-                right={userIsAdmin ? rightIcons : null} />
-            {children}
-        </div>
+        <Toolbar
+            left={isDualPanel ? null : navIcon}
+            middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
+            right={userIsAdmin ? rightIcons : null} />
     );
 };

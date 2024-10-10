@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, ReactNode, useCallback, useContext } from 'react';
+import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
@@ -12,14 +12,7 @@ import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
-import './MarkdownToolbox.scss';
-
-type MarkdownToolboxProps = {
-    apiPath: string;
-    children: ReactNode;
-}
-
-export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children }): ReactElement => {
+export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
     const queryClient = useQueryClient();
     const navigate = useNavigate();
@@ -71,7 +64,7 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     }, [invalidateAndToast, apiPath, navigate]);
 
     if (!(canWrite || canDelete) && isDualPanel) {
-        return <div className='markdown-content'>{children}</div>;
+        return <></>;
     }
 
     const navIcon = (
@@ -116,13 +109,10 @@ export const MarkdownToolbox: FC<MarkdownToolboxProps> = ({ apiPath, children })
     );
 
     return (
-        <div className='markdown-content'>
-            <Toolbar
-                left={isDualPanel || singlePage ? null : navIcon}
-                middle={null}
-                right={toolboxIcons}
-            />
-            {children}
-        </div>
+        <Toolbar
+            left={isDualPanel || singlePage ? null : navIcon}
+            middle={null}
+            right={toolboxIcons}
+        />
     );
 };

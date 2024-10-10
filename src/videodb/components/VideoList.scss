@@ -1,6 +1,13 @@
 @import '../../variables.scss';
 
-.video-list {
-    background-color: $appBgColor;
+.video-list-container {
+    display: flex;
+    flex-direction: column;
     height: 100%;
+    background-color: $appBgColor;
+
+    .video-list {
+        background-color: $appBgColor;
+        height: 100%;
+    }
 }

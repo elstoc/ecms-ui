@@ -5,10 +5,10 @@ import { useElementIsVisible } from '../../shared/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
+import { VideoToolbox } from './VideoToolbox';
 import { VideoListItem } from './VideoListItem';
 
 import './VideoList.scss';
-import { VideoToolbox } from './VideoToolbox';
 
 export const VideoList: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
@@ -24,7 +24,8 @@ export const VideoList: FC = (): ReactElement => {
     useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length }));
 
     return (
-        <VideoToolbox>
+        <div className='video-list-container'>
+            <VideoToolbox />
             <div className='video-list'>
                 {videos.map((video, index) => (
                     <VideoListItem
@@ -34,6 +35,6 @@ export const VideoList: FC = (): ReactElement => {
                     />
                 ))}
             </div>
-        </VideoToolbox>
+        </div>
     );
 };
