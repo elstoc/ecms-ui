@@ -51,40 +51,42 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
         return <div className='video-content'>{children}</div>;
     }
     
-    const rightIcons = [(
-        <Icon
-            name='download'
-            onClick={downloadCSV}
-            tooltipContent='download all videos as CSV'
-            tooltipPosition='top-right'
-        />
-    ), (
-        <Icon
-            name='add'
-            onClick={() => navigate(`./add?${searchParams.toString()}`)}
-            tooltipContent='add new video'
-            tooltipPosition='top-right'
-        />
-    )];
+    const rightIcons = (
+        <>
+            <Icon
+                name='download'
+                onClick={downloadCSV}
+                tooltipContent='download all videos as CSV'
+                tooltipPosition='top-right'
+            />
+            <Icon
+                name='add'
+                onClick={() => navigate(`./add?${searchParams.toString()}`)}
+                tooltipContent='add new video'
+                tooltipPosition='top-right'
+            />
+        </>
+    );
 
-    const flagIcons = [(
-        <Icon
-            name='cancel'
-            color='firebrick'
-            onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
-            tooltipContent={`cancel ${flagUpdateCount} flag updates`}
-            tooltipPosition='top-right'
-        />
-    ), (
-        <Icon
-            name='check'
-            className='check'
-            color='green'
-            onClick={postFlagUpdates}
-            tooltipContent={`update ${flagUpdateCount} flags`}
-            tooltipPosition='top-right'
-        />
-    )];
+    const flagIcons = (
+        <>
+            <Icon
+                name='cancel'
+                color='firebrick'
+                onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
+                tooltipContent={`cancel ${flagUpdateCount} flag updates`}
+                tooltipPosition='top-right'
+            />
+            <Icon
+                name='check'
+                className='check'
+                color='green'
+                onClick={postFlagUpdates}
+                tooltipContent={`update ${flagUpdateCount} flags`}
+                tooltipPosition='top-right'
+            />
+        </>
+    );
 
     const navIcon = (
         <Icon
@@ -96,7 +98,7 @@ export const VideoToolbox: FC<VideoToolboxProps> = ({ children }): ReactElement 
     return (
         <div className='video-content'>
             <Toolbar
-                left={isDualPanel ? null : [navIcon]}
+                left={isDualPanel ? null : navIcon}
                 middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
                 right={userIsAdmin ? rightIcons : null} />
             {children}

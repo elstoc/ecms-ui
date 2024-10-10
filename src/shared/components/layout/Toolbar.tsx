@@ -4,9 +4,9 @@ import React, { FC, ReactElement } from 'react';
 import './Toolbar.scss';
 
 type ToolbarProps = {
-    left: ReactElement[] | null;
-    middle: ReactElement[] | null;
-    right: ReactElement[] | null;
+    left: ReactElement | null;
+    middle: ReactElement | null;
+    right: ReactElement | null;
 }
 
 export const Toolbar: FC<ToolbarProps> = ({ left, middle, right }): ReactElement => {
