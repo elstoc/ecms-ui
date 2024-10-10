@@ -21,10 +21,6 @@
     
     &.sidebar-top {
         flex-direction: column;
-
-        .sidebar-container {
-            margin-bottom: 20px;
-        }
     }
 
     @media screen and (min-width: $minDualPanelWidth) {
