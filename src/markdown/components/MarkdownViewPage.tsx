@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import YAML from 'yaml';
-import React, { FC, ReactElement, ReactNode, Suspense } from 'react';
+import React, { FC, ReactElement, ReactNode, Suspense, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { splitFrontMatter } from '../../utils';
 import { useTitle } from '../../shared/hooks';
-import { useMarkdownPage } from '../hooks/useMarkdownQueries';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import './MarkdownViewPage.scss';
 
@@ -15,11 +15,11 @@ const basename = (path: string): string => {
     return path.split('/').reverse()[0];
 };
 
-export const MarkdownViewPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
-    const { content } = useMarkdownPage(apiPath);
+export const MarkdownViewPage: FC = (): ReactElement => {
+    const { markdownState: { currentPage, pageApiPath } } = useContext(MarkdownStateContext);
 
-    const [yaml, markdown] = splitFrontMatter(content);
-    const pageTitle = YAML.parse(yaml)?.title || basename(apiPath) || 'Home';
+    const [yaml, markdown] = splitFrontMatter(currentPage?.content || '');
+    const pageTitle = YAML.parse(yaml)?.title || basename(pageApiPath) || 'Home';
     useTitle(pageTitle);
 
     const renderLink = (href: string, children: ReactNode & ReactNode[]) => {

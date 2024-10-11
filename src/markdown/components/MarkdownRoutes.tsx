@@ -5,7 +5,7 @@ import { MarkdownTree } from '../api';
 import { useMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { MarkdownPage } from './MarkdownPage';
+import { MarkdownContent } from './MarkdownContent';
 
 export const MarkdownRoutes: FC = (): ReactElement => {
     const { markdownState: { rootApiPath, singlePage } } = useContext(MarkdownStateContext);
@@ -28,7 +28,7 @@ const listMarkdownRoutes = (children: MarkdownTree[], singlePage: boolean): Reac
             <Route
                 key={child.apiPath}
                 path={child.uiPath}
-                element={<MarkdownPage apiPath={child.apiPath} />}
+                element={<MarkdownContent apiPath={child.apiPath} />}
             />
         ));
         if (!singlePage && child.children) {

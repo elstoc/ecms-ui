@@ -4,7 +4,6 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { useIsDualPanel } from '../../shared/hooks';
-import { useMarkdownPage } from '../hooks/useMarkdownQueries';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
@@ -17,11 +16,11 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { markdownState: { editedMarkdown, singlePage }, markdownReducer } = useContext(MarkdownStateContext);
+    const { markdownState: { editedMarkdown, singlePage, currentPage }, markdownReducer } = useContext(MarkdownStateContext);
     const isDualPanel = useIsDualPanel();
     const mode = searchParams.get('mode');
 
-    const { content, canWrite, canDelete, pathValid, pageExists } = useMarkdownPage(apiPath);
+    const { content, canWrite, canDelete, pathValid, pageExists } = currentPage ?? {};
 
     const toggleEditMode = useCallback(() => {
         if (mode === 'edit') {
@@ -62,10 +61,6 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
             alert('error ' + error);
         }
     }, [invalidateAndToast, apiPath, navigate]);
-
-    if (!(canWrite || canDelete) && isDualPanel) {
-        return <></>;
-    }
 
     const navIcon = (
         <Icon

@@ -1,25 +1,27 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, useCallback, useState } from 'react';
+import React, { FC, ReactElement, useCallback, useContext, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
 
 import { getMarkdownPage, putMarkdownPage } from '../api';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { AppToaster } from '../../shared/components/toaster';
 import { StringInput } from '../../shared/components/forms';
 
 import './MarkdownAddPage.scss';
 
-export const MarkdownAddPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
+export const MarkdownAddPage: FC = (): ReactElement => {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [, setSearchParams] = useSearchParams();
+    const { markdownState: { pageApiPath } } = useContext(MarkdownStateContext);
 
     const [errorText, setErrorText] = useState('');
     const [newPagePath, setNewPagePath] = useState('');
 
-    const newPageFullPath = `${apiPath}/${newPagePath}`;
+    const newPageFullPath = `${pageApiPath}/${newPagePath}`;
 
     const createPage = useCallback(async () => {
         try {
