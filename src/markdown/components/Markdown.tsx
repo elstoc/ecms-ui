@@ -4,15 +4,15 @@ import { useTitle } from '../../shared/hooks';
 import { MarkdownMetadata } from '../../site/api';
 
 import { MarkdownStateContext, useMarkdownState } from '../hooks/useMarkdownStateContext';
-import { MarkdownContent } from './MarkdownContent';
+import { MarkdownRoutes } from './MarkdownRoutes';
 
-export const Markdown: FC<MarkdownMetadata> = ({ apiPath, title, singlePage }): ReactElement => {
-    const { markdownState, markdownReducer } = useMarkdownState(apiPath, singlePage);
+export const Markdown: FC<MarkdownMetadata> = ({ uiPath, apiPath, title, singlePage }): ReactElement => {
+    const { markdownState, markdownReducer } = useMarkdownState(uiPath, apiPath, singlePage);
     useTitle(title);
 
     return (
         <MarkdownStateContext.Provider value={{ markdownState, markdownReducer}}>
-            <MarkdownContent />
+            <MarkdownRoutes />
         </MarkdownStateContext.Provider>
     );
 };

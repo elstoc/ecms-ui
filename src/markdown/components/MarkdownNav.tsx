@@ -10,15 +10,15 @@ import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 import './MarkdownNav.scss';
 
 export const MarkdownNav: FC = (): ReactElement => {
-    const { markdownState: { rootApiPath, navOpen }, markdownReducer } = useContext(MarkdownStateContext);
+    const { markdownState: { rootUiPath, rootApiPath, navOpen }, markdownReducer } = useContext(MarkdownStateContext);
     const markdownTree = useMarkdownTree(rootApiPath);
     const isDualPanel = useIsDualPanel();
 
     const handleClose = () => markdownReducer({ key: 'navOpen', value: false });
 
     const navContent = (
-        <span className='markdown-nav'>
-            {markdownTree?.children && <MarkdownNavRecurse handleClick={handleClose} rootApiPath={rootApiPath} children={markdownTree.children} />}
+        <span className='markdown-nav' onClick={handleClose}>
+            {markdownTree?.children && <MarkdownNavRecurse rootUiPath={rootUiPath} children={markdownTree.children} />}
         </span>
     );
 
@@ -38,14 +38,16 @@ export const MarkdownNav: FC = (): ReactElement => {
     );
 };
 
-const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootApiPath: string, handleClick: () => void }> = ({ children, rootApiPath, handleClick }): ReactElement => {
+const MarkdownNavRecurse: FC<{ children: MarkdownTree[], rootUiPath: string }> = ({ children, rootUiPath }): ReactElement => {
     return (
         <ol>
             {children.map((child) => {
+                const linkPrefix = rootUiPath ? `${rootUiPath}/` : '';
+                const linkName = `/${linkPrefix}${child.uiPath}`.replace(/\/$/, '');
                 return (
                     <React.Fragment key = {child.apiPath}>
-                        <li><NavLink to={child.uiPath} onClick={handleClick} end>{child?.title}</NavLink></li>
-                        {child.children && <MarkdownNavRecurse rootApiPath={rootApiPath} children={child.children} handleClick={handleClick} />}
+                        <li><NavLink to={linkName} end>{child?.title}</NavLink></li>
+                        {child.children && <MarkdownNavRecurse rootUiPath={rootUiPath} children={child.children} />}
                     </React.Fragment>
                 );
             })}

@@ -5,7 +5,6 @@ import { useElementIsVisible } from '../../shared/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { VideoToolbox } from './VideoToolbox';
 import { VideoListItem } from './VideoListItem';
 
 import './VideoList.scss';
@@ -24,17 +23,14 @@ export const VideoList: FC = (): ReactElement => {
     useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length }));
 
     return (
-        <div className='video-list-container'>
-            <VideoToolbox />
-            <div className='video-list'>
-                {videos.map((video, index) => (
-                    <VideoListItem
-                        key={video.id}
-                        video={video}
-                        ref={index === limit - 1 ? refLastVideo : null}
-                    />
-                ))}
-            </div>
+        <div className='video-list'>
+            {videos.map((video, index) => (
+                <VideoListItem
+                    key={video.id}
+                    video={video}
+                    ref={index === limit - 1 ? refLastVideo : null}
+                />
+            ))}
         </div>
     );
 };

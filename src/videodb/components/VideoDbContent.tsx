@@ -10,6 +10,9 @@ import { VideoList } from './VideoList';
 import { VideoFilters } from './VideoFilters';
 import { UpdateVideo } from './UpdateVideo';
 import { AddVideo } from './AddVideo';
+import { VideoToolbox } from './VideoToolbox';
+
+import './VideoDbContent.scss';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const userIsAdmin = useUserIsAdmin();
@@ -23,9 +26,12 @@ export const VideoDbContent: FC = (): ReactElement => {
         </Suspense>
     );
 
-    const videoList = (
+    const content = (
         <Suspense>
-            <VideoList />
+            <div className='video-content'>
+                <VideoToolbox />
+                <VideoList />
+            </div>
         </Suspense>
     );
 
@@ -41,7 +47,7 @@ export const VideoDbContent: FC = (): ReactElement => {
                 </Suspense>
             }
             <ContentWithSidebar
-                contentElement={videoList}
+                contentElement={content}
                 sidebarElement={videoFilters}
                 mobileSidebarAtTop={true}
             />

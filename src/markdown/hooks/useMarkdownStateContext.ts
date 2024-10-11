@@ -1,6 +1,7 @@
 import { createContext, useReducer } from 'react';
 
 type MarkdownState = {
+    rootUiPath: string;
     rootApiPath: string;
     editedMarkdown: string;
     navOpen: boolean;
@@ -30,8 +31,8 @@ const markdownStateReducer: (state: MarkdownState, operation: StateOperations) =
 
 export const MarkdownStateContext = createContext({} as MarkdownStateContextProps);
 
-export const useMarkdownState: (rootApiPath: string, singlePage: boolean) => MarkdownStateContextProps = (rootApiPath, singlePage) => {
-    const initialState = { rootApiPath, singlePage, navOpen: false, editedMarkdown: '' };
+export const useMarkdownState: (rootUiPath: string, rootApiPath: string, singlePage: boolean) => MarkdownStateContextProps = (rootUiPath, rootApiPath, singlePage) => {
+    const initialState = { rootUiPath, rootApiPath, singlePage, navOpen: false, editedMarkdown: '' };
     const [markdownState, markdownReducer] = useReducer(markdownStateReducer, initialState);
     return { markdownState, markdownReducer };
 };
