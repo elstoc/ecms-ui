@@ -3,32 +3,29 @@
 .content-with-sidebar {
     height: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: center;
 
     .content-container {
         width: 100%;
-        max-width: $maxContentWidth;
         height: 100%;
         min-height: 500px;
         background-color: $contentBgColor;
     }
 
     .sidebar-container {
-        width: 100%;
-        max-width: $maxSidebarWidth;
+        width: 0;
     }
     
     @media screen and (min-width: $minDualPanelWidth) {
-        flex-direction: row !important;
-        justify-content: center;
-
         .content-container {
             width: 64%;
+            max-width: $maxContentWidth;
         }
 
         .sidebar-container {
             width: 34%;
+            max-width: $maxSidebarWidth;
             margin-right: 2em;
         }
     }
