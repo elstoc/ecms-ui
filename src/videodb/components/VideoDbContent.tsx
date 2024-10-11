@@ -47,9 +47,8 @@ export const VideoDbContent: FC = (): ReactElement => {
                 </Suspense>
             }
             <ContentWithSidebar
-                contentElement={content}
-                sidebarElement={videoFilters}
-                mobileSidebarAtTop={true}
+                content={content}
+                sidebar={videoFilters}
             />
         </>
     );

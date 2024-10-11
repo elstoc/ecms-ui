@@ -40,9 +40,8 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
 
     return (
         <ContentWithSidebar
-            contentElement={contentElement}
-            sidebarElement={singlePage ? null : sidebarElement}
-            mobileSidebarAtTop={true}
+            content={contentElement}
+            sidebar={singlePage ? null : sidebarElement}
         />
     );
 };

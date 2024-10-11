@@ -3,20 +3,19 @@ import React, { FC, ReactElement } from 'react';
 import './ContentWithSidebar.scss';
 
 type ContentWithSideBarProps = {
-    contentElement: ReactElement;
-    sidebarElement: ReactElement | null;
-    mobileSidebarAtTop?: boolean;
+    content: ReactElement;
+    sidebar: ReactElement | null;
 }
 
-export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ contentElement, sidebarElement, mobileSidebarAtTop }): ReactElement => {
+export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sidebar }): ReactElement => {
     return (
-        <div className={`content-with-sidebar ${mobileSidebarAtTop ? 'sidebar-top' : ''}`}>
-            {sidebarElement &&
+        <div className={'content-with-sidebar'}>
+            {sidebar &&
                 <div className='sidebar-container'>
-                    {sidebarElement}
+                    {sidebar}
                 </div>}
             <div className={'content-container'}>
-                {contentElement}
+                {content}
             </div>
         </div>
     );

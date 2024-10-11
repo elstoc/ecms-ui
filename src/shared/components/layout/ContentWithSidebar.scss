@@ -3,7 +3,7 @@
 .content-with-sidebar {
     height: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     justify-content: flex-end;
 
     .content-container {
@@ -19,10 +19,6 @@
         max-width: $maxSidebarWidth;
     }
     
-    &.sidebar-top {
-        flex-direction: column;
-    }
-
     @media screen and (min-width: $minDualPanelWidth) {
         flex-direction: row !important;
         justify-content: center;
