@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, Suspense } from 'react';
 
 import { SiteRoutes, Header, Footer } from './site';
 import { FocusStyleManager } from '@blueprintjs/core';
@@ -15,13 +15,19 @@ export const App = (): ReactElement => {
         <div id='app-container'>
             <div id='app'>
                 <div className='app-header'>
-                    <Header />
+                    <Suspense>
+                        <Header />
+                    </Suspense>
                 </div>
                 <div className='app-component'>
-                    <SiteRoutes />
+                    <Suspense>
+                        <SiteRoutes />
+                    </Suspense>
                 </div>
                 <div className='app-footer'>
-                    <Footer />
+                    <Suspense>
+                        <Footer />
+                    </Suspense>
                 </div>
             </div>
         </div>
