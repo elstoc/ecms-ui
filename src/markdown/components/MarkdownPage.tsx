@@ -31,14 +31,14 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
     );
 
     const content = (
-        <Suspense>
-            <Card className='markdown-page-content'>
+        <Card className='markdown-page-content'>
+            <Suspense>
                 {mode === 'edit'
                     ? <MarkdownEditPage apiPath={apiPath} />
                     : <MarkdownViewPage apiPath={apiPath} />}
                 {mode === 'add' && <MarkdownAddPage apiPath={apiPath} />}
-            </Card>
-        </Suspense>
+            </Suspense>
+        </Card>
     );
 
     return (

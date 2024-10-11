@@ -10,14 +10,22 @@ type ContentWithSideBarProps = {
 
 export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sidebar, toolbar }): ReactElement => {
     return (
-        <div className={'content-with-sidebar'}>
-            {sidebar &&
-                <div className='sidebar-container'>
-                    {sidebar}
+        <div className='content-with-sidebar'>
+            <div className='top'>
+                {sidebar && <div className='sidebar-container'>
                 </div>}
-            <div className={'content-container'}>
-                {toolbar}
-                {content}
+                <div className='content-container'>
+                    {toolbar}
+                </div>
+            </div>
+            <div className='bottom'>
+                {sidebar &&
+                    <div className='sidebar-container'>
+                        {sidebar}
+                    </div>}
+                <div className='content-container'>
+                    {content}
+                </div>
             </div>
         </div>
     );
