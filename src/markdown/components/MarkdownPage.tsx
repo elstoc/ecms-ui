@@ -18,30 +18,34 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
     const [ searchParams ] = useSearchParams();
     const mode = searchParams.get('mode');
 
-    const contentElement = (
+    const toolbar = (
         <Suspense>
-            <div className='markdown-page-content'>
-                <MarkdownToolbox apiPath={apiPath} />
-                <Card className='markdown-page-content'>
-                    {mode === 'edit'
-                        ? <MarkdownEditPage apiPath={apiPath} />
-                        : <MarkdownViewPage apiPath={apiPath} />}
-                    {mode === 'add' && <MarkdownAddPage apiPath={apiPath} />}
-                </Card>
-            </div>
+            <MarkdownToolbox apiPath={apiPath} />
         </Suspense>
     );
 
-    const sidebarElement = (
+    const sidebar = (
         <Suspense>
             <MarkdownNav />
         </Suspense>
     );
 
+    const content = (
+        <Suspense>
+            <Card className='markdown-page-content'>
+                {mode === 'edit'
+                    ? <MarkdownEditPage apiPath={apiPath} />
+                    : <MarkdownViewPage apiPath={apiPath} />}
+                {mode === 'add' && <MarkdownAddPage apiPath={apiPath} />}
+            </Card>
+        </Suspense>
+    );
+
     return (
         <ContentWithSidebar
-            content={contentElement}
-            sidebar={singlePage ? null : sidebarElement}
+            content={content}
+            sidebar={singlePage ? null : sidebar}
+            toolbar={toolbar}
         />
     );
 };

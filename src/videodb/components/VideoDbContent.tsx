@@ -15,21 +15,26 @@ import { VideoToolbox } from './VideoToolbox';
 import './VideoDbContent.scss';
 
 export const VideoDbContent: FC = (): ReactElement => {
+    const { videoDbState: { title } } = useContext(VideoDbStateContext);
     const userIsAdmin = useUserIsAdmin();
 
-    const { videoDbState: { title } } = useContext(VideoDbStateContext);
     useTitle(title);
 
-    const videoFilters = (
+    const toolbar = (
+        <Suspense>
+            <VideoToolbox />
+        </Suspense>
+    );
+
+    const filters = (
         <Suspense>
             <VideoFilters />
         </Suspense>
     );
 
-    const content = (
+    const list = (
         <Suspense>
             <div className='video-content'>
-                <VideoToolbox />
                 <VideoList />
             </div>
         </Suspense>
@@ -47,8 +52,9 @@ export const VideoDbContent: FC = (): ReactElement => {
                 </Suspense>
             }
             <ContentWithSidebar
-                content={content}
-                sidebar={videoFilters}
+                content={list}
+                sidebar={filters}
+                toolbar={toolbar}
             />
         </>
     );
