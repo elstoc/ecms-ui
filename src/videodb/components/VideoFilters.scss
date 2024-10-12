@@ -2,33 +2,34 @@
 
 #app-container .video-filters,
 #portal-container .video-filters {
-    background-color: $lighterAppBgColor;
     height: 100%;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
 
-    .card {
-        padding-bottom: 1em;
-        margin-bottom: 1em;
-        background-color: $lighterAppBgColor;
-        height: 100%;
+    .bp5-segmented-control {
+        background-color: $appBgColor;
+    }
 
-        label { width: 12rem; }
+    label { width: 12rem; }
 
-        .bp5-form-content,
-        .bp5-form-content .bp5-input-group {
+    .bp5-form-content,
+    .bp5-form-content .bp5-input-group {
+        width: 100%;
+    }
+
+    .max-length .bp5-input-group {
+        width: 4em;
+    }
+
+    .category {
+        button {
             width: 100%;
+            background-color: white;
         }
+    }
 
-        .max-length .bp5-input-group {
-            width: 4em;
-        }
-
-        .category {
-            button { width: 100%; }
-        }
-
-        .priority {
-            margin-bottom: 0;
-        }
+    .priority {
+        margin-bottom: 0;
     }
 
     .filter-action-buttons {
