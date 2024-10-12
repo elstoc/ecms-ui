@@ -28,7 +28,7 @@ export const MarkdownViewPage: FC = (): ReactElement => {
 
     return (
         <Suspense>
-            <div className='markdown-render-page'>
+            <div className='markdown-view-page'>
                 <RenderMd pageTitle={pageTitle} markdown={markdown} renderLink={renderLink} />
             </div>
         </Suspense>

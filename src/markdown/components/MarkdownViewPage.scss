@@ -1,10 +1,6 @@
 @import '../../variables.scss';
 
-.notExist {
-    text-align: center;
-}
-
-.markdown-render-page {
+.markdown-view-page {
     padding: 0.5rem;
     height: 100%;
     background-color: $contentBgColor;
