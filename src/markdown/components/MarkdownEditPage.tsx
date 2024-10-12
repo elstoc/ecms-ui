@@ -14,7 +14,7 @@ export const MarkdownEditPage: FC = (): ReactElement => {
 
     return (
         <Suspense>
-            <div className='markdown-edit-source'>
+            <div className='markdown-edit-page'>
                 <EditMd markdown={editedMarkdown} setMarkdown={setEditedMarkdown} />
             </div>
         </Suspense>
