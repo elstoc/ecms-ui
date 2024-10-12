@@ -14,7 +14,6 @@
     #app {
         display: flex;
         flex-direction: column;
-        width: 95%;
 
         .app-header,
         .app-footer {
@@ -32,15 +31,17 @@
             flex-shrink: 1;
         }
 
-        @for $i from 6 through 16 {
-            @media screen and (min-width: #{$i * 75}px) {
-                width: #{$i * 75 - 20}px;
+        /* That is, from 500 to 1300px */
+        @for $i from 5 through 13 {
+            @media screen and (min-width: #{$i * 100}px) {
+                width: #{$i * 100}px;
             }
         }
         
-        @for $i from 9 through 13 {
+        /* That is, from 1350 to 1650px */
+        @for $i from 9 through 11 {
             @media screen and (min-width: #{$i * 150}px) {
-                width: #{$i * 150 - 50}px;
+                width: #{$i * 150}px;
             }
         }
     }

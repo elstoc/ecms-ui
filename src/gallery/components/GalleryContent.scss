@@ -4,9 +4,5 @@
     background-color: $galleryBgColor;
     width: 100%;
     min-height: 100%;
-    padding: 5px;
-
-    @media screen and (min-width: $minDualPanelWidth) {
-        padding: 20px;
-    }
+    padding: 10px;
 }
