@@ -6,9 +6,8 @@ type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
 type ResetLimit = { action: 'resetLimit' };
 type SetUpdatedFlag = { action: 'setUpdatedFlag', videoId: number,  currValue: number | null, newValue: 0 | 1 };
 type ResetFlagUPdates = { action: 'resetFlagUpdates' };
-type SetNavOpen = { action: 'setNavOpen', value: boolean };
 
-type StateOperations = IncreaseLimit | ResetLimit | SetUpdatedFlag | ResetFlagUPdates | SetNavOpen;
+type StateOperations = IncreaseLimit | ResetLimit | SetUpdatedFlag | ResetFlagUPdates;
 
 type FlagUpdates = { [videoId: number]: 0 | 1 }
 
@@ -17,7 +16,6 @@ type VideoDbState = {
     title: string;
     limit: number;
     pendingFlagUpdates: FlagUpdates;
-    navOpen: boolean;
 };
 
 type VideoDbStateContextProps = {
@@ -40,8 +38,6 @@ const videoDbStateReducer: (state: VideoDbState, operation: StateOperations) => 
         return { ...state, pendingFlagUpdates };
     } else if (operation.action === 'resetFlagUpdates') {
         return { ...state, pendingFlagUpdates: {} };
-    } else if (operation.action === 'setNavOpen') {
-        return { ...state, navOpen: operation.value };
     }
     return state;
 };
@@ -49,7 +45,7 @@ const videoDbStateReducer: (state: VideoDbState, operation: StateOperations) => 
 export const VideoDbStateContext = createContext({} as VideoDbStateContextProps);
 
 export const useVideoDbState: (title: string, apiPath: string) => VideoDbStateContextProps = (title, apiPath) => {
-    const initialState = { title, apiPath, limit: BATCH_SIZE, pendingFlagUpdates: [], navOpen: false };
+    const initialState = { title, apiPath, limit: BATCH_SIZE, pendingFlagUpdates: [] };
     const [videoDbState, videoDbReducer] = useReducer(videoDbStateReducer, initialState);
     return { videoDbState, videoDbReducer };
 };

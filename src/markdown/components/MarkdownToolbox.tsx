@@ -3,7 +3,6 @@ import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { useIsDualPanel } from '../../shared/hooks';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
@@ -16,8 +15,7 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
-    const { markdownState: { editedMarkdown, singlePage, currentPage }, markdownReducer } = useContext(MarkdownStateContext);
-    const isDualPanel = useIsDualPanel();
+    const { markdownState: { editedMarkdown, singlePage, currentPage } } = useContext(MarkdownStateContext);
     const mode = searchParams.get('mode');
 
     const { content, canWrite, canDelete, pathValid, pageExists } = currentPage ?? {};
@@ -62,14 +60,6 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         }
     }, [invalidateAndToast, apiPath, navigate]);
 
-    const navIcon = (
-        <Icon
-            name='menu'
-            className='navMenu'
-            onClick={() => markdownReducer({ key: 'navOpen', value: true })}
-        />
-    );
-
     const toolboxIcons = (
         <>
             <Icon
@@ -105,7 +95,7 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
 
     return (
         <Toolbar
-            left={isDualPanel || singlePage ? null : navIcon}
+            left={null}
             middle={null}
             right={toolboxIcons}
         />

@@ -82,16 +82,9 @@ export const VideoToolbox: FC = (): ReactElement => {
         </>
     );
 
-    const navIcon = (
-        <Icon
-            name='menu'
-            onClick={() => videoDbReducer({ action: 'setNavOpen', value: true })}
-        />
-    );
-
     return (
         <Toolbar
-            left={isDualPanel ? null : navIcon}
+            left={null}
             middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
             right={userIsAdmin ? rightIcons : null} />
     );

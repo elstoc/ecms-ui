@@ -1,9 +1,7 @@
-import React, { FC, ReactElement, useContext } from 'react';
-import { Button, Card, Drawer } from '@blueprintjs/core';
+import React, { FC, ReactElement } from 'react';
+import { Button, Card } from '@blueprintjs/core';
 
-import { useIsDualPanel } from '../../shared/hooks';
 import { useVideoDbFilterState } from '../hooks/useVideoDbFilterState';
-import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { NullableIntInput, NullableStringInput, Switch, SegmentedControlInput } from '../../shared/components/forms';
 import { NullableSelectLookup } from './NullableSelectLookup';
@@ -25,11 +23,9 @@ const watchedStatusOptions = [
 
 export const VideoFilters: FC = (): ReactElement => {
     const { state, updateState, clearAllFilters } = useVideoDbFilterState();
-    const { videoDbState: { navOpen }, videoDbReducer } = useContext(VideoDbStateContext);
     const { titleContains, maxLength, categories, watched, mediaWatched, minResolution, tags, sortPriorityFirst } = state;
-    const isDualPanel = useIsDualPanel();
 
-    const filtersElement = (
+    return (
         <div className='video-filters'>
             <Card className='card'>
                 <NullableSelectLookup
@@ -94,24 +90,8 @@ export const VideoFilters: FC = (): ReactElement => {
                 />
                 <div className='filter-action-buttons'>
                     <Button onClick={clearAllFilters}>Reset Filters</Button>
-                    {!isDualPanel && <Button onClick={() => videoDbReducer({ action: 'setNavOpen', value: false })}>Close</Button>}
                 </div>
             </Card>
         </div>
-    );
-
-    if (isDualPanel) {
-        return filtersElement;
-    }
-
-    return (
-        <Drawer
-            isOpen={navOpen}
-            onClose={() => videoDbReducer({ action: 'setNavOpen', value: false })}
-            size='85%'
-            position='left'
-        >
-            {filtersElement}
-        </Drawer>
     );
 };
