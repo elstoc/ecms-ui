@@ -8,7 +8,6 @@ import { patchVideoDbVideos, VideoUpdate } from '../api';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { useIsDualPanel } from '../../shared/hooks';
 
-import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
@@ -45,47 +44,40 @@ export const VideoToolbox: FC = (): ReactElement => {
         return <></>;
     }
     
-    const rightIcons = (
+    return (
         <>
+            {flagUpdateCount > 0 &&
+                <>
+                    <Icon
+                        name='cancel'
+                        color='firebrick'
+                        onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
+                        tooltipContent={`cancel ${flagUpdateCount} flag updates`}
+                        tooltipPosition='top-right'
+                    />
+                    <Icon
+                        name='check'
+                        className='check'
+                        color='green'
+                        onClick={postFlagUpdates}
+                        tooltipContent={`update ${flagUpdateCount} flags`}
+                        tooltipPosition='top-right'
+                    />
+                </>}
             <Icon
                 name='download'
+                disabled={!userIsAdmin}
                 onClick={downloadCSV}
                 tooltipContent='download all videos as CSV'
                 tooltipPosition='top-right'
             />
             <Icon
                 name='add'
+                disabled={!userIsAdmin}
                 onClick={() => navigate(`./add?${searchParams.toString()}`)}
                 tooltipContent='add new video'
                 tooltipPosition='top-right'
             />
         </>
-    );
-
-    const flagIcons = (
-        <>
-            <Icon
-                name='cancel'
-                color='firebrick'
-                onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
-                tooltipContent={`cancel ${flagUpdateCount} flag updates`}
-                tooltipPosition='top-right'
-            />
-            <Icon
-                name='check'
-                className='check'
-                color='green'
-                onClick={postFlagUpdates}
-                tooltipContent={`update ${flagUpdateCount} flags`}
-                tooltipPosition='top-right'
-            />
-        </>
-    );
-
-    return (
-        <Toolbar
-            left={null}
-            middle={userIsAdmin && flagUpdateCount > 0 ? flagIcons : null}
-            right={userIsAdmin ? rightIcons : null} />
     );
 };

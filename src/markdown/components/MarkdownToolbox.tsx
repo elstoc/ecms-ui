@@ -6,7 +6,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { Toolbar } from '../../shared/components/layout';
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
 
@@ -60,7 +59,7 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         }
     }, [invalidateAndToast, apiPath, navigate]);
 
-    const toolboxIcons = (
+    return (
         <>
             <Icon
                 name='add'
@@ -91,13 +90,5 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
                 tooltipPosition='top-right'
             />
         </>
-    );
-
-    return (
-        <Toolbar
-            left={null}
-            middle={null}
-            right={toolboxIcons}
-        />
     );
 };

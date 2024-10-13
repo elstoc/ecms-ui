@@ -31,7 +31,7 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
         </div>
     );
 
-    let toolbarElement = toolbar;
+    let toolbarElement = <Toolbar right={toolbar} left={null} />;
 
     if (!isDualPanel && sidebar) {
         const navIcon = (
@@ -42,8 +42,7 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
         );
         toolbarElement = (
             <>
-                <Toolbar left={navIcon} right={null} middle={null} />
-                {toolbar}
+                <Toolbar left={navIcon} right={toolbar} />
             </>
         );
 
