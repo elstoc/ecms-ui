@@ -5,12 +5,24 @@
     height: 100%;
     padding-bottom: 1em;
     margin-bottom: 1em;
+    font-family: $headingFont;
+
+    .filter-title {
+        font-weight: 600;
+        font-size: 1.4rem;
+        margin-bottom: 1.3rem;
+    }
 
     .bp5-segmented-control {
         background-color: $appBgColor;
+        padding: 0;
     }
 
-    label { width: 12rem; }
+    label {
+        width: 12rem;
+        font-size: 1.05rem;
+        font-weight: 400;
+    }
 
     .bp5-form-content,
     .bp5-form-content .bp5-input-group {

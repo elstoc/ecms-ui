@@ -27,6 +27,7 @@ export const VideoFilters: FC = (): ReactElement => {
 
     return (
         <div className='video-filters'>
+            <div className='filter-title'>Videos</div>
             <NullableSelectLookup
                 label='Category'
                 className='category'
