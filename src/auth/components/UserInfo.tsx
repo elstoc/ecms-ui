@@ -26,8 +26,6 @@ export const UserInfo: FC = (): ReactElement => {
         <div className='user-info'>
             <Icon
                 name={loggedIn ? 'user' : 'noUser'}
-                tooltipContent={loggedIn ? userName : 'Log in'}
-                tooltipPosition='left'
                 onClick={() => setAuthDialogOpen(true)}
             />
             <Dialog

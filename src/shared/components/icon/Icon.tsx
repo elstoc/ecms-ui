@@ -27,13 +27,11 @@ type IconProps = {
     name: string;
     disabled?: boolean;
     onClick?: () => void;
-    tooltipContent?: string;
-    tooltipPosition?: PopoverPosition;
     className?: string;
     color?: string;
 };
 
-export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosition, disabled = false, className = '', color }): ReactElement => {
+export const Icon: FC<IconProps> = ({ name, onClick, disabled = false, className = '', color }): ReactElement => {
     const IconComponent = icons[name];
 
     if (!IconComponent) return <></>;
@@ -41,25 +39,9 @@ export const Icon: FC<IconProps> = ({ name, onClick, tooltipContent, tooltipPosi
     const iconOnClick = disabled ? undefined : onClick;
     const divClass = `icon-div ${className} ${disabled ? 'disabled' : ''} ${iconOnClick ? 'clickable' : ''}`;
 
-    let iconElement = <IconComponent className='icon' color={color} />;
-
-    if (tooltipContent) {
-        iconElement = (
-            <Tooltip
-                className='icon-tooltip'
-                hoverOpenDelay={500}
-                disabled={disabled}
-                content={tooltipContent}
-                position={tooltipPosition ?? 'left'}
-            >
-                {iconElement}
-            </Tooltip>
-        );
-    }
-
     return (
         <div className={divClass} onClick={iconOnClick}>
-            {iconElement}
+            <IconComponent className='icon' color={color} />
         </div>
     );
 };

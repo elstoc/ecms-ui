@@ -65,29 +65,21 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
                 name='add'
                 disabled={singlePage || !canWrite || mode === 'edit'}
                 onClick={() => setSearchParams({ mode: 'add' })}
-                tooltipContent='add new child page'
-                tooltipPosition='top-right'
             />
             <Icon
                 name='delete'
                 disabled={singlePage || !canDelete || mode === 'edit'}
                 onClick={deletePage}
-                tooltipContent='delete page'
-                tooltipPosition='top-right'
             />
             <Icon
                 name='save'
                 onClick={savePage}
                 disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
-                tooltipContent='save edited page'
-                tooltipPosition='top-right'
             />
             <Icon
                 name={mode === 'edit' ? 'cancel' : 'edit'}
                 disabled={!pageExists || !pathValid}
                 onClick={toggleEditMode}
-                tooltipContent={mode === 'edit' ? 'cancel edit' : 'view/edit page source'}
-                tooltipPosition='top-right'
             />
         </>
     );
