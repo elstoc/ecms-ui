@@ -54,7 +54,7 @@ export const VideoDbContent: FC = (): ReactElement => {
             <ContentWithSidebar
                 content={list}
                 sidebar={filters}
-                toolbar={toolbar}
+                toolbarIcons={toolbar}
             />
         </>
     );

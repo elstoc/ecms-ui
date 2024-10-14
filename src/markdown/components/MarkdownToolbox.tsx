@@ -62,6 +62,16 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     return (
         <>
             <Icon
+                name={mode === 'edit' ? 'cancel' : 'edit'}
+                disabled={!pageExists || !pathValid}
+                onClick={toggleEditMode}
+            />
+            <Icon
+                name='save'
+                onClick={savePage}
+                disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
+            />
+            <Icon
                 name='add'
                 disabled={singlePage || !canWrite || mode === 'edit'}
                 onClick={() => setSearchParams({ mode: 'add' })}
@@ -70,16 +80,6 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
                 name='delete'
                 disabled={singlePage || !canDelete || mode === 'edit'}
                 onClick={deletePage}
-            />
-            <Icon
-                name='save'
-                onClick={savePage}
-                disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
-            />
-            <Icon
-                name={mode === 'edit' ? 'cancel' : 'edit'}
-                disabled={!pageExists || !pathValid}
-                onClick={toggleEditMode}
             />
         </>
     );

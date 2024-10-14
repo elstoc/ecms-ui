@@ -46,30 +46,30 @@ export const VideoToolbox: FC = (): ReactElement => {
     
     return (
         <>
+            <Icon
+                name='add'
+                disabled={!userIsAdmin}
+                onClick={() => navigate(`./add?${searchParams.toString()}`)}
+            />
+            <Icon
+                name='download'
+                disabled={!userIsAdmin}
+                onClick={downloadCSV}
+            />
             {flagUpdateCount > 0 &&
                 <>
-                    <Icon
-                        name='cancel'
-                        color='firebrick'
-                        onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
-                    />
                     <Icon
                         name='check'
                         className='check'
                         color='green'
                         onClick={postFlagUpdates}
                     />
+                    <Icon
+                        name='cancel'
+                        color='firebrick'
+                        onClick={() => videoDbReducer({ action: 'resetFlagUpdates' })}
+                    />
                 </>}
-            <Icon
-                name='download'
-                disabled={!userIsAdmin}
-                onClick={downloadCSV}
-            />
-            <Icon
-                name='add'
-                disabled={!userIsAdmin}
-                onClick={() => navigate(`./add?${searchParams.toString()}`)}
-            />
         </>
     );
 };

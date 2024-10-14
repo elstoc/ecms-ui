@@ -35,7 +35,7 @@ export const MarkdownContent: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         <ContentWithSidebar
             content={content}
             sidebar={singlePage ? null : sidebar}
-            toolbar={toolbar}
+            toolbarIcons={toolbar}
             closeSidebarOnClick={true}
         />
     );

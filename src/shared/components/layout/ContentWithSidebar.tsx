@@ -1,48 +1,44 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { Drawer } from '@blueprintjs/core';
+import { Card, Drawer } from '@blueprintjs/core';
 
 import { useIsDualPanel } from '../../hooks';
 
 import { Icon } from '../icon';
-import { Toolbar } from './Toolbar';
 
 import './ContentWithSidebar.scss';
 
 type ContentWithSideBarProps = {
     content: ReactElement;
     sidebar: ReactElement | null;
-    toolbar: ReactElement | null;
+    toolbarIcons: ReactElement | null;
     closeSidebarOnClick?: boolean;
 }
 
-export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sidebar, toolbar, closeSidebarOnClick }): ReactElement => {
+export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sidebar, toolbarIcons, closeSidebarOnClick }): ReactElement => {
     const isDualPanel = useIsDualPanel();
     const [sidebarDrawerVisible, setSidebarDrawerVisible] = useState(false);
 
-    useEffect(() => {
-        if (isDualPanel) {
-            setSidebarDrawerVisible(false);
-        }
-    }, [isDualPanel]);
+    useEffect(() => { if (isDualPanel) setSidebarDrawerVisible(false); }, [isDualPanel]);
 
-    let sidebarElement = (
-        <div className='two-panel-sidebar'>
-            {sidebar}
-        </div>
+    let sidebarElement = sidebar;
+
+    let toolbarElement = (
+        <Card>
+            {toolbarIcons}
+        </Card>
     );
 
-    let toolbarElement = <Toolbar right={toolbar} left={null} />;
-
     if (!isDualPanel && sidebar) {
-        const navIcon = (
-            <Icon
-                name='menu'
-                onClick={() => setSidebarDrawerVisible(true)}
-            />
-        );
         toolbarElement = (
             <>
-                <Toolbar left={navIcon} right={toolbar} />
+                {toolbarElement}
+                <Card>
+                    <Icon
+                        name='menu'
+                        className='sidebar-menu-button'
+                        onClick={() => setSidebarDrawerVisible(true)}
+                    />
+                </Card>
             </>
         );
 
@@ -61,21 +57,18 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
     }
 
     return (
-        <div className='content-with-sidebar'>
-            <div className='top'>
-                {sidebar && <div className='sidebar-container'>
-                </div>}
-                <div className='toolbar-container'>
+        <div className='cws-container'>
+            <div className={sidebar ? 'cws' : 'cws no-sidebar'}>
+                <div className='cws-toolbar'>
                     {toolbarElement}
                 </div>
-            </div>
-            <div className='bottom'>
-                {sidebar &&
-                    <div className='sidebar-container'>
+                <div className='cws-content-and-sidebar'>
+                    {sidebar && <div className='cws-sidebar'>
                         {sidebarElement}
                     </div>}
-                <div className='content-container'>
-                    {content}
+                    <div className='cws-content'>
+                        {content}
+                    </div>
                 </div>
             </div>
         </div>
