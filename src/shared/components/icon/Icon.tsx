@@ -2,7 +2,6 @@
 import React, { FC, ReactElement } from 'react';
 import { FiChevronLeft, FiChevronRight, FiEdit, FiFlag, FiSave, FiTrash2, FiUser, FiUserX, FiX, FiPlusSquare, FiMenu, FiDownload, FiCheck } from 'react-icons/fi';
 import { IconType } from 'react-icons';
-import { PopoverPosition, Tooltip } from '@blueprintjs/core';
 
 import './Icon.scss';
 
