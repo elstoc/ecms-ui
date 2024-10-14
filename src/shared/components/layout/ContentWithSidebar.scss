@@ -41,7 +41,7 @@
         @media screen and (min-width: $minDualPanelWidth) {
             flex-direction: row-reverse;
             justify-content: space-between;
-            column-gap: 10px;
+            column-gap: 25px;
 
             padding-top: 1em;
 
@@ -53,7 +53,7 @@
                     max-width: $maxSidebarWidth;
                 }
 
-                .cws-content { width: 64% }
+                .cws-content { width: 65% }
             }
 
             &.no-sidebar .cws-content {
