@@ -1,0 +1,15 @@
+#app .toolbox {
+    display: flex;
+    margin: 0;
+    padding: 0;
+
+    &.horizontal {
+        flex-direction: row-reverse;
+        column-gap: 5px
+    }
+
+    &.vertical {
+        flex-direction: column;
+        row-gap: 5px;
+    }
+}

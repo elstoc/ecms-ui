@@ -21,16 +21,7 @@
             flex-direction: row-reverse;
             justify-content: space-between;
 
-            &>div {
-                display: flex;
-                flex-direction: row-reverse;
-                column-gap: 5px;
-
-                margin: 0;
-                padding: 0;
-            }
-
-            .sidebar-menu-button {
+            .sidebar-button {
                 margin-right: auto; // push menu to left hand side
             }
         }
@@ -54,14 +45,7 @@
 
             padding-top: 1em;
 
-            .cws-toolbar {
-                flex-direction: column;
-                
-                &>div {
-                    flex-direction: column;
-                    row-gap: 5px;
-                }
-            }
+            .cws-toolbar { flex-direction: column }
 
             .cws-content-and-sidebar {
                 .cws-sidebar {
@@ -69,9 +53,7 @@
                     max-width: $maxSidebarWidth;
                 }
 
-                .cws-content {
-                    width: 64%;
-                }
+                .cws-content { width: 64% }
             }
 
             &.no-sidebar .cws-content {

@@ -1,9 +1,10 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { Card, Drawer } from '@blueprintjs/core';
+import { Drawer } from '@blueprintjs/core';
 
 import { useIsDualPanel } from '../../hooks';
 
 import { Icon } from '../icon';
+import { Toolbox } from './Toolbox';
 
 import './ContentWithSidebar.scss';
 
@@ -22,26 +23,15 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
 
     let sidebarElement = sidebar;
 
-    let toolbarElement = (
-        <Card>
-            {toolbarIcons}
-        </Card>
+    const menuIcon = (
+        <Icon
+            name='menu'
+            className='sidebar-button'
+            onClick={() => setSidebarDrawerVisible(true)}
+        />
     );
 
     if (!isDualPanel && sidebar) {
-        toolbarElement = (
-            <>
-                {toolbarElement}
-                <Card>
-                    <Icon
-                        name='menu'
-                        className='sidebar-menu-button'
-                        onClick={() => setSidebarDrawerVisible(true)}
-                    />
-                </Card>
-            </>
-        );
-
         sidebarElement = (
             <Drawer
                 isOpen={sidebarDrawerVisible}
@@ -60,7 +50,8 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
         <div className='cws-container'>
             <div className={sidebar ? 'cws' : 'cws no-sidebar'}>
                 <div className='cws-toolbar'>
-                    {toolbarElement}
+                    <Toolbox content={toolbarIcons} orientation={isDualPanel ? 'vertical' : 'horizontal'} />
+                    {!isDualPanel && sidebar && <Toolbox content={menuIcon} orientation='vertical' />}
                 </div>
                 <div className='cws-content-and-sidebar'>
                     {sidebar && <div className='cws-sidebar'>
