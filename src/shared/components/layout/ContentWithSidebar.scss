@@ -28,13 +28,18 @@
 
         .cws-content-and-sidebar {
             display: flex;
-            flex-direction: row;
+            flex-direction: column;
             justify-content: space-between;
             flex-grow: 1;
 
             .cws-content {
                 width: 100%;
+                flex-grow: 1;
                 max-width: $maxContentWidth;
+            }
+
+            .cws-sidebar {
+                margin: 20px 5px;
             }
         }
 
@@ -48,12 +53,17 @@
             .cws-toolbar { flex-direction: column }
 
             .cws-content-and-sidebar {
+                flex-direction: row;
+
                 .cws-sidebar {
                     width: 34%;
                     max-width: $maxSidebarWidth;
                 }
 
-                .cws-content { width: 65% }
+                .cws-content {
+                    width: 65%;
+                    flex-grow: 0;
+                }
             }
 
             &.no-sidebar .cws-content {

@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useEffect, useState } from 'react';
-import { Drawer } from '@blueprintjs/core';
+import { Collapse } from '@blueprintjs/core';
 
 import { useIsDualPanel } from '../../hooks';
 
@@ -21,28 +21,27 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
 
     useEffect(() => { if (isDualPanel) setSidebarDrawerVisible(false); }, [isDualPanel]);
 
-    let sidebarElement = sidebar;
+    let sidebarElement = (
+        <div className='cws-sidebar'>
+            {sidebar}
+        </div>
+    );
 
     const menuIcon = (
         <Icon
             name='menu'
             className='sidebar-button'
-            onClick={() => setSidebarDrawerVisible(true)}
+            onClick={() => setSidebarDrawerVisible((visible) => !visible)}
         />
     );
 
     if (!isDualPanel && sidebar) {
         sidebarElement = (
-            <Drawer
-                isOpen={sidebarDrawerVisible}
-                onClose={() => setSidebarDrawerVisible(false)}
-                size='85%'
-                position='left'
-            >
-                <div onClick={() => closeSidebarOnClick && setSidebarDrawerVisible(false)}>
+            <Collapse isOpen={sidebarDrawerVisible} keepChildrenMounted={true}>
+                <div className='cws-sidebar' onClick={() => closeSidebarOnClick && setSidebarDrawerVisible(false)}>
                     {sidebar}
                 </div>
-            </Drawer>
+            </Collapse>
         );
     }
 
@@ -54,9 +53,7 @@ export const ContentWithSidebar: FC<ContentWithSideBarProps> = ({ content, sideb
                     {!isDualPanel && sidebar && <Toolbox content={menuIcon} orientation='vertical' />}
                 </div>
                 <div className='cws-content-and-sidebar'>
-                    {sidebar && <div className='cws-sidebar'>
-                        {sidebarElement}
-                    </div>}
+                    {sidebar && sidebarElement}
                     <div className='cws-content'>
                         {content}
                     </div>
