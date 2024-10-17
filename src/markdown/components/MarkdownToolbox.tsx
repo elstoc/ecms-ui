@@ -2,12 +2,14 @@
 import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
+import YAML from 'yaml';
 
 import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../shared/components/icon';
 import { AppToaster } from '../../shared/components/toaster';
+import { splitFrontMatter } from '../../utils';
 
 export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -40,6 +42,12 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
 
     const savePage = useCallback(async () => {
         try {
+            try {
+                const [yaml] = splitFrontMatter(editedMarkdown || '');
+                YAML.parse(yaml);
+            } catch (error: unknown) {
+                throw new Error('Unable to parse YAML front matter');
+            }
             await putMarkdownPage(apiPath, editedMarkdown ?? '');
             await invalidateAndToast('page saved');
         } catch (error: unknown) {
