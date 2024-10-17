@@ -1,6 +1,7 @@
 @import '../../variables.scss';
 
-.video-list {
-    background-color: $appBgColor;
+#app .video-list {
+    background-color: $contentBgColor;
     height: 100%;
+    padding: 2px;
 }

@@ -3,15 +3,15 @@
 #app .video-list-item {
     margin: 0;
     padding: 0;
-    margin-bottom: .4em;
+    margin: 5px;
     cursor: default;
 
     &:hover {
-        background-color: $lighterAppBgColor;
+        background-color: $midGrey;
     }
     
     &.expanded {
-        box-shadow: 0 0 0 2px #333333;
+        box-shadow: 0 0 0 1px #333333;
     }
 
     &:not(:hover) .priority.unchecked {
@@ -47,7 +47,7 @@
     }
 
     .primary-info {
-        padding: 7px 10px;
+        padding: 5px 10px;
         .bp5-form-group,
         .bp5-control.bp5-switch {
             margin: 0;
@@ -59,9 +59,9 @@
             flex-direction: row;
             align-items: center;
 
-            font-size: 1.25rem;
-            letter-spacing: 0.2px;
-            margin-bottom: 0.3rem;
+            font-size: 1.27rem;
+            letter-spacing: 0.1px;
+            margin-bottom: 2px;
         }
         
         a:visited,

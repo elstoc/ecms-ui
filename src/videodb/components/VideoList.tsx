@@ -1,5 +1,6 @@
 import React, { createRef, FC, ReactElement, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { Card } from '@blueprintjs/core';
 
 import { useElementIsVisible } from '../../shared/hooks/useElementIsVisible';
 import { useGetVideos } from '../hooks/useVideoDbQueries';
@@ -23,7 +24,7 @@ export const VideoList: FC = (): ReactElement => {
     useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length }));
 
     return (
-        <div className='video-list'>
+        <Card className='video-list'>
             {videos.map((video, index) => (
                 <VideoListItem
                     key={video.id}
@@ -31,6 +32,6 @@ export const VideoList: FC = (): ReactElement => {
                     ref={index === limit - 1 ? refLastVideo : null}
                 />
             ))}
-        </div>
+        </Card>
     );
 };
