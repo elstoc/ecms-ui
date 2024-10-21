@@ -12,7 +12,6 @@ const queryDefaults = {
     defaultOptions: {
         queries: {
             retry: 2,
-            keepPreviousData: true
         }
     }
 };
