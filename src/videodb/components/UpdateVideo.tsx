@@ -21,10 +21,10 @@ export const UpdateVideo: FC = (): ReactElement => {
     const updateVideo = useCallback(async (video: VideoWithId) => {
         try {
             await putVideoDbVideo(apiPath, video);
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
             navigate(-1);
             (await AppToaster).show({ message: 'saved', timeout: 2000 });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
         } catch (error: unknown) {
             alert('error ' + error);
