@@ -38,22 +38,22 @@ const ComponentNavItem: FC<{ component: ComponentMetadata }> = ({ component }) =
     );
 
     return (
-        <Popover
-            content={subMenuElement}
-            placement='bottom-start'
-            popoverClassName={Classes.POPOVER_DISMISS}
-            interactionKind='click'
-            minimal={true}
-            modifiers={{ offset: { enabled: true, options: { offset: [0, 6]} }}}
-        >
-            <NavLink to={component.apiPath}>
+        <NavLink to={component.apiPath}>
+            <Popover
+                content={subMenuElement}
+                placement='bottom-start'
+                popoverClassName={Classes.POPOVER_DISMISS}
+                interactionKind='click'
+                minimal={true}
+                modifiers={{ offset: { enabled: true, options: { offset: [0, 6]} }}}
+            >
                 <div
                     className='nav-title'
                     onClick={(e) => e.preventDefault()} // NavLink styling without functionality
                 >
                     {component.title}
                 </div>
-            </NavLink>
-        </Popover>
+            </Popover>
+        </NavLink>
     );
 };
