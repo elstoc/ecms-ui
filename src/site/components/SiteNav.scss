@@ -30,12 +30,15 @@
 
     .nav-title {
         font-size: 1.05rem;
-        padding: 0 0.9rem;
+        padding: 0.3rem 0.5rem;
     }
 
     @media screen and (min-width: $maxMobileWidth) {
         align-items: center;
 
+        .nav-title {
+            padding: 0 0.9rem;
+        }
     }
 }
 

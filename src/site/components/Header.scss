@@ -17,15 +17,19 @@
             flex-shrink: 0;
             font-size: 1.3rem;
             font-weight: 600;
-            padding-right: 1.8rem;
             font-family: $headingFont;
             cursor: default;
+            padding: 0.2rem 0.5rem;
         }
     }
 
     @media screen and (min-width: $maxMobileWidth) {
         .left {
             flex-direction: row;
+
+            .site-title {
+                padding: 0 2.8rem 0 0;
+            }
         }
     }
 }
