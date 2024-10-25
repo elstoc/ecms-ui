@@ -13,7 +13,7 @@ export const Header: FC = (): ReactElement => {
     return (
         <Suspense>
             <div className='header'>
-                <div className='nav-title'>
+                <div className='left'>
                     {siteTitle && <div className='site-title'>{siteTitle}</div>}
                     <SiteNav siteComponents={siteComponents}/>
                 </div>
