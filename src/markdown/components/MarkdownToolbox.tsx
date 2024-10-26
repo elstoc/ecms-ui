@@ -80,14 +80,14 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
                 disabled={mode !== 'edit' || !canWrite || content === editedMarkdown}
             />
             <Icon
+                name='delete'
+                disabled={singlePage || !canDelete || mode !== 'edit'}
+                onClick={deletePage}
+            />
+            <Icon
                 name='add'
                 disabled={singlePage || !canWrite || mode === 'edit'}
                 onClick={() => setSearchParams({ mode: 'add' })}
-            />
-            <Icon
-                name='delete'
-                disabled={singlePage || !canDelete || mode === 'edit'}
-                onClick={deletePage}
             />
         </>
     );
