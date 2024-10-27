@@ -1,25 +1,22 @@
 /* eslint-disable no-restricted-globals */
 import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 import YAML from 'yaml';
 
-import { deleteMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../shared/components/icon';
-import { showToast } from '../../shared/components/toaster';
 import { splitFrontMatter } from '../../utils';
-import { useUpdateMarkdownPage } from '../hooks/useMarkdownQueries';
+import { useDeleteMarkdownPage, useUpdateMarkdownPage } from '../hooks/useMarkdownQueries';
 
 export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const queryClient = useQueryClient();
     const navigate = useNavigate();
 
     const { markdownState: { editedMarkdown, singlePage, currentPage } } = useContext(MarkdownStateContext);
     const mode = searchParams.get('mode');
     const { mutate: saveMutate } = useUpdateMarkdownPage(apiPath, 'page saved');
+    const { mutate: deleteMutate } = useDeleteMarkdownPage(apiPath, 'page deleted');
 
     const { content, canWrite, canDelete, pathValid, pageExists } = currentPage ?? {};
 
@@ -35,13 +32,6 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         }
     }, [editedMarkdown, content, mode, setSearchParams]);
 
-    const invalidateAndToast = useCallback(async (message: string) => {
-        await showToast(message, 2000);
-        await queryClient.invalidateQueries({ queryKey: ['markdownFile', apiPath]});
-        await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-        setSearchParams();
-    }, [apiPath, queryClient, setSearchParams]);
-
     const savePage = async () => {
         try {
             try {
@@ -56,17 +46,16 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         }
     };
 
-    const deletePage = useCallback(async () => {
-        try {
-            if (confirm('Are you sure you want to delete this page')) {
-                await deleteMarkdownPage(apiPath);
-                await invalidateAndToast('page deleted');
-                navigate('..', { relative: 'path' });
-            }
-        } catch (error: unknown) {
-            alert('error ' + error);
+    const deletePage = () => {
+        if (confirm('Are you sure you want to delete this page')) {
+            deleteMutate(undefined, {
+                onSuccess: () => {
+                    setSearchParams();
+                    navigate('..', { relative: 'path' });
+                }
+            });
         }
-    }, [invalidateAndToast, apiPath, navigate]);
+    };
 
     return (
         <>

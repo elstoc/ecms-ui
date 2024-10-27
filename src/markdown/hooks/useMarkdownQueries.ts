@@ -1,4 +1,4 @@
-import { getMarkdownPage, getMarkdownTree, putMarkdownPage } from '../api';
+import { deleteMarkdownPage, getMarkdownPage, getMarkdownTree, putMarkdownPage } from '../api';
 import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 
 export const useGetMarkdownPage = (path: string) => {
@@ -26,6 +26,17 @@ export const useCreateMarkdownPage = (successMessage: string) => {
 export const useUpdateMarkdownPage = (path: string, successMessage: string) => {
     return useMutationWithToast<string>({
         mutationFn: (pageContent) => putMarkdownPage(path, pageContent),
+        invalidateKeys: [
+            ['markdownTree'],
+            ['markdownFile', path]
+        ],
+        successMessage
+    });
+};
+
+export const useDeleteMarkdownPage = (path: string, successMessage: string) => {
+    return useMutationWithToast<void>({
+        mutationFn: () => deleteMarkdownPage(path),
         invalidateKeys: [
             ['markdownTree'],
             ['markdownFile', path]
