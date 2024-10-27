@@ -3,7 +3,7 @@ import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 
 export const useGetMarkdownPage = (path: string) => {
     return useCustomQuery({
-        queryKey: ['markdownFile', path],
+        queryKey: ['markdownPage', path],
         queryFn: () => getMarkdownPage(path),
     });
 };
@@ -28,7 +28,7 @@ export const useUpdateMarkdownPage = (path: string, successMessage: string) => {
         mutationFn: (pageContent) => putMarkdownPage(path, pageContent),
         invalidateKeys: [
             ['markdownTree'],
-            ['markdownFile', path]
+            ['markdownPage', path]
         ],
         successMessage
     });
@@ -39,7 +39,7 @@ export const useDeleteMarkdownPage = (path: string, successMessage: string) => {
         mutationFn: () => deleteMarkdownPage(path),
         invalidateKeys: [
             ['markdownTree'],
-            ['markdownFile', path]
+            ['markdownPage', path]
         ],
         successMessage
     });
