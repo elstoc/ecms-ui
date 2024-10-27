@@ -1,14 +1,14 @@
 import { getMarkdownPage, getMarkdownTree, putMarkdownPage } from '../api';
 import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 
-export const useMarkdownPage = (path: string) => {
+export const useGetMarkdownPage = (path: string) => {
     return useCustomQuery({
         queryKey: ['markdownFile', path],
         queryFn: () => getMarkdownPage(path),
     });
 };
 
-export const useMarkdownTree = (path: string) => {
+export const useGetMarkdownTree = (path: string) => {
     return useCustomQuery({
         queryKey: ['markdownTree', path],
         queryFn: () => getMarkdownTree(path),

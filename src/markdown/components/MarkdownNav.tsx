@@ -1,7 +1,7 @@
 import React, { FC, ReactElement,  useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { useMarkdownTree } from '../hooks/useMarkdownQueries';
+import { useGetMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownTree } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
@@ -9,7 +9,7 @@ import './MarkdownNav.scss';
 
 export const MarkdownNav: FC = (): ReactElement => {
     const { markdownState: { rootUiPath, rootApiPath } } = useContext(MarkdownStateContext);
-    const markdownTree = useMarkdownTree(rootApiPath);
+    const markdownTree = useGetMarkdownTree(rootApiPath);
 
     const navContent = (
         <span className='markdown-nav'>

@@ -2,14 +2,14 @@ import React, { FC, ReactElement, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { MarkdownTree } from '../api';
-import { useMarkdownTree } from '../hooks/useMarkdownQueries';
+import { useGetMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { MarkdownContent } from './MarkdownContent';
 
 export const MarkdownRoutes: FC = (): ReactElement => {
     const { markdownState: { rootApiPath, singlePage } } = useContext(MarkdownStateContext);
-    const markdownTree = useMarkdownTree(rootApiPath);
+    const markdownTree = useGetMarkdownTree(rootApiPath);
 
     if (!markdownTree.children) return <></>;
 
