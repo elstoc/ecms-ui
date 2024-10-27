@@ -22,3 +22,14 @@ export const useCreateMarkdownPage = (successMessage: string) => {
         successMessage
     });
 };
+
+export const useUpdateMarkdownPage = (path: string, successMessage: string) => {
+    return useMutationWithToast<string>({
+        mutationFn: (pageContent) => putMarkdownPage(path, pageContent),
+        invalidateKeys: [
+            ['markdownTree'],
+            ['markdownFile', path]
+        ],
+        successMessage
+    });
+};

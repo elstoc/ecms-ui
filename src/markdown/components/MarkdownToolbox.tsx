@@ -4,12 +4,13 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
 import YAML from 'yaml';
 
-import { deleteMarkdownPage, putMarkdownPage } from '../api';
+import { deleteMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../shared/components/icon';
 import { showToast } from '../../shared/components/toaster';
 import { splitFrontMatter } from '../../utils';
+import { useUpdateMarkdownPage } from '../hooks/useMarkdownQueries';
 
 export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -18,6 +19,7 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
 
     const { markdownState: { editedMarkdown, singlePage, currentPage } } = useContext(MarkdownStateContext);
     const mode = searchParams.get('mode');
+    const { mutate: saveMutate } = useUpdateMarkdownPage(apiPath, 'page saved');
 
     const { content, canWrite, canDelete, pathValid, pageExists } = currentPage ?? {};
 
@@ -40,20 +42,19 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
         setSearchParams();
     }, [apiPath, queryClient, setSearchParams]);
 
-    const savePage = useCallback(async () => {
+    const savePage = async () => {
         try {
             try {
-                const [yaml] = splitFrontMatter(editedMarkdown || '');
+                const [yaml] = splitFrontMatter(editedMarkdown);
                 YAML.parse(yaml);
             } catch (error: unknown) {
                 throw new Error('Unable to parse YAML front matter');
             }
-            await putMarkdownPage(apiPath, editedMarkdown ?? '');
-            await invalidateAndToast('page saved');
+            saveMutate( editedMarkdown, { onSuccess: () => setSearchParams() });
         } catch (error: unknown) {
             alert('error ' + error);
         }
-    }, [editedMarkdown, invalidateAndToast, apiPath]);
+    };
 
     const deletePage = useCallback(async () => {
         try {
