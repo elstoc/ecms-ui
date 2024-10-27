@@ -6,7 +6,6 @@ import { VideoWithId } from '../api';
 import { useDeleteVideo, useGetVideo, usePutVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { showToast } from '../../shared/components/toaster';
 import { EditVideoForm } from './EditVideoForm';
 
 export const UpdateVideo: FC = (): ReactElement => {
@@ -17,28 +16,16 @@ export const UpdateVideo: FC = (): ReactElement => {
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
 
     const { data: storedVideo, isFetching } = useGetVideo(apiPath, numericId);
-    const { mutate: deleteMutate } = useDeleteVideo(apiPath, numericId);
-    const { mutate: putMutate } = usePutVideo(apiPath, numericId);
+    const { mutate: deleteMutate } = useDeleteVideo(apiPath, numericId, 'deleted');
+    const { mutate: putMutate } = usePutVideo(apiPath, numericId, 'saved');
 
-    const putVideo = async (video: VideoWithId) => {
-        putMutate(video, {
-            onSuccess: async () => {
-                await showToast('saved', 2000);
-                navigate(-1);
-            },
-            onError: (err) => showToast(`error: ${err.message}`)
-        });
-    };
+    const putVideo = async (video: VideoWithId) => putMutate(
+        video, { onSuccess: () => navigate(-1) }
+    );
 
-    const deleteVideo = async () => {
-        deleteMutate(undefined, {
-            onSuccess: async () => {
-                await showToast('deleted', 2000);
-                navigate(-1);
-            },
-            onError: (err) => showToast(`error: ${err.message}`)
-        });
-    };
+    const deleteVideo = async () => deleteMutate(
+        undefined, { onSuccess: async () => navigate(-1) }
+    );
 
     return (
         <Dialog

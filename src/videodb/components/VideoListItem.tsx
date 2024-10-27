@@ -7,7 +7,6 @@ import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoWithId } from '../api';
 
-import { showToast } from '../../shared/components/toaster';
 import { Flag } from '../../shared/components/forms';
 import { Icon } from '../../shared/components/icon';
 import { WatchedIcon } from './WatchedIcon';
@@ -20,7 +19,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
     const userIsAdmin = useUserIsAdmin();
     const [viewExpanded, setViewExpanded] = useState(false);
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
-    const { mutate, isPending } = usePatchVideo(apiPath, video.id);
+    const { mutate, isPending } = usePatchVideo(apiPath, video.id, 'flag updated');
 
     const videoCategory = useLookupValue(apiPath, 'categories', video.category);
     const primaryMediaType = useLookupValue(apiPath, 'media_types', video.primary_media_type);
@@ -40,13 +39,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
 
     const preventCardClick = (e: React.MouseEvent) => e.stopPropagation();
     const openVideo = () => navigate(`./${video.id}?${searchParams.toString()}`);
-    const togglePriorityFlag = (checked: boolean) => mutate(
-        { id: video.id, priority_flag: checked ? 1 : 0 },
-        {
-            onSuccess: () => showToast('flag updated', 1000),
-            onError: (err) => showToast(err.message, 2000)
-        }
-    );
+    const togglePriorityFlag = (checked: boolean) => mutate({ id: video.id, priority_flag: checked ? 1 : 0 });
 
     return (
         <Card

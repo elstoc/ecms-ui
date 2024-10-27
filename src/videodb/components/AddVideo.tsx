@@ -6,7 +6,6 @@ import { Video, VideoWithId } from '../api';
 import { usePostVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { showToast } from '../../shared/components/toaster';
 import { EditVideoForm } from './EditVideoForm';
 
 const initialVideo = {
@@ -22,18 +21,12 @@ const initialVideo = {
 export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
-    const { mutate } = usePostVideo(apiPath);
+    const { mutate } = usePostVideo(apiPath, 'saved');
 
     const addVideo = async (video: VideoWithId) => {
         mutate(
             { ...video, id: undefined } as Video,
-            {
-                onSuccess: async () => {
-                    await showToast('saved', 1000);
-                    navigate(-1);
-                },
-                onError: async (err) => showToast(`error: ${err.message}`, 5000)
-            }
+            { onSuccess: () => navigate(-1) }
         );
     };
 

@@ -1,5 +1,4 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useCustomQuery, useCustomQueryFetching } from '../../shared/hooks';
+import { useCustomQuery, useCustomQueryFetching, useMutationWithToast } from '../../shared/hooks';
 import {
     Video,
     getVideoDbVideos,
@@ -49,51 +48,47 @@ export const useGetVideo = (path: string, id: number) => {
     });
 };
 
-export const usePostVideo = (path: string) => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-        mutationFn: (video: Video) => postVideoDbVideo(path, video),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
-        }
+export const usePostVideo = (path: string, successMessage: string) => {
+    return useMutationWithToast<Video>({
+        mutationFn: (video) => postVideoDbVideo(path, video),
+        invalidateKeys: [
+            ['videoDb', 'videos'],
+            ['videoDb', 'tags']
+        ],
+        successMessage
     });
 };
 
-export const useDeleteVideo = (path: string, id: number) => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
+export const useDeleteVideo = (path: string, id: number, successMessage: string) => {
+    return useMutationWithToast<void>({
         mutationFn: () => deleteVideoDbVideo(path, id),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
-        }
+        invalidateKeys: [
+            ['videoDb', 'videos'],
+            ['videoDb', 'tags']
+        ],
+        successMessage
     });
 };
 
-export const usePutVideo = (path: string, id: number) => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-        mutationFn: (video: VideoWithId) => putVideoDbVideo(path, video),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
-        }
+export const usePutVideo = (path: string, id: number, successMessage: string) => {
+    return useMutationWithToast<VideoWithId>({
+        mutationFn: (video) => putVideoDbVideo(path, video),
+        invalidateKeys: [
+            ['videoDb', 'videos'],
+            ['videoDb', 'tags'],
+            ['videoDb', 'video', id]
+        ],
+        successMessage
     });
 };
 
-export const usePatchVideo = (path: string, id: number) => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-        mutationFn: (videoUpdate: VideoUpdate) => patchVideoDbVideo(path, videoUpdate),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
-        }
+export const usePatchVideo = (path: string, id: number, successMessage: string) => {
+    return useMutationWithToast<VideoUpdate>({
+        mutationFn: (videoUpdate) => patchVideoDbVideo(path, videoUpdate),
+        invalidateKeys: [
+            ['videoDb', 'videos'],
+            ['videoDb', 'video', id]
+        ],
+        successMessage
     });
 };
