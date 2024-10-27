@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import React, { FC, ReactElement, useCallback, useContext, useState } from 'react';
+import React, { FC, ReactElement, useContext, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
 
-import { getMarkdownPage, putMarkdownPage } from '../api';
+import { getMarkdownPage } from '../api';
+import { useCreateMarkdownPage } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { showToast } from '../../shared/components/toaster';
@@ -14,34 +14,36 @@ import './MarkdownAddPage.scss';
 
 export const MarkdownAddPage: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
     const [, setSearchParams] = useSearchParams();
     const { markdownState: { pageApiPath } } = useContext(MarkdownStateContext);
+    const { mutate } = useCreateMarkdownPage();
 
     const [errorText, setErrorText] = useState('');
     const [newPagePath, setNewPagePath] = useState('');
 
     const newPageFullPath = `${pageApiPath}/${newPagePath}`;
 
-    const createPage = useCallback(async () => {
-        try {
-            const possNewPage = await getMarkdownPage(newPageFullPath);
-            if (possNewPage.pageExists) {
-                setErrorText('Page already exists');
-            } else if (!possNewPage.pathValid) {
-                setErrorText('Invalid path');
-            } else if (!possNewPage.canWrite) {
-                setErrorText('You are not permitted to create a new page here');
-            } else {
-                await putMarkdownPage(newPageFullPath, possNewPage.content);
-                await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                showToast('page added', 2000);
-                navigate(`./${newPagePath}?mode=edit`);
-            }
-        } catch (error: unknown) {
-            setErrorText('Unexpected error: ' + error);
+    const createPage = async () => {
+        const possNewPage = await getMarkdownPage(newPageFullPath);
+        if (possNewPage.pageExists) {
+            setErrorText('Page already exists');
+        } else if (!possNewPage.pathValid) {
+            setErrorText('Invalid path');
+        } else if (!possNewPage.canWrite) {
+            setErrorText('You are not permitted to create a new page here');
+        } else {
+            mutate(
+                { path: newPageFullPath, pageContent: possNewPage.content },
+                {
+                    onSuccess: async () => {
+                        await showToast('page added', 2000);
+                        navigate(`./${newPagePath}?mode=edit`);
+                    },
+                    onError: (err) => showToast(`error: ${err.message}`, 5000)
+                }
+            );
         }
-    }, [navigate, newPageFullPath, newPagePath, queryClient]);
+    };
 
     return (
         <Dialog
