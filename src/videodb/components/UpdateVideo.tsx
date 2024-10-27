@@ -1,10 +1,9 @@
-import React, { FC, ReactElement, useCallback, useContext } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
-import { useQueryClient } from '@tanstack/react-query';
 
-import { putVideoDbVideo, VideoWithId } from '../api';
-import { useDeleteVideo, useGetVideo } from '../hooks/useVideoDbQueries';
+import { VideoWithId } from '../api';
+import { useDeleteVideo, useGetVideo, usePutVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { showToast } from '../../shared/components/toaster';
@@ -12,28 +11,27 @@ import { EditVideoForm } from './EditVideoForm';
 
 export const UpdateVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
 
     const { id } = useParams();
+    const numericId = parseInt(id ?? '0');
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
-    const { data: storedVideo, isFetching } = useGetVideo(apiPath, parseInt(id ?? '0'));
-    const { mutate } = useDeleteVideo(apiPath, parseInt(id ?? '0'));
 
-    const updateVideo = useCallback(async (video: VideoWithId) => {
-        try {
-            await putVideoDbVideo(apiPath, video);
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
-            navigate(-1);
-            await showToast('saved', 2000);
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
-        } catch (error: unknown) {
-            alert('error ' + error);
-        }
-    }, [apiPath, queryClient, navigate]);
+    const { data: storedVideo, isFetching } = useGetVideo(apiPath, numericId);
+    const { mutate: deleteMutate } = useDeleteVideo(apiPath, numericId);
+    const { mutate: putMutate } = usePutVideo(apiPath, numericId);
+
+    const putVideo = async (video: VideoWithId) => {
+        putMutate(video, {
+            onSuccess: async () => {
+                await showToast('saved', 2000);
+                navigate(-1);
+            },
+            onError: (err) => showToast(`error: ${err.message}`)
+        });
+    };
 
     const deleteVideo = async () => {
-        mutate(undefined, {
+        deleteMutate(undefined, {
             onSuccess: async () => {
                 await showToast('deleted', 2000);
                 navigate(-1);
@@ -53,7 +51,7 @@ export const UpdateVideo: FC = (): ReactElement => {
             <DialogBody useOverflowScrollContainer={false}>
                 <EditVideoForm
                     initialVideoState={storedVideo}
-                    onSave={updateVideo}
+                    onSave={putVideo}
                     onDelete={deleteVideo}
                 />
             </DialogBody>
