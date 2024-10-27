@@ -2,7 +2,7 @@ import React, { FC, ReactElement, Suspense, useState } from 'react';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { useSiteConfig } from '../../site';
-import { useUserInfo } from '..';
+import { useGetUserInfo } from '..';
 
 import { Icon } from '../../shared/components/icon';
 import { Login } from './Login';
@@ -12,7 +12,7 @@ import './UserInfo.scss';
 
 export const UserInfo: FC = (): ReactElement => {
     const [authDialogOpen, setAuthDialogOpen] = useState(false);
-    const userData = useUserInfo();
+    const userData = useGetUserInfo();
     const siteConfig = useSiteConfig();
 
     if (!siteConfig.authEnabled) {

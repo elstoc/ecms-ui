@@ -2,7 +2,7 @@ import React, { FC, ReactElement, Suspense, useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import { useTitle } from '../../shared/hooks';
-import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
+import { useGetUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { ContentWithSidebar } from '../../shared/components/layout';
@@ -16,7 +16,7 @@ import './VideoDbContent.scss';
 
 export const VideoDbContent: FC = (): ReactElement => {
     const { videoDbState: { title } } = useContext(VideoDbStateContext);
-    const userIsAdmin = useUserIsAdmin();
+    const userIsAdmin = useGetUserIsAdmin();
 
     useTitle(title);
 

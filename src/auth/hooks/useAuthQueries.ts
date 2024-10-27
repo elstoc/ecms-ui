@@ -2,15 +2,15 @@ import { getUserInfo } from '../api';
 import { useCustomQuery } from '../../shared/hooks';
 import { useSiteConfig } from '../../site';
 
-export const useUserInfo = () => {
+export const useGetUserInfo = () => {
     return useCustomQuery({
         queryKey: ['user-info'],
         queryFn: getUserInfo,
     });
 };
 
-export const useUserIsAdmin = () => {
-    const user = useUserInfo();
+export const useGetUserIsAdmin = () => {
+    const user = useGetUserInfo();
     const { authEnabled } = useSiteConfig();
     return !authEnabled || (user.roles ?? []).includes('admin');
 };

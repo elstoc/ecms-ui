@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Card, Collapse, Tag } from '@blueprintjs/core';
 
 import { useLookupValue, usePatchVideo } from '../hooks/useVideoDbQueries';
-import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
+import { useGetUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoWithId } from '../api';
 
@@ -16,7 +16,7 @@ import './VideoListItem.scss';
 export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(({ video }, ref): ReactElement => {
     const navigate = useNavigate();
     const [searchParams] = useSearchParams();
-    const userIsAdmin = useUserIsAdmin();
+    const userIsAdmin = useGetUserIsAdmin();
     const [viewExpanded, setViewExpanded] = useState(false);
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
     const { mutate, isPending } = usePatchVideo(apiPath, video.id, 'flag updated');
