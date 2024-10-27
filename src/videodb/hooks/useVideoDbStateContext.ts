@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
 
-const BATCH_SIZE = 100;
+const BATCH_SIZE = 40;
 
 type IncreaseLimit = { action: 'increaseLimit', currentlyLoaded: number }
 type ResetLimit = { action: 'resetLimit' };

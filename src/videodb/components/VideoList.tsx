@@ -1,4 +1,4 @@
-import React, { createRef, FC, ReactElement, useContext } from 'react';
+import React, { createRef, FC, ReactElement, startTransition, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Card } from '@blueprintjs/core';
 
@@ -12,7 +12,7 @@ import './VideoList.scss';
 
 export const VideoList: FC = (): ReactElement => {
     const [searchParams] = useSearchParams();
-    const { videoDbState: { apiPath,  limit }, videoDbReducer } = useContext(VideoDbStateContext);
+    const { videoDbState: { apiPath, limit }, videoDbReducer } = useContext(VideoDbStateContext);
     const { maxLength, titleContains, categories, tags, watched, mediaWatched, minResolution, sortPriorityFirst } = Object.fromEntries(searchParams.entries());
 
     const videos = useGetVideos(apiPath, {
@@ -21,7 +21,12 @@ export const VideoList: FC = (): ReactElement => {
     });
 
     const refLastVideo = createRef<HTMLDivElement>();
-    useElementIsVisible(refLastVideo, () => videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length }));
+
+    useElementIsVisible(refLastVideo, () => {
+        startTransition(() => {
+            videoDbReducer({ action: 'increaseLimit', currentlyLoaded: videos.length });
+        });
+    });
 
     return (
         <Card className='video-list'>
