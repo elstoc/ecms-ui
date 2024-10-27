@@ -2,7 +2,7 @@ import React, { forwardRef, ReactElement, useContext, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { Card, Collapse, Tag } from '@blueprintjs/core';
 
-import { useLookupValue } from '../hooks/useVideoDbQueries';
+import { useLookupValue, useMutateVideo } from '../hooks/useVideoDbQueries';
 import { useUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 import { VideoWithId } from '../api';
@@ -18,7 +18,8 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
     const [searchParams] = useSearchParams();
     const userIsAdmin = useUserIsAdmin();
     const [viewExpanded, setViewExpanded] = useState(false);
-    const { videoDbState: { apiPath, pendingFlagUpdates }, videoDbReducer } = useContext(VideoDbStateContext);
+    const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
+    const { mutate, isPending } = useMutateVideo(apiPath, video.id);
 
     const videoCategory = useLookupValue(apiPath, 'categories', video.category);
     const primaryMediaType = useLookupValue(apiPath, 'media_types', video.primary_media_type);
@@ -27,10 +28,6 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
     const otherMediaLocation = useLookupValue(apiPath, 'media_locations', video.other_media_location);
     const tagArray = video.tags?.split('|') || [];
 
-    let priorityFlagChecked = (video.priority_flag ?? 0) > 0;
-    if (video.id in pendingFlagUpdates) {
-        priorityFlagChecked = pendingFlagUpdates[video.id] === 1;
-    }
 
     let lengthText = '';
     if (video.num_episodes && video.length_mins) {
@@ -43,12 +40,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
 
     const preventCardClick = (e: React.MouseEvent) => e.stopPropagation();
     const openVideo = () => navigate(`./${video.id}?${searchParams.toString()}`);
-    const togglePriorityFlag = (checked: boolean) => videoDbReducer({
-        action: 'setUpdatedFlag',
-        videoId: video.id,
-        currValue: video.priority_flag,
-        newValue: checked ? 1 : 0
-    });
+    const togglePriorityFlag = (checked: boolean) => mutate({ id: video.id, priority_flag: checked ? 1 : 0 });
 
     return (
         <Card
@@ -67,7 +59,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
                 </div>
                 <div className='right' onClick={preventCardClick}>
                     <Flag
-                        value={priorityFlagChecked}
+                        value={isPending ? undefined : ( video.priority_flag ? true : false )}
                         className='priority'
                         color='green'
                         onValueChange={!userIsAdmin ? undefined : togglePriorityFlag}

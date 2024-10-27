@@ -16,7 +16,7 @@ export const UpdateVideo: FC = (): ReactElement => {
 
     const { id } = useParams();
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
-    const storedVideo = useGetVideo(apiPath, parseInt(id ?? '0'));
+    const { data: storedVideo, isFetching } = useGetVideo(apiPath, parseInt(id ?? '0'));
 
     const updateVideo = useCallback(async (video: VideoWithId) => {
         try {
@@ -47,7 +47,7 @@ export const UpdateVideo: FC = (): ReactElement => {
     return (
         <Dialog
             title="Update Video"
-            isOpen={true}
+            isOpen={!isFetching}
             onClose={() => navigate(-1)}
             canEscapeKeyClose={false}
             className='update-video'

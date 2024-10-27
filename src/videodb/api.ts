@@ -36,11 +36,6 @@ const getVideoDbVideos = async (path: string, filters?: { [key: string]: string 
     return data;
 };
 
-const patchVideoDbVideos = async (path: string, videoUpdates: VideoUpdate[]): Promise<void> => {
-    const url = 'videodb/videos';
-    await axiosSecureClient.patch(url, { path, videos: videoUpdates });
-};
-
 const getVideoDbVideo = async (path: string, id: number): Promise<VideoWithId> => {
     const url = 'videodb/video';
     const { data } = await axiosSecureClient.get<VideoWithId>(url, { params: { path, id }});
@@ -56,6 +51,11 @@ const postVideoDbVideo = async (path: string, video: Video): Promise<number> => 
     const url = 'videodb/video';
     const { data } = await axiosSecureClient.post<{ id: number }>(url, { path, video });
     return data.id;
+};
+
+const patchVideoDbVideo = async (path: string, videoUpdate: VideoUpdate): Promise<void> => {
+    const url = 'videodb/video';
+    await axiosSecureClient.patch(url, { path, ...videoUpdate });
 };
 
 const deleteVideoDbVideo = async (path: string, id: number): Promise<void> => {
@@ -81,10 +81,10 @@ export {
     VideoWithId,
     VideoUpdate,
     getVideoDbVideos,
-    patchVideoDbVideos,
     getVideoDbVideo,
     putVideoDbVideo,
     postVideoDbVideo,
+    patchVideoDbVideo,
     deleteVideoDbVideo,
     getVideoDbTags,
     getVideoDbLookup

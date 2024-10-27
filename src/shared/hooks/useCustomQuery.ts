@@ -13,3 +13,8 @@ export const useCustomQuery = <T>(options: QueryOptions<T>): T => {
     const { data } = useSuspenseQuery({ refetchInterval: config.queryRefetchInterval,  ...options });
     return data;
 };
+
+export const useCustomQueryFetching = <T>(options: QueryOptions<T>): { data: T, isFetching: boolean } => {
+    const { data, isFetching } = useSuspenseQuery({ refetchInterval: config.queryRefetchInterval,  ...options });
+    return { data, isFetching };
+};
