@@ -1,4 +1,3 @@
-/* eslint-disable no-restricted-globals */
 import React, { FC, ReactElement, useContext, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
@@ -7,7 +6,6 @@ import { getMarkdownPage } from '../api';
 import { useCreateMarkdownPage } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { showToast } from '../../shared/components/toaster';
 import { StringInput } from '../../shared/components/forms';
 
 import './MarkdownAddPage.scss';
@@ -16,7 +14,7 @@ export const MarkdownAddPage: FC = (): ReactElement => {
     const navigate = useNavigate();
     const [, setSearchParams] = useSearchParams();
     const { markdownState: { pageApiPath } } = useContext(MarkdownStateContext);
-    const { mutate } = useCreateMarkdownPage();
+    const { mutate } = useCreateMarkdownPage('page created');
 
     const [errorText, setErrorText] = useState('');
     const [newPagePath, setNewPagePath] = useState('');
@@ -34,13 +32,7 @@ export const MarkdownAddPage: FC = (): ReactElement => {
         } else {
             mutate(
                 { path: newPageFullPath, pageContent: possNewPage.content },
-                {
-                    onSuccess: async () => {
-                        await showToast('page added', 2000);
-                        navigate(`./${newPagePath}?mode=edit`);
-                    },
-                    onError: (err) => showToast(`error: ${err.message}`, 5000)
-                }
+                { onSuccess: () => navigate(`./${newPagePath}?mode=edit`) },
             );
         }
     };

@@ -1,7 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
 import { getMarkdownPage, getMarkdownTree, putMarkdownPage } from '../api';
-import { useCustomQuery } from '../../shared/hooks';
+import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 
 export const useMarkdownPage = (path: string) => {
     return useCustomQuery({
@@ -17,13 +15,10 @@ export const useMarkdownTree = (path: string) => {
     });
 };
 
-export const useCreateMarkdownPage = () => {
-    const queryClient = useQueryClient();
-
-    return useMutation({
-        mutationFn: (data: { path: string, pageContent: string }) => putMarkdownPage(data.path, data.pageContent),
-        onSuccess: async () => {
-            await queryClient.invalidateQueries({ queryKey: ['markdownTree'] });
-        }
+export const useCreateMarkdownPage = (successMessage: string) => {
+    return useMutationWithToast<{ path: string, pageContent: string }>({
+        mutationFn: ({ path, pageContent }) => putMarkdownPage(path, pageContent),
+        invalidateKeys: [['markdownTree']],
+        successMessage
     });
 };
