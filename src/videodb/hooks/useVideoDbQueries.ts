@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCustomQuery, useCustomQueryFetching } from '../../shared/hooks';
-import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags, VideoUpdate, patchVideoDbVideo, Video, postVideoDbVideo } from '../api';
+import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags, VideoUpdate, patchVideoDbVideo, Video, postVideoDbVideo, deleteVideoDbVideo } from '../api';
 
 export const useGetLookup = (path: string, lookupTable: string) => {
     return useCustomQuery({
@@ -42,6 +42,18 @@ export const useAddVideo = (path: string) => {
 
     return useMutation({
         mutationFn: (video: Video) => postVideoDbVideo(path, video),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
+        }
+    });
+};
+
+export const useDeleteVideo = (path: string, id: number) => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: () => deleteVideoDbVideo(path, id),
         onSuccess: async () => {
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
