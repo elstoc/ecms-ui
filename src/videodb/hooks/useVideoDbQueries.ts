@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCustomQuery, useCustomQueryFetching } from '../../shared/hooks';
 import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags, VideoUpdate, patchVideoDbVideo } from '../api';
 
-const useGetLookup = (path: string, lookupTable: string) => {
+export const useGetLookup = (path: string, lookupTable: string) => {
     return useCustomQuery({
         queryKey: ['videoDb', 'lookup', path, lookupTable],
         queryFn: () => getVideoDbLookup(path, lookupTable),
@@ -16,28 +16,28 @@ export const useLookupValue = (path: string, lookupTable: string, value?: string
     return lookup[value ?? ''];
 };
 
-const useGetTags = (path: string) => {
+export const useGetTags = (path: string) => {
     return useCustomQuery({
         queryKey: ['videoDb', 'tags', path],
         queryFn: () => getVideoDbTags(path),
     });
 };
 
-const useGetVideos = (path: string, params?: { [key: string]: string }) => {
+export const useGetVideos = (path: string, params?: { [key: string]: string }) => {
     return useCustomQuery({
         queryKey: ['videoDb', 'videos', `${path}:${JSON.stringify(params)}`],
         queryFn: () => getVideoDbVideos(path, params),
     });
 };
 
-const useGetVideo = (path: string, id: number) => {
+export const useGetVideo = (path: string, id: number) => {
     return useCustomQueryFetching({
         queryKey: ['videoDb', 'video', id],
         queryFn: () => getVideoDbVideo(path, id),
     });
 };
 
-const usePatchVideo = (path: string, id: number) => {
+export const usePatchVideo = (path: string, id: number) => {
     const queryClient = useQueryClient();
     return useMutation({
         mutationFn: (videoUpdate: VideoUpdate) => patchVideoDbVideo(path, videoUpdate),
@@ -47,5 +47,3 @@ const usePatchVideo = (path: string, id: number) => {
         }
     });
 };
-
-export { useGetVideos, useGetVideo, usePatchVideo, useGetLookup, useGetTags };
