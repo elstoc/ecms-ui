@@ -7,7 +7,7 @@ import { deleteVideoDbVideo, putVideoDbVideo, VideoWithId } from '../api';
 import { useGetVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { AppToaster } from '../../shared/components/toaster';
+import { showToast } from '../../shared/components/toaster';
 import { EditVideoForm } from './EditVideoForm';
 
 export const UpdateVideo: FC = (): ReactElement => {
@@ -23,7 +23,7 @@ export const UpdateVideo: FC = (): ReactElement => {
             await putVideoDbVideo(apiPath, video);
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', video.id]});
             navigate(-1);
-            (await AppToaster).show({ message: 'saved', timeout: 2000 });
+            await showToast('saved', 2000);
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
         } catch (error: unknown) {
@@ -35,7 +35,7 @@ export const UpdateVideo: FC = (): ReactElement => {
         try {
             await deleteVideoDbVideo(apiPath, id);
             navigate(-1);
-            (await AppToaster).show({ message: 'deleted', timeout: 2000 });
+            await showToast('deleted', 2000);
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'video', id] });
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});

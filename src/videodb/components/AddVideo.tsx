@@ -7,7 +7,7 @@ import { postVideoDbVideo, Video, VideoWithId } from '../api';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { EditVideoForm } from './EditVideoForm';
-import { AppToaster } from '../../shared/components/toaster';
+import { showToast } from '../../shared/components/toaster';
 
 const initialVideo = {
     id: 0, title: '', category: '',
@@ -29,7 +29,7 @@ export const AddVideo: FC = (): ReactElement => {
         try {
             const videoWithoutId = { ...video, id: undefined } as Video;
             await postVideoDbVideo(apiPath, videoWithoutId);
-            (await AppToaster).show({ message: 'saved', timeout: 2000 });
+            await showToast('saved', 2000);
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
             await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
             navigate(-1);

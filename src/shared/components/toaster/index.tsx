@@ -1,1 +1,1 @@
-export { AppToaster } from './Toaster';
+export { showToast } from './Toaster';

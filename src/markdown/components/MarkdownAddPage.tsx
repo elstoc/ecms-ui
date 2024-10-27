@@ -7,7 +7,7 @@ import { Button, Card, Dialog, DialogBody } from '@blueprintjs/core';
 import { getMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
-import { AppToaster } from '../../shared/components/toaster';
+import { showToast } from '../../shared/components/toaster';
 import { StringInput } from '../../shared/components/forms';
 
 import './MarkdownAddPage.scss';
@@ -35,7 +35,7 @@ export const MarkdownAddPage: FC = (): ReactElement => {
             } else {
                 await putMarkdownPage(newPageFullPath, possNewPage.content);
                 await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
-                (await AppToaster).show({ message: 'page added', timeout: 2000 });
+                showToast('page added', 2000);
                 navigate(`./${newPagePath}?mode=edit`);
             }
         } catch (error: unknown) {

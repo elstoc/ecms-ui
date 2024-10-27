@@ -8,7 +8,7 @@ import { deleteMarkdownPage, putMarkdownPage } from '../api';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { Icon } from '../../shared/components/icon';
-import { AppToaster } from '../../shared/components/toaster';
+import { showToast } from '../../shared/components/toaster';
 import { splitFrontMatter } from '../../utils';
 
 export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
@@ -34,7 +34,7 @@ export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElem
     }, [editedMarkdown, content, mode, setSearchParams]);
 
     const invalidateAndToast = useCallback(async (message: string) => {
-        (await AppToaster).show({ message, timeout: 2000 });
+        await showToast(message, 2000);
         await queryClient.invalidateQueries({ queryKey: ['markdownFile', apiPath]});
         await queryClient.invalidateQueries({ queryKey: ['markdownTree']});
         setSearchParams();
