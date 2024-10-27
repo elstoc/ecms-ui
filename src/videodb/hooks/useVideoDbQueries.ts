@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCustomQuery, useCustomQueryFetching } from '../../shared/hooks';
-import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags, VideoUpdate, patchVideoDbVideo } from '../api';
+import { getVideoDbVideos, getVideoDbVideo, getVideoDbLookup, getVideoDbTags, VideoUpdate, patchVideoDbVideo, Video, postVideoDbVideo } from '../api';
 
 export const useGetLookup = (path: string, lookupTable: string) => {
     return useCustomQuery({
@@ -37,8 +37,21 @@ export const useGetVideo = (path: string, id: number) => {
     });
 };
 
+export const useAddVideo = (path: string) => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: (video: Video) => postVideoDbVideo(path, video),
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos'] });
+            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags'] });
+        }
+    });
+};
+
 export const usePatchVideo = (path: string, id: number) => {
     const queryClient = useQueryClient();
+
     return useMutation({
         mutationFn: (videoUpdate: VideoUpdate) => patchVideoDbVideo(path, videoUpdate),
         onSuccess: async () => {

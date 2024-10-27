@@ -1,13 +1,13 @@
-import React, { FC, ReactElement, useCallback, useContext } from 'react';
+import React, { FC, ReactElement, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
-import { useQueryClient } from '@tanstack/react-query';
 
-import { postVideoDbVideo, Video, VideoWithId } from '../api';
+import { Video, VideoWithId } from '../api';
+import { useAddVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
-import { EditVideoForm } from './EditVideoForm';
 import { showToast } from '../../shared/components/toaster';
+import { EditVideoForm } from './EditVideoForm';
 
 const initialVideo = {
     id: 0, title: '', category: '',
@@ -21,22 +21,21 @@ const initialVideo = {
 
 export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const queryClient = useQueryClient();
-
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
+    const { mutate } = useAddVideo(apiPath);
 
-    const addVideo = useCallback(async (video: VideoWithId) => {
-        try {
-            const videoWithoutId = { ...video, id: undefined } as Video;
-            await postVideoDbVideo(apiPath, videoWithoutId);
-            await showToast('saved', 2000);
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'videos']});
-            await queryClient.invalidateQueries({ queryKey: ['videoDb', 'tags']});
-            navigate(-1);
-        } catch (error: unknown) {
-            alert('error ' + error);
-        }
-    }, [apiPath, queryClient, navigate]);
+    const addVideo = async (video: VideoWithId) => {
+        mutate(
+            { ...video, id: undefined } as Video,
+            {
+                onSuccess: async () => {
+                    await showToast('saved', 1000);
+                    navigate(-1);
+                },
+                onError: async (err) => showToast(`error: ${err.message}`, 5000)
+            }
+        );
+    };
 
     return (
         <Dialog
