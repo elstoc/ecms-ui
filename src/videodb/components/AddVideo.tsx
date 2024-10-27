@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { Video, VideoWithId } from '../api';
-import { useAddVideo } from '../hooks/useVideoDbQueries';
+import { usePostVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { showToast } from '../../shared/components/toaster';
@@ -22,7 +22,7 @@ const initialVideo = {
 export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
-    const { mutate } = useAddVideo(apiPath);
+    const { mutate } = usePostVideo(apiPath);
 
     const addVideo = async (video: VideoWithId) => {
         mutate(

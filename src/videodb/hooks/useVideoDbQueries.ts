@@ -49,7 +49,7 @@ export const useGetVideo = (path: string, id: number) => {
     });
 };
 
-export const useAddVideo = (path: string) => {
+export const usePostVideo = (path: string) => {
     const queryClient = useQueryClient();
 
     return useMutation({
