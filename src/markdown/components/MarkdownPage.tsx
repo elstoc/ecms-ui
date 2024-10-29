@@ -21,6 +21,7 @@ export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement
     return (
         <>
             {mode === 'edit' ? <MarkdownEditPage /> : <MarkdownViewPage />}
-            {mode === 'add' && <MarkdownAddPage />}
-        </>);
+            <MarkdownAddPage />
+        </>
+    );
 };

@@ -12,9 +12,10 @@ import './MarkdownAddPage.scss';
 
 export const MarkdownAddPage: FC = (): ReactElement => {
     const navigate = useNavigate();
-    const [, setSearchParams] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
     const { markdownState: { pageApiPath } } = useContext(MarkdownStateContext);
     const { mutate } = useCreateMarkdownPage('page created');
+    const mode = searchParams.get('mode');
 
     const [errorText, setErrorText] = useState('');
     const [newPagePath, setNewPagePath] = useState('');
@@ -40,7 +41,7 @@ export const MarkdownAddPage: FC = (): ReactElement => {
     return (
         <Dialog
             title='Add new child page'
-            isOpen={true}
+            isOpen={mode === 'add'}
             onClose={() => setSearchParams()}
             canEscapeKeyClose={false}
         >
