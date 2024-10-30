@@ -1,6 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { Video, VideoWithId } from '../api';
 import { usePostVideo } from '../hooks/useVideoDbQueries';
@@ -31,16 +30,6 @@ export const AddVideo: FC = (): ReactElement => {
     };
 
     return (
-        <Dialog
-            title="Add new Video"
-            isOpen={true}
-            onClose={() => navigate(-1)}
-            canEscapeKeyClose={false}
-            className='update-video'
-        >
-            <DialogBody useOverflowScrollContainer={false}>
-                <EditVideoForm initialVideoState={initialVideo} onSave={addVideo} />
-            </DialogBody>
-        </Dialog>
+        <EditVideoForm initialVideoState={initialVideo} onSave={addVideo} />
     );
 };

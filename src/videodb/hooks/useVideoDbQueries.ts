@@ -1,4 +1,4 @@
-import { useCustomQuery, useCustomQueryFetching, useMutationWithToast } from '../../shared/hooks';
+import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 import {
     Video,
     getVideoDbVideos,
@@ -42,7 +42,7 @@ export const useGetVideos = (path: string, params?: { [key: string]: string }) =
 };
 
 export const useGetVideo = (path: string, id: number) => {
-    return useCustomQueryFetching({
+    return useCustomQuery({
         queryKey: ['videoDb', 'video', id],
         queryFn: () => getVideoDbVideo(path, id),
     });
