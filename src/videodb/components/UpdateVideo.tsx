@@ -1,5 +1,5 @@
 import React, { FC, ReactElement, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { VideoWithId } from '../api';
@@ -8,16 +8,14 @@ import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
 import { EditVideoForm } from './EditVideoForm';
 
-export const UpdateVideo: FC = (): ReactElement => {
+export const UpdateVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const navigate = useNavigate();
 
-    const { id } = useParams();
-    const numericId = parseInt(id ?? '0');
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
 
-    const { data: storedVideo, isFetching } = useGetVideo(apiPath, numericId);
-    const { mutate: deleteMutate } = useDeleteVideo(apiPath, numericId, 'deleted');
-    const { mutate: putMutate } = usePutVideo(apiPath, numericId, 'saved');
+    const { data: storedVideo, isFetching } = useGetVideo(apiPath, id);
+    const { mutate: deleteMutate } = useDeleteVideo(apiPath, id, 'deleted');
+    const { mutate: putMutate } = usePutVideo(apiPath, id, 'saved');
 
     const putVideo = async (video: VideoWithId) => putMutate(
         video, { onSuccess: () => navigate(-1) }

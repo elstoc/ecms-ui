@@ -38,7 +38,7 @@ export const VideoListItem = forwardRef<HTMLDivElement, { video: VideoWithId }>(
     }
 
     const preventCardClick = (e: React.MouseEvent) => e.stopPropagation();
-    const openVideo = () => navigate(`./${video.id}?${searchParams.toString()}`);
+    const openVideo = () => navigate(`./update/${video.id}?${searchParams.toString()}`);
     const togglePriorityFlag = (checked: boolean) => mutate({ id: video.id, priority_flag: checked ? 1 : 0 });
 
     return (

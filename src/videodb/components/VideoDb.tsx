@@ -1,4 +1,5 @@
 import React, { FC, ReactElement, Suspense} from 'react';
+import { Route, Routes } from 'react-router';
 
 import { useTitle } from '../../shared/hooks';
 import { VideoDbMetadata } from '../../site/api';
@@ -28,7 +29,12 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
 
     const content = (
         <Suspense>
-            <VideoDbContent />
+            <Routes>
+                <Route
+                    path=':mode?/:id?'
+                    element={<VideoDbContent />}
+                />
+            </Routes>
         </Suspense>
     );
 
