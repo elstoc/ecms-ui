@@ -13,7 +13,6 @@ export const VideoDbContent: FC = (): ReactElement => {
     const userIsAdmin = useGetUserIsAdmin();
     const { mode, id } = useParams();
 
-    // suspense is wrapped around routes and page elements separately to stop screen flashing
     return (
         <div className='video-content'>
             {userIsAdmin &&

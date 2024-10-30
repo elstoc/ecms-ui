@@ -38,6 +38,7 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
         </Suspense>
     );
 
+    // suspense is wrapped around routes and page elements separately to stop screen flashing
     return (
         <VideoDbStateContext.Provider value={videoDbState} >
             <Suspense>
