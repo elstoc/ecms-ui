@@ -24,8 +24,9 @@ export const AddVideo: FC = (): ReactElement => {
     const { mutate } = usePostVideo(apiPath, 'saved');
 
     const addVideo = async (video: VideoWithId) => {
+        const { id, ...videoWithoutId } = video;
         mutate(
-            { ...video, id: undefined } as Video,
+            videoWithoutId,
             { onSuccess: () => navigate(-1) }
         );
     };
