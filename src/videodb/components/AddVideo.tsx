@@ -20,6 +20,7 @@ const initialVideo = {
 export const AddVideo: FC = (): ReactElement => {
     const navigate = useNavigate();
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
+
     const { mutate } = usePostVideo(apiPath, 'saved');
 
     const addVideo = async (video: VideoWithId) => {
@@ -30,6 +31,9 @@ export const AddVideo: FC = (): ReactElement => {
     };
 
     return (
-        <EditVideoForm initialVideoState={initialVideo} onSave={addVideo} />
+        <EditVideoForm
+            initialVideoState={initialVideo}
+            onSave={addVideo}
+        />
     );
 };

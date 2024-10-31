@@ -9,7 +9,6 @@ import { EditVideoForm } from './EditVideoForm';
 
 export const UpdateVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     const navigate = useNavigate();
-
     const { videoDbState: { apiPath } } = useContext(VideoDbStateContext);
 
     const storedVideo = useGetVideo(apiPath, id);
@@ -21,7 +20,7 @@ export const UpdateVideo: FC<{ id: number }> = ({ id }): ReactElement => {
     );
 
     const deleteVideo = async () => deleteMutate(
-        undefined, { onSuccess: async () => navigate(-1) }
+        undefined, { onSuccess: () => navigate(-1) }
     );
 
     return (
