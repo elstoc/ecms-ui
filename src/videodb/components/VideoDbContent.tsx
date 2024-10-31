@@ -23,6 +23,7 @@ export const VideoDbContent: FC = (): ReactElement => {
                     isOpen={ mode === 'add' || mode === 'update' }
                     onClose={() => navigate(-1)}
                     canEscapeKeyClose={false}
+                    canOutsideClickClose={false}
                 >
                     <DialogBody useOverflowScrollContainer={false}>
                         <Suspense>
