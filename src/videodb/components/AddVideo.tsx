@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Video, VideoWithId } from '../api';
+import { VideoWithId } from '../api';
 import { usePostVideo } from '../hooks/useVideoDbQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
 
