@@ -14,7 +14,7 @@ export const useMutationWithToast = <T>(params: {
         mutationFn,
         onSuccess: async () => {
             await Promise.allSettled(invalidateKeys.map((queryKey) => (
-                queryClient.invalidateQueries({ queryKey })
+                queryClient.invalidateQueries({ queryKey, refetchType: 'all' })
             )));
             showToast(successMessage, 1000);
         },
