@@ -43,8 +43,9 @@ export const useGetVideos = (path: string, params?: { [key: string]: string }) =
 
 export const useGetVideo = (path: string, id: number) => {
     return useCustomQuery({
-        queryKey: ['videoDb', 'video', id],
+        queryKey: [],
         queryFn: () => getVideoDbVideo(path, id),
+        gcTime: 0
     });
 };
 
@@ -76,7 +77,6 @@ export const usePutVideo = (path: string, id: number, successMessage: string) =>
         invalidateKeys: [
             ['videoDb', 'videos'],
             ['videoDb', 'tags'],
-            ['videoDb', 'video', id]
         ],
         successMessage
     });
@@ -87,7 +87,6 @@ export const usePatchVideo = (path: string, id: number, successMessage: string) 
         mutationFn: (videoUpdate) => patchVideoDbVideo(path, videoUpdate),
         invalidateKeys: [
             ['videoDb', 'videos'],
-            ['videoDb', 'video', id]
         ],
         successMessage
     });

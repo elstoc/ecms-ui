@@ -7,9 +7,10 @@ type QueryOptions<T> = {
     queryFn: () => Promise<T>;
     staleTime?: number;
     refetchInterval?: number;
+    gcTime?: number;
 }
 
 export const useCustomQuery = <T>(options: QueryOptions<T>): T => {
-    const { data } = useSuspenseQuery({ refetchInterval: config.queryRefetchInterval,  ...options });
+    const { data } = useSuspenseQuery({ refetchInterval: config.queryRefetchInterval, ...options });
     return data;
 };
