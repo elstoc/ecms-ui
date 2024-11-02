@@ -13,9 +13,9 @@ import './UserInfo.scss';
 export const UserInfo: FC = (): ReactElement => {
     const [authDialogOpen, setAuthDialogOpen] = useState(false);
     const userData = useGetUserInfo();
-    const siteConfig = useSiteConfig();
+    const { authEnabled } = useSiteConfig();
 
-    if (!siteConfig.authEnabled) {
+    if (!authEnabled) {
         return <></>;
     }
 

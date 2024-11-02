@@ -1,28 +1,26 @@
-import { useQueryClient } from '@tanstack/react-query';
 import React, { FC, ReactElement, useCallback, useState } from 'react';
-
-import { login } from '../api';
-
-import './Login.scss';
 import { Button, Card } from '@blueprintjs/core';
+
+import { useLogin } from '../hooks/useAuthQueries';
+
 import { PasswordInput, StringInput } from '../../shared/components/forms';
 
+import './Login.scss';
+
 export const Login: FC = (): ReactElement => {
-    const queryClient = useQueryClient();
     const [loginFailed, setLoginFailed] = useState(false);
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
+    const { mutate } = useLogin('logged in');
 
     const handleLogin = useCallback(async () => {
-        try {
-            await login(userId, password);
-            setLoginFailed(false);
-            await queryClient.invalidateQueries();
-        } catch {
-            setLoginFailed(true);
-            setPassword('');
-        }
-    }, [userId, password, queryClient]);
+        mutate({ userId, password }, {
+            onError: () => {
+                setLoginFailed(true);
+                setPassword('');
+            },
+        });
+    }, [mutate, userId, password]);
 
     return(
         <div className='login'>
