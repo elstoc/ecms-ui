@@ -5,6 +5,7 @@ import { useTitle } from '../../shared/hooks';
 import { VideoDbMetadata } from '../../site/api';
 import { VideoDbStateContext, useVideoDbState } from '../hooks/useVideoDbStateContext';
 
+import { NotFoundPage } from '../../shared/components/NotFoundPage';
 import { VideoDbContent } from './VideoDbContent';
 import { VideoToolbox } from './VideoToolbox';
 import { VideoFilters } from './VideoFilters';
@@ -30,10 +31,10 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
     const content = (
         <Suspense>
             <Routes>
-                <Route
-                    path=':mode?/:id?'
-                    element={<VideoDbContent />}
-                />
+                <Route path='update/:id' element={<VideoDbContent mode='update' />} />
+                <Route path='edit' element={<VideoDbContent mode='add' />} />
+                <Route path='/' element={<VideoDbContent />} />
+                <Route key='*' path='*' element={<NotFoundPage sourceComponent='video' />} />
             </Routes>
         </Suspense>
     );

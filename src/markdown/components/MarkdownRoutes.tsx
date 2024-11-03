@@ -6,6 +6,7 @@ import { useGetMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 import { MarkdownContent } from './MarkdownContent';
+import { NotFoundPage } from '../../shared/components/NotFoundPage';
 
 export const MarkdownRoutes: FC = (): ReactElement => {
     const { markdownState: { rootApiPath, singlePage } } = useContext(MarkdownStateContext);
@@ -16,6 +17,7 @@ export const MarkdownRoutes: FC = (): ReactElement => {
     return (
         <Routes>
             {listMarkdownRoutes(markdownTree.children, singlePage)}
+            <Route key='*' path='*' element={<NotFoundPage sourceComponent='markdown' />} />
         </Routes>
     );
 };

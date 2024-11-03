@@ -1,8 +1,10 @@
 import React, { FC, ReactElement, Suspense } from 'react';
+import { Route, Routes } from 'react-router';
 
 import { GalleryMetadata } from '../../site/api';
 import { GalleryStateContext, useGalleryStateReducer, getInitialState } from '../hooks/useGalleryState';
 
+import { NotFoundPage } from '../../shared/components/NotFoundPage';
 import { GalleryContent } from './GalleryContent';
 
 export const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
@@ -12,7 +14,10 @@ export const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
     return (
         <GalleryStateContext.Provider value={{galleryState, galleryStateReducer}}>
             <Suspense>
-                <GalleryContent />
+                <Routes>
+                    <Route path='/' element={<GalleryContent />} />
+                    <Route path='*' element={<NotFoundPage sourceComponent='gallery' />} />
+                </Routes>
             </Suspense>
         </GalleryStateContext.Provider>
     );

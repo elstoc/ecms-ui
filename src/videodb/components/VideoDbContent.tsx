@@ -4,16 +4,25 @@ import { Dialog, DialogBody } from '@blueprintjs/core';
 
 import { useGetUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 
+import { NotFoundPage } from '../../shared/components/NotFoundPage';
 import { VideoList } from './VideoList';
 import { UpdateVideo } from './UpdateVideo';
 import { AddVideo } from './AddVideo';
 
 import './VideoDbContent.scss';
 
-export const VideoDbContent: FC = (): ReactElement => {
+type VideoDbContentProps = {
+    mode?: 'update' | 'add'
+}
+
+export const VideoDbContent: FC<VideoDbContentProps> = ({ mode }): ReactElement => {
+    const { id } = useParams();
     const navigate = useNavigate();
     const userIsAdmin = useGetUserIsAdmin();
-    const { mode, id } = useParams();
+
+    if (mode === 'update' && !Number.isInteger(parseInt(id || 'x'))) {
+        return <NotFoundPage />;
+    }
 
     return (
         <div className='video-content'>

@@ -5,6 +5,7 @@ import { useSiteComponents } from '../hooks/useSiteQueries';
 import { ComponentMetadata, ComponentTypes } from '../api';
 
 import { SiteComponent } from './SiteComponent';
+import { NotFoundPage } from '../../shared/components/NotFoundPage';
 
 const listComponentRoutes = (components: ComponentMetadata[]): ReactElement[] => {
     const routes: ReactElement[] = [];
@@ -30,6 +31,7 @@ export const SiteRoutes: FC = (): ReactElement => {
     return (
         <Routes>
             {listComponentRoutes(siteComponents)}
+            <Route key='*' path='*' element={<NotFoundPage sourceComponent='root' />} />
         </Routes>
     );
 };
