@@ -32,7 +32,7 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
         <Suspense>
             <Routes>
                 <Route path='update/:id' element={<VideoDbContent mode='update' />} />
-                <Route path='edit' element={<VideoDbContent mode='add' />} />
+                <Route path='add' element={<VideoDbContent mode='add' />} />
                 <Route path='/' element={<VideoDbContent />} />
                 <Route key='*' path='*' element={<NotFoundPage sourceComponent='video' />} />
             </Routes>
