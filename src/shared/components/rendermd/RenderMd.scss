@@ -14,9 +14,8 @@
         margin-top: 2.2rem;
         margin-bottom: 1rem;
         padding: 0;
-        font-weight: 700;
+        font-weight: 500;
         text-align: left;
-        font-family: $headingFont;
     }
     
     h1 + h2,
@@ -35,6 +34,7 @@
     h6 { color: red; text-decoration: line-through; }
 
     h1.title {
+        font-family: $headingFont;
         font-size: 2.2rem;
         font-weight: 600;
         margin-top: -0;
@@ -75,8 +75,7 @@
     }
 
     dt {
-        font-family: $headingFont;
-        font-weight: 700;
+        font-weight: 500;
         margin-top: 0.7rem;
         margin-bottom: 0.4rem;
     }
@@ -108,6 +107,6 @@
     }
 
     strong {
-        font-weight: 600;
+        font-weight: 500;
     }
 }
