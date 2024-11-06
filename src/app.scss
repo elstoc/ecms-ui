@@ -33,10 +33,10 @@
             flex-shrink: 1;
         }
 
-        /* That is, from 500 to 1700px */
-        @for $i from 5 through 17 {
+        /* That is, from 500 to 1800px */
+        @for $i from 5 through 18 {
             @media screen and (min-width: #{$i * 100}px) {
-                width: #{$i * 100 - 20}px;
+                width: #{$i * 100 - 50}px;
             }
         }
     }

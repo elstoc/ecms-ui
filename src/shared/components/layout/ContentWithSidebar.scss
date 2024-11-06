@@ -36,11 +36,11 @@
             .cws-content {
                 width: 100%;
                 flex-grow: 1;
-                max-width: $maxContentWidth;
             }
 
             .cws-sidebar {
                 margin: 10px 5px;
+                flex-grow: 1;
             }
         }
 
@@ -53,14 +53,16 @@
 
             .cws-content-and-sidebar {
                 flex-direction: row;
+                column-gap: 20px;
 
                 .cws-sidebar {
-                    width: 34%;
+                    width: 28%;
                     max-width: $maxSidebarWidth;
                 }
 
                 .cws-content {
                     width: 64%;
+                    max-width: $maxContentWidth;
                 }
             }
 
