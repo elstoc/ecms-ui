@@ -17,15 +17,15 @@ export const JustifiedGallery: FC = (): ReactElement => {
         })
     ), [allImageFiles, galleryStateReducer]);
 
-    const refLastImage = createRef<HTMLAnchorElement>();
-    useElementIsVisible(refLastImage, loadMoreImages);
+    const refPenultimateImage = createRef<HTMLAnchorElement>();
+    useElementIsVisible(refPenultimateImage, loadMoreImages);
 
     const refActiveImage = createRef<HTMLAnchorElement>();
     useScrollIntoView(refActiveImage);
 
     const imageTiles = useMemo(() => images.map((image, index) => {
         let ref = index === activeImageIndex ? refActiveImage : null;
-        if (index === images.length - 1) ref = refLastImage;
+        if (index === images.length - 2) ref = refPenultimateImage;
 
         const element = (
             <GalleryThumb
@@ -43,7 +43,7 @@ export const JustifiedGallery: FC = (): ReactElement => {
             maxHeight: image.thumbDimensions.height,
             maxWidth: image.thumbDimensions.width
         };
-    }), [activeImageIndex, images, refActiveImage, refLastImage]);
+    }), [activeImageIndex, images, refActiveImage, refPenultimateImage]);
 
     return <Tesselate tiles={imageTiles} />;
 };
