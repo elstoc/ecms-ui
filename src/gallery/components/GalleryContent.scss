@@ -4,5 +4,9 @@
     background-color: $midGrey;
     width: 100%;
     min-height: 100%;
-    padding: 10px;
+    padding: 5px;
+
+    @media screen and (min-width: $maxMobileWidth) {
+        padding: 10px;
+    }
 }
