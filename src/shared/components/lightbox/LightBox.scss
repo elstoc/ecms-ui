@@ -18,15 +18,15 @@
     overflow-x: hidden; /* Disable horizontal scroll */
 
     img {
-        max-height: 95%;
-        max-width: 96%;
+        max-height: 97%;
+        max-width: 99%;
         object-fit: scale-down;
     }
 
     .fadeout {
         animation-name: lightbox-fadeout;
         animation-duration: 2s;
-        animation-delay: 3s;
+        animation-delay: 2s;
         animation-fill-mode: forwards;
     }
 
@@ -85,7 +85,8 @@
         position: absolute;
         text-align: center;
         font-size: 1rem;
-        padding: 9px;
+        padding-bottom: 20px;
+        padding-top: 5px;
         bottom: 0%;
         width: 100%;
         height: auto;
