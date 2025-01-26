@@ -1,7 +1,7 @@
 import React, { FC, ReactElement,  useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { MarkdownTree } from '../../contracts/markdown.contract';
+import { MarkdownTree } from '../../contracts/markdown';
 import { useGetMarkdownTree } from '../hooks/useMarkdownQueries';
 import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 

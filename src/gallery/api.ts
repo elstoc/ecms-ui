@@ -1,4 +1,4 @@
-import { GalleryContents } from '../contracts/gallery.contract';
+import { GalleryContents } from '../contracts/gallery';
 import { axiosSecureClient } from '../shared/api';
 
 export const getGalleryContents = async (path: string, limit = 0): Promise<GalleryContents> => {

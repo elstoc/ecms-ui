@@ -1,4 +1,4 @@
-import { VideoWithId } from '../../contracts/videodb.contract';
+import { VideoWithId } from '../../contracts/videodb';
 import { downloadBlob } from '../../utils';
 import { ColumnParam, createCSV } from '../../utils/createCSV';
 import { getVideoDbVideos } from '../api';

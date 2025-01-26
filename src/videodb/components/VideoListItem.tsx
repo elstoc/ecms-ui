@@ -5,7 +5,7 @@ import { Card, Collapse, Tag } from '@blueprintjs/core';
 import { useLookupValue, usePatchVideo } from '../hooks/useVideoDbQueries';
 import { useGetUserIsAdmin } from '../../auth/hooks/useAuthQueries';
 import { VideoDbStateContext } from '../hooks/useVideoDbStateContext';
-import { VideoWithId } from '../../contracts/videodb.contract';
+import { VideoWithId } from '../../contracts/videodb';
 
 import { Flag } from '../../shared/components/forms';
 import { Icon } from '../../shared/components/icon';

@@ -1,4 +1,4 @@
-import { Video, VideoUpdate, VideoWithId } from '../contracts/videodb.contract';
+import { Video, VideoUpdate, VideoWithId } from '../contracts/videodb';
 import { axiosSecureClient } from '../shared/api';
 
 export const getVideoDbVideos = async (path: string, filters?: { [key: string]: string }): Promise<VideoWithId[]> => {

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 import { Route, Routes } from 'react-router';
 
-import { GalleryMetadata } from '../../contracts/site.contract';
+import { GalleryMetadata } from '../../contracts/site';
 import { GalleryStateContext, useGalleryStateReducer, getInitialState } from '../hooks/useGalleryState';
 
 import { NotFoundPage } from '../../shared/components/NotFoundPage';

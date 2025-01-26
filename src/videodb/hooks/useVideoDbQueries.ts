@@ -1,4 +1,4 @@
-import { Video, VideoUpdate, VideoWithId } from '../../contracts/videodb.contract';
+import { Video, VideoUpdate, VideoWithId } from '../../contracts/videodb';
 import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 import {
     getVideoDbVideos,

@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { ComponentMetadata, ComponentTypes } from '../../contracts/site.contract';
+import { ComponentMetadata, ComponentTypes } from '../../contracts/site';
 import { useSiteComponents } from '../hooks/useSiteQueries';
 
 import { SiteComponent } from './SiteComponent';

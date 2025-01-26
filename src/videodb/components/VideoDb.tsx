@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, Suspense} from 'react';
 import { Route, Routes } from 'react-router';
 
-import { VideoDbMetadata } from '../../contracts/site.contract';
+import { VideoDbMetadata } from '../../contracts/site';
 import { useTitle } from '../../shared/hooks';
 import { VideoDbStateContext, useVideoDbState } from '../hooks/useVideoDbStateContext';
 

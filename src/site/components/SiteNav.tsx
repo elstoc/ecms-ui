@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Classes, Popover } from '@blueprintjs/core';
 
-import { ComponentMetadata, ComponentTypes } from '../../contracts/site.contract';
+import { ComponentMetadata, ComponentTypes } from '../../contracts/site';
 
 import './SiteNav.scss';
 

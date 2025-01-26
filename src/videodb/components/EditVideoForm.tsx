@@ -1,7 +1,7 @@
 import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Button, Card, Collapse, ControlGroup } from '@blueprintjs/core';
 
-import { VideoWithId } from '../../contracts/videodb.contract';
+import { VideoWithId } from '../../contracts/videodb';
 import { useEditVideoReducer } from '../hooks/useEditVideoReducer';
 
 import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../shared/components/forms';
