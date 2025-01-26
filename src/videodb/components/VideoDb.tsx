@@ -34,7 +34,7 @@ export const VideoDb: FC<VideoDbMetadata> = ({ title, apiPath }): ReactElement =
                 <Route path='update/:id' element={<VideoDbContent mode='update' />} />
                 <Route path='add' element={<VideoDbContent mode='add' />} />
                 <Route path='/' element={<VideoDbContent />} />
-                <Route key='*' path='*' element={<NotFoundPage sourceComponent='video' />} />
+                <Route key='*' path='*' element={<NotFoundPage />} />
             </Routes>
         </Suspense>
     );

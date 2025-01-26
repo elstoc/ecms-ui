@@ -31,7 +31,7 @@ export const SiteRoutes: FC = (): ReactElement => {
     return (
         <Routes>
             {listComponentRoutes(siteComponents)}
-            <Route key='*' path='*' element={<NotFoundPage sourceComponent='root' />} />
+            <Route key='*' path='*' element={<NotFoundPage />} />
         </Routes>
     );
 };

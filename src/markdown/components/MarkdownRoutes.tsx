@@ -17,7 +17,7 @@ export const MarkdownRoutes: FC = (): ReactElement => {
     return (
         <Routes>
             {listMarkdownRoutes(markdownTree.children, singlePage)}
-            <Route key='*' path='*' element={<NotFoundPage sourceComponent='markdown' />} />
+            <Route key='*' path='*' element={<NotFoundPage />} />
         </Routes>
     );
 };

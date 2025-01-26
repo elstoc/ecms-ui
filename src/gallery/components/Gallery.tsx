@@ -16,7 +16,7 @@ export const Gallery: FC<GalleryMetadata> = (props): ReactElement => {
             <Suspense>
                 <Routes>
                     <Route path='/' element={<GalleryContent />} />
-                    <Route path='*' element={<NotFoundPage sourceComponent='gallery' />} />
+                    <Route path='*' element={<NotFoundPage />} />
                 </Routes>
             </Suspense>
         </GalleryStateContext.Provider>
