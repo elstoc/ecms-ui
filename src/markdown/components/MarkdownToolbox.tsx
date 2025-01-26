@@ -3,11 +3,11 @@ import React, { FC, ReactElement, useCallback, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import YAML from 'yaml';
 
-import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
-
-import { Icon } from '../../shared/components/icon';
 import { splitFrontMatter } from '../../utils';
 import { useDeleteMarkdownPage, useUpdateMarkdownPage } from '../hooks/useMarkdownQueries';
+
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
+import { Icon } from '../../shared/components/icon';
 
 export const MarkdownToolbox: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const [searchParams, setSearchParams] = useSearchParams();

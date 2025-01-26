@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, Suspense } from 'react';
 
+import { useSiteComponents, useSiteConfig } from '../hooks/useSiteQueries';
 import { SiteNav } from './SiteNav';
 import { UserInfo } from '../../auth';
-import { useSiteComponents, useSiteConfig } from '../hooks/useSiteQueries';
 
 import './Header.scss';
 

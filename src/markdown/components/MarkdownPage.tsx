@@ -1,11 +1,12 @@
 import React, { FC, ReactElement, useContext, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { useGetMarkdownPage } from '../hooks/useMarkdownQueries';
+import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
+
 import { MarkdownViewPage } from './MarkdownViewPage';
 import { MarkdownEditPage } from './MarkdownEditPage';
 import { MarkdownAddPage } from './MarkdownAddPage';
-import { useGetMarkdownPage } from '../hooks/useMarkdownQueries';
-import { MarkdownStateContext } from '../hooks/useMarkdownStateContext';
 
 export const MarkdownPage: FC<{ apiPath: string }> = ({ apiPath }): ReactElement => {
     const { markdownReducer } = useContext(MarkdownStateContext);
