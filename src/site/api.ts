@@ -1,25 +1,5 @@
+import { ComponentMetadataCommon, ComponentTypes, SiteConfig } from '../contracts/site.contract';
 import { axiosSecureClient } from '../shared/api';
-
-type SiteConfig = {
-    authEnabled: boolean;
-    footerText: string;
-    siteTitle?: string;
-};
-
-enum ComponentTypes {
-    gallery = 'gallery',
-    markdown = 'markdown',
-    videodb = 'videodb',
-    componentgroup = 'componentgroup'
-}
-
-type ComponentMetadataCommon = {
-    apiPath: string;
-    uiPath: string;
-    title: string;
-    weight?: number;
-    restrict?: string;
-}
 
 type GalleryMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;

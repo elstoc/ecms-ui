@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { VideoWithId } from '../api';
+import { VideoWithId } from '../../contracts/videodb.contract';
 
 type SetStringField = {
     key: 'title' | 'category' | 'director' | 'watched' | 'progress' | 'imdb_id' | 'image_url' | 'actors' | 'plot' | 'tags'

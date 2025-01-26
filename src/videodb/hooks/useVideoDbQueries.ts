@@ -1,15 +1,13 @@
+import { Video, VideoUpdate, VideoWithId } from '../../contracts/videodb.contract';
 import { useCustomQuery, useMutationWithToast } from '../../shared/hooks';
 import {
-    Video,
     getVideoDbVideos,
     getVideoDbVideo,
     getVideoDbLookup,
     getVideoDbTags,
-    VideoUpdate,
     patchVideoDbVideo,
     postVideoDbVideo,
     deleteVideoDbVideo,
-    VideoWithId,
     putVideoDbVideo,
 } from '../api';
 

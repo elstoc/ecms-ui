@@ -2,7 +2,6 @@ import React, { FC, ReactElement, useCallback, useState } from 'react';
 import { Button, Card, Collapse, ControlGroup } from '@blueprintjs/core';
 
 import { useEditVideoReducer } from '../hooks/useEditVideoReducer';
-import { VideoWithId } from '../api';
 
 import { Switch, NullableIntInput, NullableStringInput, StringInput } from '../../shared/components/forms';
 import { SelectLookup } from './SelectLookup';
@@ -10,6 +9,7 @@ import { NullableSelectLookup } from './NullableSelectLookup';
 import { TagInput } from './TagInput';
 
 import './EditVideoForm.scss';
+import { VideoWithId } from '../../contracts/videodb.contract';
 
 type EditVideoFormProps = {
     initialVideoState: VideoWithId;

@@ -1,22 +1,5 @@
+import { MarkdownPage, MarkdownTree } from '../contracts/markdown.contract';
 import { axiosSecureClient } from '../shared/api';
-
-export type MarkdownTree = {
-    apiPath: string;
-    uiPath: string;
-    title?: string;
-    weight?: number;
-    restrict?: string;
-    allowWrite?: string;
-    children?: MarkdownTree[];
-}
-
-type MarkdownPage = {
-    content: string;
-    pageExists: boolean;
-    canWrite: boolean;
-    canDelete: boolean;
-    pathValid: boolean;
-}
 
 const getMarkdownPage = async (path: string): Promise<MarkdownPage> => {
     const url = 'markdown/page';

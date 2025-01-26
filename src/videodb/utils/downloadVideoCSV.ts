@@ -1,6 +1,7 @@
+import { VideoWithId } from '../../contracts/videodb.contract';
 import { downloadBlob } from '../../utils';
 import { ColumnParam, createCSV } from '../../utils/createCSV';
-import { getVideoDbVideos, VideoWithId } from '../api';
+import { getVideoDbVideos } from '../api';
 
 const videoColumnParams: ColumnParam<VideoWithId>[] = [
     { title: 'Id', getField: (video) => video.id },
