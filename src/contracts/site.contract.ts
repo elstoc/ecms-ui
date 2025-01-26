@@ -19,23 +19,23 @@ export type ComponentMetadataCommon = {
     restrict?: string;
 }
 
-type GalleryMetadata = ComponentMetadataCommon & {
+export type GalleryMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.gallery;
     defaultComponent?: boolean;
 }
 
-type MarkdownMetadata = ComponentMetadataCommon & {
+export type MarkdownMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.markdown;
     singlePage: boolean;
     defaultComponent?: boolean;
 }
 
-type VideoDbMetadata = ComponentMetadataCommon & {
+export type VideoDbMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.videodb;
     defaultComponent?: boolean;
 }
 
-type ComponentGroupMetadata = ComponentMetadataCommon & {
+export type ComponentGroupMetadata = ComponentMetadataCommon & {
     type: ComponentTypes.componentgroup;
     components: ComponentMetadata[];
     defaultComponent: false;

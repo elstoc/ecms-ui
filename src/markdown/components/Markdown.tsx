@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
+import { MarkdownMetadata } from '../../contracts/site.contract';
 import { useTitle } from '../../shared/hooks';
-import { MarkdownMetadata } from '../../site/api';
 
 import { MarkdownStateContext, useMarkdownState } from '../hooks/useMarkdownStateContext';
 import { MarkdownRoutes } from './MarkdownRoutes';

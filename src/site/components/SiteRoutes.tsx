@@ -1,8 +1,8 @@
 import React, { FC, ReactElement } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
+import { ComponentMetadata, ComponentTypes } from '../../contracts/site.contract';
 import { useSiteComponents } from '../hooks/useSiteQueries';
-import { ComponentMetadata, ComponentTypes } from '../api';
 
 import { SiteComponent } from './SiteComponent';
 import { NotFoundPage } from '../../shared/components/NotFoundPage';

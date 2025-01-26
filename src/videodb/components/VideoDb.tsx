@@ -1,8 +1,8 @@
 import React, { FC, ReactElement, Suspense} from 'react';
 import { Route, Routes } from 'react-router';
 
+import { VideoDbMetadata } from '../../contracts/site.contract';
 import { useTitle } from '../../shared/hooks';
-import { VideoDbMetadata } from '../../site/api';
 import { VideoDbStateContext, useVideoDbState } from '../hooks/useVideoDbStateContext';
 
 import { NotFoundPage } from '../../shared/components/NotFoundPage';

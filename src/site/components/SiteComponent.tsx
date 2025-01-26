@@ -1,6 +1,7 @@
 import React, { FC, ReactElement } from 'react';
 
-import { ComponentMetadata, ComponentTypes } from '../api';
+import { ComponentMetadata, ComponentTypes } from '../../contracts/site.contract';
+
 import { Gallery } from '../../gallery';
 import { Markdown } from '../../markdown';
 import { VideoDb } from '../../videodb';
